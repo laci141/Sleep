@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alvás 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#0a0f1e; --ink:#e9eefb; --muted:#94a3c4; --line:rgba(255,255,255,.10);
+  --wake:#f2d9a0; --n1:#d6cbf9; --n2:#b0a0f0; --n3:#7b8ae6;
+  --rem:#f6b8a2; --mint:#8fe3c8; --sky:#9fd0f5; --rose:#eeb3c8;
+  /* agytisztítás — erősített, jól elkülönülő színek */
+  --art:#5fb4ff; --vein:#4fe0a8; --lymph:#ff7fb0; --waste:#c42a4f;
+}
+html{scroll-behavior:smooth}
+body{margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif; font-size:16px; line-height:1.62; -webkit-font-smoothing:antialiased}
+/* glass-panel skill 1. kötelező pont: színes háttér KELL a panel alá */
+body::before{content:""; position:fixed; inset:0; z-index:-1;
+  background:
+    radial-gradient(700px 500px at 8% 10%, rgba(176,160,240,.30), transparent 62%),
+    radial-gradient(740px 520px at 92% 18%, rgba(143,227,200,.20), transparent 62%),
+    radial-gradient(660px 480px at 72% 74%, rgba(159,208,245,.16), transparent 62%),
+    radial-gradient(600px 460px at 18% 92%, rgba(238,179,200,.14), transparent 62%),
+    radial-gradient(680px 600px at 45% 100%, rgba(246,184,162,.16), transparent 62%),
+    var(--bg)}
+
+/* GLASS PANEL — Laci saját skillje, változtatás nélkül */
+.glass-panel{
+  background:linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.045));
+  border:1px solid rgba(255,255,255,.10); border-radius:20px;
+  backdrop-filter:blur(15px); -webkit-backdrop-filter:blur(15px);
+  box-shadow:0 18px 50px -18px rgba(0,0,0,.75); padding:24px 22px; color:#e8eef7}
+@media (max-width:600px){
+  .glass-panel{border-radius:16px; backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px);
+    box-shadow:0 12px 32px -14px rgba(0,0,0,.7); padding:18px 16px}}
+
+h1,h2,h3{font-family:'Fraunces',Georgia,serif; font-weight:600; margin:0 0 .4em; line-height:1.18; letter-spacing:-.01em}
+h1{font-size:clamp(28px,5vw,44px)} h2{font-size:clamp(22px,3.2vw,30px)} h3{font-size:clamp(17px,2.1vw,20px)}
+p{margin:0 0 1em}
+.lead{color:#cfd8ee; font-size:clamp(16px,1.6vw,17.5px)}
+.muted{color:var(--muted)}
+.eyebrow{font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11.5px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted); margin:0 0 10px}
+a{color:var(--mint)} strong{color:#fff; font-weight:600} em{color:#dbe3f3}
+
+.shell{max-width:1280px; margin:0 auto; padding:22px 18px 60px;
+  display:grid; grid-template-columns:252px minmax(0,1fr); gap:22px; align-items:start}
+@media (max-width:980px){.shell{grid-template-columns:minmax(0,1fr); gap:16px}}
+.side{position:sticky; top:22px; padding:20px 16px}
+@media (max-width:980px){.side{position:static; padding:16px 14px}}
+.brand .mark{font-family:'Fraunces',serif; font-size:20px; font-weight:700; display:block; line-height:1.25}
+.brand .sub{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+.sidenav{display:flex; flex-direction:column; gap:3px; margin-top:18px}
+.sidenav button{display:flex; align-items:center; gap:11px; width:100%; text-align:left; cursor:pointer;
+  font-family:'Inter',sans-serif; font-size:14.5px; font-weight:500; color:#c1cce6;
+  background:transparent; border:1px solid transparent; border-radius:11px; padding:10px 12px; transition:.16s}
+.sidenav button:hover{background:rgba(255,255,255,.07); color:#fff}
+.sidenav button[aria-current="true"]{background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.16)}
+.sidenav .dot{width:9px; height:9px; border-radius:50%; background:var(--c); flex:0 0 auto; box-shadow:0 0 10px -1px var(--c)}
+@media (max-width:980px){
+  .sidenav{flex-direction:row; overflow-x:auto; gap:8px; padding-bottom:4px}
+  .sidenav button{width:auto; white-space:nowrap; border-radius:999px; border-color:var(--line); background:rgba(255,255,255,.05)}
+  .sidenav::-webkit-scrollbar{height:4px}
+  .sidenav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15); border-radius:4px}}
+:focus-visible{outline:2px solid var(--mint); outline-offset:3px}
+.view{display:none; animation:fade .38s ease} .view.active{display:block}
+@keyframes fade{from{opacity:0; transform:translateY(8px)}to{opacity:1; transform:none}}
+.stack{display:flex; flex-direction:column; gap:18px}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}}
+
+#mapSvg{width:100%; height:auto; display:block}
+.mapwrap{display:none} .mapwrap.on{display:block}
+.branch-card{display:block; width:100%; text-align:left; cursor:pointer; color:var(--ink);
+  background:rgba(255,255,255,.05); border:1px solid var(--line); border-left:4px solid var(--c);
+  border-radius:14px; padding:14px 16px; margin-bottom:10px; font-family:'Inter',sans-serif; transition:.18s}
+.branch-card:hover{background:rgba(255,255,255,.1)}
+.branch-card b{font-family:'Fraunces',serif; font-size:18px; display:block; color:var(--c)}
+.branch-card span{font-size:13.5px; color:var(--muted)}
+.node-hit{cursor:pointer} .node-hit:hover .node-bg{fill-opacity:.30}
+
+.ctlbar{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:16px}
+.ctl{cursor:pointer; font-family:'Inter',sans-serif; font-size:14px; font-weight:500; color:#0a0f1e;
+  background:var(--mint); border:none; border-radius:999px; padding:9px 20px; transition:.18s}
+.ctl:hover{filter:brightness(1.1)}
+.ctl.ghost{background:rgba(255,255,255,.07); color:#c6d0e8; border:1px solid var(--line)}
+.ctl.ghost[aria-pressed="true"]{background:rgba(143,227,200,.22); border-color:rgba(143,227,200,.5); color:#fff}
+.chiprow{display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin-top:14px}
+.chiprow .lab{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted); margin-right:4px}
+.chip{cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:13px; color:#c6d0e8;
+  background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:9px; padding:5px 11px; transition:.16s; min-width:38px}
+.chip:hover{background:rgba(255,255,255,.11)}
+.chip[aria-pressed="true"]{background:rgba(176,160,240,.26); border-color:rgba(176,160,240,.55); color:#fff}
+.speedbox{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px}
+.speedbox label{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+input[type=range]{-webkit-appearance:none; appearance:none; height:6px; border-radius:4px; width:220px;
+  max-width:100%; background:linear-gradient(90deg, var(--n2), var(--mint)); outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:19px; height:19px; border-radius:50%;
+  background:#fff; border:3px solid var(--n2); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.5)}
+input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; background:#fff; border:3px solid var(--n2); cursor:pointer}
+.speedval{font-family:'JetBrains Mono',monospace; font-size:15px; font-weight:700; color:#fff; min-width:56px}
+.speedhint{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted)}
+.legend{display:flex; gap:16px; flex-wrap:wrap; margin-top:16px; font-size:13.5px; color:#b7c3da}
+.legend i{display:inline-block; width:14px; height:14px; border-radius:4px; margin-right:7px; vertical-align:-2px}
+.bar{display:flex; height:13px; border-radius:7px; overflow:hidden; margin-bottom:10px}
+.bar span{display:block}
+.hyp,.circ{width:100%; height:auto; display:block; touch-action:none}
+
+.eegwrap{position:relative; width:100%; aspect-ratio:960/210; min-height:150px; margin-top:6px;
+  border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,.03); overflow:hidden}
+#eegCanvas{position:absolute; inset:0; width:100%; height:100%}
+.eeghead{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-top:12px}
+.eeghead .band{font-family:'Fraunces',serif; font-size:clamp(19px,2.6vw,25px); font-weight:700; color:var(--wake)}
+.eeghead .hz{font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--muted)}
+#waveSvg{width:100%; height:auto; display:block}
+
+.canvaswrap{position:relative; width:100%; aspect-ratio:600/430; min-height:260px}
+#brainCanvas{position:absolute; inset:0; width:100%; height:100%}
+.toggle{display:inline-flex; background:rgba(255,255,255,.06); border:1px solid var(--line); border-radius:999px; padding:4px; gap:4px}
+.toggle button{cursor:pointer; border:none; background:transparent; color:#c6d0e8; font-family:'Inter',sans-serif;
+  font-size:14px; font-weight:500; padding:8px 18px; border-radius:999px; transition:.18s}
+.toggle button[aria-pressed="true"]{background:var(--mint); color:#0a0f1e}
+.meter{height:10px; border-radius:6px; background:rgba(255,255,255,.08); overflow:hidden; margin-top:10px}
+.meter i{display:block; height:100%; background:linear-gradient(90deg,var(--waste),var(--vein)); transition:width .3s}
+.readout{font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--muted); margin-left:auto; text-align:right}
+.readout b{color:#fff; font-weight:700; font-size:19px}
+.steps{counter-reset:s; list-style:none; padding:0; margin:0}
+.steps li{position:relative; padding-left:46px; margin-bottom:18px}
+.steps li::before{counter-increment:s; content:counter(s); position:absolute; left:0; top:1px;
+  width:31px; height:31px; border-radius:50%; display:grid; place-items:center;
+  font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--mint);
+  background:rgba(143,227,200,.12); border:1px solid rgba(143,227,200,.3)}
+.steps b{display:block; font-family:'Fraunces',serif; font-size:17px; margin-bottom:2px}
+.steps p{margin:0; font-size:14.5px; color:#c3cee6}
+
+.card{background:rgba(255,255,255,.045); border:1px solid var(--line); border-radius:16px;
+  padding:18px 18px 16px; border-top:3px solid var(--c)}
+.card h3{color:var(--c)} .card p{font-size:14.5px; color:#c3cee6; margin:0}
+.tag{display:inline-block; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--c); background:rgba(255,255,255,.06); border:1px solid var(--line);
+  border-radius:999px; padding:3px 9px; margin-bottom:10px}
+.tips{list-style:none; padding:0; margin:0}
+.tips li{display:grid; grid-template-columns:40px 1fr; gap:14px; padding:20px 0; border-bottom:1px solid rgba(255,255,255,.08)}
+.tips li:last-child{border-bottom:none}
+.tips .num{font-family:'JetBrains Mono',monospace; font-size:15px; font-weight:700; color:var(--c); padding-top:3px}
+.tips h4{font-family:'Fraunces',serif; font-size:18px; font-weight:600; margin:0 0 8px; color:#fff}
+.tips .blk{display:grid; grid-template-columns:80px 1fr; gap:12px; margin-bottom:8px; align-items:start}
+.tips .lbl{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--c); border:1px solid var(--line); border-radius:6px; padding:3px 0; text-align:center;
+  background:rgba(255,255,255,.04); margin-top:3px}
+.tips .txt{font-size:14.8px; color:#c3cee6; line-height:1.6}
+@media (max-width:620px){
+  .tips .blk{grid-template-columns:1fr; gap:2px}
+  .tips li{grid-template-columns:28px 1fr; gap:10px}
+  .tips .lbl{display:inline-block; padding:2px 8px; margin-bottom:3px}}
+.note{border-left:3px solid var(--wake); background:rgba(242,217,160,.07); padding:14px 16px;
+  border-radius:0 12px 12px 0; font-size:14.5px; color:#d9e1f2}
+.warn{border-left:3px solid var(--rem); background:rgba(246,184,162,.08); padding:14px 16px;
+  border-radius:0 12px 12px 0; font-size:14.5px; color:#f0dcd3}
+.info{border-left:3px solid var(--sky); background:rgba(159,208,245,.07); padding:14px 16px;
+  border-radius:0 12px 12px 0; font-size:14.5px; color:#d5deef}
+
+.circgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px}
+@media (max-width:640px){.circgrid{grid-template-columns:1fr}}
+.circval{background:rgba(255,255,255,.05); border:1px solid var(--line); border-left:3px solid var(--c);
+  border-radius:12px; padding:11px 14px}
+.circval .k{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted)}
+.circval .v{font-family:'JetBrains Mono',monospace; font-size:23px; font-weight:700; color:var(--c); line-height:1.25}
+.circnote{margin-top:14px; background:rgba(159,208,245,.07); border-left:3px solid var(--sky);
+  border-radius:0 12px 12px 0; padding:13px 16px; font-size:14.8px; color:#d5deef; min-height:76px}
+.circnote b{display:block; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--sky); margin-bottom:3px}
+
+.ev{display:inline-flex; gap:3px; vertical-align:1px; margin-left:8px}
+.ev i{width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.16); display:block}
+.ev i.on{background:var(--c)}
+.timeline{list-style:none; padding:0; margin:6px 0 0}
+.timeline li{display:grid; grid-template-columns:78px 1fr; gap:14px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,.07)}
+.timeline li:last-child{border-bottom:none}
+.timeline .t{font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:700; color:var(--rose)}
+.timeline .d{font-size:14.6px; color:#c9d3e8} .timeline .d b{color:#fff}
+
+.tabs{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap}
+.tabbtn{cursor:pointer; font-size:14px; font-weight:500; font-family:'Inter',sans-serif; color:#c6d0e8;
+  background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:999px; padding:8px 16px; transition:.18s}
+.tabbtn[aria-selected="true"]{background:rgba(143,227,200,.16); color:#fff; border-color:rgba(143,227,200,.4)}
+.tabpane{display:none} .tabpane.on{display:block}
+.breathstage{display:grid; place-items:center; padding:10px 0 4px}
+.bcircle{width:min(230px,58vw); aspect-ratio:1; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, rgba(143,227,200,.55), rgba(176,160,240,.35) 60%, rgba(176,160,240,.08));
+  border:1px solid rgba(255,255,255,.22); display:grid; place-items:center; transform:scale(.55);
+  box-shadow:0 0 60px -10px rgba(143,227,200,.35)}
+.bcircle span{font-family:'Fraunces',serif; font-size:clamp(18px,4vw,25px); color:#fff; text-align:center; padding:0 12px}
+.bhint{text-align:center; font-family:'JetBrains Mono',monospace; font-size:16px; color:#dbe3f3; margin-top:14px}
+
+.bodywrap{display:grid; grid-template-columns:240px 1fr; gap:26px; align-items:start}
+@media (max-width:760px){.bodywrap{grid-template-columns:1fr}}
+.bodyholder svg{width:100%; max-width:240px; height:auto; margin:0 auto; display:block; overflow:visible}
+.bd-zone{opacity:0; transition:opacity .5s}
+.bd-zone.done{opacity:.6}
+.bd-zone.hot{opacity:1; animation:zpulse 2.6s ease-in-out infinite}
+@keyframes zpulse{0%,100%{opacity:.6}50%{opacity:1}}
+.bd-breathe{animation:breathe 5.6s ease-in-out infinite; transform-origin:100px 210px}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.012)}}
+.ring{opacity:0; transition:opacity .35s} .ring.on{opacity:1}
+.relax-intro{font-size:clamp(15.5px,1.75vw,18px); color:#b9c5de; line-height:1.62}
+.bighead{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.bighead .ttl{font-family:'Fraunces',serif; font-size:clamp(24px,3.9vw,34px); color:var(--mint)}
+.bighead .cd{font-family:'JetBrains Mono',monospace; font-size:clamp(30px,5.2vw,46px); font-weight:700; color:#fff; line-height:1}
+.bighead .of{font-family:'JetBrains Mono',monospace; font-size:15px; color:var(--muted); letter-spacing:.1em}
+.segbar{display:flex; gap:4px; margin:16px 0 6px}
+.segbar i{flex:1; height:10px; border-radius:3px; background:rgba(255,255,255,.09); overflow:hidden; position:relative}
+.segbar i.full{background:rgba(176,160,240,.55)}
+.segbar i.cur::after{content:""; position:absolute; inset:0; width:var(--f,0%); background:var(--mint); transition:width .9s linear}
+.stepbox{min-height:130px}
+.stepbox p{font-size:clamp(17px,2.1vw,22px); line-height:1.55; color:#d3dcef; margin:0}
+.progressline{height:7px; background:rgba(255,255,255,.08); border-radius:4px; overflow:hidden; margin:16px 0}
+.progressline i{display:block; height:100%; background:var(--mint); width:0; transition:width .3s linear}
+.ttsstat{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted)}
+
+.src{font-size:13.5px; color:var(--muted)} .src li{margin-bottom:7px}
+footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
+  font-family:'JetBrains Mono',monospace; letter-spacing:.2em}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001s !important; transition-duration:.001s !important}
+  html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="side glass-panel">
+    <div class="brand"><span class="mark">Az éjszaka műszakja</span><span class="sub">alvás · ritmus · pihenés</span></div>
+    <nav class="sidenav" id="menu" aria-label="Fő menü"></nav>
+  </aside>
+
+  <main>
+
+  <!-- ELMETÉRKÉP -->
+  <section class="view active" id="view-map">
+    <div class="glass-panel stack">
+      <div>
+        <p class="eyebrow">Elmetérkép</p>
+        <h1>Nyolc óra, amit az agyad nem alvással tölt</h1>
+        <p class="lead">Amíg fekszel, az agyad ciklusokban dolgozik: rögzíti a napot, feldolgozza az érzelmeket, és kimossa magából azt a hulladékot, ami ébren felgyűlt. Közben az immunrendszer is átszervezi magát. Egy belső óra vezényli az egészet. Kattints egy ágra.</p>
+      </div>
+      <div class="mapwrap" id="mapWide">
+        <svg id="mapSvg" viewBox="0 0 940 520" role="img" aria-label="Az alvás témáinak elmetérképe"></svg>
+      </div>
+      <div class="mapwrap" id="mapNarrow"></div>
+    </div>
+  </section>
+
+  <!-- ALVÁSCIKLUS -->
+  <section class="view" id="view-ciklus">
+    <div class="stack">
+      <div class="glass-panel">
+        <p class="eyebrow">Alvásciklus</p>
+        <h2>Egy éjszaka, ahogy a műszerek látják</h2>
+        <p class="lead">Nem egyenletesen alszol. Kb. 90 perces ciklusok váltakoznak, és a REM-szakaszok hajnal felé nyúlnak meg. A mélyalvás nagy része az első felében van — ezért nem mindegy, mikor fekszel le, nem csak az, mennyit alszol.</p>
+        <svg class="hyp" id="hypSvg" viewBox="0 0 960 310" role="img" aria-label="Hipnogram"></svg>
+
+        <p class="eyebrow" style="margin-top:18px">EEG — élő agyhullám, ahogy a szakasz változik</p>
+        <div class="eegwrap"><canvas id="eegCanvas"></canvas></div>
+        <div class="eeghead">
+          <span class="band" id="eegBand">Béta</span>
+          <span class="hz" id="eegHz">13–30 Hz · éber, gyors, kis amplitúdó</span>
+        </div>
+        <div class="chiprow" id="eegWins"><span class="lab">Kijelzett idő</span></div>
+        <p class="muted" style="font-size:13.5px;margin:8px 0 0">Hosszabb ablak = lassabban csúszik a görbe. Bal oldalon a kilengés mikrovoltban, alul az idő.</p>
+
+        <div class="ctlbar">
+          <button class="ctl" id="hypPlay">Indítás</button>
+          <button class="ctl ghost" id="hypReset">Vissza az elejére</button>
+        </div>
+        <div class="speedbox">
+          <label for="hypSpeed">Sebesség</label>
+          <input type="range" id="hypSpeed" min="10" max="120" step="10" value="60" aria-label="Lejátszás sebessége">
+          <span class="speedval" id="hypSpeedVal">60%</span>
+          <span class="speedhint" id="hypSpeedHint">az éjszaka 40 mp alatt</span>
+        </div>
+        <div class="chiprow" id="hypSteps"><span class="lab">Lépésköz</span></div>
+        <div class="legend" id="hypLegend"></div>
+        <p class="eyebrow" style="margin-top:22px">Az éjszaka megoszlása</p>
+        <div class="bar" id="hypBar"></div>
+        <div class="legend" id="hypBarLegend" style="margin-top:8px"></div>
+      </div>
+
+      <div class="glass-panel">
+        <p class="eyebrow">Agyhullámok</p>
+        <h2>Béta, alfa, théta, delta</h2>
+        <p class="lead">Az EEG nem gondolatokat olvas, hanem azt méri, hogy sok millió idegsejt mennyire <em>együtt</em> tüzel. Minél többen mozognak egyszerre, annál lassabb és nagyobb a hullám. Ébren mindenki a maga dolgát végzi: sok apró, gyors rezgés. Mélyalvásban az egész kéreg együtt lélegzik: kevés, hatalmas, lassú hullám.</p>
+        <svg id="waveSvg" viewBox="0 0 900 470" role="img" aria-label="Agyhullámtípusok"></svg>
+        <div class="grid2" style="margin-top:18px" id="waveCards"></div>
+      </div>
+      <div class="grid2" id="stageCards"></div>
+    </div>
+  </section>
+
+  <!-- CIRKADIÁN -->
+  <section class="view" id="view-ritmus">
+    <div class="stack">
+      <div class="glass-panel">
+        <p class="eyebrow">Cirkadián ritmus</p>
+        <h2>A belső óra, ami eldönti, mikor jön az álom</h2>
+        <p class="lead">Az agy közepén, a látóidegek kereszteződése fölött ül egy kb. 20&nbsp;000 sejtből álló óra, a <em>nucleus suprachiasmaticus</em>. A saját ciklusa nem pontosan 24 óra, hanem valamivel hosszabb — átlagosan kb. 24,2 —, ezért naponta újra kell állítani. Az állítógomb a fény.</p>
+        <svg class="circ" id="circSvg" viewBox="0 0 960 380" role="img" aria-label="Melatonin, kortizol, maghőmérséklet"></svg>
+        <div class="ctlbar">
+          <button class="ctl" id="circPlay">Nap lejátszása</button>
+          <button class="ctl ghost" id="circNow">Ugrás lefekvésre</button>
+        </div>
+        <div class="circgrid">
+          <div class="circval" style="--c:var(--n2)"><div class="k">Melatonin</div><div class="v" id="vMel">0%</div></div>
+          <div class="circval" style="--c:var(--wake)"><div class="k">Kortizol</div><div class="v" id="vCor">0%</div></div>
+          <div class="circval" style="--c:var(--mint)"><div class="k">Maghőmérséklet</div><div class="v" id="vTmp">0%</div></div>
+        </div>
+        <div class="circnote"><b id="circTime">12:00</b><span id="circTxt"></span></div>
+      </div>
+      <div class="glass-panel">
+        <h3>Mit csinál a két hormon</h3>
+        <ol class="steps">
+          <li><b>Melatonin — a „besötétedett" jelzés</b><p>Nem altató. Nem lök bele az alvásba, csak kinyitja hozzá a kaput: közli a testtel, hogy beállt a biológiai éjszaka. Napnyugta után 1–2 órával kezd emelkedni (DLMO), hajnali 2 és 4 között tetőzik, reggel 7–8-ra visszaesik. A parancsot a belső óra adja — amit viszont a szemen át érkező fény állít.</p></li>
+          <li><b>Kortizol — az ébresztő, nem a stresszhormon</b><p>Éjfél körül van a mélyponton, hajnali 3 körül elkezd emelkedni, és az ébredés után 30–45 perccel tetőzik. Ez mozgósítja a vércukrot és a keringést. A gond akkor van, ha valami este felnyomja: intenzív edzés, vita, feszült munka, koffein.</p></li>
+          <li><b>Maghőmérséklet — a néma harmadik</b><p>Napi kb. 1 °C-ot ingadozik. 16 és 19 óra között a legmagasabb — ekkor a legjobb az izomerő is. Két órával a természetes ébredés előtt, hajnali 4–5 körül a mélypont. Az elalvás ehhez az eséshez van kötve.</p></li>
+          <li><b>A fény állítja mind a hármat</b><p>A retinában külön érzékelők ülnek, amik a kékes tartományra hangoltak, és közvetlenül a belső órának jelentenek. Reggeli fény: az óra <strong>előre</strong> áll. Esti fény: <strong>hátra</strong> csúszik. A kültéri fény borús időben is nagyságrendekkel erősebb a beltérinél.</p></li>
+          <li><b>Két rendszer, nem egy</b><p>Az elalvás két dolog találkozása: az ébren gyűlő adenozin adta alvásnyomás, és a belső óra éberségi jele. Amikor este az óra leengedi az éberséget, miközben az adenozin a csúcsán van, akkor jön az álom.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGYTISZTÍTÁS -->
+  <section class="view" id="view-tisztitas">
+    <div class="stack">
+      <div class="glass-panel">
+        <p class="eyebrow">Glymphatikus rendszer</p>
+        <h2>Éjszakai nagytakarítás az agyban</h2>
+        <p class="lead">Igen, jól tudod: a <strong>nyirokrendszer is része a folyamatnak</strong>. Az agyban nincsenek nyirokerek, de az agyhártyában vannak — és azok viszik le a szennyes folyadékot a nyaki nyirokcsomókba. Három útvonal, három külön szín:</p>
+        <div class="legend" style="margin-top:0;margin-bottom:14px">
+          <span><i style="background:#5fb4ff"></i><strong style="color:#5fb4ff">Kék</strong> — artéria: friss folyadék BE</span>
+          <span><i style="background:#4fe0a8"></i><strong style="color:#4fe0a8">Zöld</strong> — véna: szennyes folyadék KI</span>
+          <span><i style="background:#ff7fb0"></i><strong style="color:#ff7fb0">Rózsa</strong> — nyirokér a nyaki csomóba</span>
+          <span><i style="background:#c42a4f"></i><strong style="color:#e8506f">Bordó</strong> — a szemét maga</span>
+        </div>
+        <p class="lead">A pumpa a mélyalvás lassú hulláma. Kapcsold át mélyalvásra, és nézd a bal alsó pulzusjelzőt: <strong>minden csúcsnál lökésben szabadulnak ki a bordó szemét-pixelek</strong>, felkerülnek a zöld vénára, és onnan a rózsaszín nyirokéren jutnak a nyaki nyirokcsomóba.</p>
+        <div class="canvaswrap"><canvas id="brainCanvas"></canvas></div>
+        <div class="ctlbar">
+          <div class="toggle" role="group" aria-label="Állapot">
+            <button id="btnAwake" aria-pressed="true">Ébren</button>
+            <button id="btnAsleep" aria-pressed="false">Mélyalvásban</button>
+          </div>
+          <div class="readout"><span id="wasteLabel">Bent ragadt szemét</span>: <b id="wasteNum">0</b></div>
+        </div>
+        <div class="meter"><i id="wasteMeter" style="width:0%"></i></div>
+        <p class="muted" style="font-size:14.5px;margin-top:12px" id="brainNote">Ébren szűkek a csatornák, alig van áramlás, és nincs pulzálás, ami kilökné. A bordó szemét bent ragad a szövetben, ahol keletkezett.</p>
+      </div>
+
+      <div class="glass-panel">
+        <h3>A folyamat öt lépésben</h3>
+        <ol class="steps">
+          <li><b>Nap közben gyűlik</b><p>Amíg ébren vagy, a neuronok működésének melléktermékei felhalmozódnak a sejtek közötti térben: amiloid-béta és tau fehérje, adenozin, laktát. Az adenozin az, ami az álmosságérzetet is adja — a koffein éppen ennek a jelzését blokkolja.</p></li>
+          <li><b>Elalváskor kinyílik a tér</b><p>Mélyalvásban a sejtek közötti rés kitágul, és az erek körüli csatorna kiszélesedik. Ez a kapcsoló: ugyanaz az agy, két teljesen más áteresztőképességgel. Az ábrán ezt látod, amikor az ágak megvastagodnak és halót kapnak.</p></li>
+          <li><b>A lassú hullám pumpál</b><p>A mélyalvás nagy delta hullámai együtt mozognak a folyadékkal — ez a pulzálás a hajtómotor. Minden hullám végigsöpör, és <strong>ahova ér, ott lökésben szabadítja ki a bent ragadt szemetet</strong>. A bal alsó pulzusjelző csúcsain gyorsul az áramlás négyszeresére.</p></li>
+          <li><b>Be az artérián, ki a vénán</b><p>A friss gerincvelői folyadék az artériák menti csatornán áramlik BE (kék), átöblíti a sejtek közötti teret, felkapja a szemetet, és a vénák menti csatornán áramlik KI (zöld). Ezért van két külön érfa, ellentétes irányú áramlással.</p></li>
+          <li><b>A nyirokér elviszi a nyakba</b><p>Az agyból kilépő szennyes folyadékot az agyhártyában futó nyirokerek gyűjtik össze, és a <strong>nyaki nyirokcsomókba</strong> vezetik, ahonnan a vér- és nyirokkeringésbe kerül. A rózsaszín szakaszon a kis nyilak a nyirokerek billentyűi — azok akadályozzák meg a visszaáramlást. Ezt a hálózatot csak 2015-ben azonosították az agyhártyában.</p></li>
+        </ol>
+        <div class="note">Egy 39 fős keresztezett vizsgálatban a normál alvás után reggelre mérhetően több Alzheimer-marker volt a vérplazmában, mint átvirrasztott éjszaka után — vagyis alvás közben tényleg kikerültek az agyból.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MIÉRT FONTOS -->
+  <section class="view" id="view-miert">
+    <div class="stack">
+      <div class="glass-panel">
+        <p class="eyebrow">Miért fontos</p>
+        <h2>Mit veszítesz, ha rövidre vágod</h2>
+        <p class="lead">Az alvás nem egy funkciót lát el, hanem ötöt-hatot párhuzamosan — és mindegyik más szakaszhoz kötődik.</p>
+      </div>
+      <div class="grid2" id="whyCards"></div>
+      <div class="glass-panel">
+        <span class="tag" style="--c:var(--mint)">Immunrendszer</span>
+        <h2>Amit a vizsgálatok mérni tudtak</h2>
+        <p class="lead">Ez a legjobban dokumentált rész, mert kísérletileg vizsgálható: emberek alvását megrövidítik, aztán vért vesznek, vagy szándékosan vírust adnak nekik. Nem korrelációs megfigyelés, hanem kísérlet.</p>
+        <ul class="tips" id="immuneList"></ul>
+      </div>
+      <div class="glass-panel">
+        <span class="tag" style="--c:var(--rem)">Daganatos kockázat</span>
+        <h2>Itt kell a legpontosabban fogalmazni</h2>
+        <ul class="tips" id="cancerList"></ul>
+        <div class="info" style="margin-top:8px"><strong>Ha műszakban dolgozol:</strong> a műszakot nem tudod eltörölni, de a két legerősebb eszközt igen. Az egyik a <strong>fény időzítése</strong> — éjszakai műszak alatt világos munkatér, hazafelé napszemüveg, otthon sötétítő. A másik az <strong>étkezés időzítése</strong>: a nagy étkezéseket a világos szakaszra, éjjel inkább kicsit.</div>
+      </div>
+      <div class="glass-panel">
+        <span class="tag" style="--c:var(--wake)">Ha rossz az alvás</span>
+        <h2>Mi romlik el, és milyen sorrendben</h2>
+        <ul class="tips" id="harmList"></ul>
+        <div class="warn" style="margin-top:8px"><strong>Mikor menj orvoshoz:</strong> ha horkolsz és nappal is álmos vagy (alvási apnoe gyanúja), ha hetek óta minden éjszaka rossz, ha reggel fejfájással kelsz, ha éjszaka fulladásra ébredsz, vagy ha a nappali álmosság a munkavégzést veszélyezteti. Gép mellett ez utóbbi nem apróság.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOBB ALVÁS -->
+  <section class="view" id="view-tippek">
+    <div class="stack">
+      <div class="glass-panel">
+        <p class="eyebrow">Jobb alvás</p>
+        <h2>Először a négy nagy, utána a többi</h2>
+        <p class="lead">Fontos csavar: az amerikai alvásorvos-társaság 2021-es irányelve az „alváshigiénia" tanácslistát <strong>önmagában nem ajánlja</strong>. Ami tényleg működik, az a CBT-I magja: az ingerkontroll és az alvásmegszorítás.</p>
+      </div>
+      <div class="glass-panel">
+        <span class="tag" style="--c:var(--mint)">Erős bizonyíték</span>
+        <h3>Ezzel kezdd — fontossági sorrendben</h3>
+        <ul class="tips" id="tipsCore"></ul>
+      </div>
+      <div class="glass-panel">
+        <span class="tag" style="--c:var(--n2)">Támogató szokások</span>
+        <h3>Ezek segítenek, de önmagukban kevesek</h3>
+        <ul class="tips" id="tipsExtra"></ul>
+      </div>
+      <div class="glass-panel">
+        <div class="note">Ez ismeretterjesztés, nem orvosi tanács. Krónikus álmatlanságra a CBT-I az elsővonalbeli kezelés, nem az altató.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELAXÁCIÓ -->
+  <section class="view" id="view-relax">
+    <div class="stack">
+      <div class="glass-panel">
+        <p class="eyebrow">Esti relaxáció</p>
+        <h2>Három gyakorlat lefekvés előtt</h2>
+        <p class="relax-intro">Egyszerre csak az egyiket csináld. Mindegyik ugyanazt célozza: leveszi a stresszválaszt, hogy az elalvás magától jöjjön. Ha közben elalszol, az a siker, nem a kudarc. <strong>Kapcsold be a hangot</strong>, és nem kell olvasnod — végigmondom.</p>
+        <div class="tabs" role="tablist">
+          <button class="tabbtn" role="tab" aria-selected="true" data-pane="p-breath">4-7-8 légzés</button>
+          <button class="tabbtn" role="tab" aria-selected="false" data-pane="p-pmr">Progresszív izomlazítás</button>
+          <button class="tabbtn" role="tab" aria-selected="false" data-pane="p-scan">Testpásztázás</button>
+        </div>
+
+        <div class="tabpane on" id="p-breath">
+          <p class="relax-intro">Négy másodperc belégzés orron át, hét másodperc bent tartás, nyolc másodperc lassú kifújás szájon át. A hosszú kifújás a lényeg: az lassítja le a szívverést. Négy-hat kör elég.</p>
+          <div class="breathstage"><div class="bcircle" id="bCircle"><span id="bPhase">Készen állsz?</span></div></div>
+          <div class="bhint" id="bHint">— · kör 0</div>
+          <div class="ctlbar" style="justify-content:center">
+            <button class="ctl" id="bStart">Indítás</button>
+            <button class="ctl ghost" id="bStop">Állj</button>
+            <button class="ctl ghost tts-btn" aria-pressed="false">Hang: ki</button>
+          </div>
+        </div>
+
+        <div class="tabpane" id="p-pmr">
+          <p class="relax-intro">Lábujjtól a homlokig, izomcsoportonként: öt másodperc feszítés, aztán tíz másodperc teljes elengedés. A lényeg a különbség érzékelése a feszes és a laza között. Fekve csináld.</p>
+          <div class="bodywrap">
+            <div class="bodyholder" id="bodyHolder"></div>
+            <div>
+              <div class="bighead">
+                <span class="ttl" id="pmrTitle">Lábfej és lábujjak</span>
+                <span class="cd" id="pmrCd">05</span>
+                <span class="of" id="pmrRead">1 / 10</span>
+              </div>
+              <div class="segbar" id="pmrSeg"></div>
+              <div class="stepbox"><p id="pmrText">Nyomd meg az Indítást, és lépésenként végigvezetlek.</p></div>
+              <div class="ctlbar">
+                <button class="ctl" id="pmrStart">Indítás</button>
+                <button class="ctl ghost" id="pmrStop">Állj</button>
+                <button class="ctl ghost tts-btn" aria-pressed="false">Hang: ki</button>
+                <span class="ttsstat tts-stat"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabpane" id="p-scan">
+          <p class="relax-intro">Ugyanaz a testtérkép, csak feszítés nélkül. Odafigyelsz egy testrészre, megnézed, mit érzel ott, és továbbmész. A körbefutó fénygyűrű mutatja, hol tart a figyelem — elöl lefelé, hátul felfelé ível, ahogy egy gyűrű körbeér egy testen. Hanggal csukott szemmel is végigcsinálható.</p>
+          <div class="bodywrap">
+            <div class="bodyholder" id="scanHolder"></div>
+            <div>
+              <div class="bighead">
+                <span class="ttl" id="scanTitle">Lábfej</span>
+                <span class="cd" id="scanCd">00:30</span>
+                <span class="of" id="scanOf">1 / 10</span>
+              </div>
+              <div class="segbar" id="scanSeg"></div>
+              <div class="stepbox"><p id="scanText">Válassz hosszt, és indítsd el.</p></div>
+              <div class="progressline"><i id="scanBar"></i></div>
+              <div class="ctlbar">
+                <button class="ctl ghost" id="scan5" aria-pressed="true">5 perc</button>
+                <button class="ctl ghost" id="scan10" aria-pressed="false">10 perc</button>
+                <button class="ctl" id="scanStart">Indítás</button>
+                <button class="ctl ghost" id="scanStop">Állj</button>
+                <button class="ctl ghost tts-btn" aria-pressed="false">Hang: ki</button>
+                <div class="readout">hátralévő: <b id="scanRead">05:00</b></div>
+              </div>
+              <p class="ttsstat tts-stat" style="margin-top:10px"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEA, ÉTEL, VITAMIN -->
+  <section class="view" id="view-etrend">
+    <div class="stack">
+      <div class="glass-panel">
+        <p class="eyebrow">Tea, étel, vitamin</p>
+        <h2>Az utolsó öt százalék</h2>
+        <p class="lead">Ez a rész a relaxáció párja, de fontos a sorrend: amit itt találsz, az a <strong>finomhangolás</strong>. Ha a fix ébredés, az ingerkontroll és a reggeli fény nincs meg, akkor semmilyen tea vagy kapszula nem hozza be.</p>
+        <div class="warn"><strong>Mielőtt bármit szedni kezdesz:</strong> ha rendszeresen szedsz gyógyszert, kérdezd meg a gyógyszerészt vagy a háziorvost. A macskagyökér és a melatonin is lép kölcsönhatásba. Terhesség és szoptatás alatt semmit orvosi jóváhagyás nélkül.</div>
+      </div>
+      <div class="glass-panel">
+        <span class="tag" style="--c:var(--rose)">Tea és ital</span><h3>Mit, mikor, miért</h3>
+        <ul class="tips" id="teaList"></ul>
+      </div>
+      <div class="glass-panel">
+        <span class="tag" style="--c:var(--wake)">Étkezés</span><h3>Mikor egyél, és mi a nem várt csavar</h3>
+        <ul class="tips" id="foodList"></ul>
+      </div>
+      <div class="glass-panel">
+        <span class="tag" style="--c:var(--mint)">Vitaminok és kiegészítők</span><h3>Bizonyíték szerinti sorrendben</h3>
+        <ul class="tips" id="suppList"></ul>
+      </div>
+      <div class="glass-panel">
+        <span class="tag" style="--c:var(--rose)">Napi menetrend</span><h3>Egy 22:30-as lefekvéshez visszaszámolva</h3>
+        <ul class="timeline" id="dayPlan"></ul>
+      </div>
+      <div class="glass-panel">
+        <p class="eyebrow">Források</p>
+        <ul class="src">
+          <li>Irwin és mtsai: <em>Partial sleep deprivation reduces NK cell activity</em>. <a href="https://pubmed.ncbi.nlm.nih.gov/7871104/" target="_blank" rel="noopener">pubmed</a></li>
+          <li>Prather és mtsai: <em>Behaviorally Assessed Sleep and Susceptibility to the Common Cold</em> — SLEEP 2015. <a href="https://pmc.ncbi.nlm.nih.gov/articles/4531403/" target="_blank" rel="noopener">ncbi</a></li>
+          <li>Spiegel és mtsai: <em>Insufficient sleep and antibody response to vaccination</em> — Current Biology 2023. <a href="https://www.cell.com/current-biology/fulltext/S0960-9822(23)00156-2" target="_blank" rel="noopener">cell.com</a></li>
+          <li>IARC 2019: <em>Night shift work is probably carcinogenic (2A)</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6882045/" target="_blank" rel="noopener">ncbi</a></li>
+          <li><em>Night-shift work duration and breast cancer risk</em> — BMC Women's Health 2021. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7927396/" target="_blank" rel="noopener">ncbi</a></li>
+          <li><em>Glymphatic system and meningeal lymphatics</em> — JCI. <a href="https://www.jci.org/articles/view/90603" target="_blank" rel="noopener">jci.org</a></li>
+          <li><em>The glymphatic system in sleep</em> — Molecular Psychiatry 2026. <a href="https://www.nature.com/articles/s41380-026-03750-w" target="_blank" rel="noopener">nature.com</a></li>
+          <li>Harding és mtsai: <em>The Temperature Dependence of Sleep</em> — Front Neurosci 2019. <a href="https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2019.00336/full" target="_blank" rel="noopener">frontiersin</a></li>
+          <li><em>CBT-I components</em> — Kosin Med J 2024. <a href="https://www.kosinmedj.org/journal/view.php?number=1311" target="_blank" rel="noopener">kosinmedj</a></li>
+          <li><em>Herbal and Natural Supplements for Improving Sleep</em> — Psychiatry Investig 2024. <a href="https://www.psychiatryinvestigation.org/journal/view.php?doi=10.30773%2Fpi.2024.0121" target="_blank" rel="noopener">psychiatryinvestigation</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  </main>
+</div>
+<footer class="foot">ALVÁS 2026</footer>
+
+<script>
+"use strict";
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const C = k => getComputedStyle(document.documentElement).getPropertyValue(k).trim();
+const NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, text){
+  const n = document.createElementNS(NS, tag);
+  for(const k in attrs) n.setAttribute(k, attrs[k]);
+  if(text !== undefined) n.textContent = text;
+  return n;
+}
+function catmull(pts){
+  let d = `M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+  const last = pts.length-1;
+  for(let i=0;i<last;i++){
+    const p0=pts[i-1]||pts[i], p1=pts[i], p2=pts[i+1], p3=pts[i+2]||pts[last];
+    d += ` C ${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)},`
+      +  ` ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)},`
+      +  ` ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
+  }
+  return d;
+}
+function catmullClosed(pts){
+  const n = pts.length, P = i => pts[(i+n)%n];
+  let d = `M ${P(0)[0].toFixed(1)} ${P(0)[1].toFixed(1)}`;
+  for(let i=0;i<n;i++){
+    const p0=P(i-1), p1=P(i), p2=P(i+1), p3=P(i+2);
+    d += ` C ${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)},`
+      +  ` ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)},`
+      +  ` ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
+  }
+  return d + ' Z';
+}
+
+/* ================== MAGYAR BESZÉD (TTS) ================== */
+const TTS = {
+  on:false, voice:null, supported:('speechSynthesis' in window), huFound:false,
+  init(){
+    if(!this.supported){ this.status('A böngésződ nem tud beszélni.'); return; }
+    const pick = ()=>{
+      const vs = window.speechSynthesis.getVoices() || [];
+      this.voice = vs.find(v=>/^hu/i.test(v.lang)) || null;
+      this.huFound = !!this.voice;
+      this.status(this.huFound
+        ? 'Magyar hang: ' + this.voice.name
+        : 'Magyar hang nincs telepítve — a rendszer alaphangját használja. Windowsban: Beállítások → Idő és nyelv → Beszéd → magyar hangcsomag.');
+    };
+    pick();
+    window.speechSynthesis.onvoiceschanged = pick;
+  },
+  status(t){ $$('.tts-stat').forEach(e=>e.textContent = t); },
+  set(v){
+    this.on = v;
+    $$('.tts-btn').forEach(b=>{ b.setAttribute('aria-pressed', String(v)); b.textContent = 'Hang: ' + (v?'be':'ki'); });
+    if(!v) this.stop();
+  },
+  say(text, force){
+    if(!this.supported || (!this.on && !force)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'hu-HU';
+    if(this.voice) u.voice = this.voice;
+    u.rate = .93; u.pitch = 1; u.volume = 1;
+    window.speechSynthesis.speak(u);
+  },
+  stop(){ if(this.supported) window.speechSynthesis.cancel(); }
+};
+TTS.init();
+$$('.tts-btn').forEach(b=> b.addEventListener('click', ()=>{
+  const next = !TTS.on;
+  TTS.set(next);
+  if(next) TTS.say('Hang bekapcsolva. Csukott szemmel is követheted.', true);
+}));
+
+/* ========================= MENÜ ========================= */
+const BRANCHES = [
+  {id:'ciklus',    title:'Alvásciklus',      sub:['90 perces körök','EEG-hullámok'],           color:'--n2'},
+  {id:'ritmus',    title:'Cirkadián ritmus', sub:['melatonin és kortizol','a fény állítja'],   color:'--sky'},
+  {id:'tisztitas', title:'Agytisztítás',     sub:['artéria, véna, nyirok','pulzus pumpál'],    color:'--vein'},
+  {id:'miert',     title:'Miért fontos',     sub:['immunrendszer','daganatos kockázat'],       color:'--rem'},
+  {id:'tippek',    title:'Jobb alvás',       sub:['ingerkontroll','fény és hőmérséklet'],      color:'--wake'},
+  {id:'relax',     title:'Esti relaxáció',   sub:['4-7-8 légzés','hanggal vezetve'],           color:'--n1'},
+  {id:'etrend',    title:'Tea, étel, vitamin',sub:['mikor egyél és igyál','kiegészítők'],      color:'--rose'}
+];
+const NAV = [{id:'map', title:'Elmetérkép', color:'--ink'}].concat(BRANCHES);
+const menu = $('#menu');
+NAV.forEach(v=>{
+  const b = document.createElement('button');
+  b.dataset.view = v.id;
+  b.setAttribute('aria-current', v.id==='map' ? 'true':'false');
+  b.innerHTML = `<span class="dot" style="--c:${C(v.color)}"></span><span>${v.title}</span>`;
+  b.addEventListener('click', ()=>go(v.id));
+  menu.appendChild(b);
+});
+function go(id){
+  $$('.view').forEach(s=>s.classList.toggle('active', s.id==='view-'+id));
+  menu.querySelectorAll('button').forEach(b=>b.setAttribute('aria-current', b.dataset.view===id ? 'true':'false'));
+  window.scrollTo({top:0, behavior: REDUCED ? 'auto':'smooth'});
+  if(id==='tisztitas') startBrain(); else stopBrain();
+  if(id==='ciklus') startEeg(); else stopEeg();
+  if(id!=='relax') TTS.stop();
+}
+
+/* ===================== ELMETÉRKÉP ===================== */
+const MAP = {cx:470, cy:270, RX:300, RY:186, R0:94, NW:206, NH:76};
+function drawMindMap(){
+  const svg = $('#mapSvg'); svg.innerHTML = '';
+  const {cx,cy,RX,RY,R0,NW,NH} = MAP, n = BRANCHES.length;
+  BRANCHES.forEach((b,i)=>{
+    const a = (-90 + i*(360/n)) * Math.PI/180;
+    const x = cx + Math.cos(a)*RX, y = cy + Math.sin(a)*RY, col = C(b.color);
+    const dx = x-cx, dy = y-cy, L = Math.hypot(dx,dy), ux = dx/L, uy = dy/L;
+    const sx = cx + ux*(R0+4), sy = cy + uy*(R0+4);
+    const tx = Math.abs(ux)<1e-6 ? Infinity : (NW/2)/Math.abs(ux);
+    const ty = Math.abs(uy)<1e-6 ? Infinity : (NH/2)/Math.abs(uy);
+    const t = Math.min(tx,ty)+4, ex = x-ux*t, ey = y-uy*t;
+    const mx = (sx+ex)/2, my = (sy+ey)/2, bow = 24;
+    svg.appendChild(el('path',{d:`M ${sx.toFixed(1)} ${sy.toFixed(1)} Q ${(mx-uy*bow).toFixed(1)} ${(my+ux*bow).toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}`,
+      fill:'none', stroke:col, 'stroke-width':2, 'stroke-opacity':.5, 'stroke-linecap':'round'}));
+    svg.appendChild(el('circle',{cx:sx, cy:sy, r:3.4, fill:col, 'fill-opacity':.9}));
+    const g = el('g',{class:'node-hit', tabindex:'0', role:'button', 'aria-label':b.title});
+    g.appendChild(el('rect',{x:x-NW/2, y:y-NH/2, width:NW, height:NH, rx:16,
+      fill:col, 'fill-opacity':.14, stroke:col, 'stroke-opacity':.5, class:'node-bg'}));
+    g.appendChild(el('text',{x, y:y-8, 'text-anchor':'middle', fill:col,
+      'font-family':'Fraunces, Georgia, serif', 'font-size':19, 'font-weight':600}, b.title));
+    b.sub.forEach((s,j)=> g.appendChild(el('text',{x, y:y+11+j*15, 'text-anchor':'middle', fill:'#a9b6d3',
+      'font-family':'Inter, sans-serif', 'font-size':12.5}, s)));
+    g.addEventListener('click', ()=>go(b.id));
+    g.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); go(b.id);} });
+    svg.appendChild(g);
+  });
+  svg.appendChild(el('circle',{cx, cy, r:R0, fill:'rgba(176,160,240,.10)', stroke:'rgba(255,255,255,.18)'}));
+  svg.appendChild(el('text',{x:cx, y:cy+2, 'text-anchor':'middle', fill:'#fff',
+    'font-family':'Fraunces, Georgia, serif', 'font-size':34, 'font-weight':700, 'letter-spacing':2}, 'ALVÁS'));
+  svg.appendChild(el('text',{x:cx, y:cy+27, 'text-anchor':'middle', fill:'#94a3c4',
+    'font-family':'JetBrains Mono, monospace', 'font-size':11, 'letter-spacing':2}, '~8 ÓRA / ÉJSZAKA'));
+}
+function drawMapCards(){
+  const box = $('#mapNarrow'); box.innerHTML = '';
+  BRANCHES.forEach(b=>{
+    const c = document.createElement('button');
+    c.className = 'branch-card';
+    c.style.setProperty('--c', C(b.color));
+    c.innerHTML = `<b>${b.title}</b><span>${b.sub.join(' · ')}</span>`;
+    c.addEventListener('click', ()=>go(b.id));
+    box.appendChild(c);
+  });
+}
+function layoutMap(){
+  const wide = window.innerWidth >= 780;
+  $('#mapWide').classList.toggle('on', wide);
+  $('#mapNarrow').classList.toggle('on', !wide);
+}
+
+/* ===================== HIPNOGRAM ===================== */
+const STAGES = {
+  W:  {name:'Ébrenlét',        color:'--wake', y:96,  desc:'Rövid felébredések normálisak — éjszakánként több is van. EEG-n béta és alfa.'},
+  REM:{name:'REM',             color:'--rem',  y:134, desc:'Az agy majdnem úgy dolgozik, mint ébren, az izmok viszont lebénulnak. Álmok, érzelmi feldolgozás, fűrészfog-hullámok.'},
+  N1: {name:'N1 elszunnyadás', color:'--n1',   y:172, desc:'Átmenet ébrenlét és alvás között. Itt tűnik el az alfa, és jön helyette a théta.'},
+  N2: {name:'N2 könnyű alvás', color:'--n2',   y:210, desc:'Az éjszaka legnagyobb része. Théta-alapon alvási orsók és K-komplexek — az orsók rögzítik a mozgástanulást.'},
+  N3: {name:'N3 mélyalvás',    color:'--n3',   y:252, desc:'Delta-hullámok: lassú és hatalmas. Emlékrögzítés, szövetregeneráció és az agytisztítás nagy része.'}
+};
+const NIGHT = [
+  [0,10,'W'],[10,18,'N1'],[18,45,'N2'],[45,78,'N3'],[78,88,'N2'],[88,98,'REM'],
+  [98,125,'N2'],[125,155,'N3'],[155,165,'N2'],[165,183,'REM'],[183,188,'W'],
+  [188,212,'N2'],[212,230,'N3'],[230,240,'N2'],[240,262,'REM'],
+  [262,292,'N2'],[292,300,'N1'],[300,328,'REM'],[328,352,'N2'],[352,358,'W'],
+  [358,382,'N2'],[382,412,'REM'],[412,436,'N2'],[436,462,'REM'],[462,470,'N1'],[470,480,'W']
+];
+const TOTAL = 480, HX0 = 84, HX1 = 936;
+const hx = m => HX0 + (m/TOTAL)*(HX1-HX0);
+function clockStr(mins){
+  const t = (22*60 + 30 + Math.round(mins)) % 1440;
+  return String(Math.floor(t/60)).padStart(2,'0') + ':' + String(t%60).padStart(2,'0');
+}
+const stageAt = m => { for(const [a,b,k] of NIGHT){ if(m>=a && m<b) return k; } return 'W'; };
+const STEPS = [1,2,3,5,10];
+let hypStep = 5, curStage = 'W';
+function drawHypnogram(){
+  const svg = $('#hypSvg'); svg.innerHTML = '';
+  Object.entries(STAGES).forEach(([k,s])=>{
+    svg.appendChild(el('line',{x1:HX0, x2:HX1, y1:s.y, y2:s.y, stroke:'rgba(255,255,255,.07)'}));
+    svg.appendChild(el('text',{x:HX0-12, y:s.y+5, 'text-anchor':'end', fill:C(s.color),
+      'font-family':'JetBrains Mono, monospace', 'font-size':15, 'font-weight':500}, k));
+  });
+  svg.appendChild(el('g',{id:'stepTicks'}));
+  for(let h=0; h<=8; h++)
+    svg.appendChild(el('text',{x:hx(h*60), y:296, 'text-anchor':'middle', fill:'#7f8dac',
+      'font-family':'JetBrains Mono, monospace', 'font-size':14}, clockStr(h*60)));
+  let prev = null;
+  NIGHT.forEach(([a,b,k])=>{
+    const s = STAGES[k];
+    if(prev !== null) svg.appendChild(el('line',{x1:hx(a), x2:hx(a), y1:prev, y2:s.y,
+      stroke:'rgba(255,255,255,.22)', 'stroke-width':1.6}));
+    svg.appendChild(el('line',{x1:hx(a), x2:hx(b), y1:s.y, y2:s.y, stroke:C(s.color),
+      'stroke-width': k==='REM' ? 5.5 : 3.8, 'stroke-linecap':'round'}));
+    prev = s.y;
+  });
+  svg.appendChild(el('line',{id:'playhead', x1:hx(0), x2:hx(0), y1:70, y2:272,
+    stroke:'#fff', 'stroke-width':1.8, 'stroke-opacity':.85}));
+  svg.appendChild(el('circle',{id:'playdot', cx:hx(0), cy:STAGES.W.y, r:6.5, fill:'#fff'}));
+  svg.appendChild(el('text',{id:'bigClock', x:HX0-2, y:52, fill:'#fff',
+    'font-family':'JetBrains Mono, monospace', 'font-size':38, 'font-weight':700, 'letter-spacing':1}, '22:30'));
+  svg.appendChild(el('text',{id:'bigStep', x:HX0+168, y:52, fill:'#8b97b5',
+    'font-family':'JetBrains Mono, monospace', 'font-size':14, 'letter-spacing':1.4}, '+5 p'));
+  svg.appendChild(el('text',{x:938, y:24, 'text-anchor':'end', fill:'#7f8dac',
+    'font-family':'JetBrains Mono, monospace', 'font-size':11.5, 'letter-spacing':2.2}, 'AKTUÁLIS SZAKASZ'));
+  svg.appendChild(el('text',{id:'bigStage', x:938, y:54, 'text-anchor':'end', fill:C('--wake'),
+    'font-family':'Fraunces, Georgia, serif', 'font-size':29, 'font-weight':700}, 'Ébrenlét'));
+  drawStepTicks();
+  $('#hypLegend').innerHTML = Object.entries(STAGES)
+    .map(([k,s])=>`<span><i style="background:${C(s.color)}"></i>${s.name}</span>`).join('');
+  const tot = {};
+  NIGHT.forEach(([a,b,k])=> tot[k] = (tot[k]||0)+(b-a));
+  const order = ['W','N1','N2','N3','REM'];
+  $('#hypBar').innerHTML = order.map(k=>
+    `<span style="width:${(tot[k]/TOTAL*100).toFixed(1)}%;background:${C(STAGES[k].color)}"></span>`).join('');
+  $('#hypBarLegend').innerHTML = order.map(k=>{
+    const p = Math.round(tot[k]/TOTAL*100), hh = Math.floor(tot[k]/60), mm = tot[k]%60;
+    return `<span><i style="background:${C(STAGES[k].color)}"></i>${k} — ${hh?hh+' ó ':''}${mm} p · ${p}%</span>`;
+  }).join('');
+  $('#stageCards').innerHTML = order.map(k=>{
+    const s = STAGES[k];
+    return `<div class="card" style="--c:${C(s.color)}"><span class="tag" style="--c:${C(s.color)}">${k}</span>
+            <h3>${s.name}</h3><p>${s.desc}</p></div>`;
+  }).join('');
+}
+function drawStepTicks(){
+  const g = document.getElementById('stepTicks');
+  if(!g) return;
+  g.innerHTML = '';
+  if(hypStep < 3) return;
+  for(let m=0;m<=TOTAL;m+=hypStep)
+    g.appendChild(el('line',{x1:hx(m), x2:hx(m), y1:266, y2:276, stroke:'rgba(255,255,255,.20)', 'stroke-width':1}));
+}
+STEPS.forEach(v=>{
+  const b = document.createElement('button');
+  b.className = 'chip'; b.textContent = v;
+  b.setAttribute('aria-pressed', String(v===hypStep));
+  b.addEventListener('click', ()=>{
+    hypStep = v;
+    $('#hypSteps').querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed', String(+c.textContent===v)));
+    drawStepTicks(); hypPaint();
+  });
+  $('#hypSteps').appendChild(b);
+});
+$('#hypSteps').insertAdjacentHTML('beforeend','<span class="lab" style="margin-left:6px">perc</span>');
+const BASE_SECONDS = 24;
+let hypSpeed = 60;
+const speedSeconds = () => BASE_SECONDS / (hypSpeed/100);
+function updSpeed(){
+  $('#hypSpeedVal').textContent = hypSpeed + '%';
+  $('#hypSpeedHint').textContent = 'az éjszaka ' + Math.round(speedSeconds()) + ' mp alatt';
+}
+$('#hypSpeed').addEventListener('input', e=>{ hypSpeed = +e.target.value; updSpeed(); });
+let hypT = 0, hypRAF = null, hypLast = 0;
+function hypFrame(ts){
+  if(!hypLast) hypLast = ts;
+  const dt = (ts-hypLast)/1000; hypLast = ts;
+  hypT += dt * (TOTAL/speedSeconds());
+  if(hypT >= TOTAL){ hypT = TOTAL; hypStop(); }
+  hypPaint();
+  if(hypRAF !== null) hypRAF = requestAnimationFrame(hypFrame);
+}
+function hypPaint(){
+  const shown = Math.min(TOTAL, Math.floor(hypT/hypStep)*hypStep);
+  const k = stageAt(Math.min(shown, TOTAL-1)), s = STAGES[k], col = C(s.color);
+  const x = hx(shown);
+  const ph = document.getElementById('playhead'), dot = document.getElementById('playdot');
+  if(ph){ ph.setAttribute('x1',x); ph.setAttribute('x2',x); ph.setAttribute('stroke',col); }
+  if(dot){ dot.setAttribute('cx',x); dot.setAttribute('cy',s.y); dot.setAttribute('fill',col); }
+  const bc = document.getElementById('bigClock'), bs = document.getElementById('bigStage'), bt = document.getElementById('bigStep');
+  if(bc) bc.textContent = clockStr(shown);
+  if(bt) bt.textContent = '+' + hypStep + ' p';
+  if(bs){ bs.textContent = s.name; bs.setAttribute('fill', col); }
+  if(k !== curStage){ curStage = k; updEegLabel(); }
+}
+function hypStart(){
+  if(hypRAF) return;
+  if(hypT >= TOTAL) hypT = 0;
+  hypLast = 0; hypRAF = requestAnimationFrame(hypFrame);
+  $('#hypPlay').textContent = 'Szünet';
+}
+function hypStop(){ if(hypRAF) cancelAnimationFrame(hypRAF); hypRAF = null; $('#hypPlay').textContent = 'Indítás'; }
+$('#hypPlay').addEventListener('click', ()=> hypRAF ? hypStop() : hypStart());
+$('#hypReset').addEventListener('click', ()=>{ hypStop(); hypT = 0; hypPaint(); });
+
+/* ============== EEG ============== */
+const EEG = {
+  W:  {band:'Béta', hz:'13–30 Hz · éber, gyors, kis amplitúdó', col:'--wake', comps:[[19,.13],[24,.07],[10,.09]], noise:.055},
+  REM:{band:'Vegyes + théta', hz:'4–30 Hz · majdnem olyan, mint ébren, plusz fűrészfog', col:'--rem', comps:[[17,.09],[6.5,.13],[11,.06]], noise:.06, saw:1},
+  N1: {band:'Théta', hz:'4–7 Hz · az alfa eltűnik, jön a théta', col:'--n1', comps:[[5.5,.20],[9.5,.07]], noise:.05},
+  N2: {band:'Théta + alvási orsók', hz:'4–7 Hz alap, 11–16 Hz-es csomagok és K-komplex', col:'--n2', comps:[[5,.17]], noise:.04, spindle:1, kc:1},
+  N3: {band:'Delta', hz:'0,5–4 Hz · nagy amplitúdó, lassú, összehangolt', col:'--n3', comps:[[1.1,.62],[2.4,.14]], noise:.025}
+};
+const EW=960, EH=210, PX0=70, PX1=946, PY0=26, PY1=158, NSAMP=1400;
+const buf = new Float32Array(NSAMP);
+const EEG_WINS = [2,4,6,8,10];
+let eegWin=6, ePhase=0, eegRAF=null, eegLast=0, spTimer=0, spOn=0, kcTimer=0, kcOn=0;
+const eegCvs = $('#eegCanvas'), ectx = eegCvs.getContext('2d');
+EEG_WINS.forEach(v=>{
+  const b = document.createElement('button');
+  b.className='chip'; b.textContent=v;
+  b.setAttribute('aria-pressed', String(v===eegWin));
+  b.addEventListener('click', ()=>{
+    eegWin = v;
+    $('#eegWins').querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed', String(+c.textContent===v)));
+    drawEeg();
+  });
+  $('#eegWins').appendChild(b);
+});
+$('#eegWins').insertAdjacentHTML('beforeend','<span class="lab" style="margin-left:6px">másodperc</span>');
+function eegSample(dt){
+  const cfg = EEG[curStage];
+  ePhase += dt;
+  let v = 0;
+  cfg.comps.forEach(([f,a])=> v += Math.sin(ePhase*2*Math.PI*f)*a);
+  v += (Math.random()-.5)*cfg.noise*2;
+  if(cfg.spindle){
+    spTimer -= dt;
+    if(spTimer<=0){ spTimer = 1.6+Math.random()*2.2; spOn = .85; }
+    if(spOn>0){ spOn -= dt;
+      const env = Math.sin(Math.max(0,Math.min(1,(.85-spOn)/.85))*Math.PI);
+      v += Math.sin(ePhase*2*Math.PI*13.5)*.30*env; }
+  }
+  if(cfg.kc){
+    kcTimer -= dt;
+    if(kcTimer<=0){ kcTimer = 4+Math.random()*5; kcOn = .55; }
+    if(kcOn>0){ kcOn -= dt; const u = 1-kcOn/.55;
+      v += (-Math.sin(u*Math.PI*2))*.55*Math.sin(u*Math.PI); }
+  }
+  if(cfg.saw) v += (((ePhase*3)%1)*2-1)*.10;
+  return v;
+}
+function eegFrame(ts){
+  if(!eegLast) eegLast = ts;
+  let dt = (ts-eegLast)/1000; eegLast = ts;
+  dt = Math.min(dt,.12);
+  const per = eegWin/NSAMP;
+  const n = Math.max(1, Math.min(60, Math.round(dt/per)));
+  for(let i=0;i<n;i++){ buf.copyWithin(0,1); buf[NSAMP-1] = eegSample(per); }
+  drawEeg();
+  eegRAF = requestAnimationFrame(eegFrame);
+}
+function fitEeg(){
+  const r = eegCvs.getBoundingClientRect();
+  if(!r.width) return;
+  const dpr = Math.min(window.devicePixelRatio||1,2);
+  eegCvs.width = Math.max(1,r.width*dpr); eegCvs.height = Math.max(1,r.height*dpr);
+  ectx.setTransform(dpr*r.width/EW,0,0,dpr*r.height/EH,0,0);
+}
+function drawEeg(){
+  const cfg = EEG[curStage], col = C(cfg.col);
+  const mid = (PY0+PY1)/2, half = (PY1-PY0)/2;
+  ectx.clearRect(0,0,EW,EH);
+  ectx.font='11px JetBrains Mono, monospace'; ectx.textAlign='right'; ectx.textBaseline='middle';
+  [[1,'+100'],[.5,'+50'],[0,'0'],[-.5,'−50'],[-1,'−100']].forEach(([v,lab])=>{
+    const y = mid - v*half;
+    ectx.strokeStyle = v===0?'rgba(255,255,255,.14)':'rgba(255,255,255,.055)'; ectx.lineWidth=1;
+    ectx.beginPath(); ectx.moveTo(PX0,y); ectx.lineTo(PX1,y); ectx.stroke();
+    ectx.strokeStyle='rgba(255,255,255,.30)';
+    ectx.beginPath(); ectx.moveTo(PX0-5,y); ectx.lineTo(PX0,y); ectx.stroke();
+    ectx.fillStyle='rgba(148,163,196,.85)'; ectx.fillText(lab, PX0-9, y);
+  });
+  ectx.strokeStyle='rgba(255,255,255,.22)'; ectx.lineWidth=1.2;
+  ectx.beginPath(); ectx.moveTo(PX0,PY0-4); ectx.lineTo(PX0,PY1+4); ectx.stroke();
+  ectx.textAlign='left'; ectx.fillStyle='rgba(148,163,196,.9)'; ectx.fillText('µV', 8, PY0-12);
+  ectx.strokeStyle=col; ectx.lineWidth=2;
+  ectx.beginPath(); ectx.moveTo(PX0+10,mid); ectx.lineTo(PX0+10,mid-half*.5); ectx.stroke();
+  ectx.beginPath(); ectx.moveTo(PX0+6,mid); ectx.lineTo(PX0+14,mid); ectx.stroke();
+  ectx.beginPath(); ectx.moveTo(PX0+6,mid-half*.5); ectx.lineTo(PX0+14,mid-half*.5); ectx.stroke();
+  ectx.fillStyle=col; ectx.font='10px JetBrains Mono, monospace'; ectx.fillText('50', PX0+18, mid-half*.25);
+  ectx.strokeStyle='rgba(255,255,255,.16)'; ectx.lineWidth=1;
+  ectx.beginPath(); ectx.moveTo(PX0,PY1+12); ectx.lineTo(PX1,PY1+12); ectx.stroke();
+  ectx.font='11px JetBrains Mono, monospace'; ectx.textAlign='center';
+  for(let s=0;s<=eegWin;s++){
+    const x = PX0+(s/eegWin)*(PX1-PX0);
+    ectx.strokeStyle='rgba(255,255,255,.24)';
+    ectx.beginPath(); ectx.moveTo(x,PY1+12); ectx.lineTo(x,PY1+18); ectx.stroke();
+    ectx.fillStyle='rgba(148,163,196,.8)'; ectx.fillText(String(s), x, PY1+30);
+  }
+  ectx.textAlign='left'; ectx.fillStyle='rgba(148,163,196,.75)'; ectx.fillText('mp', PX1+2, PY1+30);
+  ectx.save();
+  ectx.beginPath(); ectx.rect(PX0,PY0-8,PX1-PX0,(PY1-PY0)+16); ectx.clip();
+  ectx.beginPath();
+  for(let i=0;i<NSAMP;i++){
+    const x = PX0+i/(NSAMP-1)*(PX1-PX0), y = mid-buf[i]*half;
+    i?ectx.lineTo(x,y):ectx.moveTo(x,y);
+  }
+  ectx.strokeStyle=col; ectx.lineWidth=1.6; ectx.lineJoin='round';
+  ectx.shadowColor=col; ectx.shadowBlur=7; ectx.stroke(); ectx.shadowBlur=0;
+  ectx.restore();
+  ectx.textAlign='right'; ectx.fillStyle='rgba(148,163,196,.6)';
+  ectx.font='11px JetBrains Mono, monospace'; ectx.fillText(eegWin+' mp ablak', PX1, PY0-12);
+}
+function updEegLabel(){
+  const cfg = EEG[curStage];
+  $('#eegBand').textContent = cfg.band;
+  $('#eegBand').style.color = C(cfg.col);
+  $('#eegHz').textContent = cfg.hz;
+}
+function startEeg(){ if(eegRAF) return; fitEeg(); drawEeg(); if(REDUCED) return; eegLast=0; eegRAF = requestAnimationFrame(eegFrame); }
+function stopEeg(){ if(eegRAF) cancelAnimationFrame(eegRAF); eegRAF = null; }
+const WAVES = [
+  {n:'Béta',hz:'13–30 Hz',f:19,a:.16,col:'--wake',when:'éber, koncentrált'},
+  {n:'Alfa',hz:'8–12 Hz',f:10,a:.30,col:'--sky',when:'ellazult ébrenlét, csukott szem'},
+  {n:'Théta',hz:'4–7 Hz',f:5.5,a:.48,col:'--n1',when:'elszunnyadás, N1 és N2'},
+  {n:'Delta',hz:'0,5–4 Hz',f:1.5,a:.88,col:'--n3',when:'N3 mélyalvás'},
+  {n:'Alvási orsó',hz:'11–16 Hz csomag',f:13.5,a:.55,col:'--n2',when:'N2, mozgástanulás',burst:1}
+];
+function drawWaveChart(){
+  const svg = $('#waveSvg'); svg.innerHTML='';
+  const X0=132, X1=878, rowH=90;
+  WAVES.forEach((w,i)=>{
+    const yc = 44+i*rowH, col = C(w.col);
+    svg.appendChild(el('text',{x:0,y:yc-8,fill:col,'font-family':'Fraunces, Georgia, serif','font-size':18,'font-weight':600}, w.n));
+    svg.appendChild(el('text',{x:0,y:yc+11,fill:'#8b97b5','font-family':'JetBrains Mono, monospace','font-size':11.5}, w.hz));
+    svg.appendChild(el('text',{x:0,y:yc+28,fill:'#7f8dac','font-family':'Inter, sans-serif','font-size':11.5}, w.when));
+    svg.appendChild(el('line',{x1:X0,x2:X1,y1:yc,y2:yc,stroke:'rgba(255,255,255,.06)'}));
+    let d='';
+    for(let px=0;px<=X1-X0;px+=2){
+      const tt = px/(X1-X0)*2;
+      let v = Math.sin(tt*2*Math.PI*w.f)*w.a;
+      if(w.burst) v *= Math.max(0, Math.sin((tt%1)*Math.PI*1.6-.3));
+      d += (px?' L ':'M ')+(X0+px).toFixed(1)+' '+(yc-v*30).toFixed(1);
+    }
+    svg.appendChild(el('path',{d,fill:'none',stroke:col,'stroke-width':1.9,'stroke-linejoin':'round'}));
+  });
+}
+const WAVE_CARDS = [
+  {c:'--wake',t:'Béta — 13–30 Hz',p:'Ébren, koncentrálva ez dominál. Sok apró, gyors rezgés: a kéreg sok kis csoportja külön dolgozik. Alacsony amplitúdó, 5–20 µV. Ha este az ágyban is ez fut, az a „nem tudom kikapcsolni a fejem" állapot.'},
+  {c:'--sky',t:'Alfa — 8–12 Hz',p:'Ellazult ébrenlét, csukott szemmel, 20–60 µV. Az elalvás kapuja: amikor az alfa kezd feltöredezni és kihagyni, az az N1 kezdete. A lassú kilégzés és a testpásztázás pont ezt célozza.'},
+  {c:'--n1',t:'Théta — 4–7 Hz',p:'Elszunnyadás és könnyű alvás, 50–100 µV. Már több idegsejt mozog együtt. Ebben a szakaszban jönnek a zuhanásérzetek és izomrándulások.'},
+  {c:'--n3',t:'Delta — 0,5–4 Hz',p:'A mélyalvás hullámai: nagyon lassúak és nagyon nagyok, akár 100–200 µV. Az egész kéreg együtt kapcsol be és ki. Ez rögzíti a tényszerű emlékeket, és ez mozgatja az agyi folyadékot a takarításhoz. Az életkorral ez csökken először.'},
+  {c:'--n2',t:'Alvási orsó és K-komplex',p:'Nem frekvenciasáv, hanem esemény. Az orsó egy 11–16 Hz-es, fél-egy másodperces hullámcsomag az N2-ben — rögzíti a mozdulatsorokat, és leárnyékolja az agyat a külső zajtól. A K-komplex nagy, hirtelen kilengés, sokszor zajra: mintha az agy azt döntené, „nem érdemes felébredni".'},
+  {c:'--rem',t:'REM — a becsapós',p:'Az EEG-n a REM majdnem úgy néz ki, mint az ébrenlét. Ezért hívták paradox alvásnak. Két dolog árulja el: a szemmozgások, és hogy a vázizmok teljesen lebénulnak.'}
+];
+$('#waveCards').innerHTML = WAVE_CARDS.map(w=>
+  `<div class="card" style="--c:${C(w.c)}"><h3>${w.t}</h3><p>${w.p}</p></div>`).join('');
+
+/* ================== CIRKADIÁN ================== */
+const CX0=84, CX1=932, CY0=66, CY1=286;
+const ct = t => CX0+(t/24)*(CX1-CX0);
+const cvy = v => CY1 - v*(CY1-CY0);
+const circClock = t => { const h=(12+t)%24; return String(Math.floor(h)).padStart(2,'0')+':'+String(Math.round((h%1)*60)).padStart(2,'0'); };
+const KEY_MEL=[[0,.02],[7,.02],[8.5,.06],[9.5,.24],[11,.60],[13,.88],[15,1],[16.5,.93],[18,.62],[19.5,.26],[20.5,.07],[22,.02],[24,.02]];
+const KEY_COR=[[0,.42],[3,.28],[6,.18],[9,.10],[12,.05],[14,.11],[16,.34],[18,.72],[19.3,1],[21,.80],[24,.42]];
+const KEY_TMP=[[0,.72],[3,.90],[6,1],[8,.96],[10,.85],[12,.62],[14,.38],[16,.16],[16.5,.10],[18,.22],[20,.44],[22,.60],[24,.72]];
+function lerpKey(keys,t){
+  if(t<=keys[0][0]) return keys[0][1];
+  for(let i=0;i<keys.length-1;i++){
+    const [x0,y0]=keys[i],[x1,y1]=keys[i+1];
+    if(t>=x0&&t<=x1){ const u=(t-x0)/(x1-x0); return y0+(y1-y0)*(u*u*(3-2*u)); }
+  }
+  return keys[keys.length-1][1];
+}
+const CURVES=[{key:KEY_MEL,col:'--n2',id:'mel'},{key:KEY_COR,col:'--wake',id:'cor'},{key:KEY_TMP,col:'--mint',id:'tmp'}];
+const CIRC_NOTES=[
+  [6,8,'Kortizolcsúcs 30–45 perccel az ébredés után. Ez nem stressz, ez az ébresztő. A reggeli fény felerősíti, és előre állítja az órát estére.'],
+  [8,12,'A melatonin nulla, a kortizol csökken. A nap legélesebb figyelmi ablaka.'],
+  [12,15,'Délutáni holtpont. Az adenozin már sok, de a belső óra éberségi jele még nem ért csúcsra. Itt jön a kávévágy — de a délutáni kávé fele éjfélkor is benned van.'],
+  [15,19,'A maghőmérséklet és a testi teljesítmény csúcsa. Ez a legjobb edzésablak, és még marad idő a lehűlésre.'],
+  [19,21,'A maghő esni kezd, a kortizol a mélypont felé tart. Innentől a fény számít a legjobban.'],
+  [21,23,'Melatonin-indulás (DLMO). Erős esti fény ilyenkor órákkal késleltetheti.'],
+  [23,3,'Melatonin a csúcsán, kortizol a mélyponton. A mélyalvás zöme ide esik, és vele az agy takarítása is.'],
+  [3,5,'Maghőmérséklet-minimum, kb. két órával a természetes ébredés előtt. A kortizol most kezd emelkedni.'],
+  [5,7,'A melatonin lecseng, a kortizol felfut, és a REM-szakaszok most a leghosszabbak.']
+];
+function noteFor(t){
+  const h=(12+t)%24;
+  for(const [a,b,txt] of CIRC_NOTES){
+    if(a<b){ if(h>=a&&h<b) return txt; } else { if(h>=a||h<b) return txt; }
+  }
+  return '';
+}
+let circT = 10.5;
+function drawCirc(){
+  const svg = $('#circSvg'); svg.innerHTML='';
+  svg.appendChild(el('rect',{x:ct(10.5),y:CY0-10,width:ct(18.5)-ct(10.5),height:(CY1-CY0)+10,
+    fill:'rgba(176,160,240,.09)',stroke:'rgba(176,160,240,.22)',rx:8}));
+  svg.appendChild(el('text',{x:(ct(10.5)+ct(18.5))/2,y:CY0-18,'text-anchor':'middle',fill:'#b0a0f0',
+    'font-family':'JetBrains Mono, monospace','font-size':12,'letter-spacing':2},'ALVÁSABLAK'));
+  for(let t=0;t<=24;t+=3){
+    svg.appendChild(el('line',{x1:ct(t),x2:ct(t),y1:CY0-10,y2:CY1,stroke:'rgba(255,255,255,.06)'}));
+    svg.appendChild(el('text',{x:ct(t),y:CY1+26,'text-anchor':'middle',fill:'#7f8dac',
+      'font-family':'JetBrains Mono, monospace','font-size':13.5}, circClock(t)));
+  }
+  svg.appendChild(el('line',{x1:CX0,x2:CX1,y1:CY1,y2:CY1,stroke:'rgba(255,255,255,.16)'}));
+  CURVES.forEach(c=>{
+    const pts=[];
+    for(let t=0;t<=24;t+=.5) pts.push([ct(t),cvy(lerpKey(c.key,t))]);
+    svg.appendChild(el('path',{d:catmull(pts),fill:'none',stroke:C(c.col),'stroke-width':3,'stroke-linecap':'round'}));
+    svg.appendChild(el('circle',{id:'dot-'+c.id,r:6,cx:ct(circT),cy:cvy(lerpKey(c.key,circT)),
+      fill:C(c.col),stroke:'#0a0f1e','stroke-width':2}));
+  });
+  svg.appendChild(el('line',{id:'circCursor',x1:ct(circT),x2:ct(circT),y1:CY0-24,y2:CY1+6,
+    stroke:'#fff','stroke-width':1.6,'stroke-opacity':.75}));
+  const hit = el('rect',{x:CX0,y:0,width:CX1-CX0,height:CY1+34,fill:'transparent',style:'cursor:ew-resize'});
+  svg.appendChild(hit);
+  const move = e=>{
+    const r = svg.getBoundingClientRect();
+    const vx = (e.clientX-r.left)*(960/r.width);
+    circT = Math.max(0, Math.min(24, (vx-CX0)/(CX1-CX0)*24));
+    circStop(); paintCirc();
+  };
+  hit.addEventListener('pointerdown', e=>{ hit.setPointerCapture(e.pointerId); move(e); });
+  hit.addEventListener('pointermove', e=>{ if(e.buttons) move(e); });
+  paintCirc();
+}
+function paintCirc(){
+  const cur = document.getElementById('circCursor');
+  if(cur){ cur.setAttribute('x1',ct(circT)); cur.setAttribute('x2',ct(circT)); }
+  CURVES.forEach(c=>{
+    const d = document.getElementById('dot-'+c.id);
+    if(d){ d.setAttribute('cx',ct(circT)); d.setAttribute('cy',cvy(lerpKey(c.key,circT))); }
+  });
+  $('#vMel').textContent = Math.round(lerpKey(KEY_MEL,circT)*100)+'%';
+  $('#vCor').textContent = Math.round(lerpKey(KEY_COR,circT)*100)+'%';
+  $('#vTmp').textContent = Math.round(lerpKey(KEY_TMP,circT)*100)+'%';
+  $('#circTime').textContent = circClock(circT);
+  $('#circTxt').textContent = noteFor(circT);
+}
+let circRAF=null, circLast=0;
+function circFrame(ts){
+  if(!circLast) circLast = ts;
+  const dt=(ts-circLast)/1000; circLast=ts;
+  circT += dt*(24/22);
+  if(circT>24) circT = 0;
+  paintCirc();
+  if(circRAF!==null) circRAF = requestAnimationFrame(circFrame);
+}
+function circStop(){ if(circRAF) cancelAnimationFrame(circRAF); circRAF=null; $('#circPlay').textContent='Nap lejátszása'; }
+$('#circPlay').addEventListener('click', ()=>{
+  if(circRAF) return circStop();
+  circLast=0; circRAF = requestAnimationFrame(circFrame); $('#circPlay').textContent='Szünet';
+});
+$('#circNow').addEventListener('click', ()=>{ circStop(); circT=10.5; paintCirc(); });
+
+/* ====== AGYTISZTÍTÁS ====== */
+const cvs = $('#brainCanvas'), ctx = cvs.getContext('2d');
+const VW = 600, VH = 430;
+/* erősített, jól elkülönülő színek */
+const CA = [95,180,255];    // artéria
+const CV = [79,224,168];    // véna
+const CL = [255,127,176];   // nyirok
+const CW = [196,42,79];     // hulladék (sötét bordó)
+const rgba = (c,a)=>`rgba(${c[0]},${c[1]},${c[2]},${a})`;
+function lobePath(cx,cy,rx,ry,folds,amp,squash){
+  const p = new Path2D();
+  for(let i=0;i<=220;i++){
+    const a=(i/220)*Math.PI*2;
+    const rip = 1 + amp*Math.sin(a*folds+.4) + amp*.5*Math.sin(a*(folds*1.9)+1.7);
+    const yr = (Math.sin(a)>0 ? ry*squash : ry);
+    const x = cx+Math.cos(a)*rx*rip, y = cy+Math.sin(a)*yr*rip;
+    i?p.lineTo(x,y):p.moveTo(x,y);
+  }
+  p.closePath(); return p;
+}
+function taperPath(pts,ws){
+  const L=[],R=[];
+  for(let i=0;i<pts.length;i++){
+    const p=pts[i], a=pts[Math.max(0,i-1)], b=pts[Math.min(pts.length-1,i+1)];
+    const dx=b[0]-a[0], dy=b[1]-a[1], len=Math.hypot(dx,dy)||1;
+    const nx=-dy/len, ny=dx/len, w=ws[i]/2;
+    L.push([p[0]+nx*w,p[1]+ny*w]); R.push([p[0]-nx*w,p[1]-ny*w]);
+  }
+  return new Path2D(catmull(L)+' '+catmull(R.slice().reverse()).replace(/^M/,'L')+' Z');
+}
+const CEREBRUM   = lobePath(266,156,176,106,9,.034,.82);
+const CEREBELLUM = lobePath(406,246,62,42,20,.038,.94);
+/* agytörzs: FELÜL mélyen a nagyagyban indul és átlátszóra fut ki, ALUL hegyesen záródik
+   -> nincs lapos felső él, tehát nincs többé látható téglalap */
+const STEM = taperPath(
+  [[326,120],[330,180],[334,240],[338,290],[343,332],[346,350],[347,358]],
+  [ 60, 52, 42, 33, 26, 16, 4]);
+const hitCvs = document.createElement('canvas');
+hitCvs.width=VW; hitCvs.height=VH;
+const hitCtx = hitCvs.getContext('2d');
+const inBrain = (x,y)=> hitCtx.isPointInPath(CEREBRUM,x,y) || hitCtx.isPointInPath(CEREBELLUM,x,y) || hitCtx.isPointInPath(STEM,x,y);
+const EXIT = {x:347, y:358};
+const LNODE = {x:432, y:398, rx:26, ry:15};
+
+function buildTree(rootChain, angles, seed0){
+  const nodes=[]; let seed=seed0;
+  const rnd = ()=>{ seed=(seed*1103515245+12345)&0x7fffffff; return seed/0x7fffffff; };
+  const add = (x,y,p,d)=>{ nodes.push({x,y,p,depth:d}); return nodes.length-1; };
+  let root=-1; rootChain.forEach(([x,y])=>{ root = add(x,y,root,-1); });
+  function grow(parent,angle,len,depth){
+    if(depth>4) return;
+    let prev=parent, x=nodes[parent].x, y=nodes[parent].y, a=angle;
+    for(let s=0;s<3;s++){
+      a += (rnd()-.5)*.34;
+      const nx=x+Math.cos(a)*(len/3), ny=y+Math.sin(a)*(len/3);
+      if(!inBrain(nx,ny)) return;
+      x=nx; y=ny; prev = add(x,y,prev,depth);
+    }
+    const sp=.50+rnd()*.30;
+    grow(prev,a-sp,len*.74,depth+1); grow(prev,a+sp,len*.74,depth+1);
+  }
+  angles.forEach(([d,l])=> grow(root, d*Math.PI/180, l, 0));
+  const hk=new Set(); nodes.forEach(n=>{ if(n.p>=0) hk.add(n.p); });
+  const tips = nodes.map((_,i)=>i).filter(i=>!hk.has(i));
+  const paths = tips.map(t=>{ const p=[]; let i=t; while(i>=0){ p.push(i); i=nodes[i].p; } return p.reverse(); });
+  return {nodes,tips,paths};
+}
+const ART  = buildTree([[340,344],[336,314],[332,284]], [[-168,94],[-112,90],[-52,62]], 12345);
+const VEIN = buildTree([[352,344],[356,314],[360,284]], [[-136,88],[-76,92],[-14,72]], 98765);
+function nearestVein(x,y){
+  let best=-1, bd=1e9, N=VEIN.nodes;
+  for(let i=0;i<N.length;i++){ const d=(N[i].x-x)**2+(N[i].y-y)**2; if(d<bd){bd=d;best=i;} }
+  return {i:best,d:Math.sqrt(bd)};
+}
+function nearAnyVessel(x,y){
+  let bd=1e9;
+  [ART.nodes,VEIN.nodes].forEach(N=>{
+    for(let i=0;i<N.length;i++){ const d=(N[i].x-x)**2+(N[i].y-y)**2; if(d<bd) bd=d; }
+  });
+  return Math.sqrt(bd);
+}
+let brainRAF=null, asleep=false, open=0, cleared=0, tSec=0;
+let waste=[], inFlow=[], outFlow=[], rings=[], lymphGlow=0, nodeGlow=0;
+let waveY=-100, pulseAmp=0;
+function spawnWaste(n){
+  let guard=0;
+  while(n>0 && guard<7000){
+    guard++;
+    const x=80+Math.random()*400, y=44+Math.random()*250;
+    if(!inBrain(x,y)) continue;
+    if(nearAnyVessel(x,y)<12) continue;
+    waste.push({x,y,ph:'stuck',a:0,i:-1,t:0,mix:0,jx:Math.random()*6.3,r:2.9+Math.random()*1.0,ex:0,rot:Math.random()*1.6});
+    n--;
+  }
+}
+function newIn(f){ f.path = ART.paths[(Math.random()*ART.paths.length)|0]; f.k=0; f.t=Math.random(); return f; }
+for(let i=0;i<46;i++) inFlow.push(newIn({}));
+function newOut(f){ f.i = VEIN.tips[(Math.random()*VEIN.tips.length)|0]; f.t=Math.random(); return f; }
+for(let i=0;i<46;i++) outFlow.push(newOut({}));
+function stepIn(f,spd){
+  f.t += spd;
+  while(f.t>=1){ f.t-=1; f.k++; if(f.k >= f.path.length-1){ newIn(f); return; } }
+}
+function posIn(f){
+  const a = ART.nodes[f.path[f.k]], b = ART.nodes[f.path[Math.min(f.k+1,f.path.length-1)]];
+  return [a.x+(b.x-a.x)*f.t, a.y+(b.y-a.y)*f.t];
+}
+function stepOut(o,spd){
+  o.t += spd;
+  while(o.t>=1){ o.t-=1; const n=VEIN.nodes[o.i]; if(n.p<0) return true; o.i=n.p; }
+  return false;
+}
+function posOut(o){
+  const n = VEIN.nodes[o.i], p = VEIN.nodes[n.p<0?o.i:n.p];
+  return [n.x+(p.x-n.x)*o.t, n.y+(p.y-n.y)*o.t];
+}
+function fitCanvas(){
+  const r = cvs.getBoundingClientRect();
+  if(!r.width) return;
+  const dpr = Math.min(window.devicePixelRatio||1,2);
+  cvs.width = Math.max(1,r.width*dpr); cvs.height = Math.max(1,r.height*dpr);
+  const sc = Math.min(r.width/VW, r.height/VH);
+  ctx.setTransform(dpr*sc,0,0,dpr*sc, dpr*(r.width-VW*sc)/2, dpr*(r.height-VH*sc)/2);
+}
+function drawTree(tree,col,scale,pulseW){
+  ctx.lineCap='round';
+  tree.nodes.forEach(n=>{
+    if(n.p<0) return;
+    const p = tree.nodes[n.p];
+    ctx.beginPath(); ctx.moveTo(n.x,n.y); ctx.lineTo(p.x,p.y);
+    ctx.strokeStyle = col;
+    ctx.lineWidth = Math.max(.9,(6.6-Math.max(0,n.depth)*1.1)*scale*(1+pulseW));
+    ctx.stroke();
+  });
+}
+/* hulladék = kis pixel (lekerekített négyzet), nem kör */
+function pixel(x,y,s,fill,rot){
+  ctx.save(); ctx.translate(x,y); ctx.rotate(rot);
+  const r = s*.28;
+  ctx.beginPath();
+  ctx.moveTo(-s/2+r,-s/2); ctx.lineTo(s/2-r,-s/2); ctx.quadraticCurveTo(s/2,-s/2,s/2,-s/2+r);
+  ctx.lineTo(s/2,s/2-r); ctx.quadraticCurveTo(s/2,s/2,s/2-r,s/2);
+  ctx.lineTo(-s/2+r,s/2); ctx.quadraticCurveTo(-s/2,s/2,-s/2,s/2-r);
+  ctx.lineTo(-s/2,-s/2+r); ctx.quadraticCurveTo(-s/2,-s/2,-s/2+r,-s/2);
+  ctx.closePath(); ctx.fillStyle=fill; ctx.fill(); ctx.restore();
+}
+function drawBrain(dt){
+  ctx.clearRect(-500,-500,2200,1800);
+  tSec += dt;
+  open += ((asleep?1:0)-open)*.035;
+  const period = 3.1, ph = (tSec%period)/period;
+  pulseAmp = asleep ? Math.max(0, Math.sin(ph*Math.PI)) : .05;
+  waveY = -100 + ph*(VH+200);
+
+  /* agytörzs: függőleges gradiens, felül teljesen átlátszó -> nincs látható él */
+  const sg = ctx.createLinearGradient(0,175,0,265);
+  sg.addColorStop(0, rgba([176,160,240],0));
+  sg.addColorStop(1, rgba(asleep?CV:[176,160,240], .085+open*.05));
+  ctx.fillStyle = sg; ctx.fill(STEM);
+  const sgs = ctx.createLinearGradient(0,195,0,275);
+  sgs.addColorStop(0,'rgba(255,255,255,0)');
+  sgs.addColorStop(1,'rgba(255,255,255,.20)');
+  ctx.strokeStyle = sgs; ctx.lineWidth = 1.5; ctx.stroke(STEM);
+
+  [CEREBELLUM, CEREBRUM].forEach(p=>{
+    const g = ctx.createLinearGradient(70,40,520,340);
+    g.addColorStop(0, rgba(asleep?CV:[176,160,240], .085+open*.06+pulseAmp*.02*open));
+    g.addColorStop(1,'rgba(255,255,255,.03)');
+    ctx.fillStyle=g; ctx.fill(p);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.5; ctx.stroke(p);
+  });
+  ctx.save(); ctx.clip(CEREBELLUM);
+  ctx.strokeStyle='rgba(255,255,255,.13)'; ctx.lineWidth=1;
+  for(let i=-5;i<=5;i++){
+    ctx.beginPath(); ctx.moveTo(406-58,246+i*7.5);
+    ctx.quadraticCurveTo(406,246+i*7.5+(i<0?4:-4),406+58,246+i*7.5); ctx.stroke();
+  }
+  ctx.restore();
+
+  ctx.save();
+  const clip = new Path2D();
+  clip.addPath(CEREBRUM); clip.addPath(CEREBELLUM); clip.addPath(STEM);
+  ctx.clip(clip);
+  ctx.strokeStyle='rgba(255,255,255,.05)'; ctx.lineWidth=1.3;
+  [[[125,115],[185,145],[245,125]],[[155,205],[225,230],[295,210]],
+   [[215,75],[275,105],[345,90]],[[290,170],[350,200],[408,180]],
+   [[105,170],[145,190],[195,175]]].forEach(p=>{
+    ctx.beginPath(); ctx.moveTo(p[0][0],p[0][1]);
+    ctx.quadraticCurveTo(p[1][0],p[1][1],p[2][0],p[2][1]); ctx.stroke();
+  });
+  if(open>.02){
+    drawTree(ART,  rgba(CA,.13*open), (1+open*2.3)*(1+pulseAmp*.5), 0);
+    drawTree(VEIN, rgba(CV,.14*open), (1+open*2.4)*(1+pulseAmp*.5), 0);
+  }
+  drawTree(ART,  rgba(CA,.38+open*.45), .38+open*.62, pulseAmp*.45*open);
+  drawTree(VEIN, rgba(CV,.38+open*.47), .38+open*.62, pulseAmp*.30*open);
+
+  if(asleep){
+    const wg = ctx.createLinearGradient(0,waveY-62,0,waveY+62);
+    wg.addColorStop(0, rgba(CV,0));
+    wg.addColorStop(.5, `rgba(200,250,230,${.26*open})`);
+    wg.addColorStop(1, rgba(CV,0));
+    ctx.fillStyle = wg;
+    ctx.beginPath(); ctx.moveTo(0,waveY-62);
+    for(let x=0;x<=VW;x+=16) ctx.lineTo(x, waveY-62+Math.sin(x/58)*9);
+    ctx.lineTo(VW,waveY+62);
+    for(let x=VW;x>=0;x-=16) ctx.lineTo(x, waveY+62+Math.sin(x/58)*9);
+    ctx.closePath(); ctx.fill();
+  }
+
+  for(let i=waste.length-1;i>=0;i--){
+    const w = waste[i];
+    if(w.a<1) w.a = Math.min(1,w.a+.03);
+    if(!asleep){
+      w.ph='stuck'; w.mix = Math.max(0,w.mix-.02); w.jx += .022;
+      const nx = w.x + Math.sin(w.jx*1.7)*.18 + (240-w.x)*.0003;
+      const ny = w.y + Math.cos(w.jx*1.3)*.15 + (145-w.y)*.0003;
+      if(inBrain(nx,ny)){ w.x=nx; w.y=ny; } else { w.jx += 2.2; }
+    } else {
+      if(w.ph==='stuck' && Math.abs(w.y-waveY)<60){ w.ph='drift'; w.i = nearestVein(w.x,w.y).i; }
+      if(w.ph==='drift'){
+        const n = VEIN.nodes[w.i], dx=n.x-w.x, dy=n.y-w.y, d=Math.hypot(dx,dy)||1;
+        const push = .55 + pulseAmp*1.15;
+        w.x += dx/d*push; w.y += dy/d*push;
+        w.mix = Math.min(.7, w.mix+.014); w.rot += .04;
+        if(d<3.4){ w.ph='flow'; w.t=0; }
+      } else if(w.ph==='flow'){
+        w.mix = Math.min(1,w.mix+.02); w.rot += .06;
+        if(stepOut(w,.010+pulseAmp*.030)){ w.ph='exit'; w.ex=0; }
+        else { const [px,py]=posOut(w); w.x=px; w.y=py; }
+      } else if(w.ph==='exit'){
+        w.ex += .013 + pulseAmp*.020;
+        const u = w.ex;
+        w.x = EXIT.x + u*(LNODE.x-EXIT.x) + Math.sin(u*10)*1.6;
+        w.y = EXIT.y + u*(LNODE.y-EXIT.y);
+        lymphGlow = Math.min(1, lymphGlow+.028);
+        if(w.ex>=1){
+          waste.splice(i,1); cleared++; nodeGlow = 1;
+          rings.push({x:LNODE.x,y:LNODE.y,r:8,a:1});
+          continue;
+        }
+      }
+    }
+    const s = (w.r*1.9) - w.mix*.7;
+    const cr = Math.round(CW[0]+(CV[0]-CW[0])*w.mix);
+    const cg = Math.round(CW[1]+(CV[1]-CW[1])*w.mix);
+    const cb = Math.round(CW[2]+(CV[2]-CW[2])*w.mix);
+    /* külső izzás, hogy a sötét bordó is látszódjon a sötét háttéren */
+    ctx.beginPath(); ctx.arc(w.x,w.y,s*1.5,0,6.29);
+    ctx.fillStyle = `rgba(${cr},${cg},${cb},${.13+.15*w.mix})`; ctx.fill();
+    pixel(w.x, w.y, s, `rgba(${cr},${cg},${cb},${.60+.40*w.a})`, w.rot);
+  }
+
+  const sIn = .003 + (.012+pulseAmp*.030)*open;
+  inFlow.forEach(f=>{
+    stepIn(f,sIn);
+    const [x,y] = posIn(f);
+    ctx.beginPath(); ctx.arc(x,y,1.7+open*.9,0,6.29);
+    ctx.fillStyle = `rgba(190,228,255,${.22+.72*open})`; ctx.fill();
+  });
+  const sOut = .003 + (.010+pulseAmp*.026)*open;
+  outFlow.forEach(o=>{
+    if(stepOut(o,sOut)) newOut(o);
+    const [x,y] = posOut(o);
+    ctx.beginPath(); ctx.arc(x,y,1.7+open*.9,0,6.29);
+    ctx.fillStyle = `rgba(200,255,232,${.22+.72*open})`; ctx.fill();
+  });
+  ctx.restore();
+
+  /* ---- NYIROKÚT: külön szín, billentyűkkel, jól láthatóan elkülönülve ---- */
+  lymphGlow = Math.max(0,lymphGlow-.010);
+  nodeGlow  = Math.max(0,nodeGlow-.020);
+  const lx0=EXIT.x, ly0=EXIT.y, lx1=LNODE.x, ly1=LNODE.y;
+  ctx.beginPath(); ctx.moveTo(lx0,ly0);
+  ctx.quadraticCurveTo(lx0+30,ly0+16,lx1,ly1);
+  ctx.strokeStyle = rgba(CL,.30+.30*open+.30*lymphGlow);
+  ctx.lineWidth = 9+open*3+lymphGlow*3; ctx.lineCap='round'; ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(lx0,ly0);
+  ctx.quadraticCurveTo(lx0+30,ly0+16,lx1,ly1);
+  ctx.strokeStyle = rgba(CL,.75+.25*lymphGlow); ctx.lineWidth = 3.4; ctx.stroke();
+  /* billentyűk */
+  for(let i=1;i<=3;i++){
+    const u=i/4, mx=lx0+30, my=ly0+16;
+    const bx = (1-u)*(1-u)*lx0 + 2*(1-u)*u*mx + u*u*lx1;
+    const by = (1-u)*(1-u)*ly0 + 2*(1-u)*u*my + u*u*ly1;
+    const dx = 2*(1-u)*(mx-lx0)+2*u*(lx1-mx), dy = 2*(1-u)*(my-ly0)+2*u*(ly1-my);
+    const L = Math.hypot(dx,dy)||1, ux=dx/L, uy=dy/L, nx=-uy, ny=ux;
+    ctx.beginPath();
+    ctx.moveTo(bx-ux*3+nx*4, by-uy*3+ny*4);
+    ctx.lineTo(bx+ux*3, by+uy*3);
+    ctx.lineTo(bx-ux*3-nx*4, by-uy*3-ny*4);
+    ctx.strokeStyle = `rgba(255,225,238,${.55+.4*lymphGlow})`; ctx.lineWidth=1.6; ctx.stroke();
+  }
+  ctx.beginPath();
+  ctx.ellipse(LNODE.x,LNODE.y,LNODE.rx*(1+nodeGlow*.10),LNODE.ry*(1+nodeGlow*.10),-.22,0,6.29);
+  ctx.fillStyle = rgba(CL,.20+.22*open+.35*nodeGlow); ctx.fill();
+  ctx.strokeStyle = rgba(CL,.80+.20*nodeGlow); ctx.lineWidth=2; ctx.stroke();
+  for(let i=rings.length-1;i>=0;i--){
+    const g=rings[i]; g.r+=1.4; g.a-=.03;
+    if(g.a<=0){ rings.splice(i,1); continue; }
+    ctx.beginPath(); ctx.arc(g.x,g.y,g.r,0,6.29);
+    ctx.strokeStyle=`rgba(255,220,235,${g.a})`; ctx.lineWidth=1.8; ctx.stroke();
+  }
+  ctx.fillStyle = rgba(CL,.9); ctx.font='11.5px JetBrains Mono, monospace'; ctx.textAlign='left';
+  ctx.fillText('NYAKI NYIROKCSOMÓ', LNODE.x-56, LNODE.y+34);
+  ctx.fillStyle='rgba(148,163,196,.7)'; ctx.font='10.5px JetBrains Mono, monospace';
+  ctx.fillText('innen a vér- és nyirokkeringésbe', LNODE.x-56, LNODE.y+48);
+  ctx.fillStyle = rgba(CL,.75); ctx.font='10.5px JetBrains Mono, monospace';
+  ctx.fillText('agyhártyai nyirokér', lx0+12, ly0-6);
+
+  /* pulzusjelző */
+  const bx=24, by=VH-30, bw=160;
+  ctx.fillStyle='rgba(148,163,196,.8)'; ctx.font='10.5px JetBrains Mono, monospace'; ctx.textAlign='left';
+  ctx.fillText(asleep?'LASSÚ HULLÁM · PUMPA':'PULZUS NÉLKÜL', bx, by-8);
+  ctx.fillStyle='rgba(255,255,255,.08)'; ctx.fillRect(bx,by,bw,8);
+  ctx.fillStyle = asleep ? `rgba(200,250,230,${.5+.5*pulseAmp})` : 'rgba(176,160,240,.35)';
+  ctx.fillRect(bx,by,bw*pulseAmp,8);
+  ctx.fillStyle='rgba(148,163,196,.6)'; ctx.font='10px JetBrains Mono, monospace';
+  ctx.fillText(asleep?'a csúcson szabadul ki a szemét':'ébren a szemét bent ragad', bx, by+23);
+
+  ctx.textAlign='right'; ctx.fillStyle='rgba(148,163,196,.75)'; ctx.font='12px JetBrains Mono, monospace';
+  ctx.fillText(asleep?'MÉLYALVÁS · a tér nyitva':'ÉBRENLÉT · a tér szűk', VW-14, 24);
+  ctx.textAlign='left'; ctx.font='11.5px JetBrains Mono, monospace';
+  ctx.fillStyle = rgba(CA,.95); ctx.fillText('artéria · folyadék BE', 22, 26);
+  ctx.fillStyle = rgba(CV,.95); ctx.fillText('véna · folyadék KI', 22, 44);
+  ctx.fillStyle = rgba(CW,1);   ctx.fillText('bordó pixel · a szemét', 22, 62);
+}
+let brainLast = 0;
+function brainFrame(ts){
+  const dt = brainLast ? Math.min(.1,(ts-brainLast)/1000) : .016;
+  brainLast = ts;
+  if(!asleep && waste.length<130 && Math.random()<.10) spawnWaste(1);
+  drawBrain(dt);
+  $('#wasteNum').textContent = asleep ? cleared : waste.length;
+  $('#wasteMeter').style.width = Math.min(100,Math.round(waste.length/130*100))+'%';
+  brainRAF = requestAnimationFrame(brainFrame);
+}
+function startBrain(){ if(brainRAF) return; fitCanvas(); if(!waste.length) spawnWaste(95); brainLast=0; brainRAF = requestAnimationFrame(brainFrame); }
+function stopBrain(){ if(brainRAF) cancelAnimationFrame(brainRAF); brainRAF=null; }
+function setSleep(v){
+  asleep = v;
+  $('#btnAwake').setAttribute('aria-pressed', String(!v));
+  $('#btnAsleep').setAttribute('aria-pressed', String(v));
+  $('#wasteLabel').textContent = v ? 'Nyirokcsomóba juttatva' : 'Bent ragadt szemét';
+  $('#brainNote').textContent = v
+    ? 'A csatornák kinyílnak. A pulzusjelző minden csúcsán lökésben szabadulnak ki a bordó szemét-pixelek, rákerülnek a zöld vénára, ott mentazöldre váltanak (ez mutatja, hogy már a folyadék viszi őket), és a rózsaszín nyirokéren jutnak a nyaki nyirokcsomóba.'
+    : 'Ébren szűkek a csatornák, alig van áramlás, és nincs pulzálás, ami kilökné. A bordó szemét bent ragad a szövetben, ahol keletkezett.';
+  if(v) cleared = 0;
+}
+$('#btnAwake').addEventListener('click', ()=>setSleep(false));
+$('#btnAsleep').addEventListener('click', ()=>setSleep(true));
+
+/* ================== TARTALOM ================== */
+const WHY = [
+  {c:'--n3',tag:'N3 mélyalvás',t:'Emlékrögzítés',p:'A napközben tanult tények a hippokampuszból a hosszú távú tárba kerülnek át. Ezt a mélyalvás delta-hullámai vezénylik — és a mélyalvás nagy része az éjszaka első felében van. Aki későn fekszik, de ugyanannyit alszik, ebből veszít.'},
+  {c:'--n2',tag:'N2 alvási orsók',t:'Mozgástanulás',p:'A kézre tanult mozdulatsorok — géptől a hangszerig — az N2 szakasz alvási orsóihoz kötődnek, amikből az utolsó két órában van a legtöbb. Aki reggel lecsíp két órát, pont ezt vágja le.'},
+  {c:'--rem',tag:'REM',t:'Érzelmi feldolgozás',p:'REM alatt az emlékek megmaradnak, de a hozzájuk tapadó érzelmi töltet tompul. Ez az, amitől egy rossz nap másnapra elviselhetőbb. Alkohol után ez a szakasz sérül a legjobban.'},
+  {c:'--vein',tag:'Glymphatikus',t:'Agytisztítás',p:'A hulladékfehérjék — köztük az amiloid-béta és a tau — döntő része alvás alatt ürül ki, és a nyirokrendszeren jut a keringésbe. Tartós alváshiány mellett ezek felhalmozódnak.'},
+  {c:'--wake',tag:'Regeneráció',t:'Növekedési hormon',p:'A napi növekedésihormon-kibocsátás nagy része az éjszaka első mélyalvás-szakaszaihoz kötődik. Ez felelős a szövetjavításért, az izomregenerációért és a csontanyagcseréért. Ezért érzed a nehéz fizikai munka utáni napot sokkal rosszabbnak, ha keveset aludtál.'},
+  {c:'--sky',tag:'Következmény',t:'Figyelem és reakcióidő',p:'Négy-öt óra alvás után a reakcióidő és a figyelemtartás mérhetően romlik, de a saját teljesítményed megítélése nem — ezért érzed magad rendben, miközben nem vagy az. Gép mellett ez nem apróság.'}
+];
+$('#whyCards').innerHTML = WHY.map(w=>
+  `<div class="card" style="--c:${C(w.c)}"><span class="tag" style="--c:${C(w.c)}">${w.tag}</span>
+   <h3>${w.t}</h3><p>${w.p}</p></div>`).join('');
+const evDots = n => `<span class="ev">${[1,2,3].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</span>`;
+function renderTips(list, sel, col){
+  $(sel).innerHTML = list.map((x,i)=>`
+    <li style="--c:${C(col)}">
+      <span class="num">${String(i+1).padStart(2,'0')}</span>
+      <div>
+        <h4>${x.t}${x.ev!==undefined?evDots(x.ev):''}</h4>
+        <div class="blk"><span class="lbl">${x.l1||'Miért'}</span><span class="txt">${x.w}</span></div>
+        <div class="blk"><span class="lbl">${x.l2||'Hogyan'}</span><span class="txt">${x.h}</span></div>
+      </div>
+    </li>`).join('');
+}
+const IMMUNE = [
+{t:'Természetes ölősejtek — az első vonal', ev:3, l1:'Mérés', l2:'Mit jelent',
+ w:'23 egészséges férfinál egyetlen éjszaka részleges alvásmegvonás után (hajnali 3 és 7 között nem aludtak) az NK-sejtek ölőképessége átlagosan a saját normál értékük <strong>72%-ára</strong> esett. Egy éjszaka rendes alvás után visszaállt. Egy 42 fős folytatásban nemcsak az NK-aktivitás esett, hanem az interleukin-2 termelés is — és az még egy éjszaka pihenés után is alacsony maradt.',
+ h:'Az NK-sejtek azok, amik a vírussal fertőzött és a rendellenessé váló sejteket ismerik fel és ölik meg anélkül, hogy előbb meg kellene tanulniuk a kórokozót. Egy éjszaka nem tragédia, mert visszaáll — a lényeg, hogy ha heti négy éjszakán ismétlődik, a rendszer soha nem tér vissza a kiindulási szintre.'},
+{t:'Megfázás — ez nem korreláció, hanem kísérlet', ev:3, l1:'Mérés', l2:'Mit jelent',
+ w:'164 egészséges önkéntes alvását egy héten át csuklóra kötött mozgásérzékelővel mérték. Utána mindenkinek ugyanannyi rhinovírust csepegtettek az orrába. Aki <strong>5 óránál kevesebbet</strong> aludt, 4,5-szer nagyobb eséllyel lett tényleg beteg, mint aki 7-nél többet. Aki 5–6 órát: 4,2-szer.',
+ h:'Ez a legmeggyőzőbb formája ennek a bizonyítéknak, mert mindenki azonos vírusadagot kapott. Nem az a kérdés, hogy elkapod-e, hanem hogy a szervezeted meg tudja-e állítani, mielőtt tünetet ad.'},
+{t:'Védőoltás — az alvás dózisnövelőként', ev:3, l1:'Mérés', l2:'Mit jelent',
+ w:'Egy 2023-as metaelemzés hét vizsgálat adatait összesítette. Akinél <em>műszerrel</em> mérték a rövid alvást az oltás körüli napokban, ott érdemi antitestcsökkenés jött ki (hatásméret 0,79). Férfiaknál a hatás nagy volt, nőknél nem érte el a szignifikanciát. Az önbevalláson alapuló adat nem adott szignifikáns eredményt — a mért alvás számít, nem amit gondolunk róla.',
+ h:'Ha oltásra mész, a körülötte lévő pár éjszakán aludj rendesen. Ez az egyik legegyszerűbb és ingyenes dolog, amivel a saját oltásod hatékonyságát növelheted.'},
+{t:'Gyulladás — a lassú háttérfolyamat', ev:2, l1:'Mérés', l2:'Mit jelent',
+ w:'Tartós alváshiány mellett emelkedik az IL-6, a TNF-alfa és a CRP szintje. Ezek a krónikus, alacsony szintű gyulladás jelzői — ugyanaz a gyulladás, ami a szív- és érrendszeri betegségek és az inzulinrezisztencia közös háttere.',
+ h:'Ez nem érezhető tünet, hanem évek alatt gyűlő terhelés. Emiatt nem lehet megérezni, hogy elég-e az alvás.'}
+];
+const CANCER = [
+{t:'Amit a WHO ügynöksége kimondott', ev:2, l1:'Tény', l2:'Fenntartás',
+ w:'A WHO alá tartozó IARC 2019-ben az <strong>éjszakai műszakot</strong> „valószínűleg emberre karcinogén" (2A) kategóriába sorolta. Definíció: legalább 3 óra munka éjfél és hajnali 5 között. Az alap: <em>elegendő</em> bizonyíték állatkísérletekben és <em>erős</em> mechanizmus-bizonyíték.',
+ h:'A besorolás nem azt jelenti, hogy az éjszakai munka rákot okoz. A 2A azt jelenti: valószínű, de az emberi epidemiológiai bizonyíték <em>korlátozott</em>. Ugyanebben a kategóriában van például a vörös hús fogyasztása is.'},
+{t:'Az emberi adatok vegyesek', ev:2, l1:'Tény', l2:'Fenntartás',
+ w:'Egy 26 vizsgálatot és 1,3 millió résztvevőt összesítő metaelemzés a 10 évnél <em>rövidebb</em> ideig éjszakázóknál 13%-kal magasabb emlőkarcinóma-kockázatot talált (RR 1,13). A 10 évnél hosszabb csoportnál az eredmény már nem lett szignifikáns. Egy 2024–2025-ös frissítés kohorszvizsgálatokban helyenként ellentétes irányt is talált.',
+ h:'Ez a tipikus kép egy valós, de kicsi hatásnál, ahol a mérés zajos. Nem szabad se lesöpörni, se katasztrófaként kezelni.'},
+{t:'A feltételezett mechanizmus', ev:2, l1:'Tény', l2:'Fenntartás',
+ w:'Négy szál fut össze: a mesterséges esti fény elnyomja a melatonint; a belső óra összezavarodik, és vele a sok ezer napi ritmusban működő gén; az NK-aktivitás csökken; és felborul a sejtosztódás napi ritmusa, ami a DNS-hibajavítás időzítését is érinti.',
+ h:'Laborban erős, emberben nehezen mérhető. Azt viszont megmutatja, hol lehet beavatkozni: a fényen és az étkezés időzítésén keresztül.'},
+{t:'Amit ebből érdemes elvinni', ev:3, l1:'Tény', l2:'Fenntartás',
+ w:'Nem az, hogy „a rossz alvás rákot okoz". Hanem az, hogy az alvás és a belső óra az immunrendszer működésének egyik alapfeltétele, ez kísérletesen mérhető, és a hatás <strong>visszafordítható</strong>: az NK-aktivitás egy éjszaka alvás után visszaáll, az oltásválasz javítható, a gyulladásjelzők csökkennek.',
+ h:'A helyes olvasat nem félelem, hanem az, hogy ez az egyik legjobban megtérülő beavatkozás, mert ingyen van és minden más rendszerre is hat.'}
+];
+const HARM = [
+{t:'Egy éjszaka után', ev:3, l1:'Mi romlik', l2:'Mit tegyél',
+ w:'A reakcióidő és a figyelemtartás mérhetően romlik, a hangulat labilisabb, a fájdalomérzékenység nő, az NK-aktivitás lecsökken. A legalattomosabb: a <em>saját</em> teljesítményed megítélése nem romlik ezzel együtt.',
+ h:'Ne hozz aznap nagy döntést, és gép mellett számolj rá. Ha lehet, 20 perces korai délutáni szunyókálás — de 15 óra után már ne. Ne próbáld kávéval megoldani: az elrejti a jelzést, nem pótolja az alvást.'},
+{t:'Egy-két hét után', ev:2, l1:'Mi romlik', l2:'Mit tegyél',
+ w:'Gyakoribbá válnak a felső légúti fertőzések, gyengül az oltásokra adott válasz, romlik a glükóztolerancia, és az étvágyszabályozás is elcsúszik: nő a ghrelin, csökken a leptin. A mélyalvás rovására eső alváshiány a növekedési hormont is visszafogja.',
+ h:'Itt már nem elég egy jó éjszaka. Vissza kell állni a fix ébredéshez és a reggeli fényhez, és ki kell húzni két hetet.'},
+{t:'Hónapok, évek alatt', ev:2, l1:'Mi romlik', l2:'Mit tegyél',
+ w:'Emelkedett szív- és érrendszeri kockázat, inzulinrezisztencia felé mutató elmozdulás, tartósan magasabb gyulladásjelzők, és a hulladékfehérjék felhalmozódása az agyban. Ezek nem hirtelen jelennek meg, és nem is érződnek időben.',
+ h:'Ha ide jutottál, a legfontosabb kizárni az alvási apnoét, mert az önmagában is elég ehhez a képhez, és teljesen máshogy kezelendő. Utána CBT-I, nem altató.'}
+];
+renderTips(IMMUNE,'#immuneList','--mint');
+renderTips(CANCER,'#cancerList','--rem');
+renderTips(HARM,'#harmList','--wake');
+const CORE = [
+{t:'Fix ébredési idő, hétvégén is',
+ w:'Az ébredés horgonyozza le a belső órát, nem a lefekvés. Az óra saját ciklusa valamivel hosszabb 24 óránál, ezért naponta újra kell állítani. Ha hétvégén két órát csúsztatsz, az az órádnak annyi, mintha átrepültél volna két időzónát: hétfőn szociális jetlaggel indulsz.',
+ h:'Válaszd a legkorábbi hétköznapi ébredést, és tartsd hétvégén is fél órán belül. Ha kevés volt az alvás, inkább korábban feküdj le, ne később kelj.'},
+{t:'Az ágy csak alvásra — ingerkontroll',
+ w:'Ha az ágyban forgolódsz, aggódsz vagy telefonozol, az agy megtanulja az „ágy = éberség" társítást. Ez feltételes reflex, pár hét alatt kialakul. Az ingerkontroll ezt írja felül, és a CBT-I egyik legerősebb önálló hatóanyaga.',
+ h:'Ha kb. 20 perc után nem alszol el, kelj ki. Ne nézd az órát, becsüld. Menj át másik helyiségbe, félhomály, olvass valami unalmasat. Csak akkor menj vissza, ha tényleg álmos vagy — és ismételd akárhányszor.'},
+{t:'Alvásmegszorítás',
+ w:'Ha kilenc órát fekszel az ágyban, hogy hatot aludj, az a három ébren töltött óra az ágyat ébrenlét-helyszínné teszi, és széttördeli az alvást. Ha leszűkíted az ágyban töltött időt a tényleges alvásidőre, nő az alvásnyomás, és az alvás összetömörödik.',
+ h:'Egy hétig vezess alvásnaplót. Az ágyban töltött időt állítsd be az átlagos tényleges alvásidőre, de sose menj 5,5 óra alá. Az ébredés fix, a lefekvést told későbbre. Ha egy héten át az alváshatékonyság 90% fölött van, told ki 15 perccel.'},
+{t:'Reggeli fény, ébredés után hamar',
+ w:'A retinában külön érzékelősejtek ülnek, amik közvetlenül a belső órának jelentenek. A reggeli fény leállítja a maradék melatonint, felviszi a kortizolt a normális ébredési csúcsra, és előre tolja az órát. A hatás nem azonnali: este jelentkezik.',
+ h:'10–20 perc kint, borús időben inkább 30–40. Ablakon át a fény töredéke jut át, tehát tényleg menj ki. Napszemüveg nélkül, de a napba ne nézz.'},
+{t:'Hűvös hálószoba, 16–19 °C',
+ w:'Az elalváshoz a maghőmérsékletnek kb. 1 °C-ot esnie kell, és ez úgy megy, hogy a kéz és a láb erei kitágulnak, és leadják a hőt. Túl meleg szobában nincs hova leadni.',
+ h:'16–19 °C, és inkább takaróval szabályozz. Ha fázik a lábad, húzz zoknit — paradox módon segít, mert így tágulnak az erek és jobban ürül a hő.'}
+];
+const EXTRA = [
+{t:'Koffein: utolsó adag 8–10 órával lefekvés előtt',
+ w:'A koffein az adenozin receptorait blokkolja. Nem tünteti el az adenozint, csak elrejti a jelét — és amikor lebomlik, a felgyűlt adenozin egyszerre üt be. A felezési idő 5–6 óra: a 15 órakor ivott kávé fele még 21-kor is benned van. A leggyakoribb következmény nem az elalvás, hanem hogy kevesebb mélyalvást kapsz.',
+ h:'Kb. 10 órával lefekvés előtt húzd meg a vonalat. Figyelj a rejtett forrásokra: energiaital, zöld tea, étcsokoládé, egyes fájdalomcsillapítók.'},
+{t:'Az alkohol nem alvás',
+ w:'Nyugtató hatású, ezért gyorsabban elalszol — de az így kapott állapot nem természetes alvás. Elnyomja a REM-et az első félidőben, és amikor lebomlik, felaprózott, felszínes második félidő jön sok mikroébredéssel.',
+ h:'Ha iszol, hagyj legalább 3–4 órát lefekvésig, és igyál mellé vizet. Próbálj két hetet nélküle, és hasonlítsd össze.'},
+{t:'Meleg zuhany vagy fürdő 1–2 órával lefekvés előtt',
+ w:'Nem a felmelegedés a lényeg, hanem ami utána jön: a meleg víz kitágítja a bőr ereit, és kilépve a test hatékonyabban adja le a hőt — így a maghő gyorsabban esik.',
+ h:'10–15 perc meleg, nem forró víz. Kádfürdő, zuhany, sőt a lábfürdő is működik.'},
+{t:'Este halvány, alacsonyan lévő fény',
+ w:'A retina óra-érzékelői a felülről jövő, kékes fényre reagálnak a legerősebben. Az esti erős mennyezetvilágítás azt üzeni, hogy még nappal van, és késlelteti a melatonin megindulását.',
+ h:'Napnyugta után kapcsold le a mennyezeti lámpát, használj szemmagasság alatti, meleg fényű lámpákat. A nagyobb tétel a szoba fénye, nem a kijelző.'},
+{t:'Mozgás igen, de ne közvetlenül lefekvés előtt',
+ w:'A rendszeres napközbeni mozgás mélyíti a mélyalvást. Az intenzív edzés viszont felviszi a maghőmérsékletet, amit épp csökkenteni kellene, és megemeli a kortizolszintet, aminek este a mélypontján kellene lennie.',
+ h:'Intenzív edzés legkésőbb 2–3 órával lefekvés előtt. Késő este már csak nyújtás, séta, könnyű jóga.'},
+{t:'Nagy vacsora és sok folyadék lefekvés előtt',
+ w:'Az emésztés felviszi a testhőt és az anyagcserét, pont amikor a maghőnek esnie kellene. Lefekvés után a reflux is felébreszthet.',
+ h:'Az utolsó nagyobb étkezés 3 órával lefekvés előtt. A folyadékot húzd előre a nap első felébe.'},
+{t:'Írd ki, ami pörög',
+ w:'A fejben tartott befejezetlen feladatok fenntartják az éberséget: az agy nem engedi el azt, aminek nincs biztos helye.',
+ h:'Lefekvés előtt 10 perc: holnapi teendők listája papírra, ne telefonba.'}
+];
+renderTips(CORE,'#tipsCore','--mint');
+renderTips(EXTRA,'#tipsExtra','--n2');
+const TEA = [
+{t:'Kamilla — ezzel kezdd', ev:2, l1:'Miért', l2:'Hogyan',
+ w:'A kamillában lévő apigenin ugyanazokhoz a GABA-A receptorokhoz kötődik, amiken a nyugtatók is hatnak, csak nagyon halványan. Egy randomizált vizsgálatban két hét kamillatea mérhetően javította az alvás minőségét. A rituálé maga is jelzés: a meleg csésze, a félhomály és a lassulás együtt tanítja az agyat.',
+ h:'Egy csésze, 60–90 perccel lefekvés előtt. Kb. 90 fokos vízzel, és tedd rá a tetejét 5–7 percre — így az illóolajok a teában maradnak. Cukrot ne, legfeljebb kevés mézet.'},
+{t:'Macskagyökér (valeriána) — erősebb, de lassabb', ev:2, l1:'Miért', l2:'Hogyan',
+ w:'A valerénsav növeli a GABA elérhetőségét. Egy 2024-es áttekintés szerint a valeriána, a komló és a melatonin azok, amiknél a legtöbb támogató adat van. Cserébe 2–4 hét rendszeres használat kell hozzá.',
+ h:'Este egy csésze, vagy komlóval keverve. Ha nyugtatót, antidepresszánst vagy alkoholt is használsz, előbb beszéld meg gyógyszerésszel.'},
+{t:'Golgotavirág és citromfű', ev:1, l1:'Miért', l2:'Hogyan',
+ w:'A golgotavirág szorongáscsökkentése a kamilláéval egy szinten van, de kis vizsgálatokban kevesebb éjszakai felébredést is hozott. A citromfű a saját GABA-dat védi a lebomlástól.',
+ h:'Jó választás, ha nem az elalvás, hanem a hajnali 3-kor felébredés a problémád.'},
+{t:'Meggylé (Montmorency) — óvatos igen', ev:1, l1:'Miért', l2:'Hogyan',
+ w:'Van benne természetes melatonin, de kevés. A valószínűbb út a gyulladáscsökkentő antocianinok. Egy 2023-as áttekintés szerint javítja az alváshatékonyságot — de a vizsgálatok kicsik és jó részük ipari finanszírozású.',
+ h:'Kb. 240 ml. Hátulütő a cukortartalom, cukorbetegségnél kifejezetten nem.'},
+{t:'Amit este kerülj', ev:3, l1:'Miért', l2:'Hogyan',
+ w:'A zöld és a fekete tea is koffeint tartalmaz — a zöld kevesebbet, de nem nullát, és a felezési idő ugyanaz.',
+ h:'Napnyugta után csak koffeinmentes gyógytea, mérsékelt mennyiség.'}
+];
+const FOOD = [
+{t:'A nem várt csavar: a triptofán a REGGELIN számít', ev:2, l1:'Miért', l2:'Hogyan',
+ w:'A melatonin triptofánból készül, szerotoninon keresztül. Japán vizsgálatok szerint a triptofánban gazdag <em>reggeli</em> plusz reggeli erős fény plusz este halvány fény emelte meg mérhetően az esti melatoninszintet. A vacsorán elfogyasztott triptofán nem mutatott ilyen hatást: a szintézishez idő és nappali fény kell.',
+ h:'Reggelire: tojás, túró vagy joghurt, zabkása, tökmag, sajt, banán. És utána menj ki a fénybe 10–20 percre.'},
+{t:'Az utolsó nagy étkezés 3 órával lefekvés előtt', ev:2, l1:'Miért', l2:'Hogyan',
+ w:'Az emésztés felviszi a testhőmérsékletet és az anyagcserét, épp amikor a maghőnek esnie kellene. Fekve a gyomorsav is könnyebben visszafolyik.',
+ h:'22:30-as lefekvésnél a vacsora 19:00 körül. Zsíros, nagyon fűszeres vagy nagy proteinadagos vacsorát este ne.'},
+{t:'Ha éhesen nem tudsz aludni', ev:1, l1:'Miért', l2:'Hogyan',
+ w:'Az üres gyomor is ébresztő jel. Emellett a triptofán akkor jut be legjobban az agyba, ha kevés szénhidrát is van mellette.',
+ h:'Fél szelet teljes kiőrlésű kenyér, egy kis natúr joghurt, pár szem mandula vagy egy kis banán. Kétszáz kalória alatt.'},
+{t:'Amit az étrendből érdemes rendben tartani', ev:2, l1:'Miért', l2:'Hogyan',
+ w:'A magnézium, a B6-vitamin és a cink mind kellenek a szerotonin–melatonin úthoz. Ha az étrendből megvannak, nincs miért kapszulázni.',
+ h:'Magnézium: tökmag, mandula, spenót, fekete bab, étcsokoládé. B6: hal, csirke, burgonya, banán. Cink: hús, tökmag, hüvelyesek.'}
+];
+const SUPP = [
+{t:'Magnézium', ev:2, l1:'Bizonyíték', l2:'Hogyan',
+ w:'Támogatja a GABA-működést. A bizonyíték közepes: a vizsgálatok kicsik, és a hatás főleg akkor jön, ha eleve hiány van.',
+ h:'200–400 mg elemi magnézium, 30–60 perccel lefekvés előtt. Glicinát vagy citrát — az oxid rosszul szívódik fel. 350 mg fölött hasmenés lehet.'},
+{t:'Glicin', ev:2, l1:'Bizonyíték', l2:'Hogyan',
+ w:'A glicin nem nyugtat, hanem <em>hűt</em>: kitágítja a kéz és a láb ereit, így a maghőmérséklet gyorsabban esik. Ugyanazt csinálja, mint a meleg fürdő, csak belülről. Az őszinte rész: kevés és kicsi vizsgálat van, több közülük glicint gyártó cégtől — viszont mellékhatást nem találtak.',
+ h:'3 g, 30–60 perccel lefekvés előtt. Nem megadózis: az étrendből eleve kb. 2 g jön naponta. Ha 1–2 hét után semmit nem érzel, hagyd abba.'},
+{t:'L-teanin', ev:2, l1:'Bizonyíték', l2:'Hogyan',
+ w:'A zöld tea nyugtató aminosava. Nem álmosít, hanem leveszi az élt a pörgésről. Már az első éjszakán érezhető.',
+ h:'200 mg lefekvés előtt. Jól megvan magnéziummal együtt.'},
+{t:'Melatonin — a legerősebb bizonyíték, a legtöbb félreértéssel', ev:3, l1:'Bizonyíték', l2:'Hogyan',
+ w:'Nem altató, hanem óraállító. Ezért az <strong>időzítés fontosabb, mint a dózis</strong>. Amire jó: időzónaváltás, műszakváltás, elcsúszott ritmus visszatolása. Amire kevésbé: krónikus álmatlanság.',
+ h:'0,3–0,5 mg, 1–3 órával lefekvés ELŐTT. A bolti 3–10 mg-os tabletta durván túldozírozott. Ha csak nagy van, törd el. Ne szedd hónapokon át.'},
+{t:'D-vitamin — mérés nélkül ne', ev:1, l1:'Bizonyíték', l2:'Hogyan',
+ w:'A hiány együtt jár rosszabb alvással, de ez nem jelenti, hogy a pótlás mindenkinél javítja. Ez az egyetlen a listán, aminél a túlzás valódi kárt okoz.',
+ h:'Kérj vérvételt (25-OH-D), és annak alapján állítsd be az adagot. Reggel vagy délben vedd be, étkezés mellett.'},
+{t:'Amit inkább ne', ev:1, l1:'Bizonyíték', l2:'Hogyan',
+ w:'A nagy dózisú B6 hosszú távon idegkárosodást okozhat. Az ashwagandha májproblémák miatt vitatott. A vény nélküli antihisztamin alapú altatók gyorsan tolerálódnak.',
+ h:'Ha három hónap után is minden éjszakához kell valami, az orvosi kérdés. Az alvási apnoe máshogy kezelendő.'}
+];
+renderTips(TEA,'#teaList','--rose');
+renderTips(FOOD,'#foodList','--wake');
+renderTips(SUPP,'#suppList','--mint');
+const DAYPLAN = [
+  ['ébredés','<b>Fény, azonnal.</b> 10–20 perc kint. Ha van, D-vitamin étkezés mellé.'],
+  ['+30 perc','<b>Triptofános reggeli:</b> tojás, túró, zab, tökmag.'],
+  ['−10 óra','<b>Utolsó koffein.</b> 22:30-as lefekvésnél 12:30 körül.'],
+  ['−7,5 óra','<b>Edzésablak</b> nyílik: 15 és 19 között a legjobb az izomerő.'],
+  ['−3,5 óra','<b>Utolsó nagy étkezés.</b> Ne zsíros, ne nagy proteinadag.'],
+  ['−2,5 óra','<b>Intenzív edzés vége.</b> Innentől csak séta, nyújtás.'],
+  ['−1,5 óra','<b>Fények le.</b> Mennyezeti lámpa ki, meleg fényű állólámpa. Tea föl.'],
+  ['−1 óra','<b>Kiegészítők:</b> magnézium és glicin. Melatonint korábban.'],
+  ['−1 óra','<b>Meleg zuhany</b> 10–15 perc.'],
+  ['−30 perc','<b>Kiírás</b> papírra, utána relaxáció hanggal.'],
+  ['lefekvés','<b>Hűvös, sötét, néma szoba</b>, 16–19 °C.']
+];
+$('#dayPlan').innerHTML = DAYPLAN.map(([t,d])=>`<li><span class="t">${t}</span><span class="d">${d}</span></li>`).join('');
+
+/* ================== 4-7-8 LÉGZÉS ================== */
+const PHASES = [
+  {label:'Belélegzés orron át', s:4, scale:1, say:'Lélegezz be orron át.'},
+  {label:'Tartsd bent',         s:7, scale:1, say:'Tartsd bent.'},
+  {label:'Fújd ki lassan',      s:8, scale:.55, say:'Fújd ki lassan, szájon át.'}
+];
+let bIdx=0, bLeft=0, bRound=0, bTimer=null;
+function bTick(){
+  bLeft--;
+  if(bLeft<=0){
+    bIdx=(bIdx+1)%3;
+    if(bIdx===0) bRound++;
+    bLeft = PHASES[bIdx].s;
+    const p = PHASES[bIdx];
+    $('#bCircle').style.transition = `transform ${p.s}s ${bIdx===1?'linear':'cubic-bezier(.4,0,.4,1)'}`;
+    $('#bCircle').style.transform = `scale(${p.scale})`;
+    $('#bPhase').textContent = p.label;
+    TTS.say(p.say);
+  }
+  $('#bHint').textContent = `${bLeft} mp · kör ${bRound}`;
+}
+$('#bStart').addEventListener('click', ()=>{
+  if(bTimer) return;
+  bIdx=2; bLeft=1; bRound=0; bTick();
+  bTimer = setInterval(bTick,1000);
+});
+$('#bStop').addEventListener('click', ()=>{
+  clearInterval(bTimer); bTimer=null; TTS.stop();
+  $('#bCircle').style.transition='transform .8s ease';
+  $('#bCircle').style.transform='scale(.55)';
+  $('#bPhase').textContent='Kész.';
+  $('#bHint').textContent = `— · ${bRound} kör megvolt`;
+});
+
+/* ====== FOLYTONOS TESTALAK ====== */
+const HALF = [
+  [100,4],[85,7],[76,18],[74,33],[77,48],[84,58],[89,63],
+  [89,72],[78,77],[64,84],[55,95],[52,114],
+  [51,138],[51,162],[53,184],
+  [55,200],[59,213],[65,220],[70,218],
+  [69,238],[67,262],[69,288],
+  [73,312],[78,336],[82,355],
+  [77,369],[65,377],[71,384],[87,381],[90,365],
+  [92,343],[92,315],[91,289],[93,261],[96,236],[99,214]
+];
+const BODY_D = catmullClosed(HALF.concat(HALF.map(([x,y])=>[200-x,y]).reverse().slice(0,-1)));
+const TORSO_HELPER = 'M 64 40 L 136 40 L 136 400 L 64 400 Z';
+const ARM_HELPER   = 'M -10 78 L 64 78 L 64 240 L -10 240 Z M 136 78 L 210 78 L 210 240 L 136 240 Z';
+const ZONES = [
+  {k:'arc',y:[0,62],c:'t'},{k:'vall',y:[62,100],c:'t'},{k:'mellkas',y:[100,142],c:'t'},
+  {k:'has',y:[142,178],c:'t'},{k:'csipo',y:[178,212],c:'t'},{k:'comb',y:[212,288],c:'t'},
+  {k:'labszar',y:[288,356],c:'t'},{k:'labfej',y:[356,400],c:'t'},
+  {k:'kar',y:[78,196],c:'a'},{k:'kez',y:[196,240],c:'a'}
+];
+const WTAB = [[6,5],[20,23],[33,25],[48,21],[60,13],[72,11],[86,34],[96,47],[120,49],[150,49],[184,47],[205,43],[220,35],[240,32],[262,33],[288,31],[315,26],[340,22],[356,20],[378,36],[395,32]];
+function halfW(y){
+  if(y<=WTAB[0][0]) return WTAB[0][1];
+  for(let i=0;i<WTAB.length-1;i++){
+    const [y0,w0]=WTAB[i],[y1,w1]=WTAB[i+1];
+    if(y>=y0&&y<=y1){ const u=(y-y0)/(y1-y0); return w0+(w1-w0)*u; }
+  }
+  return WTAB[WTAB.length-1][1];
+}
+let bodySeq = 0;
+function buildBody(){
+  const P='b'+(++bodySeq);
+  const svg = el('svg',{viewBox:'-8 -6 216 414', role:'img','aria-label':'Emberi testalak'});
+  svg.innerHTML = `
+  <defs>
+    <linearGradient id="${P}-skin" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".04"/>
+      <stop offset=".26" stop-color="#ffffff" stop-opacity=".155"/>
+      <stop offset=".58" stop-color="#ffffff" stop-opacity=".09"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".022"/>
+    </linearGradient>
+    <linearGradient id="${P}-shade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0a0f1e" stop-opacity="0"/>
+      <stop offset=".6" stop-color="#0a0f1e" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0a0f1e" stop-opacity=".44"/>
+    </linearGradient>
+    <linearGradient id="${P}-hot" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8fe3c8" stop-opacity="0"/>
+      <stop offset=".22" stop-color="#8fe3c8" stop-opacity=".64"/>
+      <stop offset=".78" stop-color="#8fe3c8" stop-opacity=".64"/>
+      <stop offset="1" stop-color="#8fe3c8" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="${P}-done" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b0a0f0" stop-opacity="0"/>
+      <stop offset=".25" stop-color="#b0a0f0" stop-opacity=".34"/>
+      <stop offset=".75" stop-color="#b0a0f0" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#b0a0f0" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="${P}-glow">
+      <stop offset="0" stop-color="#e6fff5" stop-opacity=".6"/>
+      <stop offset=".5" stop-color="#8fe3c8" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#8fe3c8" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="${P}-body"><path d="${BODY_D}"/></clipPath>
+    <clipPath id="${P}-t"><path d="${TORSO_HELPER}"/></clipPath>
+    <clipPath id="${P}-a"><path d="${ARM_HELPER}"/></clipPath>
+  </defs>
+  <g class="bd-breathe">
+    <path d="${BODY_D}" fill="url(#${P}-skin)" stroke="rgba(255,255,255,.22)" stroke-width="1.1"/>
+    <g clip-path="url(#${P}-body)">
+      <g clip-path="url(#${P}-t)">
+        ${ZONES.filter(z=>z.c==='t').map(z=>
+          `<rect class="bd-zone" data-p="${z.k}" x="-12" y="${z.y[0]}" width="224" height="${z.y[1]-z.y[0]}" fill="url(#${P}-hot)"/>`).join('')}
+      </g>
+      <g clip-path="url(#${P}-a)">
+        ${ZONES.filter(z=>z.c==='a').map(z=>
+          `<rect class="bd-zone" data-p="${z.k}" x="-12" y="${z.y[0]}" width="224" height="${z.y[1]-z.y[0]}" fill="url(#${P}-hot)"/>`).join('')}
+      </g>
+      <path d="${BODY_D}" fill="url(#${P}-shade)"/>
+      <g class="ring">
+        <ellipse class="rg-glow" cx="100" cy="200" rx="60" ry="22" fill="url(#${P}-glow)"/>
+        <path class="rg-back" fill="none" stroke="#cef7e8" stroke-opacity=".30" stroke-width="1.6" stroke-linecap="round" d=""/>
+        <path class="rg-front" fill="none" stroke="#f0fff9" stroke-opacity=".95" stroke-width="2.6" stroke-linecap="round" d=""/>
+      </g>
+    </g>
+    <path d="M 66 92 C 71 120, 72 152, 71 184 C 70 202, 70 212, 70 218" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+    <path d="M 134 92 C 129 120, 128 152, 129 184 C 130 202, 130 212, 130 218" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+  </g>`;
+  svg.querySelectorAll('.bd-zone').forEach(z=>{
+    z.dataset.hot = `url(#${P}-hot)`; z.dataset.done = `url(#${P}-done)`;
+  });
+  return svg;
+}
+function mountBody(h){ h.innerHTML=''; h.appendChild(buildBody()); }
+mountBody($('#bodyHolder')); mountBody($('#scanHolder'));
+function paintBody(root, activeKey, doneKeys){
+  root.querySelectorAll('.bd-zone').forEach(z=>{
+    const p=z.dataset.p, hot=p===activeKey, done=!hot&&doneKeys.includes(p);
+    z.classList.toggle('hot',hot); z.classList.toggle('done',done);
+    z.setAttribute('fill', done ? z.dataset.done : z.dataset.hot);
+  });
+}
+function setRing(root,on,y){
+  const g = root.querySelector('.ring');
+  if(!g) return;
+  g.classList.toggle('on',!!on);
+  if(!on) return;
+  const w = halfW(y)+7, bow = Math.max(4,w*.19);
+  const gl = g.querySelector('.rg-glow');
+  gl.setAttribute('cx',100); gl.setAttribute('cy',y.toFixed(1));
+  gl.setAttribute('rx',(w*1.3).toFixed(1)); gl.setAttribute('ry',(bow*2.5).toFixed(1));
+  g.querySelector('.rg-back').setAttribute('d',
+    `M ${(100-w).toFixed(1)} ${y.toFixed(1)} Q 100 ${(y-bow).toFixed(1)} ${(100+w).toFixed(1)} ${y.toFixed(1)}`);
+  g.querySelector('.rg-front').setAttribute('d',
+    `M ${(100-w).toFixed(1)} ${y.toFixed(1)} Q 100 ${(y+bow).toFixed(1)} ${(100+w).toFixed(1)} ${y.toFixed(1)}`);
+}
+const ZY = {}; ZONES.forEach(z=>{ if(!(z.k in ZY)) ZY[z.k]=z.y; });
+function segbar(sel,n){ $(sel).innerHTML = Array.from({length:n},()=>'<i></i>').join(''); }
+function segUpdate(sel,idx,frac){
+  $(sel).querySelectorAll('i').forEach((e,i)=>{
+    e.classList.toggle('full',i<idx); e.classList.toggle('cur',i===idx);
+    if(i===idx) e.style.setProperty('--f', Math.round((frac||0)*100)+'%');
+  });
+}
+
+/* --------- IZOMLAZÍTÁS --------- */
+const PMR = [
+  ['labfej','Lábfej és lábujjak','Görbítsd be a lábujjaidat, feszítsd meg a talpad boltozatát.'],
+  ['labszar','Vádli','Húzd a lábfejed magad felé, feszüljön meg a vádlid.'],
+  ['comb','Comb','Nyomd a térdedet lefelé, feszítsd meg a combizmot.'],
+  ['csipo','Csípő és fenék','Szorítsd össze a fenékizmokat.'],
+  ['has','Has','Húzd be a hasfalat, mintha ütést várnál.'],
+  ['mellkas','Mellkas és hát','Vegyél mély levegőt, és tartsd bent, amíg feszül a mellkas.'],
+  ['kez','Kéz','Szorítsd ökölbe mindkét kezed, olyan erősen, amennyire kényelmes.'],
+  ['kar','Kar','Feszítsd meg az alkart és a felkart, mintha húznál valamit.'],
+  ['vall','Váll és nyak','Húzd fel a vállad a füledhez, tartsd ott.'],
+  ['arc','Arc','Szorítsd össze az állkapcsod, hunyd össze a szemed, ráncold a homlokod.']
+];
+segbar('#pmrSeg', PMR.length);
+let pmrI=0, pmrPhase='tense', pmrLeft=5, pmrTimer=null, pmrSpoken='';
+const pmrRoot = $('#bodyHolder');
+function pmrPaint(){
+  const [key,title,how] = PMR[pmrI];
+  paintBody(pmrRoot, key, PMR.slice(0,pmrI).map(x=>x[0]));
+  const yr = ZY[key];
+  setRing(pmrRoot, true, yr[0]+(yr[1]-yr[0])*.5);
+  $('#pmrTitle').textContent = title;
+  $('#pmrCd').textContent = String(pmrLeft).padStart(2,'0');
+  $('#pmrCd').style.color = pmrPhase==='tense' ? C('--rem') : C('--mint');
+  $('#pmrRead').textContent = `${pmrI+1} / ${PMR.length}`;
+  $('#pmrText').innerHTML = pmrPhase==='tense'
+    ? `<strong style="color:${C('--rem')}">FESZÍTSD.</strong> ${how}`
+    : `<strong style="color:${C('--mint')}">ENGEDD EL.</strong> Csak figyeld, hogy ereszt ki a feszülés, és süllyed bele az ágyba.`;
+  const key2 = pmrI+'-'+pmrPhase;
+  if(key2 !== pmrSpoken){
+    pmrSpoken = key2;
+    TTS.say(pmrPhase==='tense' ? `${title}. Feszítsd. ${how}` : 'Engedd el. Figyeld, hogy ereszt ki a feszülés.');
+  }
+  const frac = pmrPhase==='tense' ? (5-pmrLeft)/30 : (5+(10-pmrLeft))/15;
+  segUpdate('#pmrSeg', pmrI, Math.max(0,Math.min(1,frac)));
+}
+function pmrTick(){
+  pmrLeft--;
+  if(pmrLeft<=0){
+    if(pmrPhase==='tense'){ pmrPhase='relax'; pmrLeft=10; }
+    else {
+      pmrI++;
+      if(pmrI>=PMR.length){
+        clearInterval(pmrTimer); pmrTimer=null; pmrI=PMR.length-1;
+        paintBody(pmrRoot,null,PMR.map(x=>x[0])); setRing(pmrRoot,false,0);
+        $('#pmrTitle').textContent='Kész.'; $('#pmrCd').textContent='00';
+        $('#pmrText').textContent='Feküdj még egy percet mozdulatlanul, mielőtt bármit csinálnál.';
+        TTS.say('Kész. Feküdj még egy percet mozdulatlanul.');
+        segUpdate('#pmrSeg',PMR.length,0);
+        return;
+      }
+      pmrPhase='tense'; pmrLeft=5;
+    }
+  }
+  pmrPaint();
+}
+$('#pmrStart').addEventListener('click', ()=>{
+  if(pmrTimer) return;
+  pmrI=0; pmrPhase='tense'; pmrLeft=5; pmrSpoken=''; pmrPaint();
+  pmrTimer = setInterval(pmrTick,1000);
+});
+$('#pmrStop').addEventListener('click', ()=>{
+  clearInterval(pmrTimer); pmrTimer=null; TTS.stop();
+  $('#pmrText').textContent='Megállítva. Az Indítás újrakezdi az elejéről.';
+});
+
+/* --------- TESTPÁSZTÁZÁS --------- */
+const SCAN = [
+  ['labfej','Lábfej','Kezdd itt. Meleg? Hűvös? Bizsergés? Semmi? Mindegyik jó válasz.'],
+  ['labszar','Vádli és lábszár','Engedd, hogy a lábad teljes súlyával belesüllyedjen az ágyba.'],
+  ['comb','Comb','A nagy izmok itt tartják a legtöbb maradék feszültséget.'],
+  ['csipo','Csípő','Figyeld, hogy hol nyomódik a test az ágyhoz.'],
+  ['has','Has','Kövesd, ahogy a hasfal emelkedik és süllyed a légzéssel.'],
+  ['mellkas','Mellkas és hát','Ne szabályozd a légzést, csak nézd, ahogy megy magától.'],
+  ['kez','Kéz','A tenyér és az ujjak — itt szokott a legtöbb bizsergés lenni.'],
+  ['kar','Kar','Váll felé haladva engedj el minden maradék tartást.'],
+  ['vall','Váll és nyak','A nap feszültsége legtöbbször itt gyűlik össze.'],
+  ['arc','Arc és homlok','Állkapocs, szemkörnyék, homlok. Engedd el a rágóizmokat.']
+];
+segbar('#scanSeg', SCAN.length);
+let scanTotal=300, scanLeft=300, scanTimer=null, scanRAF=null, scanSpoken=-1;
+const scanRoot = $('#scanHolder');
+const fmt = s => String(Math.floor(Math.max(0,s)/60)).padStart(2,'0')+':'+String(Math.max(0,s)%60).padStart(2,'0');
+function scanState(){
+  const per = scanTotal/SCAN.length, done = scanTotal-scanLeft;
+  const idx = Math.min(SCAN.length-1, Math.floor(done/per));
+  return {per,done,idx,inPart:done-idx*per};
+}
+function scanPaint(){
+  const {per,done,idx,inPart} = scanState();
+  paintBody(scanRoot, SCAN[idx][0], SCAN.slice(0,idx).map(x=>x[0]));
+  $('#scanTitle').textContent = SCAN[idx][1];
+  $('#scanCd').textContent = fmt(Math.ceil(per-inPart));
+  $('#scanOf').textContent = `${idx+1} / ${SCAN.length}`;
+  $('#scanText').textContent = SCAN[idx][2];
+  $('#scanBar').style.width = (done/scanTotal*100).toFixed(2)+'%';
+  $('#scanRead').textContent = fmt(scanLeft);
+  segUpdate('#scanSeg', idx, inPart/per);
+  if(idx !== scanSpoken){ scanSpoken = idx; TTS.say(`${SCAN[idx][1]}. ${SCAN[idx][2]}`); }
+}
+function ringFrame(){
+  const {per,idx,inPart} = scanState();
+  const yr = ZY[SCAN[idx][0]];
+  const smooth = Math.min(1, Math.max(0, (inPart + (performance.now()/1000 % 1))/per));
+  setRing(scanRoot, true, yr[1]-(yr[1]-yr[0])*smooth);
+  scanRAF = requestAnimationFrame(ringFrame);
+}
+function setScan(sec){
+  clearInterval(scanTimer); scanTimer=null;
+  if(scanRAF){ cancelAnimationFrame(scanRAF); scanRAF=null; }
+  scanTotal=sec; scanLeft=sec; scanSpoken=-1;
+  $('#scan5').setAttribute('aria-pressed', String(sec===300));
+  $('#scan10').setAttribute('aria-pressed', String(sec===600));
+  $('#scanRead').textContent = fmt(sec);
+  $('#scanCd').textContent = fmt(Math.round(sec/SCAN.length));
+  $('#scanOf').textContent = `1 / ${SCAN.length}`;
+  $('#scanTitle').textContent = SCAN[0][1];
+  $('#scanText').textContent = 'Kész az indításra. ' + Math.round(sec/SCAN.length) + ' másodperc jut egy testrészre.';
+  $('#scanBar').style.width='0%';
+  paintBody(scanRoot, SCAN[0][0], []); setRing(scanRoot,false,0);
+  segUpdate('#scanSeg',0,0);
+}
+$('#scan5').addEventListener('click', ()=>setScan(300));
+$('#scan10').addEventListener('click', ()=>setScan(600));
+$('#scanStart').addEventListener('click', ()=>{
+  if(scanTimer) return;
+  if(scanLeft<=0) scanLeft = scanTotal;
+  scanSpoken = -1;
+  TTS.say('Feküdj kényelmesen, csukd be a szemed, és figyelj oda arra, amit mondok.');
+  setTimeout(scanPaint, TTS.on ? 4200 : 0);
+  if(!REDUCED && !scanRAF) scanRAF = requestAnimationFrame(ringFrame);
+  scanTimer = setInterval(()=>{
+    scanLeft--;
+    if(scanLeft<=0){
+      clearInterval(scanTimer); scanTimer=null;
+      if(scanRAF){ cancelAnimationFrame(scanRAF); scanRAF=null; }
+      paintBody(scanRoot,null,SCAN.map(x=>x[0])); setRing(scanRoot,false,0);
+      $('#scanTitle').textContent='Kész.'; $('#scanCd').textContent='00:00';
+      $('#scanText').textContent='Ha még ébren vagy, maradj így, és hagyd, hogy jöjjön az álom magától.';
+      TTS.say('Kész. Ha még ébren vagy, maradj így, és hagyd, hogy jöjjön az álom magától.');
+      $('#scanBar').style.width='100%'; $('#scanRead').textContent='00:00';
+      segUpdate('#scanSeg',SCAN.length,0);
+      return;
+    }
+    scanPaint();
+  },1000);
+});
+$('#scanStop').addEventListener('click', ()=>{
+  clearInterval(scanTimer); scanTimer=null; TTS.stop();
+  if(scanRAF){ cancelAnimationFrame(scanRAF); scanRAF=null; }
+  $('#scanText').textContent='Megállítva. Az Indítás onnan folytatja, ahol abbahagytad.';
+});
+
+$$('.tabbtn').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    $$('.tabbtn').forEach(x=>x.setAttribute('aria-selected', String(x===b)));
+    $$('.tabpane').forEach(p=>p.classList.toggle('on', p.id===b.dataset.pane));
+    TTS.stop();
+  });
+});
+
+/* ================== INDÍTÁS ================== */
+function redraw(){
+  drawMindMap(); drawMapCards(); layoutMap();
+  drawHypnogram(); hypPaint(); drawWaveChart(); drawCirc();
+}
+redraw();
+updSpeed(); updEegLabel();
+pmrPaint(); setScan(300);
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
+let rt;
+window.addEventListener('resize', ()=>{
+  clearTimeout(rt);
+  rt = setTimeout(()=>{ layoutMap(); if(brainRAF) fitCanvas(); if(eegRAF) fitEeg(); },140);
+});
+window.addEventListener('beforeunload', ()=>TTS.stop());
+</script>
+</body>
+</html>
