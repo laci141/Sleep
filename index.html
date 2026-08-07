@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alvás 2026</title>
+<script src="lang/hu.js"></script>
+<script src="lang/en.js"></script>
+<script src="lang/de.js"></script>
+<script src="lang/ro.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -48,11 +52,37 @@ p{margin:0 0 1em}
   text-transform:uppercase; color:var(--muted); margin:0 0 10px}
 a{color:var(--mint)} strong{color:#fff; font-weight:600} em{color:#dbe3f3}
 
-.shell{max-width:1280px; margin:0 auto; padding:22px 18px 60px;
+/* ---------- FELSŐ SÁV: menügomb + márka + nyelvválasztó ---------- */
+.topbar{position:sticky; top:0; z-index:90; display:flex; align-items:center; gap:12px;
+  padding:9px clamp(12px,2.4vw,20px);
+  background:rgba(10,15,30,.74); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line)}
+.iconbtn{display:inline-flex; align-items:center; gap:9px; cursor:pointer; flex:0 0 auto;
+  font-family:'Inter',sans-serif; font-size:14px; font-weight:500; color:#d3dcef;
+  background:rgba(255,255,255,.06); border:1px solid var(--line); border-radius:11px;
+  padding:8px 13px; transition:.16s; line-height:1}
+.iconbtn:hover{background:rgba(255,255,255,.12); color:#fff}
+.iconbtn svg{width:17px; height:17px; flex:0 0 auto}
+.iconbtn .bars{transition:.2s}
+body.nav-open .iconbtn{background:rgba(143,227,200,.18); border-color:rgba(143,227,200,.45); color:#fff}
+.topbrand{display:flex; flex-direction:column; min-width:0; margin-right:auto}
+.topbrand .mark{font-family:'Fraunces',serif; font-size:16.5px; font-weight:700; line-height:1.2;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.topbrand .sub{font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.langsel{display:flex; gap:3px; flex:0 0 auto; background:rgba(255,255,255,.05);
+  border:1px solid var(--line); border-radius:11px; padding:3px}
+.langsel button{cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:12.5px; font-weight:700;
+  letter-spacing:.05em; color:#a9b6d3; background:transparent; border:none; border-radius:8px;
+  padding:6px 9px; transition:.15s; line-height:1}
+.langsel button:hover{background:rgba(255,255,255,.1); color:#fff}
+.langsel button[aria-pressed="true"]{background:var(--mint); color:#0a0f1e}
+
+.shell{max-width:1280px; margin:0 auto; padding:18px 18px 60px;
   display:grid; grid-template-columns:252px minmax(0,1fr); gap:22px; align-items:start}
-@media (max-width:980px){.shell{grid-template-columns:minmax(0,1fr); gap:16px}}
-.side{position:sticky; top:22px; padding:20px 16px}
-@media (max-width:980px){.side{position:static; padding:16px 14px}}
+.side{position:sticky; top:74px; padding:20px 16px}
+body.nav-closed .shell{grid-template-columns:minmax(0,1fr)}
+body.nav-closed .side{display:none}
 .brand .mark{font-family:'Fraunces',serif; font-size:20px; font-weight:700; display:block; line-height:1.25}
 .brand .sub{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
 .sidenav{display:flex; flex-direction:column; gap:3px; margin-top:18px}
@@ -62,11 +92,31 @@ a{color:var(--mint)} strong{color:#fff; font-weight:600} em{color:#dbe3f3}
 .sidenav button:hover{background:rgba(255,255,255,.07); color:#fff}
 .sidenav button[aria-current="true"]{background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.16)}
 .sidenav .dot{width:9px; height:9px; border-radius:50%; background:var(--c); flex:0 0 auto; box-shadow:0 0 10px -1px var(--c)}
+.backdrop{display:none}
+/* mobil/tablet: a menü kihúzható fiók lesz */
 @media (max-width:980px){
-  .sidenav{flex-direction:row; overflow-x:auto; gap:8px; padding-bottom:4px}
-  .sidenav button{width:auto; white-space:nowrap; border-radius:999px; border-color:var(--line); background:rgba(255,255,255,.05)}
-  .sidenav::-webkit-scrollbar{height:4px}
-  .sidenav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15); border-radius:4px}}
+  .shell{grid-template-columns:minmax(0,1fr); gap:16px; padding:14px 14px 54px}
+  .side{position:fixed; top:0; left:0; bottom:0; width:min(300px,86vw); z-index:80;
+    margin:0; border-radius:0 20px 20px 0; overflow-y:auto; -webkit-overflow-scrolling:touch;
+    transform:translateX(-104%); transition:transform .26s ease; display:block}
+  /* a fiók a felső sáv alatt kezdődik — nagyobb specifikusság, hogy a kisebb
+     képernyős .glass-panel padding-szabály ne írja felül */
+  .side.glass-panel{padding-top:68px}
+  body.nav-open .side{transform:none}
+  body.nav-closed .side{display:block}
+  .side .brand{display:none}
+  .sidenav{margin-top:4px}
+  .sidenav button{padding:12px 12px; font-size:15.5px}
+  .backdrop{display:block; position:fixed; inset:0; z-index:70; background:rgba(4,7,16,.62);
+    opacity:0; pointer-events:none; transition:opacity .26s}
+  body.nav-open .backdrop{opacity:1; pointer-events:auto}
+  .topbrand .sub{display:none}
+}
+@media (max-width:400px){
+  .iconbtn span{display:none}
+  .iconbtn{padding:9px 11px}
+  .langsel button{padding:6px 7px; font-size:11.5px}
+}
 :focus-visible{outline:2px solid var(--mint); outline-offset:3px}
 .view{display:none; animation:fade .38s ease} .view.active{display:block}
 @keyframes fade{from{opacity:0; transform:translateY(8px)}to{opacity:1; transform:none}}
@@ -227,17 +277,59 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 .src{font-size:13.5px; color:var(--muted)} .src li{margin-bottom:7px}
 footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   font-family:'JetBrains Mono',monospace; letter-spacing:.2em}
+
+/* ---------- MOBIL: a széles diagramok görgethetők, hogy a feliratok olvashatók maradjanak ---------- */
+.scrollx{width:100%}
+@media (max-width:760px){
+  .scrollx{overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch;
+    margin:0 -4px; padding:0 4px 6px}
+  .scrollx > svg{min-width:660px}
+  .scrollx::-webkit-scrollbar{height:5px}
+  .scrollx::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18); border-radius:4px}
+  .eegwrap{min-height:190px}
+  .canvaswrap{aspect-ratio:600/470; min-height:330px}
+  .ctlbar{gap:8px}
+  .ctl{padding:10px 16px; font-size:14.5px}
+  .readout{margin-left:0; text-align:left; width:100%}
+  .bighead{gap:10px}
+  .circgrid{gap:9px}
+  input[type=range]{width:100%}
+  .speedbox{gap:8px}
+  .steps li{padding-left:40px}
+  .steps li::before{width:27px; height:27px; font-size:12px}
+  .tabbtn{padding:9px 13px; font-size:13.5px}
+}
+@media (max-width:480px){
+  body{font-size:15.4px}
+  .glass-panel{padding:16px 13px}
+  .scrollx > svg{min-width:600px}
+}
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.001s !important; transition-duration:.001s !important}
   html{scroll-behavior:auto}}
 </style>
 </head>
-<body>
+<body class="nav-closed">
+
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-expanded="false" aria-controls="side">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <line class="bars" x1="3" y1="6" x2="21" y2="6"/><line class="bars" x1="3" y1="12" x2="21" y2="12"/><line class="bars" x1="3" y1="18" x2="21" y2="18"/>
+    </svg><span data-i18n="ui.menuLabel">Menü</span>
+  </button>
+  <div class="topbrand">
+    <span class="mark" data-i18n="ui.brandMark">Az éjszaka műszakja</span>
+    <span class="sub" data-i18n="ui.brandSub">alvás · ritmus · pihenés</span>
+  </div>
+  <div class="langsel" id="langSel" role="group"></div>
+</header>
+<div class="backdrop" id="navBackdrop"></div>
+
 <div class="shell">
 
-  <aside class="side glass-panel">
-    <div class="brand"><span class="mark">Az éjszaka műszakja</span><span class="sub">alvás · ritmus · pihenés</span></div>
-    <nav class="sidenav" id="menu" aria-label="Fő menü"></nav>
+  <aside class="side glass-panel" id="side">
+    <div class="brand"><span class="mark" data-i18n="ui.brandMark">Az éjszaka műszakja</span><span class="sub" data-i18n="ui.brandSub">alvás · ritmus · pihenés</span></div>
+    <nav class="sidenav" id="menu"></nav>
   </aside>
 
   <main>
@@ -246,12 +338,12 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   <section class="view active" id="view-map">
     <div class="glass-panel stack">
       <div>
-        <p class="eyebrow">Elmetérkép</p>
-        <h1>Nyolc óra, amit az agyad nem alvással tölt</h1>
-        <p class="lead">Amíg fekszel, az agyad ciklusokban dolgozik: rögzíti a napot, feldolgozza az érzelmeket, és kimossa magából azt a hulladékot, ami ébren felgyűlt. Közben az immunrendszer is átszervezi magát. Egy belső óra vezényli az egészet. Kattints egy ágra.</p>
+        <p class="eyebrow" data-i18n="ui.mapEyebrow">Elmetérkép</p>
+        <h1 data-i18n="ui.mapH1">Nyolc óra, amit az agyad nem alvással tölt</h1>
+        <p class="lead" data-i18n-html="ui.mapLead">Amíg fekszel, az agyad ciklusokban dolgozik: rögzíti a napot, feldolgozza az érzelmeket, és kimossa magából azt a hulladékot, ami ébren felgyűlt. Közben az immunrendszer is átszervezi magát. Egy belső óra vezényli az egészet. Kattints egy ágra.</p>
       </div>
       <div class="mapwrap" id="mapWide">
-        <svg id="mapSvg" viewBox="0 0 940 520" role="img" aria-label="Az alvás témáinak elmetérképe"></svg>
+        <div class="scrollx"><svg id="mapSvg" viewBox="0 0 940 520" role="img" data-i18n-aria="ui.mapSvgAria"></svg></div>
       </div>
       <div class="mapwrap" id="mapNarrow"></div>
     </div>
@@ -261,42 +353,42 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   <section class="view" id="view-ciklus">
     <div class="stack">
       <div class="glass-panel">
-        <p class="eyebrow">Alvásciklus</p>
-        <h2>Egy éjszaka, ahogy a műszerek látják</h2>
-        <p class="lead">Nem egyenletesen alszol. Kb. 90 perces ciklusok váltakoznak, és a REM-szakaszok hajnal felé nyúlnak meg. A mélyalvás nagy része az első felében van — ezért nem mindegy, mikor fekszel le, nem csak az, mennyit alszol.</p>
-        <svg class="hyp" id="hypSvg" viewBox="0 0 960 310" role="img" aria-label="Hipnogram"></svg>
+        <p class="eyebrow" data-i18n="ui.cycEyebrow">Alvásciklus</p>
+        <h2 data-i18n="ui.cycH2">Egy éjszaka, ahogy a műszerek látják</h2>
+        <p class="lead" data-i18n-html="ui.cycLead">Nem egyenletesen alszol. Kb. 90 perces ciklusok váltakoznak, és a REM-szakaszok hajnal felé nyúlnak meg. A mélyalvás nagy része az első felében van — ezért nem mindegy, mikor fekszel le, nem csak az, mennyit alszol.</p>
+        <div class="scrollx"><svg class="hyp" id="hypSvg" viewBox="0 0 960 310" role="img" data-i18n-aria="ui.cycHypAria"></svg></div>
 
-        <p class="eyebrow" style="margin-top:18px">EEG — élő agyhullám, ahogy a szakasz változik</p>
+        <p class="eyebrow" style="margin-top:18px" data-i18n="ui.cycEegEyebrow">EEG — élő agyhullám, ahogy a szakasz változik</p>
         <div class="eegwrap"><canvas id="eegCanvas"></canvas></div>
         <div class="eeghead">
           <span class="band" id="eegBand">Béta</span>
           <span class="hz" id="eegHz">13–30 Hz · éber, gyors, kis amplitúdó</span>
         </div>
-        <div class="chiprow" id="eegWins"><span class="lab">Kijelzett idő</span></div>
-        <p class="muted" style="font-size:13.5px;margin:8px 0 0">Hosszabb ablak = lassabban csúszik a görbe. Bal oldalon a kilengés mikrovoltban, alul az idő.</p>
+        <div class="chiprow" id="eegWins"><span class="lab" data-i18n="ui.cycEegWinLab">Kijelzett idő</span></div>
+        <p class="muted" style="font-size:13.5px;margin:8px 0 0" data-i18n="ui.cycEegNote">Hosszabb ablak = lassabban csúszik a görbe. Bal oldalon a kilengés mikrovoltban, alul az idő.</p>
 
         <div class="ctlbar">
           <button class="ctl" id="hypPlay">Indítás</button>
-          <button class="ctl ghost" id="hypReset">Vissza az elejére</button>
+          <button class="ctl ghost" id="hypReset" data-i18n="ui.cycReset">Vissza az elejére</button>
         </div>
         <div class="speedbox">
-          <label for="hypSpeed">Sebesség</label>
-          <input type="range" id="hypSpeed" min="10" max="120" step="10" value="60" aria-label="Lejátszás sebessége">
+          <label for="hypSpeed" data-i18n="ui.cycSpeed">Sebesség</label>
+          <input type="range" id="hypSpeed" min="10" max="120" step="10" value="60" data-i18n-aria="ui.cycSpeedAria">
           <span class="speedval" id="hypSpeedVal">60%</span>
           <span class="speedhint" id="hypSpeedHint">az éjszaka 40 mp alatt</span>
         </div>
-        <div class="chiprow" id="hypSteps"><span class="lab">Lépésköz</span></div>
+        <div class="chiprow" id="hypSteps"><span class="lab" data-i18n="ui.cycStepLab">Lépésköz</span></div>
         <div class="legend" id="hypLegend"></div>
-        <p class="eyebrow" style="margin-top:22px">Az éjszaka megoszlása</p>
+        <p class="eyebrow" style="margin-top:22px" data-i18n="ui.cycShareEyebrow">Az éjszaka megoszlása</p>
         <div class="bar" id="hypBar"></div>
         <div class="legend" id="hypBarLegend" style="margin-top:8px"></div>
       </div>
 
       <div class="glass-panel">
-        <p class="eyebrow">Agyhullámok</p>
-        <h2>Béta, alfa, théta, delta</h2>
-        <p class="lead">Az EEG nem gondolatokat olvas, hanem azt méri, hogy sok millió idegsejt mennyire <em>együtt</em> tüzel. Minél többen mozognak egyszerre, annál lassabb és nagyobb a hullám. Ébren mindenki a maga dolgát végzi: sok apró, gyors rezgés. Mélyalvásban az egész kéreg együtt lélegzik: kevés, hatalmas, lassú hullám.</p>
-        <svg id="waveSvg" viewBox="0 0 900 470" role="img" aria-label="Agyhullámtípusok"></svg>
+        <p class="eyebrow" data-i18n="ui.waveEyebrow">Agyhullámok</p>
+        <h2 data-i18n="ui.waveH2">Béta, alfa, théta, delta</h2>
+        <p class="lead" data-i18n-html="ui.waveLead">Az EEG nem gondolatokat olvas, hanem azt méri, hogy sok millió idegsejt mennyire <em>együtt</em> tüzel. Minél többen mozognak egyszerre, annál lassabb és nagyobb a hullám. Ébren mindenki a maga dolgát végzi: sok apró, gyors rezgés. Mélyalvásban az egész kéreg együtt lélegzik: kevés, hatalmas, lassú hullám.</p>
+        <div class="scrollx"><svg id="waveSvg" viewBox="0 0 900 470" role="img" data-i18n-aria="ui.waveSvgAria"></svg></div>
         <div class="grid2" style="margin-top:18px" id="waveCards"></div>
       </div>
       <div class="grid2" id="stageCards"></div>
@@ -307,30 +399,24 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   <section class="view" id="view-ritmus">
     <div class="stack">
       <div class="glass-panel">
-        <p class="eyebrow">Cirkadián ritmus</p>
-        <h2>A belső óra, ami eldönti, mikor jön az álom</h2>
-        <p class="lead">Az agy közepén, a látóidegek kereszteződése fölött ül egy kb. 20&nbsp;000 sejtből álló óra, a <em>nucleus suprachiasmaticus</em>. A saját ciklusa nem pontosan 24 óra, hanem valamivel hosszabb — átlagosan kb. 24,2 —, ezért naponta újra kell állítani. Az állítógomb a fény.</p>
-        <svg class="circ" id="circSvg" viewBox="0 0 960 380" role="img" aria-label="Melatonin, kortizol, maghőmérséklet"></svg>
+        <p class="eyebrow" data-i18n="ui.circEyebrow">Cirkadián ritmus</p>
+        <h2 data-i18n="ui.circH2">A belső óra, ami eldönti, mikor jön az álom</h2>
+        <p class="lead" data-i18n-html="ui.circLead">Az agy közepén, a látóidegek kereszteződése fölött ül egy kb. 20&nbsp;000 sejtből álló óra, a <em>nucleus suprachiasmaticus</em>. A saját ciklusa nem pontosan 24 óra, hanem valamivel hosszabb — átlagosan kb. 24,2 —, ezért naponta újra kell állítani. Az állítógomb a fény.</p>
+        <div class="scrollx"><svg class="circ" id="circSvg" viewBox="0 0 960 380" role="img" data-i18n-aria="ui.circSvgAria"></svg></div>
         <div class="ctlbar">
           <button class="ctl" id="circPlay">Nap lejátszása</button>
-          <button class="ctl ghost" id="circNow">Ugrás lefekvésre</button>
+          <button class="ctl ghost" id="circNow" data-i18n="ui.circNow">Ugrás lefekvésre</button>
         </div>
         <div class="circgrid">
-          <div class="circval" style="--c:var(--n2)"><div class="k">Melatonin</div><div class="v" id="vMel">0%</div></div>
-          <div class="circval" style="--c:var(--wake)"><div class="k">Kortizol</div><div class="v" id="vCor">0%</div></div>
-          <div class="circval" style="--c:var(--mint)"><div class="k">Maghőmérséklet</div><div class="v" id="vTmp">0%</div></div>
+          <div class="circval" style="--c:var(--n2)"><div class="k" data-i18n="ui.circMel">Melatonin</div><div class="v" id="vMel">0%</div></div>
+          <div class="circval" style="--c:var(--wake)"><div class="k" data-i18n="ui.circCor">Kortizol</div><div class="v" id="vCor">0%</div></div>
+          <div class="circval" style="--c:var(--mint)"><div class="k" data-i18n="ui.circTmp">Maghőmérséklet</div><div class="v" id="vTmp">0%</div></div>
         </div>
         <div class="circnote"><b id="circTime">12:00</b><span id="circTxt"></span></div>
       </div>
       <div class="glass-panel">
-        <h3>Mit csinál a két hormon</h3>
-        <ol class="steps">
-          <li><b>Melatonin — a „besötétedett" jelzés</b><p>Nem altató. Nem lök bele az alvásba, csak kinyitja hozzá a kaput: közli a testtel, hogy beállt a biológiai éjszaka. Napnyugta után 1–2 órával kezd emelkedni (DLMO), hajnali 2 és 4 között tetőzik, reggel 7–8-ra visszaesik. A parancsot a belső óra adja — amit viszont a szemen át érkező fény állít.</p></li>
-          <li><b>Kortizol — az ébresztő, nem a stresszhormon</b><p>Éjfél körül van a mélyponton, hajnali 3 körül elkezd emelkedni, és az ébredés után 30–45 perccel tetőzik. Ez mozgósítja a vércukrot és a keringést. A gond akkor van, ha valami este felnyomja: intenzív edzés, vita, feszült munka, koffein.</p></li>
-          <li><b>Maghőmérséklet — a néma harmadik</b><p>Napi kb. 1 °C-ot ingadozik. 16 és 19 óra között a legmagasabb — ekkor a legjobb az izomerő is. Két órával a természetes ébredés előtt, hajnali 4–5 körül a mélypont. Az elalvás ehhez az eséshez van kötve.</p></li>
-          <li><b>A fény állítja mind a hármat</b><p>A retinában külön érzékelők ülnek, amik a kékes tartományra hangoltak, és közvetlenül a belső órának jelentenek. Reggeli fény: az óra <strong>előre</strong> áll. Esti fény: <strong>hátra</strong> csúszik. A kültéri fény borús időben is nagyságrendekkel erősebb a beltérinél.</p></li>
-          <li><b>Két rendszer, nem egy</b><p>Az elalvás két dolog találkozása: az ébren gyűlő adenozin adta alvásnyomás, és a belső óra éberségi jele. Amikor este az óra leengedi az éberséget, miközben az adenozin a csúcsán van, akkor jön az álom.</p></li>
-        </ol>
+        <h3 data-i18n="ui.circStepsH3">Mit csinál a két hormon</h3>
+        <ol class="steps" id="hormoneSteps"></ol>
       </div>
     </div>
   </section>
@@ -339,21 +425,21 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   <section class="view" id="view-tisztitas">
     <div class="stack">
       <div class="glass-panel">
-        <p class="eyebrow">Glymphatikus rendszer</p>
-        <h2>Éjszakai nagytakarítás az agyban</h2>
-        <p class="lead">Igen, jól tudod: a <strong>nyirokrendszer is része a folyamatnak</strong>. Az agyban nincsenek nyirokerek, de az agyhártyában vannak — és azok viszik le a szennyes folyadékot a nyaki nyirokcsomókba. Három útvonal, három külön szín:</p>
+        <p class="eyebrow" data-i18n="ui.cleanEyebrow">Glymphatikus rendszer</p>
+        <h2 data-i18n="ui.cleanH2">Éjszakai nagytakarítás az agyban</h2>
+        <p class="lead" data-i18n-html="ui.cleanLead">Igen, jól tudod: a <strong>nyirokrendszer is része a folyamatnak</strong>. Az agyban nincsenek nyirokerek, de az agyhártyában vannak — és azok viszik le a szennyes folyadékot a nyaki nyirokcsomókba. Három útvonal, három külön szín:</p>
         <div class="legend" style="margin-top:0;margin-bottom:14px">
-          <span><i style="background:#5fb4ff"></i><strong style="color:#5fb4ff">Kék</strong> — artéria: friss folyadék BE</span>
-          <span><i style="background:#4fe0a8"></i><strong style="color:#4fe0a8">Zöld</strong> — véna: szennyes folyadék KI</span>
-          <span><i style="background:#ff7fb0"></i><strong style="color:#ff7fb0">Rózsa</strong> — nyirokér a nyaki csomóba</span>
-          <span><i style="background:#c42a4f"></i><strong style="color:#e8506f">Bordó</strong> — a szemét maga</span>
+          <span><i style="background:#5fb4ff"></i><span data-i18n-html="ui.cleanLegBlue"><strong style="color:#5fb4ff">Kék</strong> — artéria: friss folyadék BE</span></span>
+          <span><i style="background:#4fe0a8"></i><span data-i18n-html="ui.cleanLegGreen"><strong style="color:#4fe0a8">Zöld</strong> — véna: szennyes folyadék KI</span></span>
+          <span><i style="background:#ff7fb0"></i><span data-i18n-html="ui.cleanLegPink"><strong style="color:#ff7fb0">Rózsa</strong> — nyirokér a nyaki csomóba</span></span>
+          <span><i style="background:#c42a4f"></i><span data-i18n-html="ui.cleanLegDark"><strong style="color:#e8506f">Bordó</strong> — a szemét maga</span></span>
         </div>
-        <p class="lead">A pumpa a mélyalvás lassú hulláma. Kapcsold át mélyalvásra, és nézd a bal alsó pulzusjelzőt: <strong>minden csúcsnál lökésben szabadulnak ki a bordó szemét-pixelek</strong>, felkerülnek a zöld vénára, és onnan a rózsaszín nyirokéren jutnak a nyaki nyirokcsomóba.</p>
+        <p class="lead" data-i18n-html="ui.cleanLead2">A pumpa a mélyalvás lassú hulláma. Kapcsold át mélyalvásra, és nézd a bal alsó pulzusjelzőt: <strong>minden csúcsnál lökésben szabadulnak ki a bordó szemét-pixelek</strong>, felkerülnek a zöld vénára, és onnan a rózsaszín nyirokéren jutnak a nyaki nyirokcsomóba.</p>
         <div class="canvaswrap"><canvas id="brainCanvas"></canvas></div>
         <div class="ctlbar">
-          <div class="toggle" role="group" aria-label="Állapot">
-            <button id="btnAwake" aria-pressed="true">Ébren</button>
-            <button id="btnAsleep" aria-pressed="false">Mélyalvásban</button>
+          <div class="toggle" role="group" data-i18n-aria="ui.cleanStateAria">
+            <button id="btnAwake" aria-pressed="true" data-i18n="ui.cleanAwake">Ébren</button>
+            <button id="btnAsleep" aria-pressed="false" data-i18n="ui.cleanAsleep">Mélyalvásban</button>
           </div>
           <div class="readout"><span id="wasteLabel">Bent ragadt szemét</span>: <b id="wasteNum">0</b></div>
         </div>
@@ -362,15 +448,9 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
       </div>
 
       <div class="glass-panel">
-        <h3>A folyamat öt lépésben</h3>
-        <ol class="steps">
-          <li><b>Nap közben gyűlik</b><p>Amíg ébren vagy, a neuronok működésének melléktermékei felhalmozódnak a sejtek közötti térben: amiloid-béta és tau fehérje, adenozin, laktát. Az adenozin az, ami az álmosságérzetet is adja — a koffein éppen ennek a jelzését blokkolja.</p></li>
-          <li><b>Elalváskor kinyílik a tér</b><p>Mélyalvásban a sejtek közötti rés kitágul, és az erek körüli csatorna kiszélesedik. Ez a kapcsoló: ugyanaz az agy, két teljesen más áteresztőképességgel. Az ábrán ezt látod, amikor az ágak megvastagodnak és halót kapnak.</p></li>
-          <li><b>A lassú hullám pumpál</b><p>A mélyalvás nagy delta hullámai együtt mozognak a folyadékkal — ez a pulzálás a hajtómotor. Minden hullám végigsöpör, és <strong>ahova ér, ott lökésben szabadítja ki a bent ragadt szemetet</strong>. A bal alsó pulzusjelző csúcsain gyorsul az áramlás négyszeresére.</p></li>
-          <li><b>Be az artérián, ki a vénán</b><p>A friss gerincvelői folyadék az artériák menti csatornán áramlik BE (kék), átöblíti a sejtek közötti teret, felkapja a szemetet, és a vénák menti csatornán áramlik KI (zöld). Ezért van két külön érfa, ellentétes irányú áramlással.</p></li>
-          <li><b>A nyirokér elviszi a nyakba</b><p>Az agyból kilépő szennyes folyadékot az agyhártyában futó nyirokerek gyűjtik össze, és a <strong>nyaki nyirokcsomókba</strong> vezetik, ahonnan a vér- és nyirokkeringésbe kerül. A rózsaszín szakaszon a kis nyilak a nyirokerek billentyűi — azok akadályozzák meg a visszaáramlást. Ezt a hálózatot csak 2015-ben azonosították az agyhártyában.</p></li>
-        </ol>
-        <div class="note">Egy 39 fős keresztezett vizsgálatban a normál alvás után reggelre mérhetően több Alzheimer-marker volt a vérplazmában, mint átvirrasztott éjszaka után — vagyis alvás közben tényleg kikerültek az agyból.</div>
+        <h3 data-i18n="ui.cleanStepsH3">A folyamat öt lépésben</h3>
+        <ol class="steps" id="cleanSteps"></ol>
+        <div class="note" data-i18n-html="ui.cleanNote">Egy 39 fős keresztezett vizsgálatban a normál alvás után reggelre mérhetően több Alzheimer-marker volt a vérplazmában, mint átvirrasztott éjszaka után — vagyis alvás közben tényleg kikerültek az agyból.</div>
       </div>
     </div>
   </section>
@@ -379,28 +459,28 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   <section class="view" id="view-miert">
     <div class="stack">
       <div class="glass-panel">
-        <p class="eyebrow">Miért fontos</p>
-        <h2>Mit veszítesz, ha rövidre vágod</h2>
-        <p class="lead">Az alvás nem egy funkciót lát el, hanem ötöt-hatot párhuzamosan — és mindegyik más szakaszhoz kötődik.</p>
+        <p class="eyebrow" data-i18n="ui.whyEyebrow">Miért fontos</p>
+        <h2 data-i18n="ui.whyH2">Mit veszítesz, ha rövidre vágod</h2>
+        <p class="lead" data-i18n-html="ui.whyLead">Az alvás nem egy funkciót lát el, hanem ötöt-hatot párhuzamosan — és mindegyik más szakaszhoz kötődik.</p>
       </div>
       <div class="grid2" id="whyCards"></div>
       <div class="glass-panel">
-        <span class="tag" style="--c:var(--mint)">Immunrendszer</span>
-        <h2>Amit a vizsgálatok mérni tudtak</h2>
-        <p class="lead">Ez a legjobban dokumentált rész, mert kísérletileg vizsgálható: emberek alvását megrövidítik, aztán vért vesznek, vagy szándékosan vírust adnak nekik. Nem korrelációs megfigyelés, hanem kísérlet.</p>
+        <span class="tag" style="--c:var(--mint)" data-i18n="ui.immuneTag">Immunrendszer</span>
+        <h2 data-i18n="ui.immuneH2">Amit a vizsgálatok mérni tudtak</h2>
+        <p class="lead" data-i18n-html="ui.immuneLead">Ez a legjobban dokumentált rész, mert kísérletileg vizsgálható: emberek alvását megrövidítik, aztán vért vesznek, vagy szándékosan vírust adnak nekik. Nem korrelációs megfigyelés, hanem kísérlet.</p>
         <ul class="tips" id="immuneList"></ul>
       </div>
       <div class="glass-panel">
-        <span class="tag" style="--c:var(--rem)">Daganatos kockázat</span>
-        <h2>Itt kell a legpontosabban fogalmazni</h2>
+        <span class="tag" style="--c:var(--rem)" data-i18n="ui.cancerTag">Daganatos kockázat</span>
+        <h2 data-i18n="ui.cancerH2">Itt kell a legpontosabban fogalmazni</h2>
         <ul class="tips" id="cancerList"></ul>
-        <div class="info" style="margin-top:8px"><strong>Ha műszakban dolgozol:</strong> a műszakot nem tudod eltörölni, de a két legerősebb eszközt igen. Az egyik a <strong>fény időzítése</strong> — éjszakai műszak alatt világos munkatér, hazafelé napszemüveg, otthon sötétítő. A másik az <strong>étkezés időzítése</strong>: a nagy étkezéseket a világos szakaszra, éjjel inkább kicsit.</div>
+        <div class="info" style="margin-top:8px" data-i18n-html="ui.cancerInfo"><strong>Ha műszakban dolgozol:</strong> a műszakot nem tudod eltörölni, de a két legerősebb eszközt igen.</div>
       </div>
       <div class="glass-panel">
-        <span class="tag" style="--c:var(--wake)">Ha rossz az alvás</span>
-        <h2>Mi romlik el, és milyen sorrendben</h2>
+        <span class="tag" style="--c:var(--wake)" data-i18n="ui.harmTag">Ha rossz az alvás</span>
+        <h2 data-i18n="ui.harmH2">Mi romlik el, és milyen sorrendben</h2>
         <ul class="tips" id="harmList"></ul>
-        <div class="warn" style="margin-top:8px"><strong>Mikor menj orvoshoz:</strong> ha horkolsz és nappal is álmos vagy (alvási apnoe gyanúja), ha hetek óta minden éjszaka rossz, ha reggel fejfájással kelsz, ha éjszaka fulladásra ébredsz, vagy ha a nappali álmosság a munkavégzést veszélyezteti. Gép mellett ez utóbbi nem apróság.</div>
+        <div class="warn" style="margin-top:8px" data-i18n-html="ui.harmWarn"><strong>Mikor menj orvoshoz:</strong> ha horkolsz és nappal is álmos vagy.</div>
       </div>
     </div>
   </section>
@@ -409,22 +489,22 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   <section class="view" id="view-tippek">
     <div class="stack">
       <div class="glass-panel">
-        <p class="eyebrow">Jobb alvás</p>
-        <h2>Először a négy nagy, utána a többi</h2>
-        <p class="lead">Fontos csavar: az amerikai alvásorvos-társaság 2021-es irányelve az „alváshigiénia" tanácslistát <strong>önmagában nem ajánlja</strong>. Ami tényleg működik, az a CBT-I magja: az ingerkontroll és az alvásmegszorítás.</p>
+        <p class="eyebrow" data-i18n="ui.tipsEyebrow">Jobb alvás</p>
+        <h2 data-i18n="ui.tipsH2">Először a négy nagy, utána a többi</h2>
+        <p class="lead" data-i18n-html="ui.tipsLead">Fontos csavar: az amerikai alvásorvos-társaság 2021-es irányelve az „alváshigiénia" tanácslistát <strong>önmagában nem ajánlja</strong>.</p>
       </div>
       <div class="glass-panel">
-        <span class="tag" style="--c:var(--mint)">Erős bizonyíték</span>
-        <h3>Ezzel kezdd — fontossági sorrendben</h3>
+        <span class="tag" style="--c:var(--mint)" data-i18n="ui.coreTag">Erős bizonyíték</span>
+        <h3 data-i18n="ui.coreH3">Ezzel kezdd — fontossági sorrendben</h3>
         <ul class="tips" id="tipsCore"></ul>
       </div>
       <div class="glass-panel">
-        <span class="tag" style="--c:var(--n2)">Támogató szokások</span>
-        <h3>Ezek segítenek, de önmagukban kevesek</h3>
+        <span class="tag" style="--c:var(--n2)" data-i18n="ui.extraTag">Támogató szokások</span>
+        <h3 data-i18n="ui.extraH3">Ezek segítenek, de önmagukban kevesek</h3>
         <ul class="tips" id="tipsExtra"></ul>
       </div>
       <div class="glass-panel">
-        <div class="note">Ez ismeretterjesztés, nem orvosi tanács. Krónikus álmatlanságra a CBT-I az elsővonalbeli kezelés, nem az altató.</div>
+        <div class="note" data-i18n-html="ui.tipsNote">Ez ismeretterjesztés, nem orvosi tanács. Krónikus álmatlanságra a CBT-I az elsővonalbeli kezelés, nem az altató.</div>
       </div>
     </div>
   </section>
@@ -433,28 +513,28 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   <section class="view" id="view-relax">
     <div class="stack">
       <div class="glass-panel">
-        <p class="eyebrow">Esti relaxáció</p>
-        <h2>Három gyakorlat lefekvés előtt</h2>
-        <p class="relax-intro">Egyszerre csak az egyiket csináld. Mindegyik ugyanazt célozza: leveszi a stresszválaszt, hogy az elalvás magától jöjjön. Ha közben elalszol, az a siker, nem a kudarc. <strong>Kapcsold be a hangot</strong>, és nem kell olvasnod — végigmondom.</p>
+        <p class="eyebrow" data-i18n="ui.relaxEyebrow">Esti relaxáció</p>
+        <h2 data-i18n="ui.relaxH2">Három gyakorlat lefekvés előtt</h2>
+        <p class="relax-intro" data-i18n-html="ui.relaxIntro">Egyszerre csak az egyiket csináld.</p>
         <div class="tabs" role="tablist">
-          <button class="tabbtn" role="tab" aria-selected="true" data-pane="p-breath">4-7-8 légzés</button>
-          <button class="tabbtn" role="tab" aria-selected="false" data-pane="p-pmr">Progresszív izomlazítás</button>
-          <button class="tabbtn" role="tab" aria-selected="false" data-pane="p-scan">Testpásztázás</button>
+          <button class="tabbtn" role="tab" aria-selected="true" data-pane="p-breath" data-i18n="ui.tabBreath">4-7-8 légzés</button>
+          <button class="tabbtn" role="tab" aria-selected="false" data-pane="p-pmr" data-i18n="ui.tabPmr">Progresszív izomlazítás</button>
+          <button class="tabbtn" role="tab" aria-selected="false" data-pane="p-scan" data-i18n="ui.tabScan">Testpásztázás</button>
         </div>
 
         <div class="tabpane on" id="p-breath">
-          <p class="relax-intro">Négy másodperc belégzés orron át, hét másodperc bent tartás, nyolc másodperc lassú kifújás szájon át. A hosszú kifújás a lényeg: az lassítja le a szívverést. Négy-hat kör elég.</p>
+          <p class="relax-intro" data-i18n-html="ui.breathIntro">Négy másodperc belégzés orron át, hét másodperc bent tartás, nyolc másodperc lassú kifújás szájon át.</p>
           <div class="breathstage"><div class="bcircle" id="bCircle"><span id="bPhase">Készen állsz?</span></div></div>
           <div class="bhint" id="bHint">— · kör 0</div>
           <div class="ctlbar" style="justify-content:center">
-            <button class="ctl" id="bStart">Indítás</button>
-            <button class="ctl ghost" id="bStop">Állj</button>
+            <button class="ctl" id="bStart" data-i18n="ui.start">Indítás</button>
+            <button class="ctl ghost" id="bStop" data-i18n="ui.stop">Állj</button>
             <button class="ctl ghost tts-btn" aria-pressed="false">Hang: ki</button>
           </div>
         </div>
 
         <div class="tabpane" id="p-pmr">
-          <p class="relax-intro">Lábujjtól a homlokig, izomcsoportonként: öt másodperc feszítés, aztán tíz másodperc teljes elengedés. A lényeg a különbség érzékelése a feszes és a laza között. Fekve csináld.</p>
+          <p class="relax-intro" data-i18n-html="ui.pmrIntro">Lábujjtól a homlokig, izomcsoportonként: öt másodperc feszítés, aztán tíz másodperc teljes elengedés.</p>
           <div class="bodywrap">
             <div class="bodyholder" id="bodyHolder"></div>
             <div>
@@ -466,8 +546,8 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
               <div class="segbar" id="pmrSeg"></div>
               <div class="stepbox"><p id="pmrText">Nyomd meg az Indítást, és lépésenként végigvezetlek.</p></div>
               <div class="ctlbar">
-                <button class="ctl" id="pmrStart">Indítás</button>
-                <button class="ctl ghost" id="pmrStop">Állj</button>
+                <button class="ctl" id="pmrStart" data-i18n="ui.start">Indítás</button>
+                <button class="ctl ghost" id="pmrStop" data-i18n="ui.stop">Állj</button>
                 <button class="ctl ghost tts-btn" aria-pressed="false">Hang: ki</button>
                 <span class="ttsstat tts-stat"></span>
               </div>
@@ -476,7 +556,7 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
         </div>
 
         <div class="tabpane" id="p-scan">
-          <p class="relax-intro">Ugyanaz a testtérkép, csak feszítés nélkül. Odafigyelsz egy testrészre, megnézed, mit érzel ott, és továbbmész. A körbefutó fénygyűrű mutatja, hol tart a figyelem — elöl lefelé, hátul felfelé ível, ahogy egy gyűrű körbeér egy testen. Hanggal csukott szemmel is végigcsinálható.</p>
+          <p class="relax-intro" data-i18n-html="ui.scanIntro">Ugyanaz a testtérkép, csak feszítés nélkül.</p>
           <div class="bodywrap">
             <div class="bodyholder" id="scanHolder"></div>
             <div>
@@ -489,12 +569,12 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
               <div class="stepbox"><p id="scanText">Válassz hosszt, és indítsd el.</p></div>
               <div class="progressline"><i id="scanBar"></i></div>
               <div class="ctlbar">
-                <button class="ctl ghost" id="scan5" aria-pressed="true">5 perc</button>
-                <button class="ctl ghost" id="scan10" aria-pressed="false">10 perc</button>
-                <button class="ctl" id="scanStart">Indítás</button>
-                <button class="ctl ghost" id="scanStop">Állj</button>
+                <button class="ctl ghost" id="scan5" aria-pressed="true" data-i18n="ui.min5">5 perc</button>
+                <button class="ctl ghost" id="scan10" aria-pressed="false" data-i18n="ui.min10">10 perc</button>
+                <button class="ctl" id="scanStart" data-i18n="ui.start">Indítás</button>
+                <button class="ctl ghost" id="scanStop" data-i18n="ui.stop">Állj</button>
                 <button class="ctl ghost tts-btn" aria-pressed="false">Hang: ki</button>
-                <div class="readout">hátralévő: <b id="scanRead">05:00</b></div>
+                <div class="readout"><span data-i18n="ui.remaining">hátralévő:</span> <b id="scanRead">05:00</b></div>
               </div>
               <p class="ttsstat tts-stat" style="margin-top:10px"></p>
             </div>
@@ -508,29 +588,29 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   <section class="view" id="view-etrend">
     <div class="stack">
       <div class="glass-panel">
-        <p class="eyebrow">Tea, étel, vitamin</p>
-        <h2>Az utolsó öt százalék</h2>
-        <p class="lead">Ez a rész a relaxáció párja, de fontos a sorrend: amit itt találsz, az a <strong>finomhangolás</strong>. Ha a fix ébredés, az ingerkontroll és a reggeli fény nincs meg, akkor semmilyen tea vagy kapszula nem hozza be.</p>
-        <div class="warn"><strong>Mielőtt bármit szedni kezdesz:</strong> ha rendszeresen szedsz gyógyszert, kérdezd meg a gyógyszerészt vagy a háziorvost. A macskagyökér és a melatonin is lép kölcsönhatásba. Terhesség és szoptatás alatt semmit orvosi jóváhagyás nélkül.</div>
+        <p class="eyebrow" data-i18n="ui.dietEyebrow">Tea, étel, vitamin</p>
+        <h2 data-i18n="ui.dietH2">Az utolsó öt százalék</h2>
+        <p class="lead" data-i18n-html="ui.dietLead">Ez a rész a relaxáció párja, de fontos a sorrend.</p>
+        <div class="warn" data-i18n-html="ui.dietWarn"><strong>Mielőtt bármit szedni kezdesz:</strong> ha rendszeresen szedsz gyógyszert, kérdezd meg a gyógyszerészt vagy a háziorvost.</div>
       </div>
       <div class="glass-panel">
-        <span class="tag" style="--c:var(--rose)">Tea és ital</span><h3>Mit, mikor, miért</h3>
+        <span class="tag" style="--c:var(--rose)" data-i18n="ui.teaTag">Tea és ital</span><h3 data-i18n="ui.teaH3">Mit, mikor, miért</h3>
         <ul class="tips" id="teaList"></ul>
       </div>
       <div class="glass-panel">
-        <span class="tag" style="--c:var(--wake)">Étkezés</span><h3>Mikor egyél, és mi a nem várt csavar</h3>
+        <span class="tag" style="--c:var(--wake)" data-i18n="ui.foodTag">Étkezés</span><h3 data-i18n="ui.foodH3">Mikor egyél, és mi a nem várt csavar</h3>
         <ul class="tips" id="foodList"></ul>
       </div>
       <div class="glass-panel">
-        <span class="tag" style="--c:var(--mint)">Vitaminok és kiegészítők</span><h3>Bizonyíték szerinti sorrendben</h3>
+        <span class="tag" style="--c:var(--mint)" data-i18n="ui.suppTag">Vitaminok és kiegészítők</span><h3 data-i18n="ui.suppH3">Bizonyíték szerinti sorrendben</h3>
         <ul class="tips" id="suppList"></ul>
       </div>
       <div class="glass-panel">
-        <span class="tag" style="--c:var(--rose)">Napi menetrend</span><h3>Egy 22:30-as lefekvéshez visszaszámolva</h3>
+        <span class="tag" style="--c:var(--rose)" data-i18n="ui.planTag">Napi menetrend</span><h3 data-i18n="ui.planH3">Egy 22:30-as lefekvéshez visszaszámolva</h3>
         <ul class="timeline" id="dayPlan"></ul>
       </div>
       <div class="glass-panel">
-        <p class="eyebrow">Források</p>
+        <p class="eyebrow" data-i18n="ui.sourcesEyebrow">Források</p>
         <ul class="src">
           <li>Irwin és mtsai: <em>Partial sleep deprivation reduces NK cell activity</em>. <a href="https://pubmed.ncbi.nlm.nih.gov/7871104/" target="_blank" rel="noopener">pubmed</a></li>
           <li>Prather és mtsai: <em>Behaviorally Assessed Sleep and Susceptibility to the Common Cold</em> — SLEEP 2015. <a href="https://pmc.ncbi.nlm.nih.gov/articles/4531403/" target="_blank" rel="noopener">ncbi</a></li>
@@ -549,7 +629,7 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
 
   </main>
 </div>
-<footer class="foot">ALVÁS 2026</footer>
+<footer class="foot" data-i18n="ui.footer">ALVÁS 2026</footer>
 
 <script>
 "use strict";
@@ -587,33 +667,53 @@ function catmullClosed(pts){
   return d + ' Z';
 }
 
-/* ================== MAGYAR BESZÉD (TTS) ================== */
+/* ================== NYELVEK ================== */
+const LANG_ORDER = ['hu','en','de','ro'];
+let LANG = 'hu';
+try{
+  const saved = localStorage.getItem('sleep-lang');
+  if(saved && window.LANGS[saved]) LANG = saved;
+  else {
+    const nav = (navigator.language||'').slice(0,2).toLowerCase();
+    if(window.LANGS[nav]) LANG = nav;
+  }
+}catch(e){}
+if(!window.LANGS[LANG]) LANG = 'hu';
+const T = () => window.LANGS[LANG];
+function tr(path){
+  let v = T();
+  for(const k of String(path).split('.')){ if(v==null) return ''; v = v[k]; }
+  return v==null ? '' : v;
+}
+const fill = (s,vals) => String(s).replace(/\{(\w+)\}/g,(m,k)=> vals[k]!==undefined ? vals[k] : m);
+
+/* ================== BESZÉD (TTS) ================== */
 const TTS = {
-  on:false, voice:null, supported:('speechSynthesis' in window), huFound:false,
+  on:false, voice:null, supported:('speechSynthesis' in window), found:false,
   init(){
-    if(!this.supported){ this.status('A böngésződ nem tud beszélni.'); return; }
-    const pick = ()=>{
-      const vs = window.speechSynthesis.getVoices() || [];
-      this.voice = vs.find(v=>/^hu/i.test(v.lang)) || null;
-      this.huFound = !!this.voice;
-      this.status(this.huFound
-        ? 'Magyar hang: ' + this.voice.name
-        : 'Magyar hang nincs telepítve — a rendszer alaphangját használja. Windowsban: Beállítások → Idő és nyelv → Beszéd → magyar hangcsomag.');
-    };
-    pick();
-    window.speechSynthesis.onvoiceschanged = pick;
+    if(!this.supported){ this.status(tr('tts.unsupported')); return; }
+    this.pick();
+    window.speechSynthesis.onvoiceschanged = ()=>this.pick();
+  },
+  pick(){
+    if(!this.supported) return;
+    const want = T().code;
+    const vs = window.speechSynthesis.getVoices() || [];
+    this.voice = vs.find(v=> new RegExp('^'+want,'i').test(v.lang)) || null;
+    this.found = !!this.voice;
+    this.status(this.found ? fill(tr('tts.found'),{name:this.voice.name}) : tr('tts.missing'));
   },
   status(t){ $$('.tts-stat').forEach(e=>e.textContent = t); },
   set(v){
     this.on = v;
-    $$('.tts-btn').forEach(b=>{ b.setAttribute('aria-pressed', String(v)); b.textContent = 'Hang: ' + (v?'be':'ki'); });
+    $$('.tts-btn').forEach(b=>{ b.setAttribute('aria-pressed', String(v)); b.textContent = v ? tr('ui.soundOn') : tr('ui.soundOff'); });
     if(!v) this.stop();
   },
   say(text, force){
     if(!this.supported || (!this.on && !force)) return;
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'hu-HU';
+    u.lang = T().ttsLang;
     if(this.voice) u.voice = this.voice;
     u.rate = .93; u.pitch = 1; u.volume = 1;
     window.speechSynthesis.speak(u);
@@ -624,30 +724,30 @@ TTS.init();
 $$('.tts-btn').forEach(b=> b.addEventListener('click', ()=>{
   const next = !TTS.on;
   TTS.set(next);
-  if(next) TTS.say('Hang bekapcsolva. Csukott szemmel is követheted.', true);
+  if(next) TTS.say(tr('tts.enabled'), true);
 }));
 
 /* ========================= MENÜ ========================= */
-const BRANCHES = [
-  {id:'ciklus',    title:'Alvásciklus',      sub:['90 perces körök','EEG-hullámok'],           color:'--n2'},
-  {id:'ritmus',    title:'Cirkadián ritmus', sub:['melatonin és kortizol','a fény állítja'],   color:'--sky'},
-  {id:'tisztitas', title:'Agytisztítás',     sub:['artéria, véna, nyirok','pulzus pumpál'],    color:'--vein'},
-  {id:'miert',     title:'Miért fontos',     sub:['immunrendszer','daganatos kockázat'],       color:'--rem'},
-  {id:'tippek',    title:'Jobb alvás',       sub:['ingerkontroll','fény és hőmérséklet'],      color:'--wake'},
-  {id:'relax',     title:'Esti relaxáció',   sub:['4-7-8 légzés','hanggal vezetve'],           color:'--n1'},
-  {id:'etrend',    title:'Tea, étel, vitamin',sub:['mikor egyél és igyál','kiegészítők'],      color:'--rose'}
-];
-const NAV = [{id:'map', title:'Elmetérkép', color:'--ink'}].concat(BRANCHES);
+const BRANCH_COLOR = {ciklus:'--n2', ritmus:'--sky', tisztitas:'--vein', miert:'--rem',
+                      tippek:'--wake', relax:'--n1', etrend:'--rose'};
+const branches = () => T().branches.map(b=>({...b, color:BRANCH_COLOR[b.id]}));
 const menu = $('#menu');
-NAV.forEach(v=>{
-  const b = document.createElement('button');
-  b.dataset.view = v.id;
-  b.setAttribute('aria-current', v.id==='map' ? 'true':'false');
-  b.innerHTML = `<span class="dot" style="--c:${C(v.color)}"></span><span>${v.title}</span>`;
-  b.addEventListener('click', ()=>go(v.id));
-  menu.appendChild(b);
-});
+let curView = 'map';
+function buildMenu(){
+  menu.innerHTML = '';
+  menu.setAttribute('aria-label', tr('ui.menuAria'));
+  [{id:'map', title:tr('navMap'), color:'--ink'}].concat(branches()).forEach(v=>{
+    const b = document.createElement('button');
+    b.dataset.view = v.id;
+    b.setAttribute('aria-current', v.id===curView ? 'true':'false');
+    b.innerHTML = `<span class="dot" style="--c:${C(v.color)}"></span><span></span>`;
+    b.lastElementChild.textContent = v.title;
+    b.addEventListener('click', ()=>{ go(v.id); if(isNarrow()) setNav(false); });
+    menu.appendChild(b);
+  });
+}
 function go(id){
+  curView = id;
   $$('.view').forEach(s=>s.classList.toggle('active', s.id==='view-'+id));
   menu.querySelectorAll('button').forEach(b=>b.setAttribute('aria-current', b.dataset.view===id ? 'true':'false'));
   window.scrollTo({top:0, behavior: REDUCED ? 'auto':'smooth'});
@@ -656,12 +756,50 @@ function go(id){
   if(id!=='relax') TTS.stop();
 }
 
+/* ---------- menü nyit/zár + nyelvválasztó ---------- */
+const isNarrow = () => window.innerWidth <= 980;
+const menuBtn = $('#menuBtn'), backdrop = $('#navBackdrop');
+function setNav(open){
+  document.body.classList.toggle('nav-open', open);
+  document.body.classList.toggle('nav-closed', !open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? tr('ui.menuClose') : tr('ui.menuOpen'));
+  if(!isNarrow()) setTimeout(()=>{ layoutMap(); if(brainRAF) fitCanvas(); if(eegRAF) fitEeg(); }, 60);
+}
+menuBtn.addEventListener('click', ()=> setNav(!document.body.classList.contains('nav-open')));
+backdrop.addEventListener('click', ()=> setNav(false));
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && document.body.classList.contains('nav-open')) setNav(false); });
+
+const langSel = $('#langSel');
+function buildLangSel(){
+  langSel.innerHTML = '';
+  langSel.setAttribute('aria-label', tr('ui.langAria'));
+  LANG_ORDER.filter(c=>window.LANGS[c]).forEach(code=>{
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.dataset.lang = code;
+    b.textContent = window.LANGS[code].label;
+    b.title = window.LANGS[code].name;
+    b.setAttribute('aria-pressed', String(code===LANG));
+    b.addEventListener('click', ()=> setLang(code));
+    langSel.appendChild(b);
+  });
+}
+function setLang(code){
+  if(!window.LANGS[code] || code===LANG) return;
+  TTS.stop();
+  LANG = code;
+  try{ localStorage.setItem('sleep-lang', code); }catch(e){}
+  applyLang();
+}
+
 /* ===================== ELMETÉRKÉP ===================== */
 const MAP = {cx:470, cy:270, RX:300, RY:186, R0:94, NW:206, NH:76};
 function drawMindMap(){
   const svg = $('#mapSvg'); svg.innerHTML = '';
-  const {cx,cy,RX,RY,R0,NW,NH} = MAP, n = BRANCHES.length;
-  BRANCHES.forEach((b,i)=>{
+  const BR = branches();
+  const {cx,cy,RX,RY,R0,NW,NH} = MAP, n = BR.length;
+  BR.forEach((b,i)=>{
     const a = (-90 + i*(360/n)) * Math.PI/180;
     const x = cx + Math.cos(a)*RX, y = cy + Math.sin(a)*RY, col = C(b.color);
     const dx = x-cx, dy = y-cy, L = Math.hypot(dx,dy), ux = dx/L, uy = dy/L;
@@ -686,17 +824,19 @@ function drawMindMap(){
   });
   svg.appendChild(el('circle',{cx, cy, r:R0, fill:'rgba(176,160,240,.10)', stroke:'rgba(255,255,255,.18)'}));
   svg.appendChild(el('text',{x:cx, y:cy+2, 'text-anchor':'middle', fill:'#fff',
-    'font-family':'Fraunces, Georgia, serif', 'font-size':34, 'font-weight':700, 'letter-spacing':2}, 'ALVÁS'));
+    'font-family':'Fraunces, Georgia, serif', 'font-size':34, 'font-weight':700, 'letter-spacing':2}, tr('map.center')));
   svg.appendChild(el('text',{x:cx, y:cy+27, 'text-anchor':'middle', fill:'#94a3c4',
-    'font-family':'JetBrains Mono, monospace', 'font-size':11, 'letter-spacing':2}, '~8 ÓRA / ÉJSZAKA'));
+    'font-family':'JetBrains Mono, monospace', 'font-size':11, 'letter-spacing':2}, tr('map.sub')));
 }
 function drawMapCards(){
   const box = $('#mapNarrow'); box.innerHTML = '';
-  BRANCHES.forEach(b=>{
+  branches().forEach(b=>{
     const c = document.createElement('button');
     c.className = 'branch-card';
     c.style.setProperty('--c', C(b.color));
-    c.innerHTML = `<b>${b.title}</b><span>${b.sub.join(' · ')}</span>`;
+    const t = document.createElement('b'), s = document.createElement('span');
+    t.textContent = b.title; s.textContent = b.sub.join(' · ');
+    c.appendChild(t); c.appendChild(s);
     c.addEventListener('click', ()=>go(b.id));
     box.appendChild(c);
   });
@@ -709,12 +849,14 @@ function layoutMap(){
 
 /* ===================== HIPNOGRAM ===================== */
 const STAGES = {
-  W:  {name:'Ébrenlét',        color:'--wake', y:96,  desc:'Rövid felébredések normálisak — éjszakánként több is van. EEG-n béta és alfa.'},
-  REM:{name:'REM',             color:'--rem',  y:134, desc:'Az agy majdnem úgy dolgozik, mint ébren, az izmok viszont lebénulnak. Álmok, érzelmi feldolgozás, fűrészfog-hullámok.'},
-  N1: {name:'N1 elszunnyadás', color:'--n1',   y:172, desc:'Átmenet ébrenlét és alvás között. Itt tűnik el az alfa, és jön helyette a théta.'},
-  N2: {name:'N2 könnyű alvás', color:'--n2',   y:210, desc:'Az éjszaka legnagyobb része. Théta-alapon alvási orsók és K-komplexek — az orsók rögzítik a mozgástanulást.'},
-  N3: {name:'N3 mélyalvás',    color:'--n3',   y:252, desc:'Delta-hullámok: lassú és hatalmas. Emlékrögzítés, szövetregeneráció és az agytisztítás nagy része.'}
+  W:  {color:'--wake', y:96},
+  REM:{color:'--rem',  y:134},
+  N1: {color:'--n1',   y:172},
+  N2: {color:'--n2',   y:210},
+  N3: {color:'--n3',   y:252}
 };
+const stageName = k => tr('stages.'+k+'.name');
+const stageDesc = k => tr('stages.'+k+'.desc');
 const NIGHT = [
   [0,10,'W'],[10,18,'N1'],[18,45,'N2'],[45,78,'N3'],[78,88,'N2'],[88,98,'REM'],
   [98,125,'N2'],[125,155,'N3'],[155,165,'N2'],[165,183,'REM'],[183,188,'W'],
@@ -757,14 +899,14 @@ function drawHypnogram(){
   svg.appendChild(el('text',{id:'bigClock', x:HX0-2, y:52, fill:'#fff',
     'font-family':'JetBrains Mono, monospace', 'font-size':38, 'font-weight':700, 'letter-spacing':1}, '22:30'));
   svg.appendChild(el('text',{id:'bigStep', x:HX0+168, y:52, fill:'#8b97b5',
-    'font-family':'JetBrains Mono, monospace', 'font-size':14, 'letter-spacing':1.4}, '+5 p'));
+    'font-family':'JetBrains Mono, monospace', 'font-size':14, 'letter-spacing':1.4}, '+'+hypStep+' '+tr('hyp.minShort')));
   svg.appendChild(el('text',{x:938, y:24, 'text-anchor':'end', fill:'#7f8dac',
-    'font-family':'JetBrains Mono, monospace', 'font-size':11.5, 'letter-spacing':2.2}, 'AKTUÁLIS SZAKASZ'));
+    'font-family':'JetBrains Mono, monospace', 'font-size':11.5, 'letter-spacing':2.2}, tr('hyp.current')));
   svg.appendChild(el('text',{id:'bigStage', x:938, y:54, 'text-anchor':'end', fill:C('--wake'),
-    'font-family':'Fraunces, Georgia, serif', 'font-size':29, 'font-weight':700}, 'Ébrenlét'));
+    'font-family':'Fraunces, Georgia, serif', 'font-size':29, 'font-weight':700}, stageName('W')));
   drawStepTicks();
   $('#hypLegend').innerHTML = Object.entries(STAGES)
-    .map(([k,s])=>`<span><i style="background:${C(s.color)}"></i>${s.name}</span>`).join('');
+    .map(([k,s])=>`<span><i style="background:${C(s.color)}"></i>${esc(stageName(k))}</span>`).join('');
   const tot = {};
   NIGHT.forEach(([a,b,k])=> tot[k] = (tot[k]||0)+(b-a));
   const order = ['W','N1','N2','N3','REM'];
@@ -772,14 +914,15 @@ function drawHypnogram(){
     `<span style="width:${(tot[k]/TOTAL*100).toFixed(1)}%;background:${C(STAGES[k].color)}"></span>`).join('');
   $('#hypBarLegend').innerHTML = order.map(k=>{
     const p = Math.round(tot[k]/TOTAL*100), hh = Math.floor(tot[k]/60), mm = tot[k]%60;
-    return `<span><i style="background:${C(STAGES[k].color)}"></i>${k} — ${hh?hh+' ó ':''}${mm} p · ${p}%</span>`;
+    return `<span><i style="background:${C(STAGES[k].color)}"></i>${k} — ${hh?hh+' '+tr('hyp.hourShort')+' ':''}${mm} ${tr('hyp.minShort')} · ${p}%</span>`;
   }).join('');
   $('#stageCards').innerHTML = order.map(k=>{
     const s = STAGES[k];
     return `<div class="card" style="--c:${C(s.color)}"><span class="tag" style="--c:${C(s.color)}">${k}</span>
-            <h3>${s.name}</h3><p>${s.desc}</p></div>`;
+            <h3>${esc(stageName(k))}</h3><p>${stageDesc(k)}</p></div>`;
   }).join('');
 }
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 function drawStepTicks(){
   const g = document.getElementById('stepTicks');
   if(!g) return;
@@ -799,13 +942,13 @@ STEPS.forEach(v=>{
   });
   $('#hypSteps').appendChild(b);
 });
-$('#hypSteps').insertAdjacentHTML('beforeend','<span class="lab" style="margin-left:6px">perc</span>');
+$('#hypSteps').insertAdjacentHTML('beforeend','<span class="lab" id="hypStepUnit" style="margin-left:6px"></span>');
 const BASE_SECONDS = 24;
 let hypSpeed = 60;
 const speedSeconds = () => BASE_SECONDS / (hypSpeed/100);
 function updSpeed(){
   $('#hypSpeedVal').textContent = hypSpeed + '%';
-  $('#hypSpeedHint').textContent = 'az éjszaka ' + Math.round(speedSeconds()) + ' mp alatt';
+  $('#hypSpeedHint').textContent = fill(tr('hyp.nightIn'), {n: Math.round(speedSeconds())});
 }
 $('#hypSpeed').addEventListener('input', e=>{ hypSpeed = +e.target.value; updSpeed(); });
 let hypT = 0, hypRAF = null, hypLast = 0;
@@ -826,27 +969,27 @@ function hypPaint(){
   if(dot){ dot.setAttribute('cx',x); dot.setAttribute('cy',s.y); dot.setAttribute('fill',col); }
   const bc = document.getElementById('bigClock'), bs = document.getElementById('bigStage'), bt = document.getElementById('bigStep');
   if(bc) bc.textContent = clockStr(shown);
-  if(bt) bt.textContent = '+' + hypStep + ' p';
-  if(bs){ bs.textContent = s.name; bs.setAttribute('fill', col); }
+  if(bt) bt.textContent = '+' + hypStep + ' ' + tr('hyp.minShort');
+  if(bs){ bs.textContent = stageName(k); bs.setAttribute('fill', col); }
   if(k !== curStage){ curStage = k; updEegLabel(); }
 }
 function hypStart(){
   if(hypRAF) return;
   if(hypT >= TOTAL) hypT = 0;
   hypLast = 0; hypRAF = requestAnimationFrame(hypFrame);
-  $('#hypPlay').textContent = 'Szünet';
+  $('#hypPlay').textContent = tr('ui.cycPause');
 }
-function hypStop(){ if(hypRAF) cancelAnimationFrame(hypRAF); hypRAF = null; $('#hypPlay').textContent = 'Indítás'; }
+function hypStop(){ if(hypRAF) cancelAnimationFrame(hypRAF); hypRAF = null; $('#hypPlay').textContent = tr('ui.cycPlay'); }
 $('#hypPlay').addEventListener('click', ()=> hypRAF ? hypStop() : hypStart());
 $('#hypReset').addEventListener('click', ()=>{ hypStop(); hypT = 0; hypPaint(); });
 
 /* ============== EEG ============== */
 const EEG = {
-  W:  {band:'Béta', hz:'13–30 Hz · éber, gyors, kis amplitúdó', col:'--wake', comps:[[19,.13],[24,.07],[10,.09]], noise:.055},
-  REM:{band:'Vegyes + théta', hz:'4–30 Hz · majdnem olyan, mint ébren, plusz fűrészfog', col:'--rem', comps:[[17,.09],[6.5,.13],[11,.06]], noise:.06, saw:1},
-  N1: {band:'Théta', hz:'4–7 Hz · az alfa eltűnik, jön a théta', col:'--n1', comps:[[5.5,.20],[9.5,.07]], noise:.05},
-  N2: {band:'Théta + alvási orsók', hz:'4–7 Hz alap, 11–16 Hz-es csomagok és K-komplex', col:'--n2', comps:[[5,.17]], noise:.04, spindle:1, kc:1},
-  N3: {band:'Delta', hz:'0,5–4 Hz · nagy amplitúdó, lassú, összehangolt', col:'--n3', comps:[[1.1,.62],[2.4,.14]], noise:.025}
+  W:  {col:'--wake', comps:[[19,.13],[24,.07],[10,.09]], noise:.055},
+  REM:{col:'--rem',  comps:[[17,.09],[6.5,.13],[11,.06]], noise:.06, saw:1},
+  N1: {col:'--n1',   comps:[[5.5,.20],[9.5,.07]], noise:.05},
+  N2: {col:'--n2',   comps:[[5,.17]], noise:.04, spindle:1, kc:1},
+  N3: {col:'--n3',   comps:[[1.1,.62],[2.4,.14]], noise:.025}
 };
 const EW=960, EH=210, PX0=70, PX1=946, PY0=26, PY1=158, NSAMP=1400;
 const buf = new Float32Array(NSAMP);
@@ -864,7 +1007,7 @@ EEG_WINS.forEach(v=>{
   });
   $('#eegWins').appendChild(b);
 });
-$('#eegWins').insertAdjacentHTML('beforeend','<span class="lab" style="margin-left:6px">másodperc</span>');
+$('#eegWins').insertAdjacentHTML('beforeend','<span class="lab" id="eegWinUnit" style="margin-left:6px"></span>');
 function eegSample(dt){
   const cfg = EEG[curStage];
   ePhase += dt;
@@ -934,7 +1077,7 @@ function drawEeg(){
     ectx.beginPath(); ectx.moveTo(x,PY1+12); ectx.lineTo(x,PY1+18); ectx.stroke();
     ectx.fillStyle='rgba(148,163,196,.8)'; ectx.fillText(String(s), x, PY1+30);
   }
-  ectx.textAlign='left'; ectx.fillStyle='rgba(148,163,196,.75)'; ectx.fillText('mp', PX1+2, PY1+30);
+  ectx.textAlign='left'; ectx.fillStyle='rgba(148,163,196,.75)'; ectx.fillText(tr('eeg.secShort'), PX1+2, PY1+30);
   ectx.save();
   ectx.beginPath(); ectx.rect(PX0,PY0-8,PX1-PX0,(PY1-PY0)+16); ectx.clip();
   ectx.beginPath();
@@ -946,31 +1089,32 @@ function drawEeg(){
   ectx.shadowColor=col; ectx.shadowBlur=7; ectx.stroke(); ectx.shadowBlur=0;
   ectx.restore();
   ectx.textAlign='right'; ectx.fillStyle='rgba(148,163,196,.6)';
-  ectx.font='11px JetBrains Mono, monospace'; ectx.fillText(eegWin+' mp ablak', PX1, PY0-12);
+  ectx.font='11px JetBrains Mono, monospace';
+  ectx.fillText(fill(tr('eeg.window'),{n:eegWin}), PX1, PY0-12);
 }
 function updEegLabel(){
   const cfg = EEG[curStage];
-  $('#eegBand').textContent = cfg.band;
+  $('#eegBand').textContent = tr('eeg.'+curStage+'.band');
   $('#eegBand').style.color = C(cfg.col);
-  $('#eegHz').textContent = cfg.hz;
+  $('#eegHz').textContent = tr('eeg.'+curStage+'.hz');
 }
 function startEeg(){ if(eegRAF) return; fitEeg(); drawEeg(); if(REDUCED) return; eegLast=0; eegRAF = requestAnimationFrame(eegFrame); }
 function stopEeg(){ if(eegRAF) cancelAnimationFrame(eegRAF); eegRAF = null; }
 const WAVES = [
-  {n:'Béta',hz:'13–30 Hz',f:19,a:.16,col:'--wake',when:'éber, koncentrált'},
-  {n:'Alfa',hz:'8–12 Hz',f:10,a:.30,col:'--sky',when:'ellazult ébrenlét, csukott szem'},
-  {n:'Théta',hz:'4–7 Hz',f:5.5,a:.48,col:'--n1',when:'elszunnyadás, N1 és N2'},
-  {n:'Delta',hz:'0,5–4 Hz',f:1.5,a:.88,col:'--n3',when:'N3 mélyalvás'},
-  {n:'Alvási orsó',hz:'11–16 Hz csomag',f:13.5,a:.55,col:'--n2',when:'N2, mozgástanulás',burst:1}
+  {f:19,a:.16,col:'--wake'},
+  {f:10,a:.30,col:'--sky'},
+  {f:5.5,a:.48,col:'--n1'},
+  {f:1.5,a:.88,col:'--n3'},
+  {f:13.5,a:.55,col:'--n2',burst:1}
 ];
 function drawWaveChart(){
   const svg = $('#waveSvg'); svg.innerHTML='';
-  const X0=132, X1=878, rowH=90;
+  const X0=132, X1=878, rowH=90, TXT = T().waves;
   WAVES.forEach((w,i)=>{
-    const yc = 44+i*rowH, col = C(w.col);
-    svg.appendChild(el('text',{x:0,y:yc-8,fill:col,'font-family':'Fraunces, Georgia, serif','font-size':18,'font-weight':600}, w.n));
-    svg.appendChild(el('text',{x:0,y:yc+11,fill:'#8b97b5','font-family':'JetBrains Mono, monospace','font-size':11.5}, w.hz));
-    svg.appendChild(el('text',{x:0,y:yc+28,fill:'#7f8dac','font-family':'Inter, sans-serif','font-size':11.5}, w.when));
+    const yc = 44+i*rowH, col = C(w.col), t = TXT[i] || {n:'',hz:'',when:''};
+    svg.appendChild(el('text',{x:0,y:yc-8,fill:col,'font-family':'Fraunces, Georgia, serif','font-size':18,'font-weight':600}, t.n));
+    svg.appendChild(el('text',{x:0,y:yc+11,fill:'#8b97b5','font-family':'JetBrains Mono, monospace','font-size':11.5}, t.hz));
+    svg.appendChild(el('text',{x:0,y:yc+28,fill:'#7f8dac','font-family':'Inter, sans-serif','font-size':11.5}, t.when));
     svg.appendChild(el('line',{x1:X0,x2:X1,y1:yc,y2:yc,stroke:'rgba(255,255,255,.06)'}));
     let d='';
     for(let px=0;px<=X1-X0;px+=2){
@@ -982,16 +1126,13 @@ function drawWaveChart(){
     svg.appendChild(el('path',{d,fill:'none',stroke:col,'stroke-width':1.9,'stroke-linejoin':'round'}));
   });
 }
-const WAVE_CARDS = [
-  {c:'--wake',t:'Béta — 13–30 Hz',p:'Ébren, koncentrálva ez dominál. Sok apró, gyors rezgés: a kéreg sok kis csoportja külön dolgozik. Alacsony amplitúdó, 5–20 µV. Ha este az ágyban is ez fut, az a „nem tudom kikapcsolni a fejem" állapot.'},
-  {c:'--sky',t:'Alfa — 8–12 Hz',p:'Ellazult ébrenlét, csukott szemmel, 20–60 µV. Az elalvás kapuja: amikor az alfa kezd feltöredezni és kihagyni, az az N1 kezdete. A lassú kilégzés és a testpásztázás pont ezt célozza.'},
-  {c:'--n1',t:'Théta — 4–7 Hz',p:'Elszunnyadás és könnyű alvás, 50–100 µV. Már több idegsejt mozog együtt. Ebben a szakaszban jönnek a zuhanásérzetek és izomrándulások.'},
-  {c:'--n3',t:'Delta — 0,5–4 Hz',p:'A mélyalvás hullámai: nagyon lassúak és nagyon nagyok, akár 100–200 µV. Az egész kéreg együtt kapcsol be és ki. Ez rögzíti a tényszerű emlékeket, és ez mozgatja az agyi folyadékot a takarításhoz. Az életkorral ez csökken először.'},
-  {c:'--n2',t:'Alvási orsó és K-komplex',p:'Nem frekvenciasáv, hanem esemény. Az orsó egy 11–16 Hz-es, fél-egy másodperces hullámcsomag az N2-ben — rögzíti a mozdulatsorokat, és leárnyékolja az agyat a külső zajtól. A K-komplex nagy, hirtelen kilengés, sokszor zajra: mintha az agy azt döntené, „nem érdemes felébredni".'},
-  {c:'--rem',t:'REM — a becsapós',p:'Az EEG-n a REM majdnem úgy néz ki, mint az ébrenlét. Ezért hívták paradox alvásnak. Két dolog árulja el: a szemmozgások, és hogy a vázizmok teljesen lebénulnak.'}
-];
-$('#waveCards').innerHTML = WAVE_CARDS.map(w=>
-  `<div class="card" style="--c:${C(w.c)}"><h3>${w.t}</h3><p>${w.p}</p></div>`).join('');
+const WAVE_CARD_COLORS = ['--wake','--sky','--n1','--n3','--n2','--rem'];
+function renderWaveCards(){
+  $('#waveCards').innerHTML = T().waveCards.map((w,i)=>{
+    const c = C(WAVE_CARD_COLORS[i] || '--mint');
+    return `<div class="card" style="--c:${c}"><h3>${esc(w.t)}</h3><p>${w.p}</p></div>`;
+  }).join('');
+}
 
 /* ================== CIRKADIÁN ================== */
 const CX0=84, CX1=932, CY0=66, CY1=286;
@@ -1010,21 +1151,12 @@ function lerpKey(keys,t){
   return keys[keys.length-1][1];
 }
 const CURVES=[{key:KEY_MEL,col:'--n2',id:'mel'},{key:KEY_COR,col:'--wake',id:'cor'},{key:KEY_TMP,col:'--mint',id:'tmp'}];
-const CIRC_NOTES=[
-  [6,8,'Kortizolcsúcs 30–45 perccel az ébredés után. Ez nem stressz, ez az ébresztő. A reggeli fény felerősíti, és előre állítja az órát estére.'],
-  [8,12,'A melatonin nulla, a kortizol csökken. A nap legélesebb figyelmi ablaka.'],
-  [12,15,'Délutáni holtpont. Az adenozin már sok, de a belső óra éberségi jele még nem ért csúcsra. Itt jön a kávévágy — de a délutáni kávé fele éjfélkor is benned van.'],
-  [15,19,'A maghőmérséklet és a testi teljesítmény csúcsa. Ez a legjobb edzésablak, és még marad idő a lehűlésre.'],
-  [19,21,'A maghő esni kezd, a kortizol a mélypont felé tart. Innentől a fény számít a legjobban.'],
-  [21,23,'Melatonin-indulás (DLMO). Erős esti fény ilyenkor órákkal késleltetheti.'],
-  [23,3,'Melatonin a csúcsán, kortizol a mélyponton. A mélyalvás zöme ide esik, és vele az agy takarítása is.'],
-  [3,5,'Maghőmérséklet-minimum, kb. két órával a természetes ébredés előtt. A kortizol most kezd emelkedni.'],
-  [5,7,'A melatonin lecseng, a kortizol felfut, és a REM-szakaszok most a leghosszabbak.']
-];
+const CIRC_RANGES=[[6,8],[8,12],[12,15],[15,19],[19,21],[21,23],[23,3],[3,5],[5,7]];
 function noteFor(t){
-  const h=(12+t)%24;
-  for(const [a,b,txt] of CIRC_NOTES){
-    if(a<b){ if(h>=a&&h<b) return txt; } else { if(h>=a||h<b) return txt; }
+  const h=(12+t)%24, notes = T().circNotes;
+  for(let i=0;i<CIRC_RANGES.length;i++){
+    const [a,b] = CIRC_RANGES[i];
+    if(a<b){ if(h>=a&&h<b) return notes[i]||''; } else { if(h>=a||h<b) return notes[i]||''; }
   }
   return '';
 }
@@ -1034,7 +1166,7 @@ function drawCirc(){
   svg.appendChild(el('rect',{x:ct(10.5),y:CY0-10,width:ct(18.5)-ct(10.5),height:(CY1-CY0)+10,
     fill:'rgba(176,160,240,.09)',stroke:'rgba(176,160,240,.22)',rx:8}));
   svg.appendChild(el('text',{x:(ct(10.5)+ct(18.5))/2,y:CY0-18,'text-anchor':'middle',fill:'#b0a0f0',
-    'font-family':'JetBrains Mono, monospace','font-size':12,'letter-spacing':2},'ALVÁSABLAK'));
+    'font-family':'JetBrains Mono, monospace','font-size':12,'letter-spacing':2}, tr('circ.window')));
   for(let t=0;t<=24;t+=3){
     svg.appendChild(el('line',{x1:ct(t),x2:ct(t),y1:CY0-10,y2:CY1,stroke:'rgba(255,255,255,.06)'}));
     svg.appendChild(el('text',{x:ct(t),y:CY1+26,'text-anchor':'middle',fill:'#7f8dac',
@@ -1084,10 +1216,10 @@ function circFrame(ts){
   paintCirc();
   if(circRAF!==null) circRAF = requestAnimationFrame(circFrame);
 }
-function circStop(){ if(circRAF) cancelAnimationFrame(circRAF); circRAF=null; $('#circPlay').textContent='Nap lejátszása'; }
+function circStop(){ if(circRAF) cancelAnimationFrame(circRAF); circRAF=null; $('#circPlay').textContent=tr('ui.circPlay'); }
 $('#circPlay').addEventListener('click', ()=>{
   if(circRAF) return circStop();
-  circLast=0; circRAF = requestAnimationFrame(circFrame); $('#circPlay').textContent='Szünet';
+  circLast=0; circRAF = requestAnimationFrame(circFrame); $('#circPlay').textContent=tr('ui.circPause');
 });
 $('#circNow').addEventListener('click', ()=>{ circStop(); circT=10.5; paintCirc(); });
 
@@ -1403,29 +1535,34 @@ function drawBrain(dt){
     ctx.beginPath(); ctx.arc(g.x,g.y,g.r,0,6.29);
     ctx.strokeStyle=`rgba(255,220,235,${g.a})`; ctx.lineWidth=1.8; ctx.stroke();
   }
+  /* a fordítások eltérő hosszúak — a feliratot betoljuk a vászon szélén belülre */
+  const textIn = (txt,x,y)=>{
+    const w = ctx.measureText(txt).width;
+    ctx.fillText(txt, Math.max(6, Math.min(x, VW-6-w)), y);
+  };
   ctx.fillStyle = rgba(CL,.9); ctx.font='11.5px JetBrains Mono, monospace'; ctx.textAlign='left';
-  ctx.fillText('NYAKI NYIROKCSOMÓ', LNODE.x-56, LNODE.y+34);
+  textIn(tr('brain.node'), LNODE.x-56, LNODE.y+34);
   ctx.fillStyle='rgba(148,163,196,.7)'; ctx.font='10.5px JetBrains Mono, monospace';
-  ctx.fillText('innen a vér- és nyirokkeringésbe', LNODE.x-56, LNODE.y+48);
+  textIn(tr('brain.nodeSub'), LNODE.x-56, LNODE.y+48);
   ctx.fillStyle = rgba(CL,.75); ctx.font='10.5px JetBrains Mono, monospace';
-  ctx.fillText('agyhártyai nyirokér', lx0+12, ly0-6);
+  textIn(tr('brain.vessel'), lx0+12, ly0-6);
 
   /* pulzusjelző */
   const bx=24, by=VH-30, bw=160;
   ctx.fillStyle='rgba(148,163,196,.8)'; ctx.font='10.5px JetBrains Mono, monospace'; ctx.textAlign='left';
-  ctx.fillText(asleep?'LASSÚ HULLÁM · PUMPA':'PULZUS NÉLKÜL', bx, by-8);
+  ctx.fillText(asleep?tr('brain.pumpOn'):tr('brain.pumpOff'), bx, by-8);
   ctx.fillStyle='rgba(255,255,255,.08)'; ctx.fillRect(bx,by,bw,8);
   ctx.fillStyle = asleep ? `rgba(200,250,230,${.5+.5*pulseAmp})` : 'rgba(176,160,240,.35)';
   ctx.fillRect(bx,by,bw*pulseAmp,8);
   ctx.fillStyle='rgba(148,163,196,.6)'; ctx.font='10px JetBrains Mono, monospace';
-  ctx.fillText(asleep?'a csúcson szabadul ki a szemét':'ébren a szemét bent ragad', bx, by+23);
+  ctx.fillText(asleep?tr('brain.pumpHintOn'):tr('brain.pumpHintOff'), bx, by+23);
 
   ctx.textAlign='right'; ctx.fillStyle='rgba(148,163,196,.75)'; ctx.font='12px JetBrains Mono, monospace';
-  ctx.fillText(asleep?'MÉLYALVÁS · a tér nyitva':'ÉBRENLÉT · a tér szűk', VW-14, 24);
+  ctx.fillText(asleep?tr('brain.stateAsleep'):tr('brain.stateAwake'), VW-14, 24);
   ctx.textAlign='left'; ctx.font='11.5px JetBrains Mono, monospace';
-  ctx.fillStyle = rgba(CA,.95); ctx.fillText('artéria · folyadék BE', 22, 26);
-  ctx.fillStyle = rgba(CV,.95); ctx.fillText('véna · folyadék KI', 22, 44);
-  ctx.fillStyle = rgba(CW,1);   ctx.fillText('bordó pixel · a szemét', 22, 62);
+  ctx.fillStyle = rgba(CA,.95); ctx.fillText(tr('brain.legIn'), 22, 26);
+  ctx.fillStyle = rgba(CV,.95); ctx.fillText(tr('brain.legOut'), 22, 44);
+  ctx.fillStyle = rgba(CW,1);   ctx.fillText(tr('brain.legWaste'), 22, 62);
 }
 let brainLast = 0;
 function brainFrame(ts){
@@ -1439,202 +1576,68 @@ function brainFrame(ts){
 }
 function startBrain(){ if(brainRAF) return; fitCanvas(); if(!waste.length) spawnWaste(95); brainLast=0; brainRAF = requestAnimationFrame(brainFrame); }
 function stopBrain(){ if(brainRAF) cancelAnimationFrame(brainRAF); brainRAF=null; }
+function paintSleepLabels(){
+  $('#wasteLabel').textContent = asleep ? tr('brain.countAsleep') : tr('brain.countAwake');
+  $('#brainNote').textContent  = asleep ? tr('brain.noteAsleep')  : tr('brain.noteAwake');
+}
 function setSleep(v){
   asleep = v;
   $('#btnAwake').setAttribute('aria-pressed', String(!v));
   $('#btnAsleep').setAttribute('aria-pressed', String(v));
-  $('#wasteLabel').textContent = v ? 'Nyirokcsomóba juttatva' : 'Bent ragadt szemét';
-  $('#brainNote').textContent = v
-    ? 'A csatornák kinyílnak. A pulzusjelző minden csúcsán lökésben szabadulnak ki a bordó szemét-pixelek, rákerülnek a zöld vénára, ott mentazöldre váltanak (ez mutatja, hogy már a folyadék viszi őket), és a rózsaszín nyirokéren jutnak a nyaki nyirokcsomóba.'
-    : 'Ébren szűkek a csatornák, alig van áramlás, és nincs pulzálás, ami kilökné. A bordó szemét bent ragad a szövetben, ahol keletkezett.';
+  paintSleepLabels();
   if(v) cleared = 0;
 }
 $('#btnAwake').addEventListener('click', ()=>setSleep(false));
 $('#btnAsleep').addEventListener('click', ()=>setSleep(true));
 
 /* ================== TARTALOM ================== */
-const WHY = [
-  {c:'--n3',tag:'N3 mélyalvás',t:'Emlékrögzítés',p:'A napközben tanult tények a hippokampuszból a hosszú távú tárba kerülnek át. Ezt a mélyalvás delta-hullámai vezénylik — és a mélyalvás nagy része az éjszaka első felében van. Aki későn fekszik, de ugyanannyit alszik, ebből veszít.'},
-  {c:'--n2',tag:'N2 alvási orsók',t:'Mozgástanulás',p:'A kézre tanult mozdulatsorok — géptől a hangszerig — az N2 szakasz alvási orsóihoz kötődnek, amikből az utolsó két órában van a legtöbb. Aki reggel lecsíp két órát, pont ezt vágja le.'},
-  {c:'--rem',tag:'REM',t:'Érzelmi feldolgozás',p:'REM alatt az emlékek megmaradnak, de a hozzájuk tapadó érzelmi töltet tompul. Ez az, amitől egy rossz nap másnapra elviselhetőbb. Alkohol után ez a szakasz sérül a legjobban.'},
-  {c:'--vein',tag:'Glymphatikus',t:'Agytisztítás',p:'A hulladékfehérjék — köztük az amiloid-béta és a tau — döntő része alvás alatt ürül ki, és a nyirokrendszeren jut a keringésbe. Tartós alváshiány mellett ezek felhalmozódnak.'},
-  {c:'--wake',tag:'Regeneráció',t:'Növekedési hormon',p:'A napi növekedésihormon-kibocsátás nagy része az éjszaka első mélyalvás-szakaszaihoz kötődik. Ez felelős a szövetjavításért, az izomregenerációért és a csontanyagcseréért. Ezért érzed a nehéz fizikai munka utáni napot sokkal rosszabbnak, ha keveset aludtál.'},
-  {c:'--sky',tag:'Következmény',t:'Figyelem és reakcióidő',p:'Négy-öt óra alvás után a reakcióidő és a figyelemtartás mérhetően romlik, de a saját teljesítményed megítélése nem — ezért érzed magad rendben, miközben nem vagy az. Gép mellett ez nem apróság.'}
-];
-$('#whyCards').innerHTML = WHY.map(w=>
-  `<div class="card" style="--c:${C(w.c)}"><span class="tag" style="--c:${C(w.c)}">${w.tag}</span>
-   <h3>${w.t}</h3><p>${w.p}</p></div>`).join('');
+const WHY_COLORS = ['--n3','--n2','--rem','--vein','--wake','--sky'];
+function renderWhyCards(){
+  $('#whyCards').innerHTML = T().why.map((w,i)=>{
+    const c = C(WHY_COLORS[i] || '--mint');
+    return `<div class="card" style="--c:${c}"><span class="tag" style="--c:${c}">${esc(w.tag)}</span>
+     <h3>${esc(w.t)}</h3><p>${w.p}</p></div>`;
+  }).join('');
+}
 const evDots = n => `<span class="ev">${[1,2,3].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</span>`;
 function renderTips(list, sel, col){
+  const L = T().tipLabels;
   $(sel).innerHTML = list.map((x,i)=>`
     <li style="--c:${C(col)}">
       <span class="num">${String(i+1).padStart(2,'0')}</span>
       <div>
-        <h4>${x.t}${x.ev!==undefined?evDots(x.ev):''}</h4>
-        <div class="blk"><span class="lbl">${x.l1||'Miért'}</span><span class="txt">${x.w}</span></div>
-        <div class="blk"><span class="lbl">${x.l2||'Hogyan'}</span><span class="txt">${x.h}</span></div>
+        <h4>${esc(x.t)}${x.ev!==undefined?evDots(x.ev):''}</h4>
+        <div class="blk"><span class="lbl">${esc(x.l1||L.why)}</span><span class="txt">${x.w}</span></div>
+        <div class="blk"><span class="lbl">${esc(x.l2||L.how)}</span><span class="txt">${x.h}</span></div>
       </div>
     </li>`).join('');
 }
-const IMMUNE = [
-{t:'Természetes ölősejtek — az első vonal', ev:3, l1:'Mérés', l2:'Mit jelent',
- w:'23 egészséges férfinál egyetlen éjszaka részleges alvásmegvonás után (hajnali 3 és 7 között nem aludtak) az NK-sejtek ölőképessége átlagosan a saját normál értékük <strong>72%-ára</strong> esett. Egy éjszaka rendes alvás után visszaállt. Egy 42 fős folytatásban nemcsak az NK-aktivitás esett, hanem az interleukin-2 termelés is — és az még egy éjszaka pihenés után is alacsony maradt.',
- h:'Az NK-sejtek azok, amik a vírussal fertőzött és a rendellenessé váló sejteket ismerik fel és ölik meg anélkül, hogy előbb meg kellene tanulniuk a kórokozót. Egy éjszaka nem tragédia, mert visszaáll — a lényeg, hogy ha heti négy éjszakán ismétlődik, a rendszer soha nem tér vissza a kiindulási szintre.'},
-{t:'Megfázás — ez nem korreláció, hanem kísérlet', ev:3, l1:'Mérés', l2:'Mit jelent',
- w:'164 egészséges önkéntes alvását egy héten át csuklóra kötött mozgásérzékelővel mérték. Utána mindenkinek ugyanannyi rhinovírust csepegtettek az orrába. Aki <strong>5 óránál kevesebbet</strong> aludt, 4,5-szer nagyobb eséllyel lett tényleg beteg, mint aki 7-nél többet. Aki 5–6 órát: 4,2-szer.',
- h:'Ez a legmeggyőzőbb formája ennek a bizonyítéknak, mert mindenki azonos vírusadagot kapott. Nem az a kérdés, hogy elkapod-e, hanem hogy a szervezeted meg tudja-e állítani, mielőtt tünetet ad.'},
-{t:'Védőoltás — az alvás dózisnövelőként', ev:3, l1:'Mérés', l2:'Mit jelent',
- w:'Egy 2023-as metaelemzés hét vizsgálat adatait összesítette. Akinél <em>műszerrel</em> mérték a rövid alvást az oltás körüli napokban, ott érdemi antitestcsökkenés jött ki (hatásméret 0,79). Férfiaknál a hatás nagy volt, nőknél nem érte el a szignifikanciát. Az önbevalláson alapuló adat nem adott szignifikáns eredményt — a mért alvás számít, nem amit gondolunk róla.',
- h:'Ha oltásra mész, a körülötte lévő pár éjszakán aludj rendesen. Ez az egyik legegyszerűbb és ingyenes dolog, amivel a saját oltásod hatékonyságát növelheted.'},
-{t:'Gyulladás — a lassú háttérfolyamat', ev:2, l1:'Mérés', l2:'Mit jelent',
- w:'Tartós alváshiány mellett emelkedik az IL-6, a TNF-alfa és a CRP szintje. Ezek a krónikus, alacsony szintű gyulladás jelzői — ugyanaz a gyulladás, ami a szív- és érrendszeri betegségek és az inzulinrezisztencia közös háttere.',
- h:'Ez nem érezhető tünet, hanem évek alatt gyűlő terhelés. Emiatt nem lehet megérezni, hogy elég-e az alvás.'}
-];
-const CANCER = [
-{t:'Amit a WHO ügynöksége kimondott', ev:2, l1:'Tény', l2:'Fenntartás',
- w:'A WHO alá tartozó IARC 2019-ben az <strong>éjszakai műszakot</strong> „valószínűleg emberre karcinogén" (2A) kategóriába sorolta. Definíció: legalább 3 óra munka éjfél és hajnali 5 között. Az alap: <em>elegendő</em> bizonyíték állatkísérletekben és <em>erős</em> mechanizmus-bizonyíték.',
- h:'A besorolás nem azt jelenti, hogy az éjszakai munka rákot okoz. A 2A azt jelenti: valószínű, de az emberi epidemiológiai bizonyíték <em>korlátozott</em>. Ugyanebben a kategóriában van például a vörös hús fogyasztása is.'},
-{t:'Az emberi adatok vegyesek', ev:2, l1:'Tény', l2:'Fenntartás',
- w:'Egy 26 vizsgálatot és 1,3 millió résztvevőt összesítő metaelemzés a 10 évnél <em>rövidebb</em> ideig éjszakázóknál 13%-kal magasabb emlőkarcinóma-kockázatot talált (RR 1,13). A 10 évnél hosszabb csoportnál az eredmény már nem lett szignifikáns. Egy 2024–2025-ös frissítés kohorszvizsgálatokban helyenként ellentétes irányt is talált.',
- h:'Ez a tipikus kép egy valós, de kicsi hatásnál, ahol a mérés zajos. Nem szabad se lesöpörni, se katasztrófaként kezelni.'},
-{t:'A feltételezett mechanizmus', ev:2, l1:'Tény', l2:'Fenntartás',
- w:'Négy szál fut össze: a mesterséges esti fény elnyomja a melatonint; a belső óra összezavarodik, és vele a sok ezer napi ritmusban működő gén; az NK-aktivitás csökken; és felborul a sejtosztódás napi ritmusa, ami a DNS-hibajavítás időzítését is érinti.',
- h:'Laborban erős, emberben nehezen mérhető. Azt viszont megmutatja, hol lehet beavatkozni: a fényen és az étkezés időzítésén keresztül.'},
-{t:'Amit ebből érdemes elvinni', ev:3, l1:'Tény', l2:'Fenntartás',
- w:'Nem az, hogy „a rossz alvás rákot okoz". Hanem az, hogy az alvás és a belső óra az immunrendszer működésének egyik alapfeltétele, ez kísérletesen mérhető, és a hatás <strong>visszafordítható</strong>: az NK-aktivitás egy éjszaka alvás után visszaáll, az oltásválasz javítható, a gyulladásjelzők csökkennek.',
- h:'A helyes olvasat nem félelem, hanem az, hogy ez az egyik legjobban megtérülő beavatkozás, mert ingyen van és minden más rendszerre is hat.'}
-];
-const HARM = [
-{t:'Egy éjszaka után', ev:3, l1:'Mi romlik', l2:'Mit tegyél',
- w:'A reakcióidő és a figyelemtartás mérhetően romlik, a hangulat labilisabb, a fájdalomérzékenység nő, az NK-aktivitás lecsökken. A legalattomosabb: a <em>saját</em> teljesítményed megítélése nem romlik ezzel együtt.',
- h:'Ne hozz aznap nagy döntést, és gép mellett számolj rá. Ha lehet, 20 perces korai délutáni szunyókálás — de 15 óra után már ne. Ne próbáld kávéval megoldani: az elrejti a jelzést, nem pótolja az alvást.'},
-{t:'Egy-két hét után', ev:2, l1:'Mi romlik', l2:'Mit tegyél',
- w:'Gyakoribbá válnak a felső légúti fertőzések, gyengül az oltásokra adott válasz, romlik a glükóztolerancia, és az étvágyszabályozás is elcsúszik: nő a ghrelin, csökken a leptin. A mélyalvás rovására eső alváshiány a növekedési hormont is visszafogja.',
- h:'Itt már nem elég egy jó éjszaka. Vissza kell állni a fix ébredéshez és a reggeli fényhez, és ki kell húzni két hetet.'},
-{t:'Hónapok, évek alatt', ev:2, l1:'Mi romlik', l2:'Mit tegyél',
- w:'Emelkedett szív- és érrendszeri kockázat, inzulinrezisztencia felé mutató elmozdulás, tartósan magasabb gyulladásjelzők, és a hulladékfehérjék felhalmozódása az agyban. Ezek nem hirtelen jelennek meg, és nem is érződnek időben.',
- h:'Ha ide jutottál, a legfontosabb kizárni az alvási apnoét, mert az önmagában is elég ehhez a képhez, és teljesen máshogy kezelendő. Utána CBT-I, nem altató.'}
-];
-renderTips(IMMUNE,'#immuneList','--mint');
-renderTips(CANCER,'#cancerList','--rem');
-renderTips(HARM,'#harmList','--wake');
-const CORE = [
-{t:'Fix ébredési idő, hétvégén is',
- w:'Az ébredés horgonyozza le a belső órát, nem a lefekvés. Az óra saját ciklusa valamivel hosszabb 24 óránál, ezért naponta újra kell állítani. Ha hétvégén két órát csúsztatsz, az az órádnak annyi, mintha átrepültél volna két időzónát: hétfőn szociális jetlaggel indulsz.',
- h:'Válaszd a legkorábbi hétköznapi ébredést, és tartsd hétvégén is fél órán belül. Ha kevés volt az alvás, inkább korábban feküdj le, ne később kelj.'},
-{t:'Az ágy csak alvásra — ingerkontroll',
- w:'Ha az ágyban forgolódsz, aggódsz vagy telefonozol, az agy megtanulja az „ágy = éberség" társítást. Ez feltételes reflex, pár hét alatt kialakul. Az ingerkontroll ezt írja felül, és a CBT-I egyik legerősebb önálló hatóanyaga.',
- h:'Ha kb. 20 perc után nem alszol el, kelj ki. Ne nézd az órát, becsüld. Menj át másik helyiségbe, félhomály, olvass valami unalmasat. Csak akkor menj vissza, ha tényleg álmos vagy — és ismételd akárhányszor.'},
-{t:'Alvásmegszorítás',
- w:'Ha kilenc órát fekszel az ágyban, hogy hatot aludj, az a három ébren töltött óra az ágyat ébrenlét-helyszínné teszi, és széttördeli az alvást. Ha leszűkíted az ágyban töltött időt a tényleges alvásidőre, nő az alvásnyomás, és az alvás összetömörödik.',
- h:'Egy hétig vezess alvásnaplót. Az ágyban töltött időt állítsd be az átlagos tényleges alvásidőre, de sose menj 5,5 óra alá. Az ébredés fix, a lefekvést told későbbre. Ha egy héten át az alváshatékonyság 90% fölött van, told ki 15 perccel.'},
-{t:'Reggeli fény, ébredés után hamar',
- w:'A retinában külön érzékelősejtek ülnek, amik közvetlenül a belső órának jelentenek. A reggeli fény leállítja a maradék melatonint, felviszi a kortizolt a normális ébredési csúcsra, és előre tolja az órát. A hatás nem azonnali: este jelentkezik.',
- h:'10–20 perc kint, borús időben inkább 30–40. Ablakon át a fény töredéke jut át, tehát tényleg menj ki. Napszemüveg nélkül, de a napba ne nézz.'},
-{t:'Hűvös hálószoba, 16–19 °C',
- w:'Az elalváshoz a maghőmérsékletnek kb. 1 °C-ot esnie kell, és ez úgy megy, hogy a kéz és a láb erei kitágulnak, és leadják a hőt. Túl meleg szobában nincs hova leadni.',
- h:'16–19 °C, és inkább takaróval szabályozz. Ha fázik a lábad, húzz zoknit — paradox módon segít, mert így tágulnak az erek és jobban ürül a hő.'}
-];
-const EXTRA = [
-{t:'Koffein: utolsó adag 8–10 órával lefekvés előtt',
- w:'A koffein az adenozin receptorait blokkolja. Nem tünteti el az adenozint, csak elrejti a jelét — és amikor lebomlik, a felgyűlt adenozin egyszerre üt be. A felezési idő 5–6 óra: a 15 órakor ivott kávé fele még 21-kor is benned van. A leggyakoribb következmény nem az elalvás, hanem hogy kevesebb mélyalvást kapsz.',
- h:'Kb. 10 órával lefekvés előtt húzd meg a vonalat. Figyelj a rejtett forrásokra: energiaital, zöld tea, étcsokoládé, egyes fájdalomcsillapítók.'},
-{t:'Az alkohol nem alvás',
- w:'Nyugtató hatású, ezért gyorsabban elalszol — de az így kapott állapot nem természetes alvás. Elnyomja a REM-et az első félidőben, és amikor lebomlik, felaprózott, felszínes második félidő jön sok mikroébredéssel.',
- h:'Ha iszol, hagyj legalább 3–4 órát lefekvésig, és igyál mellé vizet. Próbálj két hetet nélküle, és hasonlítsd össze.'},
-{t:'Meleg zuhany vagy fürdő 1–2 órával lefekvés előtt',
- w:'Nem a felmelegedés a lényeg, hanem ami utána jön: a meleg víz kitágítja a bőr ereit, és kilépve a test hatékonyabban adja le a hőt — így a maghő gyorsabban esik.',
- h:'10–15 perc meleg, nem forró víz. Kádfürdő, zuhany, sőt a lábfürdő is működik.'},
-{t:'Este halvány, alacsonyan lévő fény',
- w:'A retina óra-érzékelői a felülről jövő, kékes fényre reagálnak a legerősebben. Az esti erős mennyezetvilágítás azt üzeni, hogy még nappal van, és késlelteti a melatonin megindulását.',
- h:'Napnyugta után kapcsold le a mennyezeti lámpát, használj szemmagasság alatti, meleg fényű lámpákat. A nagyobb tétel a szoba fénye, nem a kijelző.'},
-{t:'Mozgás igen, de ne közvetlenül lefekvés előtt',
- w:'A rendszeres napközbeni mozgás mélyíti a mélyalvást. Az intenzív edzés viszont felviszi a maghőmérsékletet, amit épp csökkenteni kellene, és megemeli a kortizolszintet, aminek este a mélypontján kellene lennie.',
- h:'Intenzív edzés legkésőbb 2–3 órával lefekvés előtt. Késő este már csak nyújtás, séta, könnyű jóga.'},
-{t:'Nagy vacsora és sok folyadék lefekvés előtt',
- w:'Az emésztés felviszi a testhőt és az anyagcserét, pont amikor a maghőnek esnie kellene. Lefekvés után a reflux is felébreszthet.',
- h:'Az utolsó nagyobb étkezés 3 órával lefekvés előtt. A folyadékot húzd előre a nap első felébe.'},
-{t:'Írd ki, ami pörög',
- w:'A fejben tartott befejezetlen feladatok fenntartják az éberséget: az agy nem engedi el azt, aminek nincs biztos helye.',
- h:'Lefekvés előtt 10 perc: holnapi teendők listája papírra, ne telefonba.'}
-];
-renderTips(CORE,'#tipsCore','--mint');
-renderTips(EXTRA,'#tipsExtra','--n2');
-const TEA = [
-{t:'Kamilla — ezzel kezdd', ev:2, l1:'Miért', l2:'Hogyan',
- w:'A kamillában lévő apigenin ugyanazokhoz a GABA-A receptorokhoz kötődik, amiken a nyugtatók is hatnak, csak nagyon halványan. Egy randomizált vizsgálatban két hét kamillatea mérhetően javította az alvás minőségét. A rituálé maga is jelzés: a meleg csésze, a félhomály és a lassulás együtt tanítja az agyat.',
- h:'Egy csésze, 60–90 perccel lefekvés előtt. Kb. 90 fokos vízzel, és tedd rá a tetejét 5–7 percre — így az illóolajok a teában maradnak. Cukrot ne, legfeljebb kevés mézet.'},
-{t:'Macskagyökér (valeriána) — erősebb, de lassabb', ev:2, l1:'Miért', l2:'Hogyan',
- w:'A valerénsav növeli a GABA elérhetőségét. Egy 2024-es áttekintés szerint a valeriána, a komló és a melatonin azok, amiknél a legtöbb támogató adat van. Cserébe 2–4 hét rendszeres használat kell hozzá.',
- h:'Este egy csésze, vagy komlóval keverve. Ha nyugtatót, antidepresszánst vagy alkoholt is használsz, előbb beszéld meg gyógyszerésszel.'},
-{t:'Golgotavirág és citromfű', ev:1, l1:'Miért', l2:'Hogyan',
- w:'A golgotavirág szorongáscsökkentése a kamilláéval egy szinten van, de kis vizsgálatokban kevesebb éjszakai felébredést is hozott. A citromfű a saját GABA-dat védi a lebomlástól.',
- h:'Jó választás, ha nem az elalvás, hanem a hajnali 3-kor felébredés a problémád.'},
-{t:'Meggylé (Montmorency) — óvatos igen', ev:1, l1:'Miért', l2:'Hogyan',
- w:'Van benne természetes melatonin, de kevés. A valószínűbb út a gyulladáscsökkentő antocianinok. Egy 2023-as áttekintés szerint javítja az alváshatékonyságot — de a vizsgálatok kicsik és jó részük ipari finanszírozású.',
- h:'Kb. 240 ml. Hátulütő a cukortartalom, cukorbetegségnél kifejezetten nem.'},
-{t:'Amit este kerülj', ev:3, l1:'Miért', l2:'Hogyan',
- w:'A zöld és a fekete tea is koffeint tartalmaz — a zöld kevesebbet, de nem nullát, és a felezési idő ugyanaz.',
- h:'Napnyugta után csak koffeinmentes gyógytea, mérsékelt mennyiség.'}
-];
-const FOOD = [
-{t:'A nem várt csavar: a triptofán a REGGELIN számít', ev:2, l1:'Miért', l2:'Hogyan',
- w:'A melatonin triptofánból készül, szerotoninon keresztül. Japán vizsgálatok szerint a triptofánban gazdag <em>reggeli</em> plusz reggeli erős fény plusz este halvány fény emelte meg mérhetően az esti melatoninszintet. A vacsorán elfogyasztott triptofán nem mutatott ilyen hatást: a szintézishez idő és nappali fény kell.',
- h:'Reggelire: tojás, túró vagy joghurt, zabkása, tökmag, sajt, banán. És utána menj ki a fénybe 10–20 percre.'},
-{t:'Az utolsó nagy étkezés 3 órával lefekvés előtt', ev:2, l1:'Miért', l2:'Hogyan',
- w:'Az emésztés felviszi a testhőmérsékletet és az anyagcserét, épp amikor a maghőnek esnie kellene. Fekve a gyomorsav is könnyebben visszafolyik.',
- h:'22:30-as lefekvésnél a vacsora 19:00 körül. Zsíros, nagyon fűszeres vagy nagy proteinadagos vacsorát este ne.'},
-{t:'Ha éhesen nem tudsz aludni', ev:1, l1:'Miért', l2:'Hogyan',
- w:'Az üres gyomor is ébresztő jel. Emellett a triptofán akkor jut be legjobban az agyba, ha kevés szénhidrát is van mellette.',
- h:'Fél szelet teljes kiőrlésű kenyér, egy kis natúr joghurt, pár szem mandula vagy egy kis banán. Kétszáz kalória alatt.'},
-{t:'Amit az étrendből érdemes rendben tartani', ev:2, l1:'Miért', l2:'Hogyan',
- w:'A magnézium, a B6-vitamin és a cink mind kellenek a szerotonin–melatonin úthoz. Ha az étrendből megvannak, nincs miért kapszulázni.',
- h:'Magnézium: tökmag, mandula, spenót, fekete bab, étcsokoládé. B6: hal, csirke, burgonya, banán. Cink: hús, tökmag, hüvelyesek.'}
-];
-const SUPP = [
-{t:'Magnézium', ev:2, l1:'Bizonyíték', l2:'Hogyan',
- w:'Támogatja a GABA-működést. A bizonyíték közepes: a vizsgálatok kicsik, és a hatás főleg akkor jön, ha eleve hiány van.',
- h:'200–400 mg elemi magnézium, 30–60 perccel lefekvés előtt. Glicinát vagy citrát — az oxid rosszul szívódik fel. 350 mg fölött hasmenés lehet.'},
-{t:'Glicin', ev:2, l1:'Bizonyíték', l2:'Hogyan',
- w:'A glicin nem nyugtat, hanem <em>hűt</em>: kitágítja a kéz és a láb ereit, így a maghőmérséklet gyorsabban esik. Ugyanazt csinálja, mint a meleg fürdő, csak belülről. Az őszinte rész: kevés és kicsi vizsgálat van, több közülük glicint gyártó cégtől — viszont mellékhatást nem találtak.',
- h:'3 g, 30–60 perccel lefekvés előtt. Nem megadózis: az étrendből eleve kb. 2 g jön naponta. Ha 1–2 hét után semmit nem érzel, hagyd abba.'},
-{t:'L-teanin', ev:2, l1:'Bizonyíték', l2:'Hogyan',
- w:'A zöld tea nyugtató aminosava. Nem álmosít, hanem leveszi az élt a pörgésről. Már az első éjszakán érezhető.',
- h:'200 mg lefekvés előtt. Jól megvan magnéziummal együtt.'},
-{t:'Melatonin — a legerősebb bizonyíték, a legtöbb félreértéssel', ev:3, l1:'Bizonyíték', l2:'Hogyan',
- w:'Nem altató, hanem óraállító. Ezért az <strong>időzítés fontosabb, mint a dózis</strong>. Amire jó: időzónaváltás, műszakváltás, elcsúszott ritmus visszatolása. Amire kevésbé: krónikus álmatlanság.',
- h:'0,3–0,5 mg, 1–3 órával lefekvés ELŐTT. A bolti 3–10 mg-os tabletta durván túldozírozott. Ha csak nagy van, törd el. Ne szedd hónapokon át.'},
-{t:'D-vitamin — mérés nélkül ne', ev:1, l1:'Bizonyíték', l2:'Hogyan',
- w:'A hiány együtt jár rosszabb alvással, de ez nem jelenti, hogy a pótlás mindenkinél javítja. Ez az egyetlen a listán, aminél a túlzás valódi kárt okoz.',
- h:'Kérj vérvételt (25-OH-D), és annak alapján állítsd be az adagot. Reggel vagy délben vedd be, étkezés mellett.'},
-{t:'Amit inkább ne', ev:1, l1:'Bizonyíték', l2:'Hogyan',
- w:'A nagy dózisú B6 hosszú távon idegkárosodást okozhat. Az ashwagandha májproblémák miatt vitatott. A vény nélküli antihisztamin alapú altatók gyorsan tolerálódnak.',
- h:'Ha három hónap után is minden éjszakához kell valami, az orvosi kérdés. Az alvási apnoe máshogy kezelendő.'}
-];
-renderTips(TEA,'#teaList','--rose');
-renderTips(FOOD,'#foodList','--wake');
-renderTips(SUPP,'#suppList','--mint');
-const DAYPLAN = [
-  ['ébredés','<b>Fény, azonnal.</b> 10–20 perc kint. Ha van, D-vitamin étkezés mellé.'],
-  ['+30 perc','<b>Triptofános reggeli:</b> tojás, túró, zab, tökmag.'],
-  ['−10 óra','<b>Utolsó koffein.</b> 22:30-as lefekvésnél 12:30 körül.'],
-  ['−7,5 óra','<b>Edzésablak</b> nyílik: 15 és 19 között a legjobb az izomerő.'],
-  ['−3,5 óra','<b>Utolsó nagy étkezés.</b> Ne zsíros, ne nagy proteinadag.'],
-  ['−2,5 óra','<b>Intenzív edzés vége.</b> Innentől csak séta, nyújtás.'],
-  ['−1,5 óra','<b>Fények le.</b> Mennyezeti lámpa ki, meleg fényű állólámpa. Tea föl.'],
-  ['−1 óra','<b>Kiegészítők:</b> magnézium és glicin. Melatonint korábban.'],
-  ['−1 óra','<b>Meleg zuhany</b> 10–15 perc.'],
-  ['−30 perc','<b>Kiírás</b> papírra, utána relaxáció hanggal.'],
-  ['lefekvés','<b>Hűvös, sötét, néma szoba</b>, 16–19 °C.']
-];
-$('#dayPlan').innerHTML = DAYPLAN.map(([t,d])=>`<li><span class="t">${t}</span><span class="d">${d}</span></li>`).join('');
+function renderSteps(sel, list){
+  $(sel).innerHTML = list.map(s=>`<li><b>${esc(s.t)}</b><p>${s.p}</p></li>`).join('');
+}
+function renderDayPlan(){
+  $('#dayPlan').innerHTML = T().dayplan.map(([t,d])=>
+    `<li><span class="t">${esc(t)}</span><span class="d">${d}</span></li>`).join('');
+}
+function renderContent(){
+  const D = T();
+  renderSteps('#hormoneSteps', D.hormoneSteps);
+  renderSteps('#cleanSteps', D.cleanSteps);
+  renderWaveCards();
+  renderWhyCards();
+  renderTips(D.immune,'#immuneList','--mint');
+  renderTips(D.cancer,'#cancerList','--rem');
+  renderTips(D.harm,'#harmList','--wake');
+  renderTips(D.core,'#tipsCore','--mint');
+  renderTips(D.extra,'#tipsExtra','--n2');
+  renderTips(D.tea,'#teaList','--rose');
+  renderTips(D.food,'#foodList','--wake');
+  renderTips(D.supp,'#suppList','--mint');
+  renderDayPlan();
+}
 
 /* ================== 4-7-8 LÉGZÉS ================== */
-const PHASES = [
-  {label:'Belélegzés orron át', s:4, scale:1, say:'Lélegezz be orron át.'},
-  {label:'Tartsd bent',         s:7, scale:1, say:'Tartsd bent.'},
-  {label:'Fújd ki lassan',      s:8, scale:.55, say:'Fújd ki lassan, szájon át.'}
-];
+const PHASES = [{s:4, scale:1},{s:7, scale:1},{s:8, scale:.55}];
 let bIdx=0, bLeft=0, bRound=0, bTimer=null;
 function bTick(){
   bLeft--;
@@ -1642,13 +1645,13 @@ function bTick(){
     bIdx=(bIdx+1)%3;
     if(bIdx===0) bRound++;
     bLeft = PHASES[bIdx].s;
-    const p = PHASES[bIdx];
+    const p = PHASES[bIdx], txt = T().breath[bIdx];
     $('#bCircle').style.transition = `transform ${p.s}s ${bIdx===1?'linear':'cubic-bezier(.4,0,.4,1)'}`;
     $('#bCircle').style.transform = `scale(${p.scale})`;
-    $('#bPhase').textContent = p.label;
-    TTS.say(p.say);
+    $('#bPhase').textContent = txt.label;
+    TTS.say(txt.say);
   }
-  $('#bHint').textContent = `${bLeft} mp · kör ${bRound}`;
+  $('#bHint').textContent = `${bLeft} ${tr('ui.secShort')} · ${tr('ui.breathRound')} ${bRound}`;
 }
 $('#bStart').addEventListener('click', ()=>{
   if(bTimer) return;
@@ -1659,8 +1662,8 @@ $('#bStop').addEventListener('click', ()=>{
   clearInterval(bTimer); bTimer=null; TTS.stop();
   $('#bCircle').style.transition='transform .8s ease';
   $('#bCircle').style.transform='scale(.55)';
-  $('#bPhase').textContent='Kész.';
-  $('#bHint').textContent = `— · ${bRound} kör megvolt`;
+  $('#bPhase').textContent = tr('ui.breathDone');
+  $('#bHint').textContent = `— · ${bRound} ${tr('ui.breathRounds')}`;
 });
 
 /* ====== FOLYTONOS TESTALAK ====== */
@@ -1789,54 +1792,45 @@ function segUpdate(sel,idx,frac){
 }
 
 /* --------- IZOMLAZÍTÁS --------- */
-const PMR = [
-  ['labfej','Lábfej és lábujjak','Görbítsd be a lábujjaidat, feszítsd meg a talpad boltozatát.'],
-  ['labszar','Vádli','Húzd a lábfejed magad felé, feszüljön meg a vádlid.'],
-  ['comb','Comb','Nyomd a térdedet lefelé, feszítsd meg a combizmot.'],
-  ['csipo','Csípő és fenék','Szorítsd össze a fenékizmokat.'],
-  ['has','Has','Húzd be a hasfalat, mintha ütést várnál.'],
-  ['mellkas','Mellkas és hát','Vegyél mély levegőt, és tartsd bent, amíg feszül a mellkas.'],
-  ['kez','Kéz','Szorítsd ökölbe mindkét kezed, olyan erősen, amennyire kényelmes.'],
-  ['kar','Kar','Feszítsd meg az alkart és a felkart, mintha húznál valamit.'],
-  ['vall','Váll és nyak','Húzd fel a vállad a füledhez, tartsd ott.'],
-  ['arc','Arc','Szorítsd össze az állkapcsod, hunyd össze a szemed, ráncold a homlokod.']
-];
-segbar('#pmrSeg', PMR.length);
+const PMR = () => T().pmr.steps;
+segbar('#pmrSeg', PMR().length);
 let pmrI=0, pmrPhase='tense', pmrLeft=5, pmrTimer=null, pmrSpoken='';
 const pmrRoot = $('#bodyHolder');
 function pmrPaint(){
-  const [key,title,how] = PMR[pmrI];
-  paintBody(pmrRoot, key, PMR.slice(0,pmrI).map(x=>x[0]));
+  const P = PMR(), M = T().pmr;
+  const [key,title,how] = P[pmrI];
+  paintBody(pmrRoot, key, P.slice(0,pmrI).map(x=>x[0]));
   const yr = ZY[key];
   setRing(pmrRoot, true, yr[0]+(yr[1]-yr[0])*.5);
   $('#pmrTitle').textContent = title;
   $('#pmrCd').textContent = String(pmrLeft).padStart(2,'0');
   $('#pmrCd').style.color = pmrPhase==='tense' ? C('--rem') : C('--mint');
-  $('#pmrRead').textContent = `${pmrI+1} / ${PMR.length}`;
+  $('#pmrRead').textContent = `${pmrI+1} / ${P.length}`;
   $('#pmrText').innerHTML = pmrPhase==='tense'
-    ? `<strong style="color:${C('--rem')}">FESZÍTSD.</strong> ${how}`
-    : `<strong style="color:${C('--mint')}">ENGEDD EL.</strong> Csak figyeld, hogy ereszt ki a feszülés, és süllyed bele az ágyba.`;
+    ? `<strong style="color:${C('--rem')}">${esc(M.tense)}</strong> ${esc(how)}`
+    : `<strong style="color:${C('--mint')}">${esc(M.release)}</strong> ${esc(M.releaseTxt)}`;
   const key2 = pmrI+'-'+pmrPhase;
   if(key2 !== pmrSpoken){
     pmrSpoken = key2;
-    TTS.say(pmrPhase==='tense' ? `${title}. Feszítsd. ${how}` : 'Engedd el. Figyeld, hogy ereszt ki a feszülés.');
+    TTS.say(pmrPhase==='tense' ? fill(M.sayTense,{title,how}) : M.sayRelease);
   }
   const frac = pmrPhase==='tense' ? (5-pmrLeft)/30 : (5+(10-pmrLeft))/15;
   segUpdate('#pmrSeg', pmrI, Math.max(0,Math.min(1,frac)));
 }
 function pmrTick(){
+  const P = PMR(), M = T().pmr;
   pmrLeft--;
   if(pmrLeft<=0){
     if(pmrPhase==='tense'){ pmrPhase='relax'; pmrLeft=10; }
     else {
       pmrI++;
-      if(pmrI>=PMR.length){
-        clearInterval(pmrTimer); pmrTimer=null; pmrI=PMR.length-1;
-        paintBody(pmrRoot,null,PMR.map(x=>x[0])); setRing(pmrRoot,false,0);
-        $('#pmrTitle').textContent='Kész.'; $('#pmrCd').textContent='00';
-        $('#pmrText').textContent='Feküdj még egy percet mozdulatlanul, mielőtt bármit csinálnál.';
-        TTS.say('Kész. Feküdj még egy percet mozdulatlanul.');
-        segUpdate('#pmrSeg',PMR.length,0);
+      if(pmrI>=P.length){
+        clearInterval(pmrTimer); pmrTimer=null; pmrI=P.length-1;
+        paintBody(pmrRoot,null,P.map(x=>x[0])); setRing(pmrRoot,false,0);
+        $('#pmrTitle').textContent=M.doneTitle; $('#pmrCd').textContent='00';
+        $('#pmrText').textContent=M.doneTxt;
+        TTS.say(M.sayDone);
+        segUpdate('#pmrSeg',P.length,0);
         return;
       }
       pmrPhase='tense'; pmrLeft=5;
@@ -1851,63 +1845,55 @@ $('#pmrStart').addEventListener('click', ()=>{
 });
 $('#pmrStop').addEventListener('click', ()=>{
   clearInterval(pmrTimer); pmrTimer=null; TTS.stop();
-  $('#pmrText').textContent='Megállítva. Az Indítás újrakezdi az elejéről.';
+  $('#pmrText').textContent = tr('pmr.stopped');
 });
 
 /* --------- TESTPÁSZTÁZÁS --------- */
-const SCAN = [
-  ['labfej','Lábfej','Kezdd itt. Meleg? Hűvös? Bizsergés? Semmi? Mindegyik jó válasz.'],
-  ['labszar','Vádli és lábszár','Engedd, hogy a lábad teljes súlyával belesüllyedjen az ágyba.'],
-  ['comb','Comb','A nagy izmok itt tartják a legtöbb maradék feszültséget.'],
-  ['csipo','Csípő','Figyeld, hogy hol nyomódik a test az ágyhoz.'],
-  ['has','Has','Kövesd, ahogy a hasfal emelkedik és süllyed a légzéssel.'],
-  ['mellkas','Mellkas és hát','Ne szabályozd a légzést, csak nézd, ahogy megy magától.'],
-  ['kez','Kéz','A tenyér és az ujjak — itt szokott a legtöbb bizsergés lenni.'],
-  ['kar','Kar','Váll felé haladva engedj el minden maradék tartást.'],
-  ['vall','Váll és nyak','A nap feszültsége legtöbbször itt gyűlik össze.'],
-  ['arc','Arc és homlok','Állkapocs, szemkörnyék, homlok. Engedd el a rágóizmokat.']
-];
-segbar('#scanSeg', SCAN.length);
+const SCAN = () => T().scan.steps;
+segbar('#scanSeg', SCAN().length);
 let scanTotal=300, scanLeft=300, scanTimer=null, scanRAF=null, scanSpoken=-1;
 const scanRoot = $('#scanHolder');
 const fmt = s => String(Math.floor(Math.max(0,s)/60)).padStart(2,'0')+':'+String(Math.max(0,s)%60).padStart(2,'0');
 function scanState(){
-  const per = scanTotal/SCAN.length, done = scanTotal-scanLeft;
-  const idx = Math.min(SCAN.length-1, Math.floor(done/per));
+  const n = SCAN().length;
+  const per = scanTotal/n, done = scanTotal-scanLeft;
+  const idx = Math.min(n-1, Math.floor(done/per));
   return {per,done,idx,inPart:done-idx*per};
 }
 function scanPaint(){
+  const S = SCAN();
   const {per,done,idx,inPart} = scanState();
-  paintBody(scanRoot, SCAN[idx][0], SCAN.slice(0,idx).map(x=>x[0]));
-  $('#scanTitle').textContent = SCAN[idx][1];
+  paintBody(scanRoot, S[idx][0], S.slice(0,idx).map(x=>x[0]));
+  $('#scanTitle').textContent = S[idx][1];
   $('#scanCd').textContent = fmt(Math.ceil(per-inPart));
-  $('#scanOf').textContent = `${idx+1} / ${SCAN.length}`;
-  $('#scanText').textContent = SCAN[idx][2];
+  $('#scanOf').textContent = `${idx+1} / ${S.length}`;
+  $('#scanText').textContent = S[idx][2];
   $('#scanBar').style.width = (done/scanTotal*100).toFixed(2)+'%';
   $('#scanRead').textContent = fmt(scanLeft);
   segUpdate('#scanSeg', idx, inPart/per);
-  if(idx !== scanSpoken){ scanSpoken = idx; TTS.say(`${SCAN[idx][1]}. ${SCAN[idx][2]}`); }
+  if(idx !== scanSpoken){ scanSpoken = idx; TTS.say(`${S[idx][1]}. ${S[idx][2]}`); }
 }
 function ringFrame(){
   const {per,idx,inPart} = scanState();
-  const yr = ZY[SCAN[idx][0]];
+  const yr = ZY[SCAN()[idx][0]];
   const smooth = Math.min(1, Math.max(0, (inPart + (performance.now()/1000 % 1))/per));
   setRing(scanRoot, true, yr[1]-(yr[1]-yr[0])*smooth);
   scanRAF = requestAnimationFrame(ringFrame);
 }
 function setScan(sec){
+  const S = SCAN();
   clearInterval(scanTimer); scanTimer=null;
   if(scanRAF){ cancelAnimationFrame(scanRAF); scanRAF=null; }
   scanTotal=sec; scanLeft=sec; scanSpoken=-1;
   $('#scan5').setAttribute('aria-pressed', String(sec===300));
   $('#scan10').setAttribute('aria-pressed', String(sec===600));
   $('#scanRead').textContent = fmt(sec);
-  $('#scanCd').textContent = fmt(Math.round(sec/SCAN.length));
-  $('#scanOf').textContent = `1 / ${SCAN.length}`;
-  $('#scanTitle').textContent = SCAN[0][1];
-  $('#scanText').textContent = 'Kész az indításra. ' + Math.round(sec/SCAN.length) + ' másodperc jut egy testrészre.';
+  $('#scanCd').textContent = fmt(Math.round(sec/S.length));
+  $('#scanOf').textContent = `1 / ${S.length}`;
+  $('#scanTitle').textContent = S[0][1];
+  $('#scanText').textContent = fill(tr('scan.ready'), {n: Math.round(sec/S.length)});
   $('#scanBar').style.width='0%';
-  paintBody(scanRoot, SCAN[0][0], []); setRing(scanRoot,false,0);
+  paintBody(scanRoot, S[0][0], []); setRing(scanRoot,false,0);
   segUpdate('#scanSeg',0,0);
 }
 $('#scan5').addEventListener('click', ()=>setScan(300));
@@ -1916,20 +1902,21 @@ $('#scanStart').addEventListener('click', ()=>{
   if(scanTimer) return;
   if(scanLeft<=0) scanLeft = scanTotal;
   scanSpoken = -1;
-  TTS.say('Feküdj kényelmesen, csukd be a szemed, és figyelj oda arra, amit mondok.');
+  TTS.say(tr('scan.sayIntro'));
   setTimeout(scanPaint, TTS.on ? 4200 : 0);
   if(!REDUCED && !scanRAF) scanRAF = requestAnimationFrame(ringFrame);
   scanTimer = setInterval(()=>{
     scanLeft--;
     if(scanLeft<=0){
+      const S = SCAN();
       clearInterval(scanTimer); scanTimer=null;
       if(scanRAF){ cancelAnimationFrame(scanRAF); scanRAF=null; }
-      paintBody(scanRoot,null,SCAN.map(x=>x[0])); setRing(scanRoot,false,0);
-      $('#scanTitle').textContent='Kész.'; $('#scanCd').textContent='00:00';
-      $('#scanText').textContent='Ha még ébren vagy, maradj így, és hagyd, hogy jöjjön az álom magától.';
-      TTS.say('Kész. Ha még ébren vagy, maradj így, és hagyd, hogy jöjjön az álom magától.');
+      paintBody(scanRoot,null,S.map(x=>x[0])); setRing(scanRoot,false,0);
+      $('#scanTitle').textContent = tr('scan.doneTitle'); $('#scanCd').textContent='00:00';
+      $('#scanText').textContent = tr('scan.doneTxt');
+      TTS.say(tr('scan.sayDone'));
       $('#scanBar').style.width='100%'; $('#scanRead').textContent='00:00';
-      segUpdate('#scanSeg',SCAN.length,0);
+      segUpdate('#scanSeg',S.length,0);
       return;
     }
     scanPaint();
@@ -1938,7 +1925,7 @@ $('#scanStart').addEventListener('click', ()=>{
 $('#scanStop').addEventListener('click', ()=>{
   clearInterval(scanTimer); scanTimer=null; TTS.stop();
   if(scanRAF){ cancelAnimationFrame(scanRAF); scanRAF=null; }
-  $('#scanText').textContent='Megállítva. Az Indítás onnan folytatja, ahol abbahagytad.';
+  $('#scanText').textContent = tr('scan.stopped');
 });
 
 $$('.tabbtn').forEach(b=>{
@@ -1954,14 +1941,45 @@ function redraw(){
   drawMindMap(); drawMapCards(); layoutMap();
   drawHypnogram(); hypPaint(); drawWaveChart(); drawCirc();
 }
-redraw();
-updSpeed(); updEegLabel();
-pmrPaint(); setScan(300);
+/* Minden felirat egy helyen: nyelvváltáskor ez fut újra. */
+function applyLang(){
+  const D = T();
+  document.documentElement.lang = D.htmlLang;
+  document.title = D.ui.title;
+
+  $$('[data-i18n]').forEach(e=>{ e.textContent = tr(e.dataset.i18n); });
+  $$('[data-i18n-html]').forEach(e=>{ e.innerHTML = tr(e.dataset.i18nHtml); });
+  $$('[data-i18n-aria]').forEach(e=>{ e.setAttribute('aria-label', tr(e.dataset.i18nAria)); });
+
+  buildLangSel();
+  buildMenu();
+  renderContent();
+
+  $('#hypStepUnit').textContent = tr('ui.cycStepUnit');
+  $('#eegWinUnit').textContent  = tr('eeg.winUnit');
+  $('#hypPlay').textContent = hypRAF ? tr('ui.cycPause') : tr('ui.cycPlay');
+  $('#circPlay').textContent = circRAF ? tr('ui.circPause') : tr('ui.circPlay');
+  menuBtn.setAttribute('aria-label', document.body.classList.contains('nav-open') ? tr('ui.menuClose') : tr('ui.menuOpen'));
+
+  TTS.set(TTS.on); TTS.pick();
+  paintSleepLabels();
+  redraw();
+  updSpeed(); updEegLabel();
+  segbar('#pmrSeg', PMR().length); pmrI = Math.min(pmrI, PMR().length-1); pmrSpoken=''; pmrPaint();
+  segbar('#scanSeg', SCAN().length); setScan(scanTotal);
+  paintCirc();
+}
+setNav(!isNarrow());
+applyLang();
 if(document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
-let rt;
+let rt, lastNarrow = isNarrow();
 window.addEventListener('resize', ()=>{
   clearTimeout(rt);
-  rt = setTimeout(()=>{ layoutMap(); if(brainRAF) fitCanvas(); if(eegRAF) fitEeg(); },140);
+  rt = setTimeout(()=>{
+    const n = isNarrow();
+    if(n !== lastNarrow){ lastNarrow = n; setNav(!n); }
+    layoutMap(); if(brainRAF) fitCanvas(); if(eegRAF) fitEeg();
+  },140);
 });
 window.addEventListener('beforeunload', ()=>TTS.stop());
 </script>
