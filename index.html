@@ -1100,29 +1100,30 @@ const CV = [79,224,168];    // véna
 const CL = [255,127,176];   // nyirok
 const CW = [196,42,79];     // hulladék (sötét bordó)
 const rgba = (c,a)=>`rgba(${c[0]},${c[1]},${c[2]},${a})`;
-function lobePath(cx,cy,rx,ry,folds,amp,squash){
-  const p = new Path2D();
-  for(let i=0;i<=220;i++){
-    const a=(i/220)*Math.PI*2;
-    const rip = 1 + amp*Math.sin(a*folds+.4) + amp*.5*Math.sin(a*(folds*1.9)+1.7);
-    const yr = (Math.sin(a)>0 ? ry*squash : ry);
-    const x = cx+Math.cos(a)*rx*rip, y = cy+Math.sin(a)*yr*rip;
-    i?p.lineTo(x,y):p.moveTo(x,y);
-  }
-  p.closePath(); return p;
-}
 function taperPath(pts,ws){
   const L=[],R=[];
   for(let i=0;i<pts.length;i++){
     const p=pts[i], a=pts[Math.max(0,i-1)], b=pts[Math.min(pts.length-1,i+1)];
     const dx=b[0]-a[0], dy=b[1]-a[1], len=Math.hypot(dx,dy)||1;
     const nx=-dy/len, ny=dx/len, w=ws[i]/2;
-    L.push([p[0]+nx*w,p[1]+ny*w]); R.push([p[0]-nx*w,p[1]-ny*w]);
+    /* körüljárás megegyezik a lobePath-szal, különben a clip-union lyukat üt az átfedésnél */
+    L.push([p[0]-nx*w,p[1]-ny*w]); R.push([p[0]+nx*w,p[1]+ny*w]);
   }
   return new Path2D(catmull(L)+' '+catmull(R.slice().reverse()).replace(/^M/,'L')+' Z');
 }
-const CEREBRUM   = lobePath(266,156,176,106,9,.034,.82);
-const CEREBELLUM = lobePath(406,246,62,42,20,.038,.94);
+/* valódi oldalnézeti agy-sziluett (arccal balra): homloklebeny elöl,
+   domború fejtető, nyakszirti lebeny hátul, alul a halántéklebeny íve —
+   kézzel rakott pontok, catmull-simítással, óramutató szerinti körüljárással */
+const CEREBRUM = new Path2D(catmullClosed([
+  [96,166],[104,116],[134,78],[182,52],[242,40],[304,42],[356,56],[402,82],
+  [434,116],[448,156],[440,194],[416,222],[384,240],[348,252],[308,260],
+  [264,262],[222,256],[186,248],[156,246],[130,236],[114,216],[100,192]
+]));
+/* kisagy: legyező alakú, lapított tetővel a nyakszirti lebeny alá simulva */
+const CEREBELLUM = new Path2D(catmullClosed([
+  [352,238],[374,226],[402,222],[430,226],[452,238],[462,256],[458,276],
+  [440,290],[414,296],[386,292],[362,280],[350,262]
+]));
 /* agytörzs: FELÜL mélyen a nagyagyban indul és átlátszóra fut ki, ALUL hegyesen záródik
    -> nincs lapos felső él, tehát nincs többé látható téglalap */
 const STEM = taperPath(
@@ -1144,18 +1145,22 @@ function buildTree(rootChain, angles, seed0){
     if(depth>4) return;
     let prev=parent, x=nodes[parent].x, y=nodes[parent].y, a=angle;
     for(let s=0;s<3;s++){
-      a += (rnd()-.5)*.34;
+      a += (rnd()-.5)*.16;
       const nx=x+Math.cos(a)*(len/3), ny=y+Math.sin(a)*(len/3);
       if(!inBrain(nx,ny)) return;
       x=nx; y=ny; prev = add(x,y,prev,depth);
     }
-    const sp=.50+rnd()*.30;
+    const sp=.40+rnd()*.20;
     grow(prev,a-sp,len*.74,depth+1); grow(prev,a+sp,len*.74,depth+1);
   }
   angles.forEach(([d,l])=> grow(root, d*Math.PI/180, l, 0));
   const hk=new Set(); nodes.forEach(n=>{ if(n.p>=0) hk.add(n.p); });
   const tips = nodes.map((_,i)=>i).filter(i=>!hk.has(i));
   const paths = tips.map(t=>{ const p=[]; let i=t; while(i>=0){ p.push(i); i=nodes[i].p; } return p.reverse(); });
+  /* családfa-vastagság: minden csomópont súlya = alatta lévő levelek száma,
+     így az összefutásoknál az ér fokozatosan vastagszik a törzs felé */
+  nodes.forEach(n=> n.w=0);
+  tips.forEach(t=>{ let i=t; while(i>=0){ nodes[i].w++; i=nodes[i].p; } });
   return {nodes,tips,paths};
 }
 const ART  = buildTree([[340,344],[336,314],[332,284]], [[-168,94],[-112,90],[-52,62]], 12345);
@@ -1216,13 +1221,15 @@ function fitCanvas(){
   ctx.setTransform(dpr*sc,0,0,dpr*sc, dpr*(r.width-VW*sc)/2, dpr*(r.height-VH*sc)/2);
 }
 function drawTree(tree,col,scale,pulseW){
-  ctx.lineCap='round';
+  ctx.lineCap='round'; ctx.lineJoin='round';
+  ctx.strokeStyle = col;
   tree.nodes.forEach(n=>{
     if(n.p<0) return;
     const p = tree.nodes[n.p];
-    ctx.beginPath(); ctx.moveTo(n.x,n.y); ctx.lineTo(p.x,p.y);
-    ctx.strokeStyle = col;
-    ctx.lineWidth = Math.max(.9,(6.6-Math.max(0,n.depth)*1.1)*scale*(1+pulseW));
+    /* vastagság a levélszámból: az összefutó ágak fokozatosan vastagodnak, mint egy családfa */
+    ctx.beginPath(); ctx.moveTo(n.x,n.y);
+    ctx.quadraticCurveTo((n.x+p.x)/2,(n.y+p.y)/2,p.x,p.y);
+    ctx.lineWidth = Math.max(.9,(.9+Math.sqrt(n.w)*.85)*scale*(1+pulseW));
     ctx.stroke();
   });
 }
@@ -1264,9 +1271,10 @@ function drawBrain(dt){
   });
   ctx.save(); ctx.clip(CEREBELLUM);
   ctx.strokeStyle='rgba(255,255,255,.13)'; ctx.lineWidth=1;
-  for(let i=-5;i<=5;i++){
-    ctx.beginPath(); ctx.moveTo(406-58,246+i*7.5);
-    ctx.quadraticCurveTo(406,246+i*7.5+(i<0?4:-4),406+58,246+i*7.5); ctx.stroke();
+  /* kisagyi folia: sűrű, enyhén ívelt redők az új legyező-formához igazítva */
+  for(let i=-6;i<=6;i++){
+    ctx.beginPath(); ctx.moveTo(348,259+i*6.2);
+    ctx.quadraticCurveTo(406,259+i*6.2+(i<0?5:-5),464,259+i*6.2); ctx.stroke();
   }
   ctx.restore();
 
@@ -1275,9 +1283,10 @@ function drawBrain(dt){
   clip.addPath(CEREBRUM); clip.addPath(CEREBELLUM); clip.addPath(STEM);
   ctx.clip(clip);
   ctx.strokeStyle='rgba(255,255,255,.05)'; ctx.lineWidth=1.3;
-  [[[125,115],[185,145],[245,125]],[[155,205],[225,230],[295,210]],
-   [[215,75],[275,105],[345,90]],[[290,170],[350,200],[408,180]],
-   [[105,170],[145,190],[195,175]]].forEach(p=>{
+  /* barázdák az új sziluett ívét követve */
+  [[[116,146],[168,118],[226,102]],[[146,196],[208,176],[264,166]],
+   [[226,68],[286,88],[346,84]],[[300,116],[354,140],[406,132]],
+   [[152,232],[212,220],[262,206]],[[302,196],[352,210],[398,194]]].forEach(p=>{
     ctx.beginPath(); ctx.moveTo(p[0][0],p[0][1]);
     ctx.quadraticCurveTo(p[1][0],p[1][1],p[2][0],p[2][1]); ctx.stroke();
   });
