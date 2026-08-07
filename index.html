@@ -1117,7 +1117,8 @@ function taperPath(pts,ws){
     const p=pts[i], a=pts[Math.max(0,i-1)], b=pts[Math.min(pts.length-1,i+1)];
     const dx=b[0]-a[0], dy=b[1]-a[1], len=Math.hypot(dx,dy)||1;
     const nx=-dy/len, ny=dx/len, w=ws[i]/2;
-    L.push([p[0]+nx*w,p[1]+ny*w]); R.push([p[0]-nx*w,p[1]-ny*w]);
+    /* körüljárás megegyezik a lobePath-szal, különben a clip-union lyukat üt az átfedésnél */
+    L.push([p[0]-nx*w,p[1]-ny*w]); R.push([p[0]+nx*w,p[1]+ny*w]);
   }
   return new Path2D(catmull(L)+' '+catmull(R.slice().reverse()).replace(/^M/,'L')+' Z');
 }
@@ -1144,18 +1145,22 @@ function buildTree(rootChain, angles, seed0){
     if(depth>4) return;
     let prev=parent, x=nodes[parent].x, y=nodes[parent].y, a=angle;
     for(let s=0;s<3;s++){
-      a += (rnd()-.5)*.34;
+      a += (rnd()-.5)*.16;
       const nx=x+Math.cos(a)*(len/3), ny=y+Math.sin(a)*(len/3);
       if(!inBrain(nx,ny)) return;
       x=nx; y=ny; prev = add(x,y,prev,depth);
     }
-    const sp=.50+rnd()*.30;
+    const sp=.40+rnd()*.20;
     grow(prev,a-sp,len*.74,depth+1); grow(prev,a+sp,len*.74,depth+1);
   }
   angles.forEach(([d,l])=> grow(root, d*Math.PI/180, l, 0));
   const hk=new Set(); nodes.forEach(n=>{ if(n.p>=0) hk.add(n.p); });
   const tips = nodes.map((_,i)=>i).filter(i=>!hk.has(i));
   const paths = tips.map(t=>{ const p=[]; let i=t; while(i>=0){ p.push(i); i=nodes[i].p; } return p.reverse(); });
+  /* családfa-vastagság: minden csomópont súlya = alatta lévő levelek száma,
+     így az összefutásoknál az ér fokozatosan vastagszik a törzs felé */
+  nodes.forEach(n=> n.w=0);
+  tips.forEach(t=>{ let i=t; while(i>=0){ nodes[i].w++; i=nodes[i].p; } });
   return {nodes,tips,paths};
 }
 const ART  = buildTree([[340,344],[336,314],[332,284]], [[-168,94],[-112,90],[-52,62]], 12345);
@@ -1216,13 +1221,15 @@ function fitCanvas(){
   ctx.setTransform(dpr*sc,0,0,dpr*sc, dpr*(r.width-VW*sc)/2, dpr*(r.height-VH*sc)/2);
 }
 function drawTree(tree,col,scale,pulseW){
-  ctx.lineCap='round';
+  ctx.lineCap='round'; ctx.lineJoin='round';
+  ctx.strokeStyle = col;
   tree.nodes.forEach(n=>{
     if(n.p<0) return;
     const p = tree.nodes[n.p];
-    ctx.beginPath(); ctx.moveTo(n.x,n.y); ctx.lineTo(p.x,p.y);
-    ctx.strokeStyle = col;
-    ctx.lineWidth = Math.max(.9,(6.6-Math.max(0,n.depth)*1.1)*scale*(1+pulseW));
+    /* vastagság a levélszámból: az összefutó ágak fokozatosan vastagodnak, mint egy családfa */
+    ctx.beginPath(); ctx.moveTo(n.x,n.y);
+    ctx.quadraticCurveTo((n.x+p.x)/2,(n.y+p.y)/2,p.x,p.y);
+    ctx.lineWidth = Math.max(.9,(.9+Math.sqrt(n.w)*.85)*scale*(1+pulseW));
     ctx.stroke();
   });
 }
