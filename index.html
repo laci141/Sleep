@@ -227,18 +227,23 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 .circnote b{display:block; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em;
   text-transform:uppercase; color:var(--sky); margin-bottom:3px}
 
-.ev{display:inline-flex; gap:3px; vertical-align:1px; margin-left:8px}
-.ev i{width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.16); display:block}
-.ev i.on{background:var(--c)}
+/* ---------- Bizonyítékszint: négy szint, saját színnel ---------- */
+.ev{display:inline-flex; align-items:center; gap:6px; margin-left:9px; padding:2px 10px;
+  font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+  white-space:nowrap; vertical-align:2px; border-radius:999px; line-height:1.7;
+  color:var(--evink); background:var(--evbg); border:1px solid var(--evline)}
+.ev::before{content:''; width:8px; height:8px; border-radius:50%; background:var(--evink); flex:none}
+.ev-3{--evink:#8fe3c8; --evbg:rgba(143,227,200,.11); --evline:rgba(143,227,200,.34)}
+.ev-2{--evink:#9fd0f5; --evbg:rgba(159,208,245,.11); --evline:rgba(159,208,245,.34)}
+.ev-1{--evink:#f2d9a0; --evbg:rgba(242,217,160,.11); --evline:rgba(242,217,160,.34)}
+.ev-0{--evink:#c3cee6; --evbg:rgba(255,255,255,.07); --evline:rgba(255,255,255,.2)}
 .ev[title]{cursor:help}
 
 /* ---------- Szemléltető modell jelölés (animációk, amik nem mérési adatok) ---------- */
 .modelbadge{display:flex; gap:11px; align-items:flex-start; margin:10px 0 8px;
   background:rgba(255,255,255,.05); border:1px solid var(--line); border-left:3px solid var(--muted);
   border-radius:0 12px 12px 0; padding:11px 14px}
-.modelbadge .mb-k{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em;
-  text-transform:uppercase; color:#e8eef9; background:rgba(255,255,255,.1); border:1px solid var(--line);
-  border-radius:999px; padding:3px 10px; white-space:nowrap; flex:none; margin-top:1px}
+.modelbadge .ev{margin-left:0; flex:none; margin-top:1px}
 .modelbadge .mb-t{font-size:13.8px; color:#b9c5dd; line-height:1.5}
 @media (max-width:560px){.modelbadge{flex-direction:column; gap:8px}}
 
@@ -247,7 +252,6 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
   margin:0 0 16px; padding-bottom:13px; border-bottom:1px solid rgba(255,255,255,.08)}
 .evlegend .k{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em;
   text-transform:uppercase; color:var(--muted)}
-.evlegend .it{display:inline-flex; align-items:center; gap:7px; font-size:12.7px; color:#b9c5dd}
 .evlegend .ev{margin-left:0}
 
 /* ---------- Forráshivatkozás az állítás mellett ---------- */
@@ -298,12 +302,11 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 .stepbox p{font-size:clamp(17px,2.1vw,22px); line-height:1.55; color:#d3dcef; margin:0}
 .progressline{height:7px; background:rgba(255,255,255,.08); border-radius:4px; overflow:hidden; margin:16px 0}
 .progressline i{display:block; height:100%; background:var(--mint); width:0; transition:width .3s linear}
-.ttsstat{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted)}
 
 .src{--c:var(--mint); list-style:none; padding:0; margin:0; font-size:13.5px; color:var(--muted)}
 .src li{margin:0 0 15px; padding:0 0 15px; border-bottom:1px solid rgba(255,255,255,.07)}
 .src li:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0}
-.src .st{display:block; font-size:15px; color:#e7ecf7; font-weight:500; line-height:1.45; margin-bottom:6px}
+.src .st{display:block; font-size:15px; color:#e7ecf7; font-weight:500; line-height:1.7; margin-bottom:6px}
 .src .meta{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:8px}
 .src .chip{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase;
   color:#c6d0e8; background:rgba(255,255,255,.06); border:1px solid var(--line); border-radius:999px; padding:3px 9px}
@@ -383,8 +386,8 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
     <div class="glass-panel stack">
       <div>
         <p class="eyebrow" data-i18n="ui.mapEyebrow">Elmetérkép</p>
-        <h1 data-i18n="ui.mapH1">Nyolc óra, amit az agyad nem alvással tölt</h1>
-        <p class="lead" data-i18n-html="ui.mapLead">Amíg fekszel, az agyad ciklusokban dolgozik: rögzíti a napot, feldolgozza az érzelmeket, és kimossa magából azt a hulladékot, ami ébren felgyűlt. Közben az immunrendszer is átszervezi magát. Egy belső óra vezényli az egészet. Kattints egy ágra.</p>
+        <h1 data-i18n="ui.mapH1">Mi történik az agyaddal, miközben alszol?</h1>
+        <p class="lead" data-i18n-html="ui.mapLead">Az alvás nem kikapcsolás: az agy és a szervezet éjszaka is aktív. Amíg fekszel, az agy ciklusokban dolgozik — rögzíti a napot, feldolgozza az érzelmeket, és kimossa magából azt a hulladékot, ami ébren felgyűlt. Közben az immunrendszer is átszervezi magát, az egészet pedig egy belső óra vezényli. Kattints egy ágra.</p>
       </div>
       <div class="mapwrap" id="mapWide">
         <div class="scrollx"><svg id="mapSvg" viewBox="0 0 940 520" role="img" data-i18n-aria="ui.mapSvgAria"></svg></div>
@@ -404,7 +407,7 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
 
         <p class="eyebrow" style="margin-top:18px" data-i18n="ui.cycEegEyebrow">EEG-hullámok szemléltetése alvás közben</p>
         <div class="modelbadge">
-          <span class="mb-k" data-i18n="ui.modelBadge">Szemléltető modell</span>
+          <span class="ev ev-0" data-i18n="ui.modelBadge">Szemléltető modell</span>
           <span class="mb-t" data-i18n="ui.cycEegSim">A hullámforma programozott szimuláció, nem valódi személy EEG-felvétele. Az alakja a szakaszokra jellemző frekvenciákat követi, oktatási céllal.</span>
         </div>
         <div class="eegwrap"><canvas id="eegCanvas"></canvas></div>
@@ -449,7 +452,7 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
       <div class="glass-panel">
         <p class="eyebrow" data-i18n="ui.circEyebrow">Cirkadián ritmus</p>
         <h2 data-i18n="ui.circH2">A belső óra, ami eldönti, mikor jön az álom</h2>
-        <p class="lead" data-i18n-html="ui.circLead">Az agy közepén, a látóidegek kereszteződése fölött ül egy kb. 20&nbsp;000 sejtből álló óra, a <em>nucleus suprachiasmaticus</em>. A saját ciklusa nem pontosan 24 óra, hanem valamivel hosszabb — átlagosan kb. 24,2 —, ezért naponta újra kell állítani. Az állítógomb a fény.</p>
+        <p class="lead" data-i18n-html="ui.circLead">A belső biológiai óra természetes ciklusa nem mindig pontosan 24 óra. A környezeti fény minden nap segít összehangolni a belső órát a nappal–éjszaka ciklusával. Maga az óra az agy közepén, a látóidegek kereszteződése fölött ül: ez a <em>nucleus suprachiasmaticus</em>, egy kb. 20&nbsp;000 sejtből álló csoport.</p>
         <div class="scrollx"><svg class="circ" id="circSvg" viewBox="0 0 960 380" role="img" data-i18n-aria="ui.circSvgAria"></svg></div>
         <div class="ctlbar">
           <button class="ctl" id="circPlay">Nap lejátszása</button>
@@ -482,9 +485,9 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
           <span><i style="background:#ff7fb0"></i><span data-i18n-html="ui.cleanLegPink"><strong style="color:#ff7fb0">Rózsa</strong> — nyirokér a nyaki csomóba</span></span>
           <span><i style="background:#c42a4f"></i><span data-i18n-html="ui.cleanLegDark"><strong style="color:#e8506f">Bordó</strong> — a szemét maga</span></span>
         </div>
-        <p class="lead" data-i18n-html="ui.cleanLead2">A pumpa a mélyalvás lassú hulláma. Kapcsold át mélyalvásra, és nézd a bal alsó pulzusjelzőt: <strong>minden csúcsnál lökésben szabadulnak ki a bordó szemét-pixelek</strong>, felkerülnek a zöld vénára, és onnan a rózsaszín nyirokéren jutnak a nyaki nyirokcsomóba.</p>
+        <p class="lead" data-i18n-html="ui.cleanLead2">Az animáció azt szemlélteti, hogyan képzelhető el az alvás közbeni folyadékmozgás egyik kutatási modellje. A valódi emberi folyamat ennél összetettebb, és jelenleg is kutatják. Kapcsolj át mélyalvásra, és nézd meg, hogyan jut a bordó szemét a zöld vénára, onnan pedig a rózsaszín nyirokéren a nyaki nyirokcsomóba.</p>
         <div class="modelbadge">
-          <span class="mb-k" data-i18n="ui.modelBadge">Szemléltető modell</span>
+          <span class="ev ev-0" data-i18n="ui.modelBadge">Szemléltető modell</span>
           <span class="mb-t" data-i18n="ui.cleanModel">Az animáció leegyszerűsített modell, nem MRI-, mikroszkópos vagy élő agyi mérés. A kutatásokban felvetett folyadékáramlási elrendezést szemlélteti.</span>
         </div>
         <div class="canvaswrap"><canvas id="brainCanvas"></canvas></div>
@@ -502,7 +505,7 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
       <div class="glass-panel">
         <h3 data-i18n="ui.cleanStepsH3">A folyamat öt lépésben</h3>
         <ol class="steps" id="cleanSteps"></ol>
-        <div class="note"><span data-i18n-html="ui.cleanNote">Egy 39 fős keresztezett vizsgálatban a normál alvás után reggelre mérhetően több Alzheimer-marker volt a vérplazmában, mint átvirrasztott éjszaka után — vagyis alvás közben tényleg kikerültek az agyból.</span><span id="cleanNoteSrc"></span></div>
+        <div class="note"><span data-i18n-html="ui.cleanNote">Egy 15 fős keresztezett vizsgálatban egyetlen átvirrasztott éjszaka után reggelre megemelkedett a tau-fehérje szintje a vérplazmában (+17,2%, szemben a normál alvás utáni +1,8%-kal). A többi vizsgált markernél nem volt különbség. Kicsi, feltáró jellegű vizsgálat: azt jelzi, hogy az alvás hiánya meglátszik ezeken az értékeken, de nem méri közvetlenül az agy takarítását.</span><span id="cleanNoteSrc"></span></div>
       </div>
     </div>
   </section>
@@ -581,7 +584,6 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
           <div class="ctlbar" style="justify-content:center">
             <button class="ctl" id="bStart" data-i18n="ui.start">Indítás</button>
             <button class="ctl ghost" id="bStop" data-i18n="ui.stop">Állj</button>
-            <button class="ctl ghost tts-btn" aria-pressed="false">Hang: ki</button>
           </div>
         </div>
 
@@ -600,8 +602,6 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
               <div class="ctlbar">
                 <button class="ctl" id="pmrStart" data-i18n="ui.start">Indítás</button>
                 <button class="ctl ghost" id="pmrStop" data-i18n="ui.stop">Állj</button>
-                <button class="ctl ghost tts-btn" aria-pressed="false">Hang: ki</button>
-                <span class="ttsstat tts-stat"></span>
               </div>
             </div>
           </div>
@@ -625,10 +625,8 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
                 <button class="ctl ghost" id="scan10" aria-pressed="false" data-i18n="ui.min10">10 perc</button>
                 <button class="ctl" id="scanStart" data-i18n="ui.start">Indítás</button>
                 <button class="ctl ghost" id="scanStop" data-i18n="ui.stop">Állj</button>
-                <button class="ctl ghost tts-btn" aria-pressed="false">Hang: ki</button>
                 <div class="readout"><span data-i18n="ui.remaining">hátralévő:</span> <b id="scanRead">05:00</b></div>
               </div>
-              <p class="ttsstat tts-stat" style="margin-top:10px"></p>
             </div>
           </div>
         </div>
@@ -729,46 +727,6 @@ function tr(path){
 }
 const fill = (s,vals) => String(s).replace(/\{(\w+)\}/g,(m,k)=> vals[k]!==undefined ? vals[k] : m);
 
-/* ================== BESZÉD (TTS) ================== */
-const TTS = {
-  on:false, voice:null, supported:('speechSynthesis' in window), found:false,
-  init(){
-    if(!this.supported){ this.status(tr('tts.unsupported')); return; }
-    this.pick();
-    window.speechSynthesis.onvoiceschanged = ()=>this.pick();
-  },
-  pick(){
-    if(!this.supported) return;
-    const want = T().code;
-    const vs = window.speechSynthesis.getVoices() || [];
-    this.voice = vs.find(v=> new RegExp('^'+want,'i').test(v.lang)) || null;
-    this.found = !!this.voice;
-    this.status(this.found ? fill(tr('tts.found'),{name:this.voice.name}) : tr('tts.missing'));
-  },
-  status(t){ $$('.tts-stat').forEach(e=>e.textContent = t); },
-  set(v){
-    this.on = v;
-    $$('.tts-btn').forEach(b=>{ b.setAttribute('aria-pressed', String(v)); b.textContent = v ? tr('ui.soundOn') : tr('ui.soundOff'); });
-    if(!v) this.stop();
-  },
-  say(text, force){
-    if(!this.supported || (!this.on && !force)) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = T().ttsLang;
-    if(this.voice) u.voice = this.voice;
-    u.rate = .93; u.pitch = 1; u.volume = 1;
-    window.speechSynthesis.speak(u);
-  },
-  stop(){ if(this.supported) window.speechSynthesis.cancel(); }
-};
-TTS.init();
-$$('.tts-btn').forEach(b=> b.addEventListener('click', ()=>{
-  const next = !TTS.on;
-  TTS.set(next);
-  if(next) TTS.say(tr('tts.enabled'), true);
-}));
-
 /* ========================= MENÜ ========================= */
 const BRANCH_COLOR = {ciklus:'--n2', ritmus:'--sky', tisztitas:'--vein', miert:'--rem',
                       tippek:'--wake', relax:'--n1', etrend:'--rose'};
@@ -795,7 +753,6 @@ function go(id){
   window.scrollTo({top:0, behavior: REDUCED ? 'auto':'smooth'});
   if(id==='tisztitas') startBrain(); else stopBrain();
   if(id==='ciklus') startEeg(); else stopEeg();
-  if(id!=='relax') TTS.stop();
   /* a rejtett nézetekben a szélesség 0, ezért váltás után újra kell mérni */
   updScrollHints();
 }
@@ -831,7 +788,6 @@ function buildLangSel(){
 }
 function setLang(code){
   if(!window.LANGS[code] || code===LANG) return;
-  TTS.stop();
   LANG = code;
   try{ localStorage.setItem('sleep-lang', code); }catch(e){}
   applyLang();
@@ -1710,13 +1666,17 @@ function srcRef(key, i){
   return id ? srcRefId(id) : '';
 }
 
+/* Négy bizonyítékszint: 3 = erős, 2 = jó, 1 = korlátozott, 0 = szemléltető modell. */
 const evTitle = n => tr('evLegend.l'+n) || '';
-const evDots = n => `<span class="ev" title="${esc(tr('evLegend.k'))}: ${esc(evTitle(n))}" aria-label="${esc(tr('evLegend.k'))}: ${esc(evTitle(n))}">${[1,2,3].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</span>`;
+const evDots = n => {
+  const lbl = evTitle(n);
+  return `<span class="ev ev-${n}" title="${esc(tr('evLegend.k'))}: ${esc(lbl)}" aria-label="${esc(tr('evLegend.k'))}: ${esc(lbl)}">${esc(lbl)}</span>`;
+};
 
-/* Jelmagyarázat a pöttyökhöz — csak ott, ahol tényleg van bizonyítékszint */
+/* Jelmagyarázat — mind a négy szint, ott, ahol bizonyítékszintek szerepelnek */
 function evLegendHtml(){
   return `<div class="evlegend"><span class="k">${esc(tr('evLegend.k'))}</span>` +
-    [1,2,3].map(n=>`<span class="it">${evDots(n)}${esc(evTitle(n))}</span>`).join('') +
+    [3,2,1,0].map(n=>evDots(n)).join('') +
     `</div>`;
 }
 function mountEvLegend(ul){
@@ -1793,7 +1753,7 @@ function renderContent(){
   renderTips(D.supp,'#suppList','--mint','supp');
   renderDayPlan();
   renderSources();
-  $('#cleanNoteSrc').innerHTML = srcRefId('benedict20');
+  $('#cleanNoteSrc').innerHTML = evDots(SOURCES.benedict20.ev) + srcRefId('benedict20');
 }
 
 /* ================== 4-7-8 LÉGZÉS ================== */
@@ -1809,7 +1769,6 @@ function bTick(){
     $('#bCircle').style.transition = `transform ${p.s}s ${bIdx===1?'linear':'cubic-bezier(.4,0,.4,1)'}`;
     $('#bCircle').style.transform = `scale(${p.scale})`;
     $('#bPhase').textContent = txt.label;
-    TTS.say(txt.say);
   }
   $('#bHint').textContent = `${bLeft} ${tr('ui.secShort')} · ${tr('ui.breathRound')} ${bRound}`;
 }
@@ -1819,7 +1778,7 @@ $('#bStart').addEventListener('click', ()=>{
   bTimer = setInterval(bTick,1000);
 });
 $('#bStop').addEventListener('click', ()=>{
-  clearInterval(bTimer); bTimer=null; TTS.stop();
+  clearInterval(bTimer); bTimer=null;
   $('#bCircle').style.transition='transform .8s ease';
   $('#bCircle').style.transform='scale(.55)';
   $('#bPhase').textContent = tr('ui.breathDone');
@@ -1954,7 +1913,7 @@ function segUpdate(sel,idx,frac){
 /* --------- IZOMLAZÍTÁS --------- */
 const PMR = () => T().pmr.steps;
 segbar('#pmrSeg', PMR().length);
-let pmrI=0, pmrPhase='tense', pmrLeft=5, pmrTimer=null, pmrSpoken='';
+let pmrI=0, pmrPhase='tense', pmrLeft=5, pmrTimer=null;
 const pmrRoot = $('#bodyHolder');
 function pmrPaint(){
   const P = PMR(), M = T().pmr;
@@ -1969,11 +1928,6 @@ function pmrPaint(){
   $('#pmrText').innerHTML = pmrPhase==='tense'
     ? `<strong style="color:${C('--rem')}">${esc(M.tense)}</strong> ${esc(how)}`
     : `<strong style="color:${C('--mint')}">${esc(M.release)}</strong> ${esc(M.releaseTxt)}`;
-  const key2 = pmrI+'-'+pmrPhase;
-  if(key2 !== pmrSpoken){
-    pmrSpoken = key2;
-    TTS.say(pmrPhase==='tense' ? fill(M.sayTense,{title,how}) : M.sayRelease);
-  }
   const frac = pmrPhase==='tense' ? (5-pmrLeft)/30 : (5+(10-pmrLeft))/15;
   segUpdate('#pmrSeg', pmrI, Math.max(0,Math.min(1,frac)));
 }
@@ -1989,7 +1943,6 @@ function pmrTick(){
         paintBody(pmrRoot,null,P.map(x=>x[0])); setRing(pmrRoot,false,0);
         $('#pmrTitle').textContent=M.doneTitle; $('#pmrCd').textContent='00';
         $('#pmrText').textContent=M.doneTxt;
-        TTS.say(M.sayDone);
         segUpdate('#pmrSeg',P.length,0);
         return;
       }
@@ -2000,18 +1953,18 @@ function pmrTick(){
 }
 $('#pmrStart').addEventListener('click', ()=>{
   if(pmrTimer) return;
-  pmrI=0; pmrPhase='tense'; pmrLeft=5; pmrSpoken=''; pmrPaint();
+  pmrI=0; pmrPhase='tense'; pmrLeft=5; pmrPaint();
   pmrTimer = setInterval(pmrTick,1000);
 });
 $('#pmrStop').addEventListener('click', ()=>{
-  clearInterval(pmrTimer); pmrTimer=null; TTS.stop();
+  clearInterval(pmrTimer); pmrTimer=null;
   $('#pmrText').textContent = tr('pmr.stopped');
 });
 
 /* --------- TESTPÁSZTÁZÁS --------- */
 const SCAN = () => T().scan.steps;
 segbar('#scanSeg', SCAN().length);
-let scanTotal=300, scanLeft=300, scanTimer=null, scanRAF=null, scanSpoken=-1;
+let scanTotal=300, scanLeft=300, scanTimer=null, scanRAF=null;
 const scanRoot = $('#scanHolder');
 const fmt = s => String(Math.floor(Math.max(0,s)/60)).padStart(2,'0')+':'+String(Math.max(0,s)%60).padStart(2,'0');
 function scanState(){
@@ -2031,7 +1984,6 @@ function scanPaint(){
   $('#scanBar').style.width = (done/scanTotal*100).toFixed(2)+'%';
   $('#scanRead').textContent = fmt(scanLeft);
   segUpdate('#scanSeg', idx, inPart/per);
-  if(idx !== scanSpoken){ scanSpoken = idx; TTS.say(`${S[idx][1]}. ${S[idx][2]}`); }
 }
 function ringFrame(){
   const {per,idx,inPart} = scanState();
@@ -2044,7 +1996,7 @@ function setScan(sec){
   const S = SCAN();
   clearInterval(scanTimer); scanTimer=null;
   if(scanRAF){ cancelAnimationFrame(scanRAF); scanRAF=null; }
-  scanTotal=sec; scanLeft=sec; scanSpoken=-1;
+  scanTotal=sec; scanLeft=sec;
   $('#scan5').setAttribute('aria-pressed', String(sec===300));
   $('#scan10').setAttribute('aria-pressed', String(sec===600));
   $('#scanRead').textContent = fmt(sec);
@@ -2061,9 +2013,7 @@ $('#scan10').addEventListener('click', ()=>setScan(600));
 $('#scanStart').addEventListener('click', ()=>{
   if(scanTimer) return;
   if(scanLeft<=0) scanLeft = scanTotal;
-  scanSpoken = -1;
-  TTS.say(tr('scan.sayIntro'));
-  setTimeout(scanPaint, TTS.on ? 4200 : 0);
+  scanPaint();
   if(!REDUCED && !scanRAF) scanRAF = requestAnimationFrame(ringFrame);
   scanTimer = setInterval(()=>{
     scanLeft--;
@@ -2074,7 +2024,6 @@ $('#scanStart').addEventListener('click', ()=>{
       paintBody(scanRoot,null,S.map(x=>x[0])); setRing(scanRoot,false,0);
       $('#scanTitle').textContent = tr('scan.doneTitle'); $('#scanCd').textContent='00:00';
       $('#scanText').textContent = tr('scan.doneTxt');
-      TTS.say(tr('scan.sayDone'));
       $('#scanBar').style.width='100%'; $('#scanRead').textContent='00:00';
       segUpdate('#scanSeg',S.length,0);
       return;
@@ -2083,7 +2032,7 @@ $('#scanStart').addEventListener('click', ()=>{
   },1000);
 });
 $('#scanStop').addEventListener('click', ()=>{
-  clearInterval(scanTimer); scanTimer=null; TTS.stop();
+  clearInterval(scanTimer); scanTimer=null;
   if(scanRAF){ cancelAnimationFrame(scanRAF); scanRAF=null; }
   $('#scanText').textContent = tr('scan.stopped');
 });
@@ -2092,7 +2041,6 @@ $$('.tabbtn').forEach(b=>{
   b.addEventListener('click', ()=>{
     $$('.tabbtn').forEach(x=>x.setAttribute('aria-selected', String(x===b)));
     $$('.tabpane').forEach(p=>p.classList.toggle('on', p.id===b.dataset.pane));
-    TTS.stop();
   });
 });
 
@@ -2137,11 +2085,10 @@ function applyLang(){
   $('#circPlay').textContent = circRAF ? tr('ui.circPause') : tr('ui.circPlay');
   menuBtn.setAttribute('aria-label', document.body.classList.contains('nav-open') ? tr('ui.menuClose') : tr('ui.menuOpen'));
 
-  TTS.set(TTS.on); TTS.pick();
   paintSleepLabels();
   redraw();
   updSpeed(); updEegLabel();
-  segbar('#pmrSeg', PMR().length); pmrI = Math.min(pmrI, PMR().length-1); pmrSpoken=''; pmrPaint();
+  segbar('#pmrSeg', PMR().length); pmrI = Math.min(pmrI, PMR().length-1); pmrPaint();
   segbar('#scanSeg', SCAN().length); setScan(scanTotal);
   paintCirc();
   updScrollHints();
@@ -2159,7 +2106,6 @@ window.addEventListener('resize', ()=>{
     updScrollHints();
   },140);
 });
-window.addEventListener('beforeunload', ()=>TTS.stop());
 </script>
 </body>
 </html>

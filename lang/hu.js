@@ -1,7 +1,7 @@
 /* Magyar — forrásnyelv. A többi nyelv ennek a kulcsszerkezetét másolja. */
 window.LANGS = window.LANGS || {};
 window.LANGS.hu = {
-code:'hu', label:'HU', name:'Magyar', htmlLang:'hu', ttsLang:'hu-HU',
+code:'hu', label:'HU', name:'Magyar', htmlLang:'hu',
 
 ui:{
   title:'Alvás 2026',
@@ -16,8 +16,8 @@ ui:{
   footer:'ALVÁS 2026',
 
   mapEyebrow:'Elmetérkép',
-  mapH1:'Nyolc óra, amit az agyad nem alvással tölt',
-  mapLead:'Amíg fekszel, az agyad ciklusokban dolgozik: rögzíti a napot, feldolgozza az érzelmeket, és kimossa magából azt a hulladékot, ami ébren felgyűlt. Közben az immunrendszer is átszervezi magát. Egy belső óra vezényli az egészet. Kattints egy ágra.',
+  mapH1:'Mi történik az agyaddal, miközben alszol?',
+  mapLead:'Az alvás nem kikapcsolás: az agy és a szervezet éjszaka is aktív. Amíg fekszel, az agy ciklusokban dolgozik — rögzíti a napot, feldolgozza az érzelmeket, és kimossa magából azt a hulladékot, ami ébren felgyűlt. Közben az immunrendszer is átszervezi magát, az egészet pedig egy belső óra vezényli. Kattints egy ágra.',
   mapSvgAria:'Az alvás témáinak elmetérképe',
 
   cycEyebrow:'Alvásciklus',
@@ -43,7 +43,7 @@ ui:{
 
   circEyebrow:'Cirkadián ritmus',
   circH2:'A belső óra, ami eldönti, mikor jön az álom',
-  circLead:'Az agy közepén, a látóidegek kereszteződése fölött ül egy kb. 20&nbsp;000 sejtből álló óra, a <em>nucleus suprachiasmaticus</em>. A saját ciklusa nem pontosan 24 óra, hanem valamivel hosszabb, és emberenként eltér — ezért naponta újra kell állítani. Az állítógomb a fény.',
+  circLead:'A belső biológiai óra természetes ciklusa nem mindig pontosan 24 óra. A környezeti fény minden nap segít összehangolni a belső órát a nappal–éjszaka ciklusával. Maga az óra az agy közepén, a látóidegek kereszteződése fölött ül: ez a <em>nucleus suprachiasmaticus</em>, egy kb. 20&nbsp;000 sejtből álló csoport.',
   circSvgAria:'Melatonin, kortizol, maghőmérséklet',
   circPlay:'Nap lejátszása',
   circPause:'Szünet',
@@ -60,7 +60,7 @@ ui:{
   cleanLegGreen:'<strong style="color:#4fe0a8">Zöld</strong> — véna: szennyes folyadék KI',
   cleanLegPink:'<strong style="color:#ff7fb0">Rózsa</strong> — nyirokér a nyaki csomóba',
   cleanLegDark:'<strong style="color:#e8506f">Bordó</strong> — a szemét maga',
-  cleanLead2:'A modellben a pumpa szerepét a mélyalvás lassú hulláma játssza. Kapcsold át mélyalvásra, és nézd a bal alsó pulzusjelzőt: <strong>az animációban minden csúcsnál elindul egy adag bordó szemét-pixel</strong>, felkerül a zöld vénára, és onnan a rózsaszín nyirokéren jut a nyaki nyirokcsomóba. Ez a szemléltetés menete — a valódi agyban az áramlás folyamatos, és a mértékét jelenleg is kutatják.',
+  cleanLead2:'Az animáció azt szemlélteti, hogyan képzelhető el az alvás közbeni folyadékmozgás egyik kutatási modellje. A valódi emberi folyamat ennél összetettebb, és jelenleg is kutatják. Kapcsolj át mélyalvásra, és nézd meg, hogyan jut a bordó szemét a zöld vénára, onnan pedig a rózsaszín nyirokéren a nyaki nyirokcsomóba.',
   cleanStateAria:'Állapot',
   cleanAwake:'Ébren',
   cleanAsleep:'Mélyalvásban',
@@ -91,7 +91,7 @@ ui:{
 
   relaxEyebrow:'Esti relaxáció',
   relaxH2:'Három gyakorlat lefekvés előtt',
-  relaxIntro:'Egyszerre csak az egyiket csináld. Mindegyik ugyanazt célozza: leveszi a stresszválaszt, hogy az elalvás magától jöjjön. Ha közben elalszol, az a siker, nem a kudarc. <strong>Kapcsold be a hangot</strong>, és nem kell olvasnod — végigmondom.',
+  relaxIntro:'Egyszerre csak az egyiket csináld. Mindegyik ugyanazt célozza: leveszi a stresszválaszt, hogy az elalvás magától jöjjön. Ha közben elalszol, az a siker, nem a kudarc.',
   tabBreath:'4-7-8 légzés',
   tabPmr:'Progresszív izomlazítás',
   tabScan:'Testpásztázás',
@@ -104,12 +104,10 @@ ui:{
   secShort:'mp',
   pmrIntro:'Lábujjtól a homlokig, izomcsoportonként: öt másodperc feszítés, aztán tíz másodperc teljes elengedés. A lényeg a különbség érzékelése a feszes és a laza között. Fekve csináld.',
   pmrIdle:'Nyomd meg az Indítást, és lépésenként végigvezetlek.',
-  scanIntro:'Ugyanaz a testtérkép, csak feszítés nélkül. Odafigyelsz egy testrészre, megnézed, mit érzel ott, és továbbmész. A körbefutó fénygyűrű mutatja, hol tart a figyelem — elöl lefelé, hátul felfelé ível, ahogy egy gyűrű körbeér egy testen. Hanggal csukott szemmel is végigcsinálható.',
+  scanIntro:'Ugyanaz a testtérkép, csak feszítés nélkül. Odafigyelsz egy testrészre, megnézed, mit érzel ott, és továbbmész. A körbefutó fénygyűrű mutatja, hol tart a figyelem — elöl lefelé, hátul felfelé ível, ahogy egy gyűrű körbeér egy testen.',
   scanIdle:'Válassz hosszt, és indítsd el.',
   start:'Indítás',
   stop:'Állj',
-  soundOn:'Hang: be',
-  soundOff:'Hang: ki',
   min5:'5 perc',
   min10:'10 perc',
   remaining:'hátralévő:',
@@ -147,7 +145,7 @@ branches:[
   {id:'tisztitas', title:'Agytisztítás',      sub:['artéria, véna, nyirok','pulzus pumpál']},
   {id:'miert',     title:'Miért fontos',      sub:['immunrendszer','daganatos kockázat']},
   {id:'tippek',    title:'Jobb alvás',        sub:['ingerkontroll','fény és hőmérséklet']},
-  {id:'relax',     title:'Esti relaxáció',    sub:['4-7-8 légzés','hanggal vezetve']},
+  {id:'relax',     title:'Esti relaxáció',    sub:['4-7-8 légzés','lépésről lépésre']},
   {id:'etrend',    title:'Tea, étel, vitamin',sub:['mikor egyél és igyál','kiegészítők']}
 ],
 
@@ -291,43 +289,43 @@ harm:[
 ],
 
 core:[
-{t:'Fix ébredési idő, hétvégén is',
+{t:'Fix ébredési idő, hétvégén is', ev:2,
  w:'Az ébredés horgonyozza le a belső órát, nem a lefekvés. Az óra saját ciklusa valamivel hosszabb 24 óránál, ezért naponta újra kell állítani. Ha hétvégén két órát csúsztatsz, az az órádnak annyi, mintha átrepültél volna két időzónát: hétfőn szociális jetlaggel indulsz.',
  h:'Válaszd a legkorábbi hétköznapi ébredést, és tartsd hétvégén is fél órán belül. Ha kevés volt az alvás, inkább korábban feküdj le, ne később kelj.'},
-{t:'Az ágy csak alvásra — ingerkontroll',
+{t:'Az ágy csak alvásra — ingerkontroll', ev:3,
  w:'Ha az ágyban forgolódsz, aggódsz vagy telefonozol, az agy megtanulja az „ágy = éberség" társítást. Ez feltételes reflex, pár hét alatt kialakul. Az ingerkontroll ezt írja felül, és a CBT-I egyik legerősebb önálló hatóanyaga.',
  h:'Ha kb. 20 perc után nem alszol el, kelj ki. Ne nézd az órát, becsüld. Menj át másik helyiségbe, félhomály, olvass valami unalmasat. Csak akkor menj vissza, ha tényleg álmos vagy — és ismételd akárhányszor.'},
-{t:'Alvásmegszorítás',
+{t:'Alvásmegszorítás', ev:3,
  w:'Ha kilenc órát fekszel az ágyban, hogy hatot aludj, az a három ébren töltött óra az ágyat ébrenlét-helyszínné teszi, és széttördeli az alvást. Ha leszűkíted az ágyban töltött időt a tényleges alvásidőre, nő az alvásnyomás, és az alvás összetömörödik.',
  h:'Egy hétig vezess alvásnaplót. Az ágyban töltött időt állítsd be az átlagos tényleges alvásidőre, de sose menj 5,5 óra alá. Az ébredés fix, a lefekvést told későbbre. Ha egy héten át az alváshatékonyság 90% fölött van, told ki 15 perccel.'},
-{t:'Reggeli fény, ébredés után hamar',
+{t:'Reggeli fény, ébredés után hamar', ev:2,
  w:'A retinában külön érzékelősejtek ülnek, amik közvetlenül a belső órának jelentenek. A reggeli fény leállítja a maradék melatonint, felviszi a kortizolt a normális ébredési csúcsra, és előre tolja az órát. A hatás nem azonnali: este jelentkezik.',
  h:'10–20 perc kint, borús időben inkább 30–40. Ablakon át a fény töredéke jut át, tehát tényleg menj ki. Napszemüveg nélkül, de a napba ne nézz.'},
-{t:'Hűvös hálószoba, 16–19 °C',
+{t:'Hűvös hálószoba, 16–19 °C', ev:2,
  w:'Az elalváshoz a maghőmérsékletnek kb. 1 °C-ot esnie kell, és ez úgy megy, hogy a kéz és a láb erei kitágulnak, és leadják a hőt. Túl meleg szobában nincs hova leadni.',
  h:'16–19 °C, és inkább takaróval szabályozz. Ha fázik a lábad, húzz zoknit — paradox módon segít, mert így tágulnak az erek és jobban ürül a hő.'}
 ],
 
 extra:[
-{t:'Koffein: utolsó adag 8–10 órával lefekvés előtt',
+{t:'Koffein: utolsó adag 8–10 órával lefekvés előtt', ev:3,
  w:'A koffein az adenozin receptorait blokkolja. Nem tünteti el az adenozint, csak elrejti a jelét — és amikor lebomlik, a felgyűlt adenozin egyszerre üt be. A felezési idő 5–6 óra: a 15 órakor ivott kávé fele még 21-kor is benned van. A leggyakoribb következmény nem az elalvás, hanem hogy kevesebb mélyalvást kapsz.',
  h:'Kb. 10 órával lefekvés előtt húzd meg a vonalat. Figyelj a rejtett forrásokra: energiaital, zöld tea, étcsokoládé, egyes fájdalomcsillapítók.'},
-{t:'Az alkohol nem alvás',
+{t:'Az alkohol nem alvás', ev:3,
  w:'Nyugtató hatású, ezért gyorsabban elalszol — de az így kapott állapot nem természetes alvás. Elnyomja a REM-et az első félidőben, és amikor lebomlik, felaprózott, felszínes második félidő jön sok mikroébredéssel.',
  h:'Ha iszol, hagyj legalább 3–4 órát lefekvésig, és igyál mellé vizet. Próbálj két hetet nélküle, és hasonlítsd össze.'},
-{t:'Meleg zuhany vagy fürdő 1–2 órával lefekvés előtt',
+{t:'Meleg zuhany vagy fürdő 1–2 órával lefekvés előtt', ev:2,
  w:'Nem a felmelegedés a lényeg, hanem ami utána jön: a meleg víz kitágítja a bőr ereit, és kilépve a test hatékonyabban adja le a hőt — így a maghő gyorsabban esik.',
  h:'10–15 perc meleg, nem forró víz. Kádfürdő, zuhany, sőt a lábfürdő is működik.'},
-{t:'Este halvány, alacsonyan lévő fény',
+{t:'Este halvány, alacsonyan lévő fény', ev:2,
  w:'A retina óra-érzékelői a felülről jövő, kékes fényre reagálnak a legerősebben. Az esti erős mennyezetvilágítás azt üzeni, hogy még nappal van, és késlelteti a melatonin megindulását.',
  h:'Napnyugta után kapcsold le a mennyezeti lámpát, használj szemmagasság alatti, meleg fényű lámpákat. A nagyobb tétel a szoba fénye, nem a kijelző.'},
-{t:'Mozgás igen, de ne közvetlenül lefekvés előtt',
+{t:'Mozgás igen, de ne közvetlenül lefekvés előtt', ev:2,
  w:'A rendszeres napközbeni mozgás mélyíti a mélyalvást. Az intenzív edzés viszont felviszi a maghőmérsékletet, amit épp csökkenteni kellene, és megemeli a kortizolszintet, aminek este a mélypontján kellene lennie.',
  h:'Intenzív edzés legkésőbb 2–3 órával lefekvés előtt. Késő este már csak nyújtás, séta, könnyű jóga.'},
-{t:'Nagy vacsora és sok folyadék lefekvés előtt',
+{t:'Nagy vacsora és sok folyadék lefekvés előtt', ev:1,
  w:'Az emésztés felviszi a testhőt és az anyagcserét, pont amikor a maghőnek esnie kellene. Lefekvés után a reflux is felébreszthet.',
  h:'Az utolsó nagyobb étkezés 3 órával lefekvés előtt. A folyadékot húzd előre a nap első felébe.'},
-{t:'Írd ki, ami pörög',
+{t:'Írd ki, ami pörög', ev:1,
  w:'A fejben tartott befejezetlen feladatok fenntartják az éberséget: az agy nem engedi el azt, aminek nincs biztos helye.',
  h:'Lefekvés előtt 10 perc: holnapi teendők listája papírra, ne telefonba.'}
 ],
@@ -396,12 +394,12 @@ dayplan:[
   ['−1,5 óra','<b>Fények le.</b> Mennyezeti lámpa ki, meleg fényű állólámpa. Tea föl.'],
   ['−1 óra','<b>Kiegészítők:</b> magnézium és glicin. Melatonint korábban.'],
   ['−1 óra','<b>Meleg zuhany</b> 10–15 perc.'],
-  ['−30 perc','<b>Kiírás</b> papírra, utána relaxáció hanggal.'],
+  ['−30 perc','<b>Kiírás</b> papírra, utána relaxáció.'],
   ['lefekvés','<b>Hűvös, sötét, néma szoba</b>, 16–19 °C.']
 ],
 
 breath:[
-  {label:'Belélegzés orron át', say:'Lélegezz be orron át.'},
+  {label:'Belélegzés orron át'},
   {label:'Tartsd bent',         say:'Tartsd bent.'},
   {label:'Fújd ki lassan',      say:'Fújd ki lassan, szájon át.'}
 ],
@@ -410,11 +408,8 @@ pmr:{
   tense:'FESZÍTSD.',
   release:'ENGEDD EL.',
   releaseTxt:'Csak figyeld, hogy ereszt ki a feszülés, és süllyed bele az ágyba.',
-  sayTense:'{title}. Feszítsd. {how}',
-  sayRelease:'Engedd el. Figyeld, hogy ereszt ki a feszülés.',
   doneTitle:'Kész.',
   doneTxt:'Feküdj még egy percet mozdulatlanul, mielőtt bármit csinálnál.',
-  sayDone:'Kész. Feküdj még egy percet mozdulatlanul.',
   stopped:'Megállítva. Az Indítás újrakezdi az elejéről.',
   steps:[
     ['labfej','Lábfej és lábujjak','Görbítsd be a lábujjaidat, feszítsd meg a talpad boltozatát.'],
@@ -432,10 +427,8 @@ pmr:{
 
 scan:{
   ready:'Kész az indításra. {n} másodperc jut egy testrészre.',
-  sayIntro:'Feküdj kényelmesen, csukd be a szemed, és figyelj oda arra, amit mondok.',
   doneTitle:'Kész.',
   doneTxt:'Ha még ébren vagy, maradj így, és hagyd, hogy jöjjön az álom magától.',
-  sayDone:'Kész. Ha még ébren vagy, maradj így, és hagyd, hogy jöjjön az álom magától.',
   stopped:'Megállítva. Az Indítás onnan folytatja, ahol abbahagytad.',
   steps:[
     ['labfej','Lábfej','Kezdd itt. Meleg? Hűvös? Bizsergés? Semmi? Mindegyik jó válasz.'],
@@ -451,15 +444,8 @@ scan:{
   ]
 },
 
-tts:{
-  unsupported:'A böngésződ nem tud beszélni.',
-  found:'Hang: {name}',
-  missing:'A nyelvhez nincs telepített hang — a rendszer alaphangját használja. Windowsban: Beállítások → Idő és nyelv → Beszéd → nyelvi hangcsomag.',
-  enabled:'Hang bekapcsolva. Csukott szemmel is követheted.'
-}
-,
 
-evLegend:{k:'Bizonyíték', l1:'Korlátozott', l2:'Jó', l3:'Erős'},
+evLegend:{k:'Bizonyíték', l0:'Szemléltető modell', l1:'Korlátozott bizonyíték', l2:'Jó bizonyíték', l3:'Erős bizonyíték'},
 
 srcTypes:{exp:'kísérlet', trial:'kísérletes vizsgálat', meta:'metaelemzés', review:'áttekintés', cross:'keresztezett vizsgálat', class:'szakértői besorolás'},
 

@@ -1,7 +1,7 @@
 /* English translation of the Hungarian source file. Mirrors its key structure. */
 window.LANGS = window.LANGS || {};
 window.LANGS.en = {
-code:'en', label:'EN', name:'English', htmlLang:'en', ttsLang:'en-US',
+code:'en', label:'EN', name:'English', htmlLang:'en',
 
 ui:{
   title:'Sleep 2026',
@@ -16,8 +16,8 @@ ui:{
   footer:'SLEEP 2026',
 
   mapEyebrow:'Mind map',
-  mapH1:'Eight hours your brain doesn\'t spend sleeping',
-  mapLead:'While you lie there, your brain works in cycles: it consolidates the day, processes emotions, and flushes out the waste that built up while you were awake. Meanwhile your immune system reorganizes itself too. An internal clock conducts the whole thing. Click a branch.',
+  mapH1:'What happens to your brain while you sleep?',
+  mapLead:'Sleep is not a switch-off: the brain and the body stay active at night. While you lie there, the brain works in cycles — it files away the day, processes emotions, and washes out the waste that built up while you were awake. Meanwhile the immune system reorganises itself, and an internal clock conducts the whole thing. Click a branch.',
   mapSvgAria:'Mind map of sleep topics',
 
   cycEyebrow:'Sleep cycle',
@@ -43,7 +43,7 @@ ui:{
 
   circEyebrow:'Circadian rhythm',
   circH2:'The internal clock that decides when sleep comes',
-  circLead:'In the middle of the brain, above the crossing of the optic nerves, sits a clock made of roughly 20&nbsp;000 cells, the <em>suprachiasmatic nucleus</em>. Its own cycle isn\'t exactly 24 hours but somewhat longer, and it differs from person to person — so it has to be reset every day. The reset button is light.',
+  circLead:'The natural cycle of the internal biological clock is not always exactly 24 hours. Environmental light helps to align the internal clock with the day–night cycle every day. The clock itself sits in the middle of the brain, above the crossing of the optic nerves: the <em>suprachiasmatic nucleus</em>, a group of roughly 20&nbsp;000 cells.',
   circSvgAria:'Melatonin, cortisol, core temperature',
   circPlay:'Play the day',
   circPause:'Pause',
@@ -60,7 +60,7 @@ ui:{
   cleanLegGreen:'<strong style="color:#4fe0a8">Green</strong> — vein: used fluid OUT',
   cleanLegPink:'<strong style="color:#ff7fb0">Pink</strong> — lymphatic vessel to the neck node',
   cleanLegDark:'<strong style="color:#e8506f">Maroon</strong> — the waste itself',
-  cleanLead2:'In the model, the role of the pump is played by the slow wave of deep sleep. Switch to deep sleep and watch the pulse indicator in the bottom left: <strong>in the animation, a batch of maroon waste pixels sets off at every peak</strong>, is picked up by the green vein, and carried from there through the pink lymphatic vessel to the neck lymph node. That is how the illustration works — in a real brain the flow is continuous, and its extent is still being researched.',
+  cleanLead2:'The animation illustrates one research model of how fluid movement during sleep can be pictured. The real process in humans is more complex than this, and it is still being researched. Switch to deep sleep and watch how the maroon waste reaches the green vein, and from there travels through the pink lymphatic vessel to the neck lymph node.',
   cleanStateAria:'State',
   cleanAwake:'Awake',
   cleanAsleep:'In deep sleep',
@@ -91,7 +91,7 @@ ui:{
 
   relaxEyebrow:'Evening relaxation',
   relaxH2:'Three exercises before bed',
-  relaxIntro:'Do just one at a time. They all aim at the same thing: taking the edge off your stress response so sleep can arrive on its own. If you fall asleep partway through, that\'s a success, not a failure. <strong>Turn the sound on</strong> and you won\'t need to read — I\'ll talk you through it.',
+  relaxIntro:'Do just one at a time. They all aim at the same thing: taking the edge off your stress response so sleep can arrive on its own. If you fall asleep partway through, that\'s a success, not a failure.',
   tabBreath:'4-7-8 breathing',
   tabPmr:'Progressive muscle relaxation',
   tabScan:'Body scan',
@@ -104,12 +104,10 @@ ui:{
   secShort:'s',
   pmrIntro:'From your toes to your forehead, muscle group by muscle group: five seconds of tensing, then ten seconds of complete release. The point is to notice the difference between tense and relaxed. Do it lying down.',
   pmrIdle:'Press Start, and I\'ll guide you through it step by step.',
-  scanIntro:'Same body map, just without the tensing. You bring your attention to a body part, notice what you feel there, and move on. The ring of light circling around shows where your attention is — moving down the front, up the back, the way a ring travels around a body. With the sound on, you can do the whole thing with your eyes closed.',
+  scanIntro:'Same body map, just without the tensing. You bring your attention to a body part, notice what you feel there, and move on. The ring of light circling around shows where your attention is — moving down the front, up the back, the way a ring travels around a body.',
   scanIdle:'Choose a length, and start it.',
   start:'Start',
   stop:'Stop',
-  soundOn:'Sound: on',
-  soundOff:'Sound: off',
   min5:'5 min',
   min10:'10 min',
   remaining:'remaining:',
@@ -147,7 +145,7 @@ branches:[
   {id:'tisztitas', title:'Brain cleaning',    sub:['artery, vein, lymph','pulse pumps it']},
   {id:'miert',     title:'Why it matters',    sub:['immune system','cancer risk']},
   {id:'tippek',    title:'Better sleep',      sub:['stimulus control','light and temperature']},
-  {id:'relax',     title:'Evening relaxation',sub:['4-7-8 breathing','voice-guided']},
+  {id:'relax',     title:'Evening relaxation',sub:['4-7-8 breathing','step by step']},
   {id:'etrend',    title:'Tea, food, vitamins',sub:['when to eat and drink','supplements']}
 ],
 
@@ -291,43 +289,43 @@ harm:[
 ],
 
 core:[
-{t:'A fixed wake time, weekends included',
+{t:'A fixed wake time, weekends included', ev:2,
  w:'It\'s waking, not going to bed, that anchors the internal clock. The clock\'s own cycle is somewhat longer than 24 hours, so it needs resetting every day. If you shift by two hours on the weekend, to your clock that\'s the same as flying across two time zones: you start Monday with social jet lag.',
  h:'Pick the earliest wake time you have on weekdays, and keep weekends within half an hour of it. If you didn\'t get enough sleep, go to bed earlier rather than waking up later.'},
-{t:'The bed is only for sleep — stimulus control',
+{t:'The bed is only for sleep — stimulus control', ev:3,
  w:'If you toss and turn, worry, or scroll your phone in bed, the brain learns the association "bed = alertness". This is a conditioned reflex that forms within a few weeks. Stimulus control overrides it, and it\'s one of the strongest single components of CBT-I on its own.',
  h:'If you haven\'t fallen asleep after about 20 minutes, get up. Don\'t check the clock, estimate it. Go to another room, dim light, read something boring. Only go back once you\'re genuinely sleepy — and repeat as many times as needed.'},
-{t:'Sleep restriction',
+{t:'Sleep restriction', ev:3,
  w:'If you lie in bed for nine hours to get six hours of sleep, those three awake hours turn the bed into a place of wakefulness and fragment your sleep. If you narrow the time spent in bed down to your actual sleep time, sleep pressure rises and sleep consolidates.',
  h:'Keep a sleep diary for a week. Set your time in bed to your average actual sleep time, but never go below 5.5 hours. Keep the wake time fixed, push bedtime later. If your sleep efficiency stays above 90% for a week, extend it by 15 minutes.'},
-{t:'Morning light, soon after waking',
+{t:'Morning light, soon after waking', ev:2,
  w:'The retina holds separate sensor cells that report directly to the internal clock. Morning light shuts off any remaining melatonin, brings cortisol up to its normal waking peak, and shifts the clock earlier. The effect isn\'t immediate: it shows up in the evening.',
  h:'10–20 minutes outside, or 30–40 on a cloudy day. Only a fraction of the light gets through a window, so actually go outside. No sunglasses, but don\'t stare into the sun.'},
-{t:'A cool bedroom, 16–19 °C',
+{t:'A cool bedroom, 16–19 °C', ev:2,
  w:'To fall asleep, core temperature needs to drop by about 1 °C, and it does that by the blood vessels in your hands and feet dilating and releasing heat. In a room that\'s too warm, there\'s nowhere for that heat to go.',
  h:'16–19 °C, and regulate mainly with the blanket. If your feet are cold, put socks on — paradoxically it helps, because it dilates the vessels and lets heat escape more easily.'}
 ],
 
 extra:[
-{t:'Caffeine: last dose 8–10 hours before bed',
+{t:'Caffeine: last dose 8–10 hours before bed', ev:3,
  w:'Caffeine blocks adenosine receptors. It doesn\'t make adenosine go away, it just hides its signal — and when it wears off, the adenosine that built up hits all at once. Its half-life is 5–6 hours: half of the coffee you drink at 3 p.m. is still in you at 9 p.m. The most common consequence isn\'t trouble falling asleep, it\'s getting less deep sleep.',
  h:'Draw the line about 10 hours before bed. Watch for hidden sources: energy drinks, green tea, dark chocolate, some painkillers.'},
-{t:'Alcohol is not sleep',
+{t:'Alcohol is not sleep', ev:3,
  w:'It\'s sedating, so you fall asleep faster — but the state you end up in isn\'t natural sleep. It suppresses REM in the first half, and once it wears off, the second half turns fragmented and shallow, with lots of micro-awakenings.',
  h:'If you drink, leave at least 3–4 hours before bed, and drink water alongside it. Try two weeks without it and compare.'},
-{t:'A warm shower or bath 1–2 hours before bed',
+{t:'A warm shower or bath 1–2 hours before bed', ev:2,
  w:'The point isn\'t warming up — it\'s what happens afterward: warm water dilates the blood vessels in the skin, and once you step out, the body releases heat more efficiently, so core temperature drops faster.',
  h:'10–15 minutes of warm, not hot, water. A bath, a shower, even a foot bath works.'},
-{t:'Dim, low-placed light in the evening',
+{t:'Dim, low-placed light in the evening', ev:2,
  w:'The retina\'s clock receptors respond most strongly to blue-ish light coming from above. Bright evening ceiling light signals that it\'s still daytime and delays melatonin onset.',
  h:'After sunset, turn off the ceiling light and use warm-toned lamps below eye level. The room\'s light matters more than the screen.'},
-{t:'Exercise yes, but not right before bed',
+{t:'Exercise yes, but not right before bed', ev:2,
  w:'Regular exercise during the day deepens deep sleep. Intense exercise, though, raises core temperature right when it should be dropping, and raises cortisol, which should be at its low point in the evening.',
  h:'Intense exercise no later than 2–3 hours before bed. Late in the evening, stick to stretching, walking, gentle yoga.'},
-{t:'A big dinner and lots of fluid before bed',
+{t:'A big dinner and lots of fluid before bed', ev:1,
  w:'Digestion raises body heat and metabolism, right when core temperature should be dropping. Lying down afterward, reflux can also wake you up.',
  h:'Have your last substantial meal 3 hours before bed. Shift most of your fluid intake to the first half of the day.'},
-{t:'Write down what\'s spinning in your head',
+{t:'Write down what\'s spinning in your head', ev:1,
  w:'Unfinished tasks held in your head keep you alert: the brain won\'t let go of anything that doesn\'t have a fixed place to be.',
  h:'10 minutes before bed: write tomorrow\'s to-do list on paper, not on your phone.'}
 ],
@@ -396,12 +394,12 @@ dayplan:[
   ['−1.5 h','<b>Lights down.</b> Ceiling light off, warm-toned floor lamp. Tea on.'],
   ['−1 h','<b>Supplements:</b> magnesium and glycine. Melatonin earlier.'],
   ['−1 h','<b>Warm shower</b>, 10–15 minutes.'],
-  ['−30 min','<b>Write it down</b> on paper, then voice-guided relaxation.'],
+  ['−30 min','<b>Write it down</b> on paper, then relaxation.'],
   ['bedtime','<b>Cool, dark, silent room</b>, 16–19 °C.']
 ],
 
 breath:[
-  {label:'Breathe in through the nose', say:'Breathe in through your nose.'},
+  {label:'Breathe in through the nose'},
   {label:'Hold it',                    say:'Hold it.'},
   {label:'Breathe out slowly',         say:'Breathe out slowly, through your mouth.'}
 ],
@@ -410,11 +408,8 @@ pmr:{
   tense:'TENSE.',
   release:'RELEASE.',
   releaseTxt:'Just notice the tension draining out, and sink into the bed.',
-  sayTense:'{title}. Tense it. {how}',
-  sayRelease:'Release. Notice the tension draining out.',
   doneTitle:'Done.',
   doneTxt:'Lie still for one more minute before you do anything.',
-  sayDone:'Done. Lie still for one more minute.',
   stopped:'Stopped. Start will begin again from the beginning.',
   steps:[
     ['labfej','Feet and toes','Curl your toes, tense the arch of your foot.'],
@@ -432,10 +427,8 @@ pmr:{
 
 scan:{
   ready:'Ready to start. {n} seconds per body part.',
-  sayIntro:'Lie down comfortably, close your eyes, and pay attention to what I say.',
   doneTitle:'Done.',
   doneTxt:'If you\'re still awake, stay like this and let sleep come on its own.',
-  sayDone:'Done. If you\'re still awake, stay like this and let sleep come on its own.',
   stopped:'Stopped. Start will continue from where you left off.',
   steps:[
     ['labfej','Feet','Start here. Warm? Cool? Tingling? Nothing? Any answer is fine.'],
@@ -451,15 +444,8 @@ scan:{
   ]
 },
 
-tts:{
-  unsupported:'Your browser can\'t speak.',
-  found:'Voice: {name}',
-  missing:'No voice is installed for this language — the system\'s default voice will be used. On Windows: Settings → Time & Language → Speech → language voice pack.',
-  enabled:'Sound turned on. You can follow along with your eyes closed.'
-}
-,
 
-evLegend:{k:'Evidence', l1:'Limited', l2:'Good', l3:'Strong'},
+evLegend:{k:'Evidence', l0:'Illustrative model', l1:'Limited evidence', l2:'Good evidence', l3:'Strong evidence'},
 
 srcTypes:{exp:'experiment', trial:'experimental study', meta:'meta-analysis', review:'review', cross:'crossover study', class:'expert classification'},
 

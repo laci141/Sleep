@@ -1,7 +1,7 @@
 /* Deutsch — Übersetzung des ungarischen Originals (hu.js). Gleiche Schlüsselstruktur. */
 window.LANGS = window.LANGS || {};
 window.LANGS.de = {
-code:'de', label:'DE', name:'Deutsch', htmlLang:'de', ttsLang:'de-DE',
+code:'de', label:'DE', name:'Deutsch', htmlLang:'de',
 
 ui:{
   title:'Schlaf 2026',
@@ -16,8 +16,8 @@ ui:{
   footer:'SCHLAF 2026',
 
   mapEyebrow:'Gedankenkarte',
-  mapH1:'Acht Stunden, die dein Gehirn nicht mit Schlafen verbringt',
-  mapLead:'Während du liegst, arbeitet dein Gehirn in Zyklen: Es speichert den Tag, verarbeitet Gefühle und spült den Abfall aus sich heraus, der sich im Wachzustand angesammelt hat. Währenddessen organisiert sich auch das Immunsystem neu. Eine innere Uhr dirigiert das Ganze. Klick auf einen Ast.',
+  mapH1:'Was passiert mit deinem Gehirn, während du schläfst?',
+  mapLead:'Schlaf ist kein Abschalten: Gehirn und Körper sind auch nachts aktiv. Während du liegst, arbeitet das Gehirn in Zyklen — es speichert den Tag ab, verarbeitet Gefühle und spült den Abfall heraus, der sich im Wachzustand angesammelt hat. Gleichzeitig ordnet sich das Immunsystem neu, und eine innere Uhr dirigiert das Ganze. Klicke auf einen Zweig.',
   mapSvgAria:'Gedankenkarte der Schlafthemen',
 
   cycEyebrow:'Schlafzyklus',
@@ -43,7 +43,7 @@ ui:{
 
   circEyebrow:'Zirkadianer Rhythmus',
   circH2:'Die innere Uhr, die entscheidet, wann der Schlaf kommt',
-  circLead:'In der Mitte des Gehirns, über der Kreuzung der Sehnerven, sitzt eine aus etwa 20&nbsp;000 Zellen bestehende Uhr, der <em>Nucleus suprachiasmaticus</em>. Ihr eigener Zyklus dauert nicht genau 24 Stunden, sondern etwas länger, und sie ist von Mensch zu Mensch verschieden — deshalb muss sie täglich neu gestellt werden. Der Stellknopf ist das Licht.',
+  circLead:'Der natürliche Zyklus der inneren biologischen Uhr dauert nicht immer genau 24 Stunden. Das Umgebungslicht hilft jeden Tag dabei, die innere Uhr mit dem Tag-Nacht-Zyklus in Einklang zu bringen. Die Uhr selbst sitzt in der Mitte des Gehirns, über der Kreuzung der Sehnerven: der <em>Nucleus suprachiasmaticus</em>, eine Gruppe von etwa 20&nbsp;000 Zellen.',
   circSvgAria:'Melatonin, Cortisol, Körperkerntemperatur',
   circPlay:'Tag abspielen',
   circPause:'Pause',
@@ -60,7 +60,7 @@ ui:{
   cleanLegGreen:'<strong style="color:#4fe0a8">Grün</strong> — Vene: verschmutzte Flüssigkeit RAUS',
   cleanLegPink:'<strong style="color:#ff7fb0">Rosa</strong> — Lymphgefäß zum Halslymphknoten',
   cleanLegDark:'<strong style="color:#e8506f">Weinrot</strong> — der Abfall selbst',
-  cleanLead2:'Im Modell übernimmt die langsame Welle des Tiefschlafs die Rolle der Pumpe. Schalte auf Tiefschlaf um, und schau auf die Pulsanzeige unten links: <strong>in der Animation setzt sich bei jeder Spitze eine Portion weinroter Abfall-Pixel in Bewegung</strong>, gelangt auf die grüne Vene und von dort über das rosa Lymphgefäß zum Halslymphknoten. So läuft die Veranschaulichung — im echten Gehirn ist der Fluss kontinuierlich, und sein Ausmaß wird noch erforscht.',
+  cleanLead2:'Die Animation veranschaulicht ein Forschungsmodell davon, wie man sich die Flüssigkeitsbewegung im Schlaf vorstellen kann. Der tatsächliche Vorgang im Menschen ist komplexer und wird derzeit noch erforscht. Schalte auf Tiefschlaf um und schau, wie der weinrote Abfall auf die grüne Vene gelangt und von dort über das rosa Lymphgefäß zum Halslymphknoten.',
   cleanStateAria:'Zustand',
   cleanAwake:'Wach',
   cleanAsleep:'Im Tiefschlaf',
@@ -91,7 +91,7 @@ ui:{
 
   relaxEyebrow:'Abendliche Entspannung',
   relaxH2:'Drei Übungen vor dem Schlafengehen',
-  relaxIntro:'Mach immer nur eine davon. Alle zielen auf dasselbe: Sie nehmen die Stressreaktion weg, damit der Schlaf von selbst kommt. Wenn du dabei einschläfst, ist das der Erfolg, nicht das Scheitern. <strong>Schalte den Ton ein</strong>, dann musst du nicht lesen — ich führe dich durch.',
+  relaxIntro:'Mach immer nur eine davon. Alle zielen auf dasselbe: Sie nehmen die Stressreaktion weg, damit der Schlaf von selbst kommt. Wenn du dabei einschläfst, ist das der Erfolg, nicht das Scheitern.',
   tabBreath:'4-7-8-Atmung',
   tabPmr:'Progressive Muskelentspannung',
   tabScan:'Körperscan',
@@ -104,12 +104,10 @@ ui:{
   secShort:'s',
   pmrIntro:'Von den Zehen bis zur Stirn, Muskelgruppe für Muskelgruppe: fünf Sekunden anspannen, dann zehn Sekunden vollständig loslassen. Es geht darum, den Unterschied zwischen angespannt und locker zu spüren. Mach es im Liegen.',
   pmrIdle:'Drück auf Start, und ich führe dich Schritt für Schritt hindurch.',
-  scanIntro:'Dieselbe Körperkarte, nur ohne Anspannung. Du richtest die Aufmerksamkeit auf einen Körperteil, schaust, was du dort fühlst, und gehst weiter. Der umlaufende Lichtring zeigt, wo die Aufmerksamkeit gerade ist — vorne abwärts, hinten aufwärts, so wie ein Ring einen Körper umrundet. Mit Ton lässt es sich auch mit geschlossenen Augen durchführen.',
+  scanIntro:'Dieselbe Körperkarte, nur ohne Anspannung. Du richtest die Aufmerksamkeit auf einen Körperteil, schaust, was du dort fühlst, und gehst weiter. Der umlaufende Lichtring zeigt, wo die Aufmerksamkeit gerade ist — vorne abwärts, hinten aufwärts, so wie ein Ring einen Körper umrundet.',
   scanIdle:'Wähl eine Länge, und starte.',
   start:'Start',
   stop:'Stopp',
-  soundOn:'Ton: an',
-  soundOff:'Ton: aus',
   min5:'5 Min',
   min10:'10 Min',
   remaining:'verbleibend:',
@@ -147,7 +145,7 @@ branches:[
   {id:'tisztitas', title:'Gehirnreinigung',      sub:['Arterie, Vene, Lymphe','Puls pumpt']},
   {id:'miert',     title:'Warum es wichtig ist',      sub:['Immunsystem','Krebsrisiko']},
   {id:'tippek',    title:'Besser schlafen',        sub:['Stimuluskontrolle','Licht und Temperatur']},
-  {id:'relax',     title:'Abendliche Entspannung',    sub:['4-7-8-Atmung','mit Tonführung']},
+  {id:'relax',     title:'Abendliche Entspannung',    sub:['4-7-8-Atmung','Schritt für Schritt']},
   {id:'etrend',    title:'Tee, Essen, Vitamine',sub:['wann du essen und trinken solltest','Nahrungsergänzung']}
 ],
 
@@ -291,43 +289,43 @@ harm:[
 ],
 
 core:[
-{t:'Feste Aufwachzeit, auch am Wochenende',
+{t:'Feste Aufwachzeit, auch am Wochenende', ev:2,
  w:'Das Aufwachen verankert die innere Uhr, nicht das Zubettgehen. Der eigene Zyklus der Uhr ist etwas länger als 24 Stunden, deshalb muss sie täglich neu gestellt werden. Wenn du am Wochenende zwei Stunden verschiebst, ist das für deine Uhr, als wärst du über zwei Zeitzonen geflogen: Am Montag startest du mit sozialem Jetlag.',
  h:'Wähl die früheste Aufwachzeit deiner Wochentage, und halte dich auch am Wochenende innerhalb einer halben Stunde davon. Wenn der Schlaf zu kurz war, geh lieber früher ins Bett, statt später aufzustehen.'},
-{t:'Das Bett nur zum Schlafen — Stimuluskontrolle',
+{t:'Das Bett nur zum Schlafen — Stimuluskontrolle', ev:3,
  w:'Wenn du dich im Bett hin- und herwälzt, dir Sorgen machst oder am Handy bist, lernt das Gehirn die Verknüpfung „Bett = Wachheit". Das ist ein bedingter Reflex, der sich innerhalb weniger Wochen ausbildet. Die Stimuluskontrolle hebt das auf und ist eine der stärksten eigenständigen Komponenten der CBT-I.',
  h:'Wenn du nach etwa 20 Minuten nicht eingeschlafen bist, steh auf. Schau nicht auf die Uhr, schätze. Geh in einen anderen Raum, Halbdunkel, lies etwas Langweiliges. Geh erst zurück, wenn du wirklich müde bist — und wiederhole das beliebig oft.'},
-{t:'Schlafrestriktion',
+{t:'Schlafrestriktion', ev:3,
  w:'Wenn du neun Stunden im Bett liegst, um sechs zu schlafen, machen die drei wach verbrachten Stunden das Bett zu einem Ort der Wachheit und zerstückeln den Schlaf. Wenn du die im Bett verbrachte Zeit auf die tatsächliche Schlafzeit beschränkst, steigt der Schlafdruck, und der Schlaf verdichtet sich.',
  h:'Führ eine Woche lang ein Schlaftagebuch. Stell die im Bett verbrachte Zeit auf die durchschnittliche tatsächliche Schlafzeit ein, aber geh nie unter 5,5 Stunden. Die Aufwachzeit bleibt fest, das Zubettgehen verschiebst du nach hinten. Wenn die Schlafeffizienz eine Woche lang über 90% liegt, verlängere um 15 Minuten.'},
-{t:'Morgenlicht, bald nach dem Aufwachen',
+{t:'Morgenlicht, bald nach dem Aufwachen', ev:2,
  w:'In der Netzhaut sitzen eigene Sinneszellen, die direkt an die innere Uhr melden. Das Morgenlicht stoppt das restliche Melatonin, treibt das Cortisol auf den normalen Aufwach-Höhepunkt und stellt die Uhr vor. Die Wirkung ist nicht sofort spürbar: Sie zeigt sich am Abend.',
  h:'10–20 Minuten draußen, bei bewölktem Wetter eher 30–40. Durch ein Fenster kommt nur ein Bruchteil des Lichts durch, geh also wirklich hinaus. Ohne Sonnenbrille, aber schau nicht in die Sonne.'},
-{t:'Kühles Schlafzimmer, 16–19 °C',
+{t:'Kühles Schlafzimmer, 16–19 °C', ev:2,
  w:'Zum Einschlafen muss die Körperkerntemperatur um etwa 1 °C fallen, und das geschieht dadurch, dass sich die Blutgefäße in Händen und Füßen erweitern und die Wärme abgeben. In einem zu warmen Zimmer gibt es nirgendwohin abzugeben.',
  h:'16–19 °C, und reguliere lieber mit der Decke. Wenn dir an den Füßen kalt ist, zieh Socken an — paradoxerweise hilft das, weil sich dadurch die Gefäße erweitern und die Wärme besser abfließt.'}
 ],
 
 extra:[
-{t:'Koffein: letzte Dosis 8–10 Stunden vor dem Schlafengehen',
+{t:'Koffein: letzte Dosis 8–10 Stunden vor dem Schlafengehen', ev:3,
  w:'Koffein blockiert die Adenosinrezeptoren. Es lässt das Adenosin nicht verschwinden, sondern verdeckt nur sein Signal — und wenn es abgebaut ist, schlägt das angesammelte Adenosin auf einmal zu. Die Halbwertszeit beträgt 5–6 Stunden: Von einem um 15 Uhr getrunkenen Kaffee ist um 21 Uhr noch die Hälfte in dir. Die häufigste Folge ist nicht das Einschlafen, sondern dass du weniger Tiefschlaf bekommst.',
  h:'Zieh die Grenze etwa 10 Stunden vor dem Schlafengehen. Achte auf versteckte Quellen: Energydrinks, grüner Tee, Zartbitterschokolade, manche Schmerzmittel.'},
-{t:'Alkohol ist kein Schlaf',
+{t:'Alkohol ist kein Schlaf', ev:3,
  w:'Er wirkt beruhigend, deshalb schläfst du schneller ein — aber der dadurch entstehende Zustand ist kein natürlicher Schlaf. Er unterdrückt den REM in der ersten Hälfte, und wenn er abgebaut wird, folgt eine zerstückelte, oberflächliche zweite Hälfte mit vielen Mikroerwachungen.',
  h:'Wenn du trinkst, lass mindestens 3–4 Stunden bis zum Schlafengehen, und trink Wasser dazu. Probier zwei Wochen ohne, und vergleiche.'},
-{t:'Warme Dusche oder Bad 1–2 Stunden vor dem Schlafengehen',
+{t:'Warme Dusche oder Bad 1–2 Stunden vor dem Schlafengehen', ev:2,
  w:'Nicht das Aufwärmen ist der Punkt, sondern das, was danach kommt: Das warme Wasser weitet die Hautgefäße, und beim Herausgehen gibt der Körper die Wärme effizienter ab — dadurch sinkt die Kerntemperatur schneller.',
  h:'10–15 Minuten warmes, nicht heißes Wasser. Wannenbad, Dusche, sogar ein Fußbad funktioniert.'},
-{t:'Abends schwaches, tief sitzendes Licht',
+{t:'Abends schwaches, tief sitzendes Licht', ev:2,
  w:'Die Uhr-Sensoren der Netzhaut reagieren am stärksten auf bläuliches Licht von oben. Starke Deckenbeleuchtung am Abend signalisiert, dass noch Tag ist, und verzögert den Start des Melatonins.',
  h:'Schalte nach Sonnenuntergang die Deckenlampe aus, benutz Lampen unterhalb der Augenhöhe mit warmem Licht. Das Licht im Raum ist der größere Faktor, nicht der Bildschirm.'},
-{t:'Bewegung ja, aber nicht direkt vor dem Schlafengehen',
+{t:'Bewegung ja, aber nicht direkt vor dem Schlafengehen', ev:2,
  w:'Regelmäßige Bewegung tagsüber vertieft den Tiefschlaf. Intensives Training treibt hingegen die Körperkerntemperatur hoch, die eigentlich sinken sollte, und hebt den Cortisolspiegel, der abends auf seinem Tiefpunkt sein sollte.',
  h:'Intensives Training spätestens 2–3 Stunden vor dem Schlafengehen. Spätabends nur noch Dehnen, Spazieren, leichtes Yoga.'},
-{t:'Großes Abendessen und viel Flüssigkeit vor dem Schlafengehen',
+{t:'Großes Abendessen und viel Flüssigkeit vor dem Schlafengehen', ev:1,
  w:'Die Verdauung treibt die Körpertemperatur und den Stoffwechsel hoch, genau dann, wenn die Kerntemperatur sinken sollte. Im Liegen kann dich auch Sodbrennen wecken.',
  h:'Die letzte größere Mahlzeit 3 Stunden vor dem Schlafengehen. Verlager die Flüssigkeitsaufnahme in die erste Tageshälfte.'},
-{t:'Schreib auf, was dir im Kopf herumgeht',
+{t:'Schreib auf, was dir im Kopf herumgeht', ev:1,
  w:'Im Kopf gehaltene unerledigte Aufgaben halten die Wachheit aufrecht: Das Gehirn lässt nicht los, was keinen sicheren Platz hat.',
  h:'10 Minuten vor dem Schlafengehen: die Aufgabenliste für morgen auf Papier, nicht ins Handy.'}
 ],
@@ -396,12 +394,12 @@ dayplan:[
   ['−1,5 Std','<b>Lichter runter.</b> Deckenlampe aus, Stehlampe mit warmem Licht. Tee auf.'],
   ['−1 Std','<b>Nahrungsergänzung:</b> Magnesium und Glycin. Melatonin früher.'],
   ['−1 Std','<b>Warme Dusche</b> 10–15 Minuten.'],
-  ['−30 Min','<b>Aufschreiben</b> auf Papier, danach Entspannung mit Ton.'],
+  ['−30 Min','<b>Aufschreiben</b> auf Papier, danach Entspannung.'],
   ['Schlafengehen','<b>Kühles, dunkles, stilles Zimmer</b>, 16–19 °C.']
 ],
 
 breath:[
-  {label:'Einatmen durch die Nase', say:'Atme durch die Nase ein.'},
+  {label:'Einatmen durch die Nase'},
   {label:'Halte an',         say:'Halte die Luft an.'},
   {label:'Langsam ausatmen',      say:'Atme langsam durch den Mund aus.'}
 ],
@@ -410,11 +408,8 @@ pmr:{
   tense:'ANSPANNEN.',
   release:'LOSLASSEN.',
   releaseTxt:'Beobachte einfach, wie die Spannung nachlässt und du ins Bett einsinkst.',
-  sayTense:'{title}. Anspannen. {how}',
-  sayRelease:'Lass los. Beobachte, wie die Spannung nachlässt.',
   doneTitle:'Fertig.',
   doneTxt:'Bleib noch eine Minute reglos liegen, bevor du irgendetwas tust.',
-  sayDone:'Fertig. Bleib noch eine Minute reglos liegen.',
   stopped:'Gestoppt. Start beginnt wieder von vorne.',
   steps:[
     ['labfej','Fuß und Zehen','Kräusel die Zehen ein, spann das Fußgewölbe an.'],
@@ -432,10 +427,8 @@ pmr:{
 
 scan:{
   ready:'Bereit zum Start. {n} Sekunden pro Körperteil.',
-  sayIntro:'Leg dich bequem hin, schließ die Augen, und achte auf das, was ich sage.',
   doneTitle:'Fertig.',
   doneTxt:'Wenn du noch wach bist, bleib so liegen, und lass den Schlaf von selbst kommen.',
-  sayDone:'Fertig. Wenn du noch wach bist, bleib so liegen, und lass den Schlaf von selbst kommen.',
   stopped:'Gestoppt. Start setzt dort fort, wo du aufgehört hast.',
   steps:[
     ['labfej','Füße','Fang hier an. Warm? Kühl? Kribbeln? Nichts? Jede Antwort ist richtig.'],
@@ -451,15 +444,8 @@ scan:{
   ]
 },
 
-tts:{
-  unsupported:'Dein Browser kann nicht sprechen.',
-  found:'Stimme: {name}',
-  missing:'Für diese Sprache ist keine Stimme installiert — es wird die Standardstimme des Systems verwendet. Unter Windows: Einstellungen → Zeit und Sprache → Sprache und Region → Sprachpaket installieren.',
-  enabled:'Ton eingeschaltet. Du kannst auch mit geschlossenen Augen folgen.'
-}
-,
 
-evLegend:{k:'Evidenz', l1:'Begrenzt', l2:'Gut', l3:'Stark'},
+evLegend:{k:'Evidenz', l0:'Veranschaulichendes Modell', l1:'Begrenzte Evidenz', l2:'Gute Evidenz', l3:'Starke Evidenz'},
 
 srcTypes:{exp:'Experiment', trial:'experimentelle Studie', meta:'Metaanalyse', review:'Übersichtsarbeit', cross:'Cross-over-Studie', class:'Experten-Einstufung'},
 
