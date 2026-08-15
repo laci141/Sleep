@@ -16,8 +16,8 @@ ui:{
   footer:'SOMN 2026',
 
   mapEyebrow:'Harta minții',
-  mapH1:'Opt ore în care creierul tău nu doar doarme',
-  mapLead:'Cât timp stai întins, creierul tău lucrează în cicluri: fixează ziua, procesează emoțiile și elimină deșeurile acumulate cât ai fost treaz. Între timp, sistemul imunitar se reorganizează și el. Un ceas intern dirijează totul. Dă clic pe o ramură.',
+  mapH1:'Ce se întâmplă cu creierul tău în timp ce dormi?',
+  mapLead:'Somnul nu înseamnă oprire: creierul și organismul sunt active și noaptea. Cât timp stai întins, creierul lucrează în cicluri — fixează ziua, procesează emoțiile și spală deșeurile adunate cât ai fost treaz. Între timp, sistemul imunitar se reorganizează, iar un ceas intern dirijează totul. Apasă pe o ramură.',
   mapSvgAria:'Harta minții a temelor despre somn',
 
   cycEyebrow:'Ciclul somnului',
@@ -43,7 +43,7 @@ ui:{
 
   circEyebrow:'Ritm circadian',
   circH2:'Ceasul intern care decide când vine somnul',
-  circLead:'În centrul creierului, deasupra încrucișării nervilor optici, se află un ceas format din aproximativ 20&nbsp;000 de celule, <em>nucleul suprachiasmatic</em>. Ciclul lui propriu nu este exact de 24 de ore, ci puțin mai lung, și diferă de la om la om — de aceea trebuie resetat zilnic. Butonul de reglare este lumina.',
+  circLead:'Ciclul natural al ceasului biologic intern nu este întotdeauna exact de 24 de ore. Lumina din mediu ajută în fiecare zi la sincronizarea ceasului intern cu ciclul zi–noapte. Ceasul propriu-zis se află în centrul creierului, deasupra încrucișării nervilor optici: <em>nucleul suprachiasmatic</em>, un grup de aproximativ 20&nbsp;000 de celule.',
   circSvgAria:'Melatonină, cortizol, temperatura centrală',
   circPlay:'Redă ziua',
   circPause:'Pauză',
@@ -60,7 +60,7 @@ ui:{
   cleanLegGreen:'<strong style="color:#4fe0a8">Verde</strong> — venă: lichid uzat care IESE',
   cleanLegPink:'<strong style="color:#ff7fb0">Roz</strong> — vas limfatic spre ganglionul cervical',
   cleanLegDark:'<strong style="color:#e8506f">Grena</strong> — deșeul propriu-zis',
-  cleanLead2:'În model, rolul pompei îl joacă unda lentă a somnului profund. Comută pe somn profund și urmărește indicatorul de puls din stânga jos: <strong>în animație, la fiecare vârf pornește o porție de pixeli grena de deșeu</strong>, ajunge pe vena verde, iar de acolo, prin vasul limfatic roz, în ganglionul limfatic cervical. Așa funcționează ilustrația — în creierul real curgerea este continuă, iar amploarea ei este încă în studiu.',
+  cleanLead2:'Animația ilustrează unul dintre modelele de cercetare despre cum ne putem imagina mișcarea lichidului în timpul somnului. Procesul real la om este mai complex și este încă în studiu. Comută pe somn profund și urmărește cum ajunge deșeul grena pe vena verde, iar de acolo, prin vasul limfatic roz, în ganglionul limfatic cervical.',
   cleanStateAria:'Stare',
   cleanAwake:'Treaz',
   cleanAsleep:'În somn profund',
@@ -291,43 +291,43 @@ harm:[
 ],
 
 core:[
-{t:'Oră fixă de trezire, chiar și în weekend',
+{t:'Oră fixă de trezire, chiar și în weekend', ev:2,
  w:'Trezirea ancorează ceasul intern, nu culcarea. Ciclul propriu al ceasului este puțin mai lung de 24 de ore, de aceea trebuie resetat zilnic. Dacă în weekend îl decalezi cu două ore, pentru ceasul tău e ca și cum ai fi zburat peste două fusuri orare: lunea pornești cu jetlag social.',
  h:'Alege cea mai devreme oră de trezire din timpul săptămânii și păstreaz-o și în weekend, în limita a jumătate de oră. Dacă ai dormit puțin, culcă-te mai devreme, nu te trezi mai târziu.'},
-{t:'Patul doar pentru somn — controlul stimulului',
+{t:'Patul doar pentru somn — controlul stimulului', ev:3,
  w:'Dacă te zvârcolești în pat, te îngrijorezi sau te uiți pe telefon, creierul învață asocierea „pat = veghe". Acesta este un reflex condiționat, care se formează în câteva săptămâni. Controlul stimulului suprascrie acest lucru și este unul dintre cele mai puternice ingrediente de sine stătătoare ale CBT-I.',
  h:'Dacă după circa 20 de minute nu ai adormit, ridică-te din pat. Nu te uita la ceas, estimează. Treci în altă cameră, penumbră, citește ceva plictisitor. Întoarce-te doar când chiar ești somnoros — și repetă de câte ori e nevoie.'},
-{t:'Restricția somnului',
+{t:'Restricția somnului', ev:3,
  w:'Dacă stai nouă ore în pat ca să dormi șase, cele trei ore petrecute treaz transformă patul într-un loc al vegherii și fragmentează somnul. Dacă restrângi timpul petrecut în pat la timpul real de somn, presiunea de somn crește, iar somnul se comprimă.',
  h:'Ține un jurnal de somn timp de o săptămână. Setează timpul petrecut în pat la media timpului real de somn, dar nu coborî niciodată sub 5,5 ore. Ora de trezire rămâne fixă, culcarea o amâni. Dacă timp de o săptămână eficiența somnului este peste 90%, extinde-o cu 15 minute.'},
-{t:'Lumină de dimineață, curând după trezire',
+{t:'Lumină de dimineață, curând după trezire', ev:2,
  w:'În retină există celule receptoare speciale, care raportează direct ceasului intern. Lumina de dimineață oprește melatonina rămasă, ridică cortizolul la vârful normal de trezire și avansează ceasul. Efectul nu este imediat: apare seara.',
  h:'10–20 de minute afară, pe vreme înnorată mai degrabă 30–40. Prin geam trece doar o fracțiune din lumină, așa că ieși cu adevărat afară. Fără ochelari de soare, dar nu te uita direct la soare.'},
-{t:'Dormitor răcoros, 16–19 °C',
+{t:'Dormitor răcoros, 16–19 °C', ev:2,
  w:'Pentru a adormi, temperatura centrală trebuie să scadă cu circa 1 °C, iar acest lucru se întâmplă prin dilatarea vaselor de sânge din mâini și picioare, care eliberează căldura. Într-o cameră prea caldă, nu are unde să o elibereze.',
  h:'16–19 °C, și reglează mai degrabă cu pătura. Dacă îți sunt reci picioarele, pune-ți șosete — ajută în mod paradoxal, pentru că astfel vasele se dilată și căldura se elimină mai bine.'}
 ],
 
 extra:[
-{t:'Cofeina: ultima doză cu 8–10 ore înainte de culcare',
+{t:'Cofeina: ultima doză cu 8–10 ore înainte de culcare', ev:3,
  w:'Cofeina blochează receptorii adenozinei. Nu elimină adenozina, doar îi ascunde semnalul — iar când se descompune, adenozina acumulată lovește deodată. Timpul de înjumătățire este de 5–6 ore: jumătate din cafeaua băută la ora 15 este încă în tine la ora 21. Cea mai frecventă consecință nu este adormirea, ci faptul că obții mai puțin somn profund.',
  h:'Trasează linia cu circa 10 ore înainte de culcare. Fii atent la sursele ascunse: băuturi energizante, ceai verde, ciocolată neagră, unele analgezice.'},
-{t:'Alcoolul nu este somn',
+{t:'Alcoolul nu este somn', ev:3,
  w:'Are efect sedativ, de aceea adormi mai repede — dar starea obținută astfel nu este somn natural. Suprimă REM-ul în prima jumătate, iar când se descompune, urmează o a doua jumătate fragmentată, superficială, cu multe microtreziri.',
  h:'Dacă bei, lasă cel puțin 3–4 ore până la culcare și bea apă alături. Încearcă două săptămâni fără el și compară.'},
-{t:'Duș sau baie caldă cu 1–2 ore înainte de culcare',
+{t:'Duș sau baie caldă cu 1–2 ore înainte de culcare', ev:2,
  w:'Nu încălzirea în sine contează, ci ce urmează după: apa caldă dilată vasele de sânge din piele, iar la ieșire corpul elimină căldura mai eficient — astfel temperatura centrală scade mai repede.',
  h:'10–15 minute apă caldă, nu fierbinte. Baie în cadă, duș, chiar și baia de picioare funcționează.'},
-{t:'Seara, lumină slabă, poziționată jos',
+{t:'Seara, lumină slabă, poziționată jos', ev:2,
  w:'Receptorii-ceas ai retinei reacționează cel mai puternic la lumina albăstruie venită de sus. Iluminatul puternic de plafon seara transmite mesajul că încă e zi și întârzie declanșarea melatoninei.',
  h:'După apusul soarelui, stinge lampa de plafon, folosește lămpi sub nivelul ochilor, cu lumină caldă. Miza mai mare este lumina camerei, nu ecranul.'},
-{t:'Mișcare da, dar nu chiar înainte de culcare',
+{t:'Mișcare da, dar nu chiar înainte de culcare', ev:2,
  w:'Mișcarea regulată din timpul zilei aprofundează somnul profund. Antrenamentul intens, în schimb, ridică temperatura centrală, tocmai când ar trebui să scadă, și ridică nivelul de cortizol, care seara ar trebui să fie la minim.',
  h:'Antrenament intens cel târziu cu 2–3 ore înainte de culcare. Seara târziu, doar întindere, plimbare, yoga ușoară.'},
-{t:'Cină copioasă și multe lichide înainte de culcare',
+{t:'Cină copioasă și multe lichide înainte de culcare', ev:1,
  w:'Digestia ridică temperatura corporală și metabolismul, tocmai când temperatura centrală ar trebui să scadă. După culcare, refluxul te poate trezi și el.',
  h:'Ultima masă mai mare cu 3 ore înainte de culcare. Mută consumul de lichide mai devreme, în prima jumătate a zilei.'},
-{t:'Scrie ce te frământă',
+{t:'Scrie ce te frământă', ev:1,
  w:'Sarcinile neterminate ținute în minte mențin starea de veghe: creierul nu lasă să plece ceea ce nu are un loc sigur.',
  h:'Cu 10 minute înainte de culcare: lista de sarcini pentru mâine, pe hârtie, nu pe telefon.'}
 ],
@@ -459,7 +459,7 @@ tts:{
 }
 ,
 
-evLegend:{k:'Dovezi', l1:'Limitate', l2:'Bune', l3:'Puternice'},
+evLegend:{k:'Dovezi', l0:'Model ilustrativ', l1:'Dovezi limitate', l2:'Dovezi bune', l3:'Dovezi puternice'},
 
 srcTypes:{exp:'experiment', trial:'studiu experimental', meta:'meta-analiză', review:'sinteză', cross:'studiu încrucișat', class:'clasificare de experți'},
 
