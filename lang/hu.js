@@ -23,7 +23,7 @@ ui:{
   cycEyebrow:'Alvásciklus',
   cycH2:'Egy éjszaka, ahogy a műszerek látják',
   cycLead:'Nem egyenletesen alszol. Kb. 90 perces ciklusok váltakoznak, és a REM-szakaszok hajnal felé nyúlnak meg. A mélyalvás nagy része az első felében van — ezért nem mindegy, mikor fekszel le, nem csak az, mennyit alszol.',
-  cycEegEyebrow:'EEG — élő agyhullám, ahogy a szakasz változik',
+  cycEegEyebrow:'EEG-hullámok szemléltetése alvás közben',
   cycEegWinLab:'Kijelzett idő',
   cycEegNote:'Hosszabb ablak = lassabban csúszik a görbe. Bal oldalon a kilengés mikrovoltban, alul az idő.',
   cycPlay:'Indítás',
@@ -43,7 +43,7 @@ ui:{
 
   circEyebrow:'Cirkadián ritmus',
   circH2:'A belső óra, ami eldönti, mikor jön az álom',
-  circLead:'Az agy közepén, a látóidegek kereszteződése fölött ül egy kb. 20&nbsp;000 sejtből álló óra, a <em>nucleus suprachiasmaticus</em>. A saját ciklusa nem pontosan 24 óra, hanem valamivel hosszabb — átlagosan kb. 24,2 —, ezért naponta újra kell állítani. Az állítógomb a fény.',
+  circLead:'Az agy közepén, a látóidegek kereszteződése fölött ül egy kb. 20&nbsp;000 sejtből álló óra, a <em>nucleus suprachiasmaticus</em>. A saját ciklusa nem pontosan 24 óra, hanem valamivel hosszabb, és emberenként eltér — ezért naponta újra kell állítani. Az állítógomb a fény.',
   circSvgAria:'Melatonin, kortizol, maghőmérséklet',
   circPlay:'Nap lejátszása',
   circPause:'Szünet',
@@ -60,12 +60,12 @@ ui:{
   cleanLegGreen:'<strong style="color:#4fe0a8">Zöld</strong> — véna: szennyes folyadék KI',
   cleanLegPink:'<strong style="color:#ff7fb0">Rózsa</strong> — nyirokér a nyaki csomóba',
   cleanLegDark:'<strong style="color:#e8506f">Bordó</strong> — a szemét maga',
-  cleanLead2:'A pumpa a mélyalvás lassú hulláma. Kapcsold át mélyalvásra, és nézd a bal alsó pulzusjelzőt: <strong>minden csúcsnál lökésben szabadulnak ki a bordó szemét-pixelek</strong>, felkerülnek a zöld vénára, és onnan a rózsaszín nyirokéren jutnak a nyaki nyirokcsomóba.',
+  cleanLead2:'A modellben a pumpa szerepét a mélyalvás lassú hulláma játssza. Kapcsold át mélyalvásra, és nézd a bal alsó pulzusjelzőt: <strong>az animációban minden csúcsnál elindul egy adag bordó szemét-pixel</strong>, felkerül a zöld vénára, és onnan a rózsaszín nyirokéren jut a nyaki nyirokcsomóba. Ez a szemléltetés menete — a valódi agyban az áramlás folyamatos, és a mértékét jelenleg is kutatják.',
   cleanStateAria:'Állapot',
   cleanAwake:'Ébren',
   cleanAsleep:'Mélyalvásban',
   cleanStepsH3:'A folyamat öt lépésben',
-  cleanNote:'Egy 39 fős keresztezett vizsgálatban a normál alvás után reggelre mérhetően több Alzheimer-marker volt a vérplazmában, mint átvirrasztott éjszaka után — vagyis alvás közben tényleg kikerültek az agyból.',
+  cleanNote:'Egy 15 fős keresztezett vizsgálatban egyetlen átvirrasztott éjszaka után reggelre megemelkedett a tau-fehérje szintje a vérplazmában (+17,2%, szemben a normál alvás utáni +1,8%-kal). A többi vizsgált markernél nem volt különbség. Kicsi, feltáró jellegű vizsgálat: azt jelzi, hogy az alvás hiánya meglátszik ezeken az értékeken, de nem méri közvetlenül az agy takarítását.',
 
   whyEyebrow:'Miért fontos',
   whyH2:'Mit veszítesz, ha rövidre vágod',
@@ -127,7 +127,16 @@ ui:{
   suppH3:'Bizonyíték szerinti sorrendben',
   planTag:'Napi menetrend',
   planH3:'Egy 22:30-as lefekvéshez visszaszámolva',
-  sourcesEyebrow:'Források'
+  sourcesEyebrow:'Források',
+  modelBadge:'Szemléltető modell',
+  cycEegSim:'A hullámforma programozott szimuláció, nem valódi személy EEG-felvétele. Az alakja a szakaszokra jellemző frekvenciákat követi, oktatási céllal.',
+  cleanModel:'Az animáció leegyszerűsített modell, nem MRI-, mikroszkópos vagy élő agyi mérés. Egy kutatások alapján felvetett folyadékáramlási elrendezést szemléltet.',
+  sourcesLead:'Minden forrásnál látod, hogy mit vizsgált, mi jött ki belőle, és mennyire erős a bizonyíték.',
+  srcOpen:'Forrás megnyitása',
+  srcWhat:'Mit vizsgált',
+  srcResult:'Eredmény',
+  etAl:'és mtsai',
+  scrollHint:'← húzd oldalra a diagramot →'
 },
 
 navMap:'Elmetérkép',
@@ -204,7 +213,7 @@ hormoneSteps:[
 cleanSteps:[
   {t:'Nap közben gyűlik',p:'Amíg ébren vagy, a neuronok működésének melléktermékei felhalmozódnak a sejtek közötti térben: amiloid-béta és tau fehérje, adenozin, laktát. Az adenozin az, ami az álmosságérzetet is adja — a koffein éppen ennek a jelzését blokkolja.'},
   {t:'Elalváskor kinyílik a tér',p:'Mélyalvásban a sejtek közötti rés kitágul, és az erek körüli csatorna kiszélesedik. Ez a kapcsoló: ugyanaz az agy, két teljesen más áteresztőképességgel. Az ábrán ezt látod, amikor az ágak megvastagodnak és halót kapnak.'},
-  {t:'A lassú hullám pumpál',p:'A mélyalvás nagy delta hullámai együtt mozognak a folyadékkal — ez a pulzálás a hajtómotor. Minden hullám végigsöpör, és <strong>ahova ér, ott lökésben szabadítja ki a bent ragadt szemetet</strong>. A bal alsó pulzusjelző csúcsain gyorsul az áramlás négyszeresére.'},
+  {t:'A lassú hullám pumpál',p:'A kutatások szerint a mélyalvás nagy delta hullámai együtt mozognak a folyadékkal — a jelenlegi elképzelés szerint ez a pulzálás a hajtómotor. Az animációban minden hullám végigsöpör, és <strong>ahol áthalad, ott elindítja a bent ragadt szemetet</strong>; a bal alsó pulzusjelző csúcsain gyorsul az áramlás. Hogy emberben pontosan mekkora ez a hatás, azt még kutatják.'},
   {t:'Be az artérián, ki a vénán',p:'A friss gerincvelői folyadék az artériák menti csatornán áramlik BE (kék), átöblíti a sejtek közötti teret, felkapja a szemetet, és a vénák menti csatornán áramlik KI (zöld). Ezért van két külön érfa, ellentétes irányú áramlással.'},
   {t:'A nyirokér elviszi a nyakba',p:'Az agyból kilépő szennyes folyadékot az agyhártyában futó nyirokerek gyűjtik össze, és a <strong>nyaki nyirokcsomókba</strong> vezetik, ahonnan a vér- és nyirokkeringésbe kerül. A rózsaszín szakaszon a kis nyilak a nyirokerek billentyűi — azok akadályozzák meg a visszaáramlást. Ezt a hálózatot csak 2015-ben azonosították az agyhártyában.'}
 ],
@@ -247,7 +256,7 @@ immune:[
  w:'164 egészséges önkéntes alvását egy héten át csuklóra kötött mozgásérzékelővel mérték. Utána mindenkinek ugyanannyi rhinovírust csepegtettek az orrába. Aki <strong>5 óránál kevesebbet</strong> aludt, 4,5-szer nagyobb eséllyel lett tényleg beteg, mint aki 7-nél többet. Aki 5–6 órát: 4,2-szer.',
  h:'Ez a legmeggyőzőbb formája ennek a bizonyítéknak, mert mindenki azonos vírusadagot kapott. Nem az a kérdés, hogy elkapod-e, hanem hogy a szervezeted meg tudja-e állítani, mielőtt tünetet ad.'},
 {t:'Védőoltás — az alvás dózisnövelőként', ev:3, l1:'Mérés', l2:'Mit jelent',
- w:'Egy 2023-as metaelemzés hét vizsgálat adatait összesítette. Akinél <em>műszerrel</em> mérték a rövid alvást az oltás körüli napokban, ott érdemi antitestcsökkenés jött ki (hatásméret 0,79). Férfiaknál a hatás nagy volt, nőknél nem érte el a szignifikanciát. Az önbevalláson alapuló adat nem adott szignifikáns eredményt — a mért alvás számít, nem amit gondolunk róla.',
+ w:'Egy 2023-as metaelemzés több vizsgálat adatát összesítette. Akinél <em>műszerrel</em> mérték a rövid alvást az oltás körüli napokban, ott érdemi antitestcsökkenés jött ki (hatásméret 0,79; megbízhatósági tartomány 0,40–1,18). Férfiaknál a hatás nagy volt, nőknél nem érte el a szignifikanciát. Az önbevalláson alapuló adat nem adott szignifikáns eredményt — a mért alvás számít, nem amit gondolunk róla.',
  h:'Ha oltásra mész, a körülötte lévő pár éjszakán aludj rendesen. Ez az egyik legegyszerűbb és ingyenes dolog, amivel a saját oltásod hatékonyságát növelheted.'},
 {t:'Gyulladás — a lassú háttérfolyamat', ev:2, l1:'Mérés', l2:'Mit jelent',
  w:'Tartós alváshiány mellett emelkedik az IL-6, a TNF-alfa és a CRP szintje. Ezek a krónikus, alacsony szintű gyulladás jelzői — ugyanaz a gyulladás, ami a szív- és érrendszeri betegségek és az inzulinrezisztencia közös háttere.',
@@ -447,5 +456,35 @@ tts:{
   found:'Hang: {name}',
   missing:'A nyelvhez nincs telepített hang — a rendszer alaphangját használja. Windowsban: Beállítások → Idő és nyelv → Beszéd → nyelvi hangcsomag.',
   enabled:'Hang bekapcsolva. Csukott szemmel is követheted.'
+}
+,
+
+evLegend:{k:'Bizonyíték', l1:'Korlátozott', l2:'Jó', l3:'Erős'},
+
+srcTypes:{exp:'kísérlet', trial:'kísérletes vizsgálat', meta:'metaelemzés', review:'áttekintés', cross:'keresztezett vizsgálat', class:'szakértői besorolás'},
+
+srcInfo:{
+  irwin94:{q:'23 egészséges férfi alvását rövidítették meg egyetlen éjszakára (hajnali 3 és 7 között nem aludtak).',
+           r:'A természetes ölősejtek ölőképessége a saját normálérték 72%-ára esett, majd egy éjszaka rendes alvás után visszaállt.'},
+  prather15:{q:'164 önkéntes alvását egy héten át csuklóra kötött mozgásérzékelővel mérték, majd mindenkinek ugyanannyi rhinovírust cseppentettek az orrába.',
+           r:'Aki 5 óránál kevesebbet aludt, 4,5-ször nagyobb eséllyel lett ténylegesen beteg, mint aki 7 óránál többet. A bizonytalanság nagy: 1,08–18,69.'},
+  spiegel23:{q:'Több vizsgálat adatát összesítette arról, hogy az oltás körüli napok alvása hogyan függ össze az antitestválasszal.',
+           r:'Műszerrel mért rövid alvásnál érdemi antitestcsökkenés (hatásméret 0,79; 0,40–1,18). Férfiaknál nagy hatás, nőknél nem volt szignifikáns. Önbevallásból nem jött ki.'},
+  iarc19:{q:'Szakértői testület értékelte az éjszakai műszak és a daganatos megbetegedések összefüggését.',
+           r:'„Valószínűleg emberre karcinogén” (2A) besorolás. Az emberi epidemiológiai bizonyíték korlátozott — a besorolás nem jelenti azt, hogy az éjszakai munka rákot okoz.'},
+  manouchehri21:{q:'26 vizsgálat, összesen 1 313 348 résztvevő adatát összesítette az éjszakai műszak hossza és az emlőrák kockázata között.',
+           r:'10 évnél rövidebb éjszakázásnál 13%-kal magasabb kockázat (RR 1,13). 10 évnél hosszabbnál az eredmény nem lett szignifikáns (RR 1,08).'},
+  benedict20:{q:'15 egészséges fiatal férfi vérplazmáját mérték normál alvás, illetve egy átvirrasztott éjszaka után.',
+           r:'Átvirrasztott éjszaka után a tau-fehérje szintje emelkedett (+17,2%, szemben a normál alvás +1,8%-ával). A többi markernél nem volt különbség. Kicsi, feltáró vizsgálat.'},
+  louveau17:{q:'Áttekintés a glymphatikus rendszerről és az agyhártyában futó nyirokerekről.',
+           r:'Összefoglalja, hogyan ürül a folyadék és a hulladék az idegrendszerből a nyaki nyirokcsomók felé — és megnevezi, mi az, ami még nyitott kérdés.'},
+  xu26:{q:'Áttekintés a glymphatikus rendszer szerepéről alvás közben.',
+           r:'A rendszer alvás alatt aktívabb, ébren jórészt csendes. A pontos molekuláris mechanizmusok feltárása még a további kutatás feladata.'},
+  harding19:{q:'Áttekintés a testhőmérséklet és az alvás kapcsolatáról.',
+           r:'Az elalvás a maghőmérséklet eséséhez kötődik; a hőszabályozás és az alvásszabályozás szorosan összefügg.'},
+  cbti24:{q:'Áttekintés az álmatlanság kognitív viselkedésterápiájának (CBT-I) összetevőiről.',
+           r:'A CBT-I az elsővonalbeli kezelés krónikus álmatlanságra; a magja az ingerkontroll és az alvásmegszorítás.'},
+  supp24:{q:'Áttekintés az alvásra használt gyógynövényekről és étrend-kiegészítőkről.',
+           r:'A legtöbb támogató adat a melatonin, a valeriána és a komló mellett van. A vizsgálatok többsége kicsi, a bizonyíték korlátozott.'}
 }
 };

@@ -230,6 +230,32 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 .ev{display:inline-flex; gap:3px; vertical-align:1px; margin-left:8px}
 .ev i{width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.16); display:block}
 .ev i.on{background:var(--c)}
+.ev[title]{cursor:help}
+
+/* ---------- Szemléltető modell jelölés (animációk, amik nem mérési adatok) ---------- */
+.modelbadge{display:flex; gap:11px; align-items:flex-start; margin:10px 0 8px;
+  background:rgba(255,255,255,.05); border:1px solid var(--line); border-left:3px solid var(--muted);
+  border-radius:0 12px 12px 0; padding:11px 14px}
+.modelbadge .mb-k{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; color:#e8eef9; background:rgba(255,255,255,.1); border:1px solid var(--line);
+  border-radius:999px; padding:3px 10px; white-space:nowrap; flex:none; margin-top:1px}
+.modelbadge .mb-t{font-size:13.8px; color:#b9c5dd; line-height:1.5}
+@media (max-width:560px){.modelbadge{flex-direction:column; gap:8px}}
+
+/* ---------- Bizonyítékszint jelmagyarázat ---------- */
+.evlegend{--c:var(--mint); display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center;
+  margin:0 0 16px; padding-bottom:13px; border-bottom:1px solid rgba(255,255,255,.08)}
+.evlegend .k{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted)}
+.evlegend .it{display:inline-flex; align-items:center; gap:7px; font-size:12.7px; color:#b9c5dd}
+.evlegend .ev{margin-left:0}
+
+/* ---------- Forráshivatkozás az állítás mellett ---------- */
+.srcref{display:inline-flex; align-items:center; gap:5px; margin-left:9px; padding:2px 9px;
+  font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.06em; vertical-align:2px;
+  color:var(--sky); text-decoration:none; white-space:nowrap;
+  border:1px solid rgba(159,208,245,.3); background:rgba(159,208,245,.08); border-radius:999px}
+.srcref:hover,.srcref:focus-visible{background:rgba(159,208,245,.2); color:#fff}
 .timeline{list-style:none; padding:0; margin:6px 0 0}
 .timeline li{display:grid; grid-template-columns:78px 1fr; gap:14px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,.07)}
 .timeline li:last-child{border-bottom:none}
@@ -274,7 +300,24 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 .progressline i{display:block; height:100%; background:var(--mint); width:0; transition:width .3s linear}
 .ttsstat{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted)}
 
-.src{font-size:13.5px; color:var(--muted)} .src li{margin-bottom:7px}
+.src{--c:var(--mint); list-style:none; padding:0; margin:0; font-size:13.5px; color:var(--muted)}
+.src li{margin:0 0 15px; padding:0 0 15px; border-bottom:1px solid rgba(255,255,255,.07)}
+.src li:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0}
+.src .st{display:block; font-size:15px; color:#e7ecf7; font-weight:500; line-height:1.45; margin-bottom:6px}
+.src .meta{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:8px}
+.src .chip{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:#c6d0e8; background:rgba(255,255,255,.06); border:1px solid var(--line); border-radius:999px; padding:3px 9px}
+.src .row{display:grid; grid-template-columns:78px 1fr; gap:11px; margin-bottom:5px; align-items:start}
+.src .rk{font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--muted); margin-top:3px}
+.src .rv{font-size:13.8px; color:#c3cee6; line-height:1.55}
+.src a{color:var(--sky); text-decoration:none; border-bottom:1px solid rgba(159,208,245,.35)}
+.src a:hover,.src a:focus-visible{color:#fff; border-bottom-color:#fff}
+@media (max-width:560px){.src .row{grid-template-columns:1fr; gap:1px}}
+
+/* ---------- Mobil: jelzés, hogy a széles diagram oldalra húzható ---------- */
+.scrollhint{display:none; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.09em;
+  color:var(--muted); text-align:center; margin:3px 0 9px; user-select:none}
 footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   font-family:'JetBrains Mono',monospace; letter-spacing:.2em}
 
@@ -286,6 +329,7 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   .scrollx > svg{min-width:660px}
   .scrollx::-webkit-scrollbar{height:5px}
   .scrollx::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18); border-radius:4px}
+  .scrollhint.on{display:block}
   .eegwrap{min-height:190px}
   .canvaswrap{aspect-ratio:600/470; min-height:330px}
   .ctlbar{gap:8px}
@@ -358,7 +402,11 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
         <p class="lead" data-i18n-html="ui.cycLead">Nem egyenletesen alszol. Kb. 90 perces ciklusok váltakoznak, és a REM-szakaszok hajnal felé nyúlnak meg. A mélyalvás nagy része az első felében van — ezért nem mindegy, mikor fekszel le, nem csak az, mennyit alszol.</p>
         <div class="scrollx"><svg class="hyp" id="hypSvg" viewBox="0 0 960 310" role="img" data-i18n-aria="ui.cycHypAria"></svg></div>
 
-        <p class="eyebrow" style="margin-top:18px" data-i18n="ui.cycEegEyebrow">EEG — élő agyhullám, ahogy a szakasz változik</p>
+        <p class="eyebrow" style="margin-top:18px" data-i18n="ui.cycEegEyebrow">EEG-hullámok szemléltetése alvás közben</p>
+        <div class="modelbadge">
+          <span class="mb-k" data-i18n="ui.modelBadge">Szemléltető modell</span>
+          <span class="mb-t" data-i18n="ui.cycEegSim">A hullámforma programozott szimuláció, nem valódi személy EEG-felvétele. Az alakja a szakaszokra jellemző frekvenciákat követi, oktatási céllal.</span>
+        </div>
         <div class="eegwrap"><canvas id="eegCanvas"></canvas></div>
         <div class="eeghead">
           <span class="band" id="eegBand">Béta</span>
@@ -435,6 +483,10 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
           <span><i style="background:#c42a4f"></i><span data-i18n-html="ui.cleanLegDark"><strong style="color:#e8506f">Bordó</strong> — a szemét maga</span></span>
         </div>
         <p class="lead" data-i18n-html="ui.cleanLead2">A pumpa a mélyalvás lassú hulláma. Kapcsold át mélyalvásra, és nézd a bal alsó pulzusjelzőt: <strong>minden csúcsnál lökésben szabadulnak ki a bordó szemét-pixelek</strong>, felkerülnek a zöld vénára, és onnan a rózsaszín nyirokéren jutnak a nyaki nyirokcsomóba.</p>
+        <div class="modelbadge">
+          <span class="mb-k" data-i18n="ui.modelBadge">Szemléltető modell</span>
+          <span class="mb-t" data-i18n="ui.cleanModel">Az animáció leegyszerűsített modell, nem MRI-, mikroszkópos vagy élő agyi mérés. A kutatásokban felvetett folyadékáramlási elrendezést szemlélteti.</span>
+        </div>
         <div class="canvaswrap"><canvas id="brainCanvas"></canvas></div>
         <div class="ctlbar">
           <div class="toggle" role="group" data-i18n-aria="ui.cleanStateAria">
@@ -450,7 +502,7 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
       <div class="glass-panel">
         <h3 data-i18n="ui.cleanStepsH3">A folyamat öt lépésben</h3>
         <ol class="steps" id="cleanSteps"></ol>
-        <div class="note" data-i18n-html="ui.cleanNote">Egy 39 fős keresztezett vizsgálatban a normál alvás után reggelre mérhetően több Alzheimer-marker volt a vérplazmában, mint átvirrasztott éjszaka után — vagyis alvás közben tényleg kikerültek az agyból.</div>
+        <div class="note"><span data-i18n-html="ui.cleanNote">Egy 39 fős keresztezett vizsgálatban a normál alvás után reggelre mérhetően több Alzheimer-marker volt a vérplazmában, mint átvirrasztott éjszaka után — vagyis alvás közben tényleg kikerültek az agyból.</span><span id="cleanNoteSrc"></span></div>
       </div>
     </div>
   </section>
@@ -611,18 +663,8 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
       </div>
       <div class="glass-panel">
         <p class="eyebrow" data-i18n="ui.sourcesEyebrow">Források</p>
-        <ul class="src">
-          <li>Irwin és mtsai: <em>Partial sleep deprivation reduces NK cell activity</em>. <a href="https://pubmed.ncbi.nlm.nih.gov/7871104/" target="_blank" rel="noopener">pubmed</a></li>
-          <li>Prather és mtsai: <em>Behaviorally Assessed Sleep and Susceptibility to the Common Cold</em> — SLEEP 2015. <a href="https://pmc.ncbi.nlm.nih.gov/articles/4531403/" target="_blank" rel="noopener">ncbi</a></li>
-          <li>Spiegel és mtsai: <em>Insufficient sleep and antibody response to vaccination</em> — Current Biology 2023. <a href="https://www.cell.com/current-biology/fulltext/S0960-9822(23)00156-2" target="_blank" rel="noopener">cell.com</a></li>
-          <li>IARC 2019: <em>Night shift work is probably carcinogenic (2A)</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6882045/" target="_blank" rel="noopener">ncbi</a></li>
-          <li><em>Night-shift work duration and breast cancer risk</em> — BMC Women's Health 2021. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7927396/" target="_blank" rel="noopener">ncbi</a></li>
-          <li><em>Glymphatic system and meningeal lymphatics</em> — JCI. <a href="https://www.jci.org/articles/view/90603" target="_blank" rel="noopener">jci.org</a></li>
-          <li><em>The glymphatic system in sleep</em> — Molecular Psychiatry 2026. <a href="https://www.nature.com/articles/s41380-026-03750-w" target="_blank" rel="noopener">nature.com</a></li>
-          <li>Harding és mtsai: <em>The Temperature Dependence of Sleep</em> — Front Neurosci 2019. <a href="https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2019.00336/full" target="_blank" rel="noopener">frontiersin</a></li>
-          <li><em>CBT-I components</em> — Kosin Med J 2024. <a href="https://www.kosinmedj.org/journal/view.php?number=1311" target="_blank" rel="noopener">kosinmedj</a></li>
-          <li><em>Herbal and Natural Supplements for Improving Sleep</em> — Psychiatry Investig 2024. <a href="https://www.psychiatryinvestigation.org/journal/view.php?doi=10.30773%2Fpi.2024.0121" target="_blank" rel="noopener">psychiatryinvestigation</a></li>
-        </ul>
+        <p class="muted" style="font-size:13.5px;margin:0 0 16px" data-i18n="ui.sourcesLead">Minden forrásnál látod, hogy mit vizsgált, mi jött ki belőle, és mennyire erős a bizonyíték.</p>
+        <ul class="src" id="srcList"></ul>
       </div>
     </div>
   </section>
@@ -754,6 +796,8 @@ function go(id){
   if(id==='tisztitas') startBrain(); else stopBrain();
   if(id==='ciklus') startEeg(); else stopEeg();
   if(id!=='relax') TTS.stop();
+  /* a rejtett nézetekben a szélesség 0, ezért váltás után újra kell mérni */
+  updScrollHints();
 }
 
 /* ---------- menü nyit/zár + nyelvválasztó ---------- */
@@ -1599,21 +1643,135 @@ function renderWhyCards(){
      <h3>${esc(w.t)}</h3><p>${w.p}</p></div>`;
   }).join('');
 }
-const evDots = n => `<span class="ev">${[1,2,3].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</span>`;
-function renderTips(list, sel, col){
+/* ================== FORRÁSJEGYZÉK ==================
+   A nyelvfüggetlen adatok (szerző, cím, folyóirat, év, típus, link) itt élnek egy helyen.
+   A fordítható rész — mit vizsgált, mi jött ki — a lang/*.js `srcInfo` kulcsa alatt van.
+   Minden tétel ellenőrzött; kitalált azonosító vagy eredmény nem kerülhet ide. */
+const SOURCES = {
+  irwin94:{au:'Irwin', t:'Partial sleep deprivation reduces natural killer cell activity in humans',
+    j:'Psychosomatic Medicine', y:1994, type:'exp', ev:3,
+    url:'https://doi.org/10.1097/00006842-199411000-00004'},
+  prather15:{au:'Prather', t:'Behaviorally Assessed Sleep and Susceptibility to the Common Cold',
+    j:'Sleep', y:2015, type:'trial', ev:3,
+    url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC4531403/'},
+  spiegel23:{au:'Spiegel', t:'A meta-analysis of the associations between insufficient sleep duration and antibody response to vaccination',
+    j:'Current Biology', y:2023, type:'meta', ev:3,
+    url:'https://doi.org/10.1016/j.cub.2023.02.017'},
+  iarc19:{au:'', t:'IARC Monographs Volume 124 — Night Shift Work',
+    j:'IARC / WHO', y:2019, type:'class', ev:2,
+    url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC6882045/'},
+  manouchehri21:{au:'Manouchehri', t:'Night-shift work duration and breast cancer risk: an updated systematic review and meta-analysis',
+    j:'BMC Women’s Health', y:2021, type:'meta', ev:2,
+    url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC7927396/'},
+  benedict20:{au:'Benedict', t:'Effects of acute sleep loss on diurnal plasma dynamics of CNS health biomarkers in young men',
+    j:'Neurology', y:2020, type:'cross', ev:1,
+    url:'https://doi.org/10.1212/WNL.0000000000008866'},
+  louveau17:{au:'Louveau', t:'Understanding the functions and relationships of the glymphatic system and meningeal lymphatics',
+    j:'Journal of Clinical Investigation', y:2017, type:'review', ev:2,
+    url:'https://doi.org/10.1172/JCI90603'},
+  xu26:{au:'Xu', t:'The glymphatic system in sleep: a nexus of waste clearance, brain homeostasis, and disease intervention',
+    j:'Molecular Psychiatry', y:2026, type:'review', ev:2,
+    url:'https://doi.org/10.1038/s41380-026-03750-w'},
+  harding19:{au:'Harding', t:'The Temperature Dependence of Sleep',
+    j:'Frontiers in Neuroscience', y:2019, type:'review', ev:2,
+    url:'https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2019.00336/full'},
+  cbti24:{au:'', t:'Cognitive behavioral therapy for insomnia — components',
+    j:'Kosin Medical Journal', y:2024, type:'review', ev:3,
+    url:'https://www.kosinmedj.org/journal/view.php?number=1311'},
+  supp24:{au:'', t:'Herbal and Natural Supplements for Improving Sleep',
+    j:'Psychiatry Investigation', y:2024, type:'review', ev:2,
+    url:'https://www.psychiatryinvestigation.org/journal/view.php?doi=10.30773%2Fpi.2024.0121'}
+};
+const SRC_ORDER = ['irwin94','prather15','spiegel23','iarc19','manouchehri21',
+                   'benedict20','louveau17','xu26','harding19','cbti24','supp24'];
+
+/* Melyik állításhoz melyik forrás tartozik (lista neve → elem sorszáma → forrás azonosítója).
+   Csak oda kerül hivatkozás, ahol a forrás tényleg az adott állítást támasztja alá. */
+const CLAIM_SRC = {
+  immune:{0:'irwin94', 1:'prather15', 2:'spiegel23'},
+  cancer:{0:'iarc19', 1:'manouchehri21'},
+  harm:{0:'irwin94'},
+  core:{1:'cbti24', 2:'cbti24', 4:'harding19'},
+  tea:{1:'supp24'},
+  supp:{3:'supp24'},
+  cleanSteps:{2:'xu26', 4:'louveau17'}
+};
+
+/* Hivatkozás-gomb egy állítás mellé */
+function srcRefId(id){
+  const s = SOURCES[id];
+  if(!s) return '';
+  const label = (s.au ? s.au+' ' : '') + (s.y || '');
+  return ` <a class="srcref" href="${s.url}" target="_blank" rel="noopener"
+    aria-label="${esc(tr('ui.srcOpen'))}: ${esc(s.t)}" title="${esc(s.t)}">📚 ${esc(label.trim())}</a>`;
+}
+function srcRef(key, i){
+  const id = CLAIM_SRC[key] && CLAIM_SRC[key][i];
+  return id ? srcRefId(id) : '';
+}
+
+const evTitle = n => tr('evLegend.l'+n) || '';
+const evDots = n => `<span class="ev" title="${esc(tr('evLegend.k'))}: ${esc(evTitle(n))}" aria-label="${esc(tr('evLegend.k'))}: ${esc(evTitle(n))}">${[1,2,3].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</span>`;
+
+/* Jelmagyarázat a pöttyökhöz — csak ott, ahol tényleg van bizonyítékszint */
+function evLegendHtml(){
+  return `<div class="evlegend"><span class="k">${esc(tr('evLegend.k'))}</span>` +
+    [1,2,3].map(n=>`<span class="it">${evDots(n)}${esc(evTitle(n))}</span>`).join('') +
+    `</div>`;
+}
+function mountEvLegend(ul){
+  const host = ul.parentNode;
+  let lg = host.querySelector(':scope > .evlegend');
+  if(!lg){
+    lg = document.createElement('div');
+    host.insertBefore(lg, ul);
+  }
+  lg.outerHTML = evLegendHtml();
+}
+
+/* Forráslista kirajzolása: cím, év, típus, mit vizsgált, eredmény, bizonyítékszint, link */
+function renderSources(){
+  const box = $('#srcList');
+  if(!box) return;
+  const info = T().srcInfo || {};
+  const types = T().srcTypes || {};
+  box.innerHTML = SRC_ORDER.map(id=>{
+    const s = SOURCES[id], x = info[id] || {};
+    const who = s.au ? `${esc(s.au)} ${esc(tr('ui.etAl'))} — ` : '';
+    const chips = [
+      s.y ? `<span class="chip">${s.y}</span>` : '',
+      types[s.type] ? `<span class="chip">${esc(types[s.type])}</span>` : '',
+      `<span class="chip">${esc(s.j)}</span>`
+    ].join('');
+    const rows = [
+      x.q ? `<div class="row"><span class="rk">${esc(tr('ui.srcWhat'))}</span><span class="rv">${x.q}</span></div>` : '',
+      x.r ? `<div class="row"><span class="rk">${esc(tr('ui.srcResult'))}</span><span class="rv">${x.r}</span></div>` : ''
+    ].join('');
+    return `<li>
+      <span class="st">${who}${esc(s.t)}${evDots(s.ev)}</span>
+      <div class="meta">${chips}</div>
+      ${rows}
+      <a href="${s.url}" target="_blank" rel="noopener">${esc(tr('ui.srcOpen'))} ↗</a>
+    </li>`;
+  }).join('');
+}
+
+function renderTips(list, sel, col, key){
   const L = T().tipLabels;
-  $(sel).innerHTML = list.map((x,i)=>`
+  const ul = $(sel);
+  if(list.some(x=>x.ev!==undefined)) mountEvLegend(ul);
+  ul.innerHTML = list.map((x,i)=>`
     <li style="--c:${C(col)}">
       <span class="num">${String(i+1).padStart(2,'0')}</span>
       <div>
-        <h4>${esc(x.t)}${x.ev!==undefined?evDots(x.ev):''}</h4>
+        <h4>${esc(x.t)}${x.ev!==undefined?evDots(x.ev):''}${srcRef(key,i)}</h4>
         <div class="blk"><span class="lbl">${esc(x.l1||L.why)}</span><span class="txt">${x.w}</span></div>
         <div class="blk"><span class="lbl">${esc(x.l2||L.how)}</span><span class="txt">${x.h}</span></div>
       </div>
     </li>`).join('');
 }
-function renderSteps(sel, list){
-  $(sel).innerHTML = list.map(s=>`<li><b>${esc(s.t)}</b><p>${s.p}</p></li>`).join('');
+function renderSteps(sel, list, key){
+  $(sel).innerHTML = list.map((s,i)=>`<li><b>${esc(s.t)}${srcRef(key,i)}</b><p>${s.p}</p></li>`).join('');
 }
 function renderDayPlan(){
   $('#dayPlan').innerHTML = T().dayplan.map(([t,d])=>
@@ -1622,18 +1780,20 @@ function renderDayPlan(){
 function renderContent(){
   const D = T();
   renderSteps('#hormoneSteps', D.hormoneSteps);
-  renderSteps('#cleanSteps', D.cleanSteps);
+  renderSteps('#cleanSteps', D.cleanSteps, 'cleanSteps');
   renderWaveCards();
   renderWhyCards();
-  renderTips(D.immune,'#immuneList','--mint');
-  renderTips(D.cancer,'#cancerList','--rem');
-  renderTips(D.harm,'#harmList','--wake');
-  renderTips(D.core,'#tipsCore','--mint');
-  renderTips(D.extra,'#tipsExtra','--n2');
-  renderTips(D.tea,'#teaList','--rose');
-  renderTips(D.food,'#foodList','--wake');
-  renderTips(D.supp,'#suppList','--mint');
+  renderTips(D.immune,'#immuneList','--mint','immune');
+  renderTips(D.cancer,'#cancerList','--rem','cancer');
+  renderTips(D.harm,'#harmList','--wake','harm');
+  renderTips(D.core,'#tipsCore','--mint','core');
+  renderTips(D.extra,'#tipsExtra','--n2','extra');
+  renderTips(D.tea,'#teaList','--rose','tea');
+  renderTips(D.food,'#foodList','--wake','food');
+  renderTips(D.supp,'#suppList','--mint','supp');
   renderDayPlan();
+  renderSources();
+  $('#cleanNoteSrc').innerHTML = srcRefId('benedict20');
 }
 
 /* ================== 4-7-8 LÉGZÉS ================== */
@@ -1936,6 +2096,22 @@ $$('.tabbtn').forEach(b=>{
   });
 });
 
+/* ========= MOBIL: jelzés, hogy a széles diagram oldalra húzható =========
+   Csak akkor jelenik meg, ha a tartalom tényleg túllóg a kereten. */
+function updScrollHints(){
+  $$('.scrollx').forEach(box=>{
+    let h = box.previousElementSibling;
+    if(!h || !h.classList.contains('scrollhint')){
+      h = document.createElement('p');
+      h.className = 'scrollhint';
+      h.setAttribute('aria-hidden','true');
+      box.parentNode.insertBefore(h, box);
+    }
+    h.textContent = tr('ui.scrollHint');
+    h.classList.toggle('on', box.scrollWidth > box.clientWidth + 4);
+  });
+}
+
 /* ================== INDÍTÁS ================== */
 function redraw(){
   drawMindMap(); drawMapCards(); layoutMap();
@@ -1968,6 +2144,7 @@ function applyLang(){
   segbar('#pmrSeg', PMR().length); pmrI = Math.min(pmrI, PMR().length-1); pmrSpoken=''; pmrPaint();
   segbar('#scanSeg', SCAN().length); setScan(scanTotal);
   paintCirc();
+  updScrollHints();
 }
 setNav(!isNarrow());
 applyLang();
@@ -1979,6 +2156,7 @@ window.addEventListener('resize', ()=>{
     const n = isNarrow();
     if(n !== lastNarrow){ lastNarrow = n; setNav(!n); }
     layoutMap(); if(brainRAF) fitCanvas(); if(eegRAF) fitEeg();
+    updScrollHints();
   },140);
 });
 window.addEventListener('beforeunload', ()=>TTS.stop());

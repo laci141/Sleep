@@ -23,7 +23,7 @@ ui:{
   cycEyebrow:'Sleep cycle',
   cycH2:'One night, as the instruments see it',
   cycLead:'You don\'t sleep evenly. Roughly 90-minute cycles alternate, and REM periods stretch longer toward morning. Most deep sleep happens in the first half of the night — which is why when you go to bed matters, not just how long you sleep.',
-  cycEegEyebrow:'EEG — live brainwave as the stage changes',
+  cycEegEyebrow:'EEG waves illustrated during sleep',
   cycEegWinLab:'Displayed time',
   cycEegNote:'A longer window means the curve scrolls more slowly. Amplitude in microvolts on the left, time along the bottom.',
   cycPlay:'Start',
@@ -43,7 +43,7 @@ ui:{
 
   circEyebrow:'Circadian rhythm',
   circH2:'The internal clock that decides when sleep comes',
-  circLead:'In the middle of the brain, above the crossing of the optic nerves, sits a clock made of roughly 20&nbsp;000 cells, the <em>suprachiasmatic nucleus</em>. Its own cycle isn\'t exactly 24 hours but somewhat longer — on average around 24.2 — so it has to be reset every day. The reset button is light.',
+  circLead:'In the middle of the brain, above the crossing of the optic nerves, sits a clock made of roughly 20&nbsp;000 cells, the <em>suprachiasmatic nucleus</em>. Its own cycle isn\'t exactly 24 hours but somewhat longer, and it differs from person to person — so it has to be reset every day. The reset button is light.',
   circSvgAria:'Melatonin, cortisol, core temperature',
   circPlay:'Play the day',
   circPause:'Pause',
@@ -60,12 +60,12 @@ ui:{
   cleanLegGreen:'<strong style="color:#4fe0a8">Green</strong> — vein: used fluid OUT',
   cleanLegPink:'<strong style="color:#ff7fb0">Pink</strong> — lymphatic vessel to the neck node',
   cleanLegDark:'<strong style="color:#e8506f">Maroon</strong> — the waste itself',
-  cleanLead2:'The pump is the slow wave of deep sleep. Switch to deep sleep and watch the pulse indicator in the bottom left: <strong>at every peak, a burst of maroon waste pixels is released</strong>, picked up by the green vein, and carried from there through the pink lymphatic vessel to the neck lymph node.',
+  cleanLead2:'In the model, the role of the pump is played by the slow wave of deep sleep. Switch to deep sleep and watch the pulse indicator in the bottom left: <strong>in the animation, a batch of maroon waste pixels sets off at every peak</strong>, is picked up by the green vein, and carried from there through the pink lymphatic vessel to the neck lymph node. That is how the illustration works — in a real brain the flow is continuous, and its extent is still being researched.',
   cleanStateAria:'State',
   cleanAwake:'Awake',
   cleanAsleep:'In deep sleep',
   cleanStepsH3:'The process in five steps',
-  cleanNote:'In a crossover study of 39 people, blood plasma the morning after normal sleep measurably contained more Alzheimer\'s markers than after a night of staying awake — meaning they really had left the brain during sleep.',
+  cleanNote:'In a crossover study of 15 people, tau protein in blood plasma rose by the morning after a single sleepless night (+17.2%, versus +1.8% after normal sleep). There was no difference in the other markers measured. It is a small, exploratory study: it shows that lack of sleep is visible in these values, but it does not directly measure the brain being cleaned.',
 
   whyEyebrow:'Why it matters',
   whyH2:'What you lose when you cut it short',
@@ -127,7 +127,16 @@ ui:{
   suppH3:'Ranked by evidence',
   planTag:'Daily schedule',
   planH3:'Counting back from a 22:30 bedtime',
-  sourcesEyebrow:'Sources'
+  sourcesEyebrow:'Sources',
+  modelBadge:'Illustrative model',
+  cycEegSim:'The waveform is a programmed simulation, not a recording from a real person. Its shape follows the frequencies typical of each stage, for teaching purposes.',
+  cleanModel:'The animation is a simplified model, not an MRI, microscope or live brain measurement. It illustrates a fluid-flow arrangement proposed on the basis of research.',
+  sourcesLead:'For every source you can see what it examined, what came out of it, and how strong the evidence is.',
+  srcOpen:'Open source',
+  srcWhat:'What it examined',
+  srcResult:'Result',
+  etAl:'et al.',
+  scrollHint:'← drag the diagram sideways →'
 },
 
 navMap:'Mind map',
@@ -204,7 +213,7 @@ hormoneSteps:[
 cleanSteps:[
   {t:'It builds up during the day',p:'While you\'re awake, byproducts of neuron activity accumulate in the space between cells: amyloid-beta and tau protein, adenosine, lactate. Adenosine is what produces the feeling of sleepiness — caffeine works by blocking exactly this signal.'},
   {t:'The space opens up as you fall asleep',p:'In deep sleep, the gaps between cells widen, and the channels around blood vessels expand. This is the switch: the same brain, with two completely different levels of permeability. You see this in the diagram when the branches thicken and get a halo.'},
-  {t:'The slow wave pumps',p:'The big delta waves of deep sleep move together with the fluid — this pulsing is the engine. Every wave sweeps through, and <strong>wherever it reaches, it releases the trapped waste in a burst</strong>. At the peaks of the pulse indicator bottom left, flow speeds up to four times normal.'},
+  {t:'The slow wave pumps',p:'Research suggests the big delta waves of deep sleep move together with the fluid — on the current view, this pulsing is the engine. In the animation every wave sweeps through, and <strong>wherever it passes, it sets the trapped waste in motion</strong>; at the peaks of the pulse indicator bottom left the flow speeds up. Exactly how large this effect is in humans is still being researched.'},
   {t:'In through the artery, out through the vein',p:'Fresh cerebrospinal fluid flows IN (blue) along the channel beside the arteries, flushes through the space between cells, picks up the waste, and flows OUT (green) along the channel beside the veins. That\'s why there are two separate vessel trees, with flow in opposite directions.'},
   {t:'The lymphatic vessel carries it to the neck',p:'The used fluid leaving the brain is collected by lymphatic vessels running through the meninges and carried to the <strong>lymph nodes in the neck</strong>, from where it enters the blood and lymph circulation. On the pink segment, the small arrows are the valves of the lymphatic vessels — they prevent backflow. This network in the meninges was only identified in 2015.'}
 ],
@@ -247,7 +256,7 @@ immune:[
  w:'164 healthy volunteers had their sleep tracked for a week with a wrist-worn motion sensor. Afterward, everyone received the same dose of rhinovirus dripped into their nose. Those who slept <strong>less than 5 hours</strong> were 4.5 times more likely to actually get sick than those who slept more than 7. Those who slept 5–6 hours: 4.2 times.',
  h:'This is the most convincing form of this kind of evidence, because everyone received an identical dose of the virus. The question isn\'t whether you catch it — it\'s whether your body can stop it before it turns into symptoms.'},
 {t:'Vaccination — sleep as a dose booster', ev:3, l1:'Measurement', l2:'What it means',
- w:'A 2023 meta-analysis pooled data from seven studies. Where short sleep around the days of vaccination was measured <em>with instruments</em>, a meaningful drop in antibody response showed up (effect size 0.79). The effect was large in men, but didn\'t reach significance in women. Self-reported sleep data didn\'t produce a significant result — measured sleep is what counts, not what we think about it.',
+ w:'A 2023 meta-analysis pooled data from several studies. Where short sleep around the days of vaccination was measured <em>with instruments</em>, a meaningful drop in antibody response showed up (effect size 0.79; confidence interval 0.40–1.18). The effect was large in men, but didn\'t reach significance in women. Self-reported sleep data didn\'t produce a significant result — measured sleep is what counts, not what we think about it.',
  h:'If you\'re getting vaccinated, sleep properly in the nights around it. It\'s one of the simplest, free things you can do to boost your own vaccine\'s effectiveness.'},
 {t:'Inflammation — the slow background process', ev:2, l1:'Measurement', l2:'What it means',
  w:'With ongoing sleep deprivation, levels of IL-6, TNF-alpha, and CRP rise. These are markers of chronic, low-grade inflammation — the same inflammation that underlies cardiovascular disease and insulin resistance.',
@@ -447,5 +456,35 @@ tts:{
   found:'Voice: {name}',
   missing:'No voice is installed for this language — the system\'s default voice will be used. On Windows: Settings → Time & Language → Speech → language voice pack.',
   enabled:'Sound turned on. You can follow along with your eyes closed.'
+}
+,
+
+evLegend:{k:'Evidence', l1:'Limited', l2:'Good', l3:'Strong'},
+
+srcTypes:{exp:'experiment', trial:'experimental study', meta:'meta-analysis', review:'review', cross:'crossover study', class:'expert classification'},
+
+srcInfo:{
+  irwin94:{q:'The sleep of 23 healthy men was shortened for a single night (no sleep between 3 and 7 a.m.).',
+           r:'The killing capacity of natural killer cells fell to 72% of their own normal value, then returned to baseline after one night of normal sleep.'},
+  prather15:{q:'The sleep of 164 volunteers was measured for a week with a wrist motion sensor, then everyone received the same dose of rhinovirus in the nose.',
+           r:'Those sleeping less than 5 hours were 4.5 times more likely to actually fall ill than those sleeping more than 7. The uncertainty is wide: 1.08–18.69.'},
+  spiegel23:{q:'Pooled data from several studies on how sleep in the days around vaccination relates to the antibody response.',
+           r:'With instrument-measured short sleep there was a meaningful drop in antibody response (effect size 0.79; 0.40–1.18). Large effect in men, not significant in women. Self-reported sleep gave no significant result.'},
+  iarc19:{q:'An expert panel evaluated the link between night shift work and cancer.',
+           r:'Classified as “probably carcinogenic to humans” (2A). The human epidemiological evidence is limited — the classification does not mean that night work causes cancer.'},
+  manouchehri21:{q:'Pooled 26 studies with 1,313,348 participants on night shift duration and breast cancer risk.',
+           r:'For less than 10 years of night work, 13% higher risk (RR 1.13). For more than 10 years the result was no longer significant (RR 1.08).'},
+  benedict20:{q:'Blood plasma of 15 healthy young men was measured after normal sleep and after one night of sleep loss.',
+           r:'After the sleepless night tau protein rose (+17.2%, versus +1.8% after normal sleep). No difference in the other markers. A small, exploratory study.'},
+  louveau17:{q:'A review of the glymphatic system and the lymphatic vessels running in the meninges.',
+           r:'Summarises how fluid and waste drain from the central nervous system towards the neck lymph nodes — and names what is still an open question.'},
+  xu26:{q:'A review of the role of the glymphatic system during sleep.',
+           r:'The system is more active during sleep and largely quiet while awake. Working out the exact molecular mechanisms is left to further research.'},
+  harding19:{q:'A review of the relationship between body temperature and sleep.',
+           r:'Falling asleep is tied to the drop in core temperature; heat regulation and sleep regulation are closely intertwined.'},
+  cbti24:{q:'A review of the components of cognitive behavioural therapy for insomnia (CBT-I).',
+           r:'CBT-I is the first-line treatment for chronic insomnia; its core is stimulus control and sleep restriction.'},
+  supp24:{q:'A review of herbs and dietary supplements used for sleep.',
+           r:'The most supporting data exist for melatonin, valerian and hops. Most studies are small and the evidence is limited.'}
 }
 };
