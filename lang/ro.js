@@ -23,7 +23,7 @@ ui:{
   cycEyebrow:'Ciclul somnului',
   cycH2:'O noapte, așa cum o văd aparatele',
   cycLead:'Nu dormi uniform. Se succed cicluri de aproximativ 90 de minute, iar etapele REM se lungesc spre dimineață. Cea mai mare parte a somnului profund se află în prima jumătate a nopții — de aceea contează nu doar cât dormi, ci și când te culci.',
-  cycEegEyebrow:'EEG — undă cerebrală live, pe măsură ce etapa se schimbă',
+  cycEegEyebrow:'Undele EEG ilustrate în timpul somnului',
   cycEegWinLab:'Interval afișat',
   cycEegNote:'Fereastră mai lungă = curba alunecă mai lent. În stânga, amplitudinea în microvolți, jos, timpul.',
   cycPlay:'Start',
@@ -43,7 +43,7 @@ ui:{
 
   circEyebrow:'Ritm circadian',
   circH2:'Ceasul intern care decide când vine somnul',
-  circLead:'În centrul creierului, deasupra încrucișării nervilor optici, se află un ceas format din aproximativ 20&nbsp;000 de celule, <em>nucleul suprachiasmatic</em>. Ciclul lui propriu nu este exact de 24 de ore, ci puțin mai lung — în medie circa 24,2 —, de aceea trebuie resetat zilnic. Butonul de reglare este lumina.',
+  circLead:'În centrul creierului, deasupra încrucișării nervilor optici, se află un ceas format din aproximativ 20&nbsp;000 de celule, <em>nucleul suprachiasmatic</em>. Ciclul lui propriu nu este exact de 24 de ore, ci puțin mai lung, și diferă de la om la om — de aceea trebuie resetat zilnic. Butonul de reglare este lumina.',
   circSvgAria:'Melatonină, cortizol, temperatura centrală',
   circPlay:'Redă ziua',
   circPause:'Pauză',
@@ -60,12 +60,12 @@ ui:{
   cleanLegGreen:'<strong style="color:#4fe0a8">Verde</strong> — venă: lichid uzat care IESE',
   cleanLegPink:'<strong style="color:#ff7fb0">Roz</strong> — vas limfatic spre ganglionul cervical',
   cleanLegDark:'<strong style="color:#e8506f">Grena</strong> — deșeul propriu-zis',
-  cleanLead2:'Pompa este unda lentă a somnului profund. Comută pe somn profund și urmărește indicatorul de puls din stânga jos: <strong>la fiecare vârf, pixelii grena de deșeu sunt eliberați în valuri</strong>, ajung pe vena verde, iar de acolo, prin vasul limfatic roz, ajung în ganglionul limfatic cervical.',
+  cleanLead2:'În model, rolul pompei îl joacă unda lentă a somnului profund. Comută pe somn profund și urmărește indicatorul de puls din stânga jos: <strong>în animație, la fiecare vârf pornește o porție de pixeli grena de deșeu</strong>, ajunge pe vena verde, iar de acolo, prin vasul limfatic roz, în ganglionul limfatic cervical. Așa funcționează ilustrația — în creierul real curgerea este continuă, iar amploarea ei este încă în studiu.',
   cleanStateAria:'Stare',
   cleanAwake:'Treaz',
   cleanAsleep:'În somn profund',
   cleanStepsH3:'Procesul în cinci pași',
-  cleanNote:'Într-un studiu încrucișat cu 39 de participanți, dimineața după un somn normal existau, măsurabil, mai mulți markeri Alzheimer în plasma sanguină decât după o noapte albă — cu alte cuvinte, în timpul somnului aceștia chiar au fost eliminați din creier.',
+  cleanNote:'Într-un studiu încrucișat cu 15 participanți, după o singură noapte albă a crescut dimineața nivelul proteinei tau în plasma sanguină (+17,2%, față de +1,8% după somn normal). La ceilalți markeri măsurați nu a fost nicio diferență. Este un studiu mic, exploratoriu: arată că lipsa somnului se vede în aceste valori, dar nu măsoară direct curățarea creierului.',
 
   whyEyebrow:'De ce contează',
   whyH2:'Ce pierzi dacă îl scurtezi',
@@ -127,7 +127,16 @@ ui:{
   suppH3:'În ordinea dovezilor',
   planTag:'Program zilnic',
   planH3:'Numărătoare inversă pentru o culcare la 22:30',
-  sourcesEyebrow:'Surse'
+  sourcesEyebrow:'Surse',
+  modelBadge:'Model ilustrativ',
+  cycEegSim:'Forma undei este o simulare programată, nu înregistrarea EEG a unei persoane reale. Forma ei urmează, în scop didactic, frecvențele tipice fiecărei etape.',
+  cleanModel:'Animația este un model simplificat, nu o măsurătoare RMN, microscopică sau cerebrală în timp real. Ilustrează o schemă de curgere a lichidului propusă pe baza cercetărilor.',
+  sourcesLead:'La fiecare sursă vezi ce a studiat, ce a rezultat și cât de puternice sunt dovezile.',
+  srcOpen:'Deschide sursa',
+  srcWhat:'Ce a studiat',
+  srcResult:'Rezultat',
+  etAl:'et al.',
+  scrollHint:'← trage diagrama lateral →'
 },
 
 navMap:'Harta minții',
@@ -204,7 +213,7 @@ hormoneSteps:[
 cleanSteps:[
   {t:'Se acumulează în timpul zilei',p:'Cât timp ești treaz, produsele secundare ale activității neuronilor se acumulează în spațiul dintre celule: proteina amiloid-beta și tau, adenozină, lactat. Adenozina este cea care dă și senzația de somnolență — cofeina blochează exact acest semnal.'},
   {t:'La adormire, spațiul se deschide',p:'În somn profund, fanta dintre celule se lărgește, iar canalul din jurul vaselor de sânge se lățește. Acesta este comutatorul: același creier, cu două capacități de permeabilitate complet diferite. Pe diagramă vezi asta atunci când ramurile se îngroașă și capătă o aură.'},
-  {t:'Unda lentă pompează',p:'Undele delta mari ale somnului profund se mișcă împreună cu lichidul — această pulsație este motorul. Fiecare undă mătură totul, și <strong>oriunde ajunge, eliberează în valuri deșeul rămas blocat</strong>. La vârfurile indicatorului de puls din stânga jos, fluxul se accelerează de patru ori.'},
+  {t:'Unda lentă pompează',p:'Potrivit cercetărilor, undele delta mari ale somnului profund se mișcă împreună cu lichidul — după concepția actuală, această pulsație este motorul. În animație, fiecare undă mătură totul și <strong>pe unde trece, pune în mișcare deșeul rămas blocat</strong>; la vârfurile indicatorului de puls din stânga jos fluxul se accelerează. Cât de mare este exact acest efect la om se cercetează încă.'},
   {t:'Intră prin arteră, iese prin venă',p:'Lichidul cefalorahidian proaspăt curge ÎNĂUNTRU (albastru) prin canalul de-a lungul arterelor, spală spațiul dintre celule, preia deșeul și curge AFARĂ (verde) prin canalul de-a lungul venelor. De aceea există doi arbori vasculari separați, cu flux în direcții opuse.'},
   {t:'Vasul limfatic îl duce în gât',p:'Lichidul uzat care iese din creier este colectat de vasele limfatice care trec prin meninge și este condus către <strong>ganglionii limfatici cervicali</strong>, de unde intră în circulația sangvină și limfatică. Pe porțiunea roz, săgețile mici sunt valvele vaselor limfatice — acestea împiedică refluxul. Această rețea a fost identificată în meninge abia în 2015.'}
 ],
@@ -247,7 +256,7 @@ immune:[
  w:'Somnul a 164 de voluntari sănătoși a fost măsurat timp de o săptămână cu un senzor de mișcare purtat la încheietură. Apoi tuturor li s-a picurat în nas aceeași cantitate de rinovirus. Cei care au dormit <strong>mai puțin de 5 ore</strong> au avut o șansă de 4,5 ori mai mare să se îmbolnăvească efectiv decât cei care au dormit peste 7. Cei cu 5–6 ore: de 4,2 ori.',
  h:'Aceasta este forma cea mai convingătoare a acestei dovezi, pentru că toată lumea a primit aceeași doză de virus. Întrebarea nu e dacă îl contactezi, ci dacă organismul tău îl poate opri înainte să dea simptome.'},
 {t:'Vaccinarea — somnul ca amplificator de doză', ev:3, l1:'Măsurătoare', l2:'Ce înseamnă',
- w:'O meta-analiză din 2023 a agregat date din șapte studii. La cei la care somnul scurt din jurul vaccinării a fost măsurat <em>instrumental</em>, a rezultat o scădere semnificativă a anticorpilor (mărimea efectului 0,79). La bărbați efectul a fost mare, la femei nu a atins pragul de semnificație. Datele bazate pe auto-raportare nu au dat un rezultat semnificativ — contează somnul măsurat, nu ce credem noi despre el.',
+ w:'O meta-analiză din 2023 a agregat date din mai multe studii. La cei la care somnul scurt din jurul vaccinării a fost măsurat <em>instrumental</em>, a rezultat o scădere semnificativă a anticorpilor (mărimea efectului 0,79; interval de încredere 0,40–1,18). La bărbați efectul a fost mare, la femei nu a atins pragul de semnificație. Datele bazate pe auto-raportare nu au dat un rezultat semnificativ — contează somnul măsurat, nu ce credem noi despre el.',
  h:'Dacă mergi să te vaccinezi, dormi bine în nopțile din jurul acelui moment. Este unul dintre cele mai simple și gratuite lucruri prin care poți crește eficacitatea propriului vaccin.'},
 {t:'Inflamația — procesul lent de fond', ev:2, l1:'Măsurătoare', l2:'Ce înseamnă',
  w:'În privarea cronică de somn, cresc nivelurile de IL-6, TNF-alfa și CRP. Acestea sunt markerii inflamației cronice de grad scăzut — aceeași inflamație care stă la baza comună a bolilor cardiovasculare și a rezistenței la insulină.',
@@ -447,5 +456,35 @@ tts:{
   found:'Voce: {name}',
   missing:'Pentru această limbă nu există o voce instalată — se folosește vocea implicită a sistemului. În Windows: Setări → Ora și limba → Vorbire → pachet de voce pentru limbă.',
   enabled:'Sunet activat. Poți urmări și cu ochii închiși.'
+}
+,
+
+evLegend:{k:'Dovezi', l1:'Limitate', l2:'Bune', l3:'Puternice'},
+
+srcTypes:{exp:'experiment', trial:'studiu experimental', meta:'meta-analiză', review:'sinteză', cross:'studiu încrucișat', class:'clasificare de experți'},
+
+srcInfo:{
+  irwin94:{q:'Somnul a 23 de bărbați sănătoși a fost scurtat pentru o singură noapte (fără somn între orele 3 și 7).',
+           r:'Capacitatea de ucidere a celulelor natural killer a scăzut la 72% din valoarea lor normală, apoi a revenit după o noapte de somn normal.'},
+  prather15:{q:'Somnul a 164 de voluntari a fost măsurat timp de o săptămână cu un senzor de mișcare la încheietură, apoi toți au primit aceeași doză de rinovirus în nas.',
+           r:'Cei care au dormit sub 5 ore s-au îmbolnăvit efectiv de 4,5 ori mai probabil decât cei care au dormit peste 7 ore. Incertitudinea este mare: 1,08–18,69.'},
+  spiegel23:{q:'A agregat datele mai multor studii despre legătura dintre somnul din zilele din jurul vaccinării și răspunsul în anticorpi.',
+           r:'La somnul scurt măsurat instrumental a apărut o scădere semnificativă a anticorpilor (mărimea efectului 0,79; 0,40–1,18). Efect mare la bărbați, nesemnificativ la femei. Din auto-raportare nu a rezultat nimic.'},
+  iarc19:{q:'Un grup de experți a evaluat legătura dintre munca în tura de noapte și bolile canceroase.',
+           r:'Încadrare drept „probabil cancerigen pentru om” (2A). Dovezile epidemiologice la om sunt limitate — încadrarea nu înseamnă că munca de noapte provoacă cancer.'},
+  manouchehri21:{q:'A agregat 26 de studii, cu 1.313.348 de participante, privind durata muncii de noapte și riscul de cancer mamar.',
+           r:'Sub 10 ani de muncă de noapte, risc cu 13% mai mare (RR 1,13). Peste 10 ani, rezultatul nu a mai fost semnificativ (RR 1,08).'},
+  benedict20:{q:'Plasma sanguină a 15 bărbați tineri sănătoși a fost măsurată după somn normal și după o noapte albă.',
+           r:'După noaptea albă, proteina tau a crescut (+17,2%, față de +1,8% după somn normal). La ceilalți markeri nu a fost nicio diferență. Un studiu mic, exploratoriu.'},
+  louveau17:{q:'Sinteză despre sistemul glimfatic și vasele limfatice din meninge.',
+           r:'Rezumă cum se drenează lichidul și deșeurile din sistemul nervos central spre ganglionii cervicali — și numește ce a rămas încă o întrebare deschisă.'},
+  xu26:{q:'Sinteză despre rolul sistemului glimfatic în timpul somnului.',
+           r:'Sistemul este mai activ în somn și în mare parte liniștit în starea de veghe. Mecanismele moleculare exacte rămân în sarcina cercetărilor viitoare.'},
+  harding19:{q:'Sinteză despre legătura dintre temperatura corpului și somn.',
+           r:'Adormirea este legată de scăderea temperaturii centrale; termoreglarea și reglarea somnului sunt strâns împletite.'},
+  cbti24:{q:'Sinteză despre componentele terapiei cognitiv-comportamentale pentru insomnie (CBT-I).',
+           r:'CBT-I este tratamentul de primă linie în insomnia cronică; nucleul ei este controlul stimulilor și restricția de somn.'},
+  supp24:{q:'Sinteză despre plantele medicinale și suplimentele alimentare folosite pentru somn.',
+           r:'Cele mai multe date de sprijin există pentru melatonină, valeriană și hamei. Majoritatea studiilor sunt mici, iar dovezile sunt limitate.'}
 }
 };

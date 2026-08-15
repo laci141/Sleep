@@ -23,7 +23,7 @@ ui:{
   cycEyebrow:'Schlafzyklus',
   cycH2:'Eine Nacht, wie die Geräte sie sehen',
   cycLead:'Du schläfst nicht gleichmäßig. Etwa 90-minütige Zyklen wechseln sich ab, und die REM-Phasen werden gegen den Morgen hin länger. Der Großteil des Tiefschlafs liegt in der ersten Nachthälfte — deshalb ist es nicht egal, wann du dich hinlegst, nicht nur, wie viel du schläfst.',
-  cycEegEyebrow:'EEG — Live-Hirnwelle, während sich die Phase ändert',
+  cycEegEyebrow:'EEG-Wellen im Schlaf — eine Veranschaulichung',
   cycEegWinLab:'Angezeigter Zeitraum',
   cycEegNote:'Längeres Fenster = die Kurve läuft langsamer. Links der Ausschlag in Mikrovolt, unten die Zeit.',
   cycPlay:'Start',
@@ -43,7 +43,7 @@ ui:{
 
   circEyebrow:'Zirkadianer Rhythmus',
   circH2:'Die innere Uhr, die entscheidet, wann der Schlaf kommt',
-  circLead:'In der Mitte des Gehirns, über der Kreuzung der Sehnerven, sitzt eine aus etwa 20&nbsp;000 Zellen bestehende Uhr, der <em>Nucleus suprachiasmaticus</em>. Ihr eigener Zyklus dauert nicht genau 24 Stunden, sondern etwas länger — im Schnitt etwa 24,2 —, deshalb muss sie täglich neu gestellt werden. Der Stellknopf ist das Licht.',
+  circLead:'In der Mitte des Gehirns, über der Kreuzung der Sehnerven, sitzt eine aus etwa 20&nbsp;000 Zellen bestehende Uhr, der <em>Nucleus suprachiasmaticus</em>. Ihr eigener Zyklus dauert nicht genau 24 Stunden, sondern etwas länger, und sie ist von Mensch zu Mensch verschieden — deshalb muss sie täglich neu gestellt werden. Der Stellknopf ist das Licht.',
   circSvgAria:'Melatonin, Cortisol, Körperkerntemperatur',
   circPlay:'Tag abspielen',
   circPause:'Pause',
@@ -60,12 +60,12 @@ ui:{
   cleanLegGreen:'<strong style="color:#4fe0a8">Grün</strong> — Vene: verschmutzte Flüssigkeit RAUS',
   cleanLegPink:'<strong style="color:#ff7fb0">Rosa</strong> — Lymphgefäß zum Halslymphknoten',
   cleanLegDark:'<strong style="color:#e8506f">Weinrot</strong> — der Abfall selbst',
-  cleanLead2:'Die Pumpe ist die langsame Welle des Tiefschlafs. Schalte auf Tiefschlaf um, und schau auf die Pulsanzeige unten links: <strong>bei jeder Spitze werden die weinroten Abfall-Pixel stoßweise freigesetzt</strong>, gelangen auf die grüne Vene, und von dort über das rosa Lymphgefäß zum Halslymphknoten.',
+  cleanLead2:'Im Modell übernimmt die langsame Welle des Tiefschlafs die Rolle der Pumpe. Schalte auf Tiefschlaf um, und schau auf die Pulsanzeige unten links: <strong>in der Animation setzt sich bei jeder Spitze eine Portion weinroter Abfall-Pixel in Bewegung</strong>, gelangt auf die grüne Vene und von dort über das rosa Lymphgefäß zum Halslymphknoten. So läuft die Veranschaulichung — im echten Gehirn ist der Fluss kontinuierlich, und sein Ausmaß wird noch erforscht.',
   cleanStateAria:'Zustand',
   cleanAwake:'Wach',
   cleanAsleep:'Im Tiefschlaf',
   cleanStepsH3:'Der Prozess in fünf Schritten',
-  cleanNote:'In einer Cross-over-Studie mit 39 Personen waren am Morgen nach normalem Schlaf messbar mehr Alzheimer-Marker im Blutplasma als nach einer durchwachten Nacht — das heißt, sie sind während des Schlafs tatsächlich aus dem Gehirn ausgetreten.',
+  cleanNote:'In einer Cross-over-Studie mit 15 Personen stieg nach einer einzigen durchwachten Nacht am Morgen das Tau-Protein im Blutplasma an (+17,2% gegenüber +1,8% nach normalem Schlaf). Bei den übrigen gemessenen Markern gab es keinen Unterschied. Eine kleine, explorative Studie: Sie zeigt, dass sich Schlafmangel in diesen Werten niederschlägt, misst aber nicht direkt die Reinigung des Gehirns.',
 
   whyEyebrow:'Warum es wichtig ist',
   whyH2:'Was du verlierst, wenn du ihn kürzt',
@@ -127,7 +127,16 @@ ui:{
   suppH3:'Nach Evidenzlage geordnet',
   planTag:'Tagesplan',
   planH3:'Rückwärts gerechnet ab einer Schlafenszeit von 22:30 Uhr',
-  sourcesEyebrow:'Quellen'
+  sourcesEyebrow:'Quellen',
+  modelBadge:'Veranschaulichendes Modell',
+  cycEegSim:'Die Wellenform ist eine programmierte Simulation, keine Aufzeichnung einer realen Person. Ihre Form folgt zu Lehrzwecken den für die jeweilige Phase typischen Frequenzen.',
+  cleanModel:'Die Animation ist ein vereinfachtes Modell, keine MRT-, Mikroskop- oder Live-Hirnmessung. Sie veranschaulicht eine in der Forschung vorgeschlagene Anordnung des Flüssigkeitsflusses.',
+  sourcesLead:'Bei jeder Quelle siehst du, was untersucht wurde, was dabei herauskam und wie stark die Evidenz ist.',
+  srcOpen:'Quelle öffnen',
+  srcWhat:'Untersucht',
+  srcResult:'Ergebnis',
+  etAl:'et al.',
+  scrollHint:'← Diagramm zur Seite ziehen →'
 },
 
 navMap:'Gedankenkarte',
@@ -204,7 +213,7 @@ hormoneSteps:[
 cleanSteps:[
   {t:'Tagsüber sammelt es sich',p:'Solange du wach bist, sammeln sich die Nebenprodukte der Neuronenaktivität im Raum zwischen den Zellen an: Amyloid-beta und Tau-Protein, Adenosin, Laktat. Das Adenosin ist es, das auch das Müdigkeitsgefühl erzeugt — Koffein blockiert genau dieses Signal.'},
   {t:'Beim Einschlafen öffnet sich der Raum',p:'Im Tiefschlaf weitet sich der Zwischenraum zwischen den Zellen, und der Kanal um die Blutgefäße wird breiter. Das ist der Schalter: dasselbe Gehirn, mit zwei völlig unterschiedlichen Durchlässigkeiten. In der Grafik siehst du das, wenn sich die Äste verdicken und einen Schein bekommen.'},
-  {t:'Die langsame Welle pumpt',p:'Die großen Deltawellen des Tiefschlafs bewegen sich gemeinsam mit der Flüssigkeit — dieses Pulsieren ist der Antrieb. Jede Welle fegt hindurch, und <strong>wo sie ankommt, setzt sie stoßweise den festsitzenden Abfall frei</strong>. An den Spitzen der Pulsanzeige unten links beschleunigt sich der Fluss auf das Vierfache.'},
+  {t:'Die langsame Welle pumpt',p:'Nach den Forschungsergebnissen bewegen sich die großen Deltawellen des Tiefschlafs gemeinsam mit der Flüssigkeit — nach heutiger Vorstellung ist dieses Pulsieren der Antrieb. In der Animation fegt jede Welle hindurch, und <strong>wo sie durchläuft, setzt sie den festsitzenden Abfall in Bewegung</strong>; an den Spitzen der Pulsanzeige unten links beschleunigt sich der Fluss. Wie groß dieser Effekt beim Menschen genau ist, wird noch erforscht.'},
   {t:'Rein über die Arterie, raus über die Vene',p:'Die frische Rückenmarksflüssigkeit strömt über den Kanal entlang der Arterien REIN (blau), spült den Raum zwischen den Zellen durch, nimmt den Abfall auf und strömt über den Kanal entlang der Venen RAUS (grün). Deshalb gibt es zwei getrennte Gefäßbäume mit entgegengesetzter Fließrichtung.'},
   {t:'Das Lymphgefäß bringt es zum Hals',p:'Die aus dem Gehirn austretende verschmutzte Flüssigkeit wird von den in der Hirnhaut verlaufenden Lymphgefäßen gesammelt und zu den <strong>Halslymphknoten</strong> geleitet, von wo sie in den Blut- und Lymphkreislauf gelangt. Im rosa Abschnitt sind die kleinen Pfeile die Klappen der Lymphgefäße — sie verhindern den Rückfluss. Dieses Netzwerk wurde erst 2015 in der Hirnhaut identifiziert.'}
 ],
@@ -247,7 +256,7 @@ immune:[
  w:'Der Schlaf von 164 gesunden Freiwilligen wurde eine Woche lang mit einem am Handgelenk getragenen Bewegungssensor gemessen. Danach bekam jeder die gleiche Menge Rhinovirus in die Nase geträufelt. Wer <strong>weniger als 5 Stunden</strong> schlief, wurde mit 4,5-fach höherer Wahrscheinlichkeit tatsächlich krank als jemand, der mehr als 7 Stunden schlief. Bei 5–6 Stunden: 4,2-fach.',
  h:'Das ist die überzeugendste Form dieses Beweises, weil jeder die gleiche Virusdosis bekam. Die Frage ist nicht, ob du dich ansteckst, sondern ob dein Körper es aufhalten kann, bevor es Symptome zeigt.'},
 {t:'Impfung — Schlaf als Wirkungsverstärker', ev:3, l1:'Messung', l2:'Was es bedeutet',
- w:'Eine Metaanalyse aus dem Jahr 2023 fasste die Daten von sieben Studien zusammen. Wo der verkürzte Schlaf in den Tagen rund um die Impfung <em>gerätegemessen</em> war, zeigte sich ein deutlicher Antikörperrückgang (Effektgröße 0,79). Bei Männern war der Effekt groß, bei Frauen erreichte er keine Signifikanz. Die auf Selbstauskunft beruhenden Daten ergaben kein signifikantes Ergebnis — der gemessene Schlaf zählt, nicht das, was wir darüber denken.',
+ w:'Eine Metaanalyse aus dem Jahr 2023 fasste die Daten mehrerer Studien zusammen. Wo der verkürzte Schlaf in den Tagen rund um die Impfung <em>gerätegemessen</em> war, zeigte sich ein deutlicher Antikörperrückgang (Effektgröße 0,79; Vertrauensbereich 0,40–1,18). Bei Männern war der Effekt groß, bei Frauen erreichte er keine Signifikanz. Die auf Selbstauskunft beruhenden Daten ergaben kein signifikantes Ergebnis — der gemessene Schlaf zählt, nicht das, was wir darüber denken.',
  h:'Wenn du zur Impfung gehst, schlaf in den umliegenden Nächten ordentlich. Das ist eines der einfachsten und kostenlosen Dinge, mit denen du die Wirksamkeit deiner eigenen Impfung steigern kannst.'},
 {t:'Entzündung — der langsame Hintergrundprozess', ev:2, l1:'Messung', l2:'Was es bedeutet',
  w:'Bei anhaltendem Schlafmangel steigen die Werte von IL-6, TNF-alpha und CRP. Das sind Marker für eine chronische, niedriggradige Entzündung — dieselbe Entzündung, die den gemeinsamen Hintergrund von Herz-Kreislauf-Erkrankungen und Insulinresistenz bildet.',
@@ -447,5 +456,35 @@ tts:{
   found:'Stimme: {name}',
   missing:'Für diese Sprache ist keine Stimme installiert — es wird die Standardstimme des Systems verwendet. Unter Windows: Einstellungen → Zeit und Sprache → Sprache und Region → Sprachpaket installieren.',
   enabled:'Ton eingeschaltet. Du kannst auch mit geschlossenen Augen folgen.'
+}
+,
+
+evLegend:{k:'Evidenz', l1:'Begrenzt', l2:'Gut', l3:'Stark'},
+
+srcTypes:{exp:'Experiment', trial:'experimentelle Studie', meta:'Metaanalyse', review:'Übersichtsarbeit', cross:'Cross-over-Studie', class:'Experten-Einstufung'},
+
+srcInfo:{
+  irwin94:{q:'Bei 23 gesunden Männern wurde der Schlaf für eine einzige Nacht verkürzt (zwischen 3 und 7 Uhr kein Schlaf).',
+           r:'Die Tötungsfähigkeit der natürlichen Killerzellen sank auf 72% ihres eigenen Normalwerts und kehrte nach einer Nacht normalen Schlafs zurück.'},
+  prather15:{q:'Der Schlaf von 164 Freiwilligen wurde eine Woche lang mit einem Bewegungssensor am Handgelenk gemessen, danach bekamen alle dieselbe Menge Rhinoviren in die Nase.',
+           r:'Wer weniger als 5 Stunden schlief, wurde 4,5-mal wahrscheinlicher tatsächlich krank als wer mehr als 7 Stunden schlief. Die Unsicherheit ist groß: 1,08–18,69.'},
+  spiegel23:{q:'Fasste Daten mehrerer Studien dazu zusammen, wie der Schlaf in den Tagen rund um die Impfung mit der Antikörperantwort zusammenhängt.',
+           r:'Bei gerätegemessenem kurzem Schlaf zeigte sich ein deutlicher Antikörperrückgang (Effektgröße 0,79; 0,40–1,18). Bei Männern großer Effekt, bei Frauen nicht signifikant. Aus Selbstauskunft ergab sich nichts.'},
+  iarc19:{q:'Ein Expertengremium bewertete den Zusammenhang zwischen Nachtschichtarbeit und Krebserkrankungen.',
+           r:'Einstufung als „wahrscheinlich krebserregend für den Menschen“ (2A). Die epidemiologische Evidenz beim Menschen ist begrenzt — die Einstufung bedeutet nicht, dass Nachtarbeit Krebs verursacht.'},
+  manouchehri21:{q:'Fasste 26 Studien mit insgesamt 1.313.348 Teilnehmerinnen zur Dauer der Nachtschicht und zum Brustkrebsrisiko zusammen.',
+           r:'Bei weniger als 10 Jahren Nachtarbeit ein um 13% höheres Risiko (RR 1,13). Bei mehr als 10 Jahren war das Ergebnis nicht mehr signifikant (RR 1,08).'},
+  benedict20:{q:'Das Blutplasma von 15 gesunden jungen Männern wurde nach normalem Schlaf und nach einer durchwachten Nacht gemessen.',
+           r:'Nach der durchwachten Nacht stieg das Tau-Protein (+17,2% gegenüber +1,8% nach normalem Schlaf). Bei den übrigen Markern kein Unterschied. Eine kleine, explorative Studie.'},
+  louveau17:{q:'Übersichtsarbeit zum glymphatischen System und zu den Lymphgefäßen in der Hirnhaut.',
+           r:'Fasst zusammen, wie Flüssigkeit und Abfall aus dem Zentralnervensystem zu den Halslymphknoten abfließen — und benennt, was noch offen ist.'},
+  xu26:{q:'Übersichtsarbeit zur Rolle des glymphatischen Systems während des Schlafs.',
+           r:'Das System ist im Schlaf aktiver und im Wachzustand weitgehend ruhig. Die genauen molekularen Mechanismen bleiben weiterer Forschung überlassen.'},
+  harding19:{q:'Übersichtsarbeit zum Zusammenhang von Körpertemperatur und Schlaf.',
+           r:'Das Einschlafen ist an das Absinken der Kerntemperatur gebunden; Wärmeregulation und Schlafregulation hängen eng zusammen.'},
+  cbti24:{q:'Übersichtsarbeit zu den Bestandteilen der kognitiven Verhaltenstherapie bei Insomnie (CBT-I).',
+           r:'CBT-I ist die Erstlinienbehandlung bei chronischer Insomnie; ihr Kern sind Stimuluskontrolle und Schlafrestriktion.'},
+  supp24:{q:'Übersichtsarbeit zu Heilpflanzen und Nahrungsergänzungsmitteln für den Schlaf.',
+           r:'Die meisten unterstützenden Daten gibt es für Melatonin, Baldrian und Hopfen. Die meisten Studien sind klein, die Evidenz ist begrenzt.'}
 }
 };
