@@ -1,7 +1,7 @@
 /* Română — traducere din maghiară. */
 window.LANGS = window.LANGS || {};
 window.LANGS.ro = {
-code:'ro', label:'RO', name:'Română', htmlLang:'ro', ttsLang:'ro-RO',
+code:'ro', label:'RO', name:'Română', htmlLang:'ro',
 
 ui:{
   title:'Somn 2026',
@@ -91,7 +91,7 @@ ui:{
 
   relaxEyebrow:'Relaxare de seară',
   relaxH2:'Trei exerciții înainte de culcare',
-  relaxIntro:'Fă doar unul pe rând. Toate au același scop: reduc răspunsul de stres, ca adormirea să vină de la sine. Dacă adormi în timpul exercițiului, este un succes, nu un eșec. <strong>Pornește sunetul</strong> — nu trebuie să citești, îți spun eu totul.',
+  relaxIntro:'Fă doar unul pe rând. Toate au același scop: reduc răspunsul de stres, ca adormirea să vină de la sine. Dacă adormi în timpul exercițiului, este un succes, nu un eșec.',
   tabBreath:'Respirație 4-7-8',
   tabPmr:'Relaxare musculară progresivă',
   tabScan:'Scanare corporală',
@@ -104,12 +104,10 @@ ui:{
   secShort:'s',
   pmrIntro:'De la degetele de la picioare până la frunte, grupă de mușchi cu grupă de mușchi: cinci secunde de încordare, apoi zece secunde de relaxare completă. Esențial este să simți diferența dintre încordat și relaxat. Fă-l culcat.',
   pmrIdle:'Apasă Start și te ghidez pas cu pas.',
-  scanIntro:'Aceeași hartă a corpului, doar fără încordare. Îți îndrepți atenția către o parte a corpului, observi ce simți acolo și treci mai departe. Inelul de lumină care se rotește arată unde se află atenția — coboară în față, urcă în spate, așa cum un inel înconjoară un corp. Cu sunet, poate fi făcut și cu ochii închiși.',
+  scanIntro:'Aceeași hartă a corpului, doar fără încordare. Îți îndrepți atenția către o parte a corpului, observi ce simți acolo și treci mai departe. Inelul de lumină care se rotește arată unde se află atenția — coboară în față, urcă în spate, așa cum un inel înconjoară un corp.',
   scanIdle:'Alege durata și pornește.',
   start:'Start',
   stop:'Stop',
-  soundOn:'Sunet: pornit',
-  soundOff:'Sunet: oprit',
   min5:'5 minute',
   min10:'10 minute',
   remaining:'rămas:',
@@ -147,7 +145,7 @@ branches:[
   {id:'tisztitas', title:'Curățarea creierului',   sub:['arteră, venă, limfă','pulsul pompează']},
   {id:'miert',     title:'De ce contează',         sub:['sistemul imunitar','riscul de cancer']},
   {id:'tippek',    title:'Somn mai bun',           sub:['controlul stimulului','lumină și temperatură']},
-  {id:'relax',     title:'Relaxare de seară',      sub:['respirație 4-7-8','ghidat cu voce']},
+  {id:'relax',     title:'Relaxare de seară',      sub:['respirație 4-7-8','pas cu pas']},
   {id:'etrend',    title:'Ceai, alimente, vitamine',sub:['când să mănânci și să bei','suplimente']}
 ],
 
@@ -396,12 +394,12 @@ dayplan:[
   ['−1,5 ore','<b>Luminile jos.</b> Lampa de plafon stinsă, lampă de podea cu lumină caldă. Ceaiul pe foc.'],
   ['−1 oră','<b>Suplimente:</b> magneziu și glicină. Melatonina mai devreme.'],
   ['−1 oră','<b>Duș cald</b> 10–15 minute.'],
-  ['−30 minute','<b>Scrierea gândurilor</b> pe hârtie, apoi relaxare cu voce.'],
+  ['−30 minute','<b>Scrierea gândurilor</b> pe hârtie, apoi relaxare.'],
   ['culcare','<b>Cameră răcoroasă, întunecată, silențioasă</b>, 16–19 °C.']
 ],
 
 breath:[
-  {label:'Inspirație pe nas', say:'Inspiră pe nas.'},
+  {label:'Inspirație pe nas'},
   {label:'Ține aerul',        say:'Ține aerul.'},
   {label:'Expiră lent',       say:'Expiră lent, pe gură.'}
 ],
@@ -410,11 +408,8 @@ pmr:{
   tense:'ÎNCORDEAZĂ.',
   release:'RELAXEAZĂ.',
   releaseTxt:'Doar observă cum se eliberează tensiunea și cum te scufunzi în pat.',
-  sayTense:'{title}. Încordează. {how}',
-  sayRelease:'Relaxează. Observă cum se eliberează tensiunea.',
   doneTitle:'Gata.',
   doneTxt:'Mai stai încă un minut nemișcat, înainte să faci orice.',
-  sayDone:'Gata. Mai stai încă un minut nemișcat.',
   stopped:'Oprit. Start reia de la început.',
   steps:[
     ['labfej','Talpă și degete de la picioare','Îndoaie degetele de la picioare, încordează bolta plantară.'],
@@ -432,10 +427,8 @@ pmr:{
 
 scan:{
   ready:'Gata de start. {n} de secunde revin fiecărei părți a corpului.',
-  sayIntro:'Întinde-te confortabil, închide ochii și fii atent la ce spun.',
   doneTitle:'Gata.',
   doneTxt:'Dacă ești încă treaz, rămâi așa și lasă somnul să vină de la sine.',
-  sayDone:'Gata. Dacă ești încă treaz, rămâi așa și lasă somnul să vină de la sine.',
   stopped:'Oprit. Start continuă de unde ai rămas.',
   steps:[
     ['labfej','Talpă','Începe aici. Cald? Rece? Furnicături? Nimic? Orice răspuns e bun.'],
@@ -451,13 +444,6 @@ scan:{
   ]
 },
 
-tts:{
-  unsupported:'Browserul tău nu poate vorbi.',
-  found:'Voce: {name}',
-  missing:'Pentru această limbă nu există o voce instalată — se folosește vocea implicită a sistemului. În Windows: Setări → Ora și limba → Vorbire → pachet de voce pentru limbă.',
-  enabled:'Sunet activat. Poți urmări și cu ochii închiși.'
-}
-,
 
 evLegend:{k:'Dovezi', l0:'Model ilustrativ', l1:'Dovezi limitate', l2:'Dovezi bune', l3:'Dovezi puternice'},
 

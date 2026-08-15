@@ -1,7 +1,7 @@
 /* Magyar — forrásnyelv. A többi nyelv ennek a kulcsszerkezetét másolja. */
 window.LANGS = window.LANGS || {};
 window.LANGS.hu = {
-code:'hu', label:'HU', name:'Magyar', htmlLang:'hu', ttsLang:'hu-HU',
+code:'hu', label:'HU', name:'Magyar', htmlLang:'hu',
 
 ui:{
   title:'Alvás 2026',
@@ -91,7 +91,7 @@ ui:{
 
   relaxEyebrow:'Esti relaxáció',
   relaxH2:'Három gyakorlat lefekvés előtt',
-  relaxIntro:'Egyszerre csak az egyiket csináld. Mindegyik ugyanazt célozza: leveszi a stresszválaszt, hogy az elalvás magától jöjjön. Ha közben elalszol, az a siker, nem a kudarc. <strong>Kapcsold be a hangot</strong>, és nem kell olvasnod — végigmondom.',
+  relaxIntro:'Egyszerre csak az egyiket csináld. Mindegyik ugyanazt célozza: leveszi a stresszválaszt, hogy az elalvás magától jöjjön. Ha közben elalszol, az a siker, nem a kudarc.',
   tabBreath:'4-7-8 légzés',
   tabPmr:'Progresszív izomlazítás',
   tabScan:'Testpásztázás',
@@ -104,12 +104,10 @@ ui:{
   secShort:'mp',
   pmrIntro:'Lábujjtól a homlokig, izomcsoportonként: öt másodperc feszítés, aztán tíz másodperc teljes elengedés. A lényeg a különbség érzékelése a feszes és a laza között. Fekve csináld.',
   pmrIdle:'Nyomd meg az Indítást, és lépésenként végigvezetlek.',
-  scanIntro:'Ugyanaz a testtérkép, csak feszítés nélkül. Odafigyelsz egy testrészre, megnézed, mit érzel ott, és továbbmész. A körbefutó fénygyűrű mutatja, hol tart a figyelem — elöl lefelé, hátul felfelé ível, ahogy egy gyűrű körbeér egy testen. Hanggal csukott szemmel is végigcsinálható.',
+  scanIntro:'Ugyanaz a testtérkép, csak feszítés nélkül. Odafigyelsz egy testrészre, megnézed, mit érzel ott, és továbbmész. A körbefutó fénygyűrű mutatja, hol tart a figyelem — elöl lefelé, hátul felfelé ível, ahogy egy gyűrű körbeér egy testen.',
   scanIdle:'Válassz hosszt, és indítsd el.',
   start:'Indítás',
   stop:'Állj',
-  soundOn:'Hang: be',
-  soundOff:'Hang: ki',
   min5:'5 perc',
   min10:'10 perc',
   remaining:'hátralévő:',
@@ -147,7 +145,7 @@ branches:[
   {id:'tisztitas', title:'Agytisztítás',      sub:['artéria, véna, nyirok','pulzus pumpál']},
   {id:'miert',     title:'Miért fontos',      sub:['immunrendszer','daganatos kockázat']},
   {id:'tippek',    title:'Jobb alvás',        sub:['ingerkontroll','fény és hőmérséklet']},
-  {id:'relax',     title:'Esti relaxáció',    sub:['4-7-8 légzés','hanggal vezetve']},
+  {id:'relax',     title:'Esti relaxáció',    sub:['4-7-8 légzés','lépésről lépésre']},
   {id:'etrend',    title:'Tea, étel, vitamin',sub:['mikor egyél és igyál','kiegészítők']}
 ],
 
@@ -396,12 +394,12 @@ dayplan:[
   ['−1,5 óra','<b>Fények le.</b> Mennyezeti lámpa ki, meleg fényű állólámpa. Tea föl.'],
   ['−1 óra','<b>Kiegészítők:</b> magnézium és glicin. Melatonint korábban.'],
   ['−1 óra','<b>Meleg zuhany</b> 10–15 perc.'],
-  ['−30 perc','<b>Kiírás</b> papírra, utána relaxáció hanggal.'],
+  ['−30 perc','<b>Kiírás</b> papírra, utána relaxáció.'],
   ['lefekvés','<b>Hűvös, sötét, néma szoba</b>, 16–19 °C.']
 ],
 
 breath:[
-  {label:'Belélegzés orron át', say:'Lélegezz be orron át.'},
+  {label:'Belélegzés orron át'},
   {label:'Tartsd bent',         say:'Tartsd bent.'},
   {label:'Fújd ki lassan',      say:'Fújd ki lassan, szájon át.'}
 ],
@@ -410,11 +408,8 @@ pmr:{
   tense:'FESZÍTSD.',
   release:'ENGEDD EL.',
   releaseTxt:'Csak figyeld, hogy ereszt ki a feszülés, és süllyed bele az ágyba.',
-  sayTense:'{title}. Feszítsd. {how}',
-  sayRelease:'Engedd el. Figyeld, hogy ereszt ki a feszülés.',
   doneTitle:'Kész.',
   doneTxt:'Feküdj még egy percet mozdulatlanul, mielőtt bármit csinálnál.',
-  sayDone:'Kész. Feküdj még egy percet mozdulatlanul.',
   stopped:'Megállítva. Az Indítás újrakezdi az elejéről.',
   steps:[
     ['labfej','Lábfej és lábujjak','Görbítsd be a lábujjaidat, feszítsd meg a talpad boltozatát.'],
@@ -432,10 +427,8 @@ pmr:{
 
 scan:{
   ready:'Kész az indításra. {n} másodperc jut egy testrészre.',
-  sayIntro:'Feküdj kényelmesen, csukd be a szemed, és figyelj oda arra, amit mondok.',
   doneTitle:'Kész.',
   doneTxt:'Ha még ébren vagy, maradj így, és hagyd, hogy jöjjön az álom magától.',
-  sayDone:'Kész. Ha még ébren vagy, maradj így, és hagyd, hogy jöjjön az álom magától.',
   stopped:'Megállítva. Az Indítás onnan folytatja, ahol abbahagytad.',
   steps:[
     ['labfej','Lábfej','Kezdd itt. Meleg? Hűvös? Bizsergés? Semmi? Mindegyik jó válasz.'],
@@ -451,13 +444,6 @@ scan:{
   ]
 },
 
-tts:{
-  unsupported:'A böngésződ nem tud beszélni.',
-  found:'Hang: {name}',
-  missing:'A nyelvhez nincs telepített hang — a rendszer alaphangját használja. Windowsban: Beállítások → Idő és nyelv → Beszéd → nyelvi hangcsomag.',
-  enabled:'Hang bekapcsolva. Csukott szemmel is követheted.'
-}
-,
 
 evLegend:{k:'Bizonyíték', l0:'Szemléltető modell', l1:'Korlátozott bizonyíték', l2:'Jó bizonyíték', l3:'Erős bizonyíték'},
 

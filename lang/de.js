@@ -1,7 +1,7 @@
 /* Deutsch — Übersetzung des ungarischen Originals (hu.js). Gleiche Schlüsselstruktur. */
 window.LANGS = window.LANGS || {};
 window.LANGS.de = {
-code:'de', label:'DE', name:'Deutsch', htmlLang:'de', ttsLang:'de-DE',
+code:'de', label:'DE', name:'Deutsch', htmlLang:'de',
 
 ui:{
   title:'Schlaf 2026',
@@ -91,7 +91,7 @@ ui:{
 
   relaxEyebrow:'Abendliche Entspannung',
   relaxH2:'Drei Übungen vor dem Schlafengehen',
-  relaxIntro:'Mach immer nur eine davon. Alle zielen auf dasselbe: Sie nehmen die Stressreaktion weg, damit der Schlaf von selbst kommt. Wenn du dabei einschläfst, ist das der Erfolg, nicht das Scheitern. <strong>Schalte den Ton ein</strong>, dann musst du nicht lesen — ich führe dich durch.',
+  relaxIntro:'Mach immer nur eine davon. Alle zielen auf dasselbe: Sie nehmen die Stressreaktion weg, damit der Schlaf von selbst kommt. Wenn du dabei einschläfst, ist das der Erfolg, nicht das Scheitern.',
   tabBreath:'4-7-8-Atmung',
   tabPmr:'Progressive Muskelentspannung',
   tabScan:'Körperscan',
@@ -104,12 +104,10 @@ ui:{
   secShort:'s',
   pmrIntro:'Von den Zehen bis zur Stirn, Muskelgruppe für Muskelgruppe: fünf Sekunden anspannen, dann zehn Sekunden vollständig loslassen. Es geht darum, den Unterschied zwischen angespannt und locker zu spüren. Mach es im Liegen.',
   pmrIdle:'Drück auf Start, und ich führe dich Schritt für Schritt hindurch.',
-  scanIntro:'Dieselbe Körperkarte, nur ohne Anspannung. Du richtest die Aufmerksamkeit auf einen Körperteil, schaust, was du dort fühlst, und gehst weiter. Der umlaufende Lichtring zeigt, wo die Aufmerksamkeit gerade ist — vorne abwärts, hinten aufwärts, so wie ein Ring einen Körper umrundet. Mit Ton lässt es sich auch mit geschlossenen Augen durchführen.',
+  scanIntro:'Dieselbe Körperkarte, nur ohne Anspannung. Du richtest die Aufmerksamkeit auf einen Körperteil, schaust, was du dort fühlst, und gehst weiter. Der umlaufende Lichtring zeigt, wo die Aufmerksamkeit gerade ist — vorne abwärts, hinten aufwärts, so wie ein Ring einen Körper umrundet.',
   scanIdle:'Wähl eine Länge, und starte.',
   start:'Start',
   stop:'Stopp',
-  soundOn:'Ton: an',
-  soundOff:'Ton: aus',
   min5:'5 Min',
   min10:'10 Min',
   remaining:'verbleibend:',
@@ -147,7 +145,7 @@ branches:[
   {id:'tisztitas', title:'Gehirnreinigung',      sub:['Arterie, Vene, Lymphe','Puls pumpt']},
   {id:'miert',     title:'Warum es wichtig ist',      sub:['Immunsystem','Krebsrisiko']},
   {id:'tippek',    title:'Besser schlafen',        sub:['Stimuluskontrolle','Licht und Temperatur']},
-  {id:'relax',     title:'Abendliche Entspannung',    sub:['4-7-8-Atmung','mit Tonführung']},
+  {id:'relax',     title:'Abendliche Entspannung',    sub:['4-7-8-Atmung','Schritt für Schritt']},
   {id:'etrend',    title:'Tee, Essen, Vitamine',sub:['wann du essen und trinken solltest','Nahrungsergänzung']}
 ],
 
@@ -396,12 +394,12 @@ dayplan:[
   ['−1,5 Std','<b>Lichter runter.</b> Deckenlampe aus, Stehlampe mit warmem Licht. Tee auf.'],
   ['−1 Std','<b>Nahrungsergänzung:</b> Magnesium und Glycin. Melatonin früher.'],
   ['−1 Std','<b>Warme Dusche</b> 10–15 Minuten.'],
-  ['−30 Min','<b>Aufschreiben</b> auf Papier, danach Entspannung mit Ton.'],
+  ['−30 Min','<b>Aufschreiben</b> auf Papier, danach Entspannung.'],
   ['Schlafengehen','<b>Kühles, dunkles, stilles Zimmer</b>, 16–19 °C.']
 ],
 
 breath:[
-  {label:'Einatmen durch die Nase', say:'Atme durch die Nase ein.'},
+  {label:'Einatmen durch die Nase'},
   {label:'Halte an',         say:'Halte die Luft an.'},
   {label:'Langsam ausatmen',      say:'Atme langsam durch den Mund aus.'}
 ],
@@ -410,11 +408,8 @@ pmr:{
   tense:'ANSPANNEN.',
   release:'LOSLASSEN.',
   releaseTxt:'Beobachte einfach, wie die Spannung nachlässt und du ins Bett einsinkst.',
-  sayTense:'{title}. Anspannen. {how}',
-  sayRelease:'Lass los. Beobachte, wie die Spannung nachlässt.',
   doneTitle:'Fertig.',
   doneTxt:'Bleib noch eine Minute reglos liegen, bevor du irgendetwas tust.',
-  sayDone:'Fertig. Bleib noch eine Minute reglos liegen.',
   stopped:'Gestoppt. Start beginnt wieder von vorne.',
   steps:[
     ['labfej','Fuß und Zehen','Kräusel die Zehen ein, spann das Fußgewölbe an.'],
@@ -432,10 +427,8 @@ pmr:{
 
 scan:{
   ready:'Bereit zum Start. {n} Sekunden pro Körperteil.',
-  sayIntro:'Leg dich bequem hin, schließ die Augen, und achte auf das, was ich sage.',
   doneTitle:'Fertig.',
   doneTxt:'Wenn du noch wach bist, bleib so liegen, und lass den Schlaf von selbst kommen.',
-  sayDone:'Fertig. Wenn du noch wach bist, bleib so liegen, und lass den Schlaf von selbst kommen.',
   stopped:'Gestoppt. Start setzt dort fort, wo du aufgehört hast.',
   steps:[
     ['labfej','Füße','Fang hier an. Warm? Kühl? Kribbeln? Nichts? Jede Antwort ist richtig.'],
@@ -451,13 +444,6 @@ scan:{
   ]
 },
 
-tts:{
-  unsupported:'Dein Browser kann nicht sprechen.',
-  found:'Stimme: {name}',
-  missing:'Für diese Sprache ist keine Stimme installiert — es wird die Standardstimme des Systems verwendet. Unter Windows: Einstellungen → Zeit und Sprache → Sprache und Region → Sprachpaket installieren.',
-  enabled:'Ton eingeschaltet. Du kannst auch mit geschlossenen Augen folgen.'
-}
-,
 
 evLegend:{k:'Evidenz', l0:'Veranschaulichendes Modell', l1:'Begrenzte Evidenz', l2:'Gute Evidenz', l3:'Starke Evidenz'},
 

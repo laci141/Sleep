@@ -1,7 +1,7 @@
 /* English translation of the Hungarian source file. Mirrors its key structure. */
 window.LANGS = window.LANGS || {};
 window.LANGS.en = {
-code:'en', label:'EN', name:'English', htmlLang:'en', ttsLang:'en-US',
+code:'en', label:'EN', name:'English', htmlLang:'en',
 
 ui:{
   title:'Sleep 2026',
@@ -91,7 +91,7 @@ ui:{
 
   relaxEyebrow:'Evening relaxation',
   relaxH2:'Three exercises before bed',
-  relaxIntro:'Do just one at a time. They all aim at the same thing: taking the edge off your stress response so sleep can arrive on its own. If you fall asleep partway through, that\'s a success, not a failure. <strong>Turn the sound on</strong> and you won\'t need to read — I\'ll talk you through it.',
+  relaxIntro:'Do just one at a time. They all aim at the same thing: taking the edge off your stress response so sleep can arrive on its own. If you fall asleep partway through, that\'s a success, not a failure.',
   tabBreath:'4-7-8 breathing',
   tabPmr:'Progressive muscle relaxation',
   tabScan:'Body scan',
@@ -104,12 +104,10 @@ ui:{
   secShort:'s',
   pmrIntro:'From your toes to your forehead, muscle group by muscle group: five seconds of tensing, then ten seconds of complete release. The point is to notice the difference between tense and relaxed. Do it lying down.',
   pmrIdle:'Press Start, and I\'ll guide you through it step by step.',
-  scanIntro:'Same body map, just without the tensing. You bring your attention to a body part, notice what you feel there, and move on. The ring of light circling around shows where your attention is — moving down the front, up the back, the way a ring travels around a body. With the sound on, you can do the whole thing with your eyes closed.',
+  scanIntro:'Same body map, just without the tensing. You bring your attention to a body part, notice what you feel there, and move on. The ring of light circling around shows where your attention is — moving down the front, up the back, the way a ring travels around a body.',
   scanIdle:'Choose a length, and start it.',
   start:'Start',
   stop:'Stop',
-  soundOn:'Sound: on',
-  soundOff:'Sound: off',
   min5:'5 min',
   min10:'10 min',
   remaining:'remaining:',
@@ -147,7 +145,7 @@ branches:[
   {id:'tisztitas', title:'Brain cleaning',    sub:['artery, vein, lymph','pulse pumps it']},
   {id:'miert',     title:'Why it matters',    sub:['immune system','cancer risk']},
   {id:'tippek',    title:'Better sleep',      sub:['stimulus control','light and temperature']},
-  {id:'relax',     title:'Evening relaxation',sub:['4-7-8 breathing','voice-guided']},
+  {id:'relax',     title:'Evening relaxation',sub:['4-7-8 breathing','step by step']},
   {id:'etrend',    title:'Tea, food, vitamins',sub:['when to eat and drink','supplements']}
 ],
 
@@ -396,12 +394,12 @@ dayplan:[
   ['−1.5 h','<b>Lights down.</b> Ceiling light off, warm-toned floor lamp. Tea on.'],
   ['−1 h','<b>Supplements:</b> magnesium and glycine. Melatonin earlier.'],
   ['−1 h','<b>Warm shower</b>, 10–15 minutes.'],
-  ['−30 min','<b>Write it down</b> on paper, then voice-guided relaxation.'],
+  ['−30 min','<b>Write it down</b> on paper, then relaxation.'],
   ['bedtime','<b>Cool, dark, silent room</b>, 16–19 °C.']
 ],
 
 breath:[
-  {label:'Breathe in through the nose', say:'Breathe in through your nose.'},
+  {label:'Breathe in through the nose'},
   {label:'Hold it',                    say:'Hold it.'},
   {label:'Breathe out slowly',         say:'Breathe out slowly, through your mouth.'}
 ],
@@ -410,11 +408,8 @@ pmr:{
   tense:'TENSE.',
   release:'RELEASE.',
   releaseTxt:'Just notice the tension draining out, and sink into the bed.',
-  sayTense:'{title}. Tense it. {how}',
-  sayRelease:'Release. Notice the tension draining out.',
   doneTitle:'Done.',
   doneTxt:'Lie still for one more minute before you do anything.',
-  sayDone:'Done. Lie still for one more minute.',
   stopped:'Stopped. Start will begin again from the beginning.',
   steps:[
     ['labfej','Feet and toes','Curl your toes, tense the arch of your foot.'],
@@ -432,10 +427,8 @@ pmr:{
 
 scan:{
   ready:'Ready to start. {n} seconds per body part.',
-  sayIntro:'Lie down comfortably, close your eyes, and pay attention to what I say.',
   doneTitle:'Done.',
   doneTxt:'If you\'re still awake, stay like this and let sleep come on its own.',
-  sayDone:'Done. If you\'re still awake, stay like this and let sleep come on its own.',
   stopped:'Stopped. Start will continue from where you left off.',
   steps:[
     ['labfej','Feet','Start here. Warm? Cool? Tingling? Nothing? Any answer is fine.'],
@@ -451,13 +444,6 @@ scan:{
   ]
 },
 
-tts:{
-  unsupported:'Your browser can\'t speak.',
-  found:'Voice: {name}',
-  missing:'No voice is installed for this language — the system\'s default voice will be used. On Windows: Settings → Time & Language → Speech → language voice pack.',
-  enabled:'Sound turned on. You can follow along with your eyes closed.'
-}
-,
 
 evLegend:{k:'Evidence', l0:'Illustrative model', l1:'Limited evidence', l2:'Good evidence', l3:'Strong evidence'},
 
