@@ -473,4 +473,17 @@ srcInfo:{
   supp24:{q:'A review of herbs and dietary supplements used for sleep.',
            r:'The most supporting data exist for melatonin, valerian and hops. Most studies are small and the evidence is limited.'}
 }
+,
+
+audio:{
+  title:'Background sound',
+  sub:'Four layers, all generated live — no audio files. Mix whatever works for you.',
+  on:'Sound: on', off:'Sound: off',
+  toggleAria:'Turn background sound on and off',
+  unsupported:'Not supported by your browser',
+  master:'Master volume', brown:'Brown noise', rain:'Rain', drone:'Deep hum', waves:'Waves',
+  timer:'Sleep timer', timerAria:'Sleep timer', timerOff:'off', timerMin:'{n} min',
+  follow:'Waves follow the breathing',
+  note:'A steady background sound can mask sudden noises, and some people find it helps them fall asleep. The evidence is limited, and it does not replace a fixed wake-up time and morning light. If it bothers you, turn it off — no sound works for everyone.'
+}
 };

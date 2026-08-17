@@ -290,6 +290,49 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.012)}}
 .ring{opacity:0; transition:opacity .35s} .ring.on{opacity:1}
 .relax-intro{font-size:clamp(15.5px,1.75vw,18px); color:#b9c5de; line-height:1.62}
+
+/* ---------- Hanggenerátor ---------- */
+.sndbtn{display:inline-flex; align-items:center; justify-content:center; cursor:pointer; flex:0 0 auto;
+  width:38px; height:38px; border-radius:11px; color:#c6d0e8;
+  background:rgba(255,255,255,.06); border:1px solid var(--line); transition:.18s}
+.sndbtn:hover{background:rgba(255,255,255,.12); color:#fff}
+.sndbtn[aria-pressed="true"]{background:rgba(143,227,200,.2); border-color:rgba(143,227,200,.5); color:var(--mint)}
+.sndbtn svg{width:19px; height:19px}
+.sndbtn .off{display:none} .sndbtn[aria-pressed="false"] .off{display:block}
+.sndbtn[aria-pressed="false"] .on{display:none}
+
+.sndpanel{margin:18px 0 4px; padding:16px 18px; border-radius:14px;
+  background:rgba(255,255,255,.04); border:1px solid var(--line)}
+.sndhead{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+.sndhead h3{font-family:'Fraunces',serif; font-size:17px; font-weight:600; margin:0; color:#fff}
+.sndhead .ctl{margin-left:auto}
+.sndsub{font-size:13.5px; color:var(--muted); margin:6px 0 0; line-height:1.55}
+.sndbody{margin-top:15px; display:none}
+.sndbody.on{display:block}
+.sndgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:11px 22px}
+.sndrow{display:grid; grid-template-columns:1fr auto; gap:3px 10px; align-items:center}
+.sndrow label{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--muted)}
+.sndrow .v{font-family:'JetBrains Mono',monospace; font-size:12px; color:#c6d0e8; text-align:right; min-width:42px}
+.sndrow input[type=range]{grid-column:1/-1; width:100%}
+.sndrow.master label{color:var(--mint)}
+.sndfoot{display:flex; align-items:center; gap:10px 18px; flex-wrap:wrap; margin-top:16px;
+  padding-top:14px; border-top:1px solid rgba(255,255,255,.08)}
+.sndfoot .lab{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--muted)}
+.sndchips{display:flex; gap:6px; flex-wrap:wrap}
+.sndchips button{cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#c6d0e8;
+  background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:999px; padding:5px 12px; transition:.16s}
+.sndchips button:hover{background:rgba(255,255,255,.1); color:#fff}
+.sndchips button[aria-pressed="true"]{background:rgba(143,227,200,.2); border-color:rgba(143,227,200,.5); color:#fff}
+.sndswitch{display:inline-flex; align-items:center; gap:9px; cursor:pointer; font-size:13.5px; color:#c3cee6}
+.sndswitch input{width:17px; height:17px; accent-color:var(--mint); cursor:pointer}
+.sndnote{margin-top:14px; font-size:13.2px; color:#b9c5dd; line-height:1.55}
+.sndnote .ev{margin-left:0; margin-right:8px}
+@media (max-width:560px){
+  .sndpanel{padding:14px 13px}
+  .sndhead .ctl{margin-left:0; width:100%}
+}
 .bighead{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
 .bighead .ttl{font-family:'Fraunces',serif; font-size:clamp(24px,3.9vw,34px); color:var(--mint)}
 .bighead .cd{font-family:'JetBrains Mono',monospace; font-size:clamp(30px,5.2vw,46px); font-weight:700; color:#fff; line-height:1}
@@ -368,6 +411,14 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
     <span class="mark" data-i18n="ui.brandMark">Az éjszaka műszakja</span>
     <span class="sub" data-i18n="ui.brandSub">alvás · ritmus · pihenés</span>
   </div>
+  <button class="sndbtn" id="sndBtn" aria-pressed="false" data-i18n-aria="audio.toggleAria">
+    <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/>
+    </svg>
+    <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M11 5 6 9H2v6h4l5 4z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/>
+    </svg>
+  </button>
   <div class="langsel" id="langSel" role="group"></div>
 </header>
 <div class="backdrop" id="navBackdrop"></div>
@@ -571,6 +622,30 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
         <p class="eyebrow" data-i18n="ui.relaxEyebrow">Esti relaxáció</p>
         <h2 data-i18n="ui.relaxH2">Három gyakorlat lefekvés előtt</h2>
         <p class="relax-intro" data-i18n-html="ui.relaxIntro">Egyszerre csak az egyiket csináld.</p>
+
+        <div class="sndpanel">
+          <div class="sndhead">
+            <h3 data-i18n="audio.title">Háttérhang</h3>
+            <button class="ctl ghost" id="sndToggle" aria-pressed="false" aria-controls="sndBody" data-i18n="audio.off">Hang: ki</button>
+          </div>
+          <p class="sndsub" data-i18n="audio.sub">Négy réteg, mind élőben generálva — nincs hangfájl. Keverd ki magadnak.</p>
+          <div class="sndbody" id="sndBody">
+            <div class="sndgrid">
+              <div class="sndrow master"><label for="volMaster" data-i18n="audio.master">Fő hangerő</label><span class="v" id="vMaster">70%</span><input type="range" id="volMaster" min="0" max="100" step="1" value="70"></div>
+              <div class="sndrow"><label for="volBrown" data-i18n="audio.brown">Barna zaj</label><span class="v" id="vBrown">55%</span><input type="range" id="volBrown" min="0" max="100" step="1" value="55"></div>
+              <div class="sndrow"><label for="volRain" data-i18n="audio.rain">Eső</label><span class="v" id="vRain">40%</span><input type="range" id="volRain" min="0" max="100" step="1" value="40"></div>
+              <div class="sndrow"><label for="volDrone" data-i18n="audio.drone">Mély zúgás</label><span class="v" id="vDrone">45%</span><input type="range" id="volDrone" min="0" max="100" step="1" value="45"></div>
+              <div class="sndrow"><label for="volWaves" data-i18n="audio.waves">Hullámok</label><span class="v" id="vWaves">50%</span><input type="range" id="volWaves" min="0" max="100" step="1" value="50"></div>
+            </div>
+            <div class="sndfoot">
+              <span class="lab" data-i18n="audio.timer">Elalvás-időzítő</span>
+              <div class="sndchips" id="sndTimer" role="group" data-i18n-aria="audio.timerAria"></div>
+              <label class="sndswitch"><input type="checkbox" id="sndFollow" checked><span data-i18n="audio.follow">A hullámok kövessék a légzést</span></label>
+            </div>
+            <p class="sndnote"><span id="sndEv"></span><span data-i18n-html="audio.note">A folyamatos háttérhang elfedheti a zavaró zajokat, és egyeseknek segít elaludni.</span></p>
+          </div>
+        </div>
+
         <div class="tabs" role="tablist">
           <button class="tabbtn" role="tab" aria-selected="true" data-pane="p-breath" data-i18n="ui.tabBreath">4-7-8 légzés</button>
           <button class="tabbtn" role="tab" aria-selected="false" data-pane="p-pmr" data-i18n="ui.tabPmr">Progresszív izomlazítás</button>
@@ -726,6 +801,243 @@ function tr(path){
   return v==null ? '' : v;
 }
 const fill = (s,vals) => String(s).replace(/\{(\w+)\}/g,(m,k)=> vals[k]!==undefined ? vals[k] : m);
+
+/* fut-e a 4-7-8 légzésgyakorlat — a hullámréteg ettől függ */
+let breathRunning = false;
+
+/* ================== HANGGENERÁTOR ==================
+   Négy réteg, mind élőben generálva — nincs hangfájl, így a projekt egyetlen HTML marad.
+   Jelút: réteg → saját GainNode → mester GainNode → hangszóró.
+   A zúgás, az eső és a hullámok emellett egy generált impulzusválaszú zengetőre is
+   rámennek, ettől lesz tere a hangnak. Az AudioContext csak az első kattintásra jön
+   létre — a böngészők másképp letiltják. */
+const AUDIO = {
+  on:false, ac:null, master:null, revG:null, g:{}, n:{},
+  vols:{master:70, brown:55, rain:40, drone:45, waves:50},
+  follow:true, timerMin:0, timerId:null, dropId:null, ready:false,
+  /* a rétegek nyers erősítése — hogy a csúszkák hasonló hangosságot adjanak */
+  scale:{brown:.55, rain:.75, drone:.32, waves:1.5},
+
+  init(){
+    if(this.ac) return true;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return false;
+    const ac = this.ac = new AC();
+    const master = this.master = ac.createGain();
+    master.gain.value = 0;
+    master.connect(ac.destination);
+
+    /* zengető: generált impulzusválasz, exponenciális lecsengéssel */
+    const rl = ac.sampleRate*2.6, imp = ac.createBuffer(2, rl, ac.sampleRate);
+    for(let ch=0; ch<2; ch++){
+      const d = imp.getChannelData(ch);
+      for(let i=0;i<rl;i++) d[i] = (Math.random()*2-1) * Math.pow(1-i/rl, 2.6);
+    }
+    const rev = ac.createConvolver(); rev.buffer = imp;
+    const revG = this.revG = ac.createGain(); revG.gain.value = .4;
+    revG.connect(rev); rev.connect(master);
+
+    const mk = key => { const g = ac.createGain(); g.gain.value = 0; g.connect(master); this.g[key] = g; return g; };
+
+    /* rózsaszín zaj (Paul Kellet) — az eső és a hullámok alapja */
+    const nl = ac.sampleRate*5, nb = ac.createBuffer(1, nl, ac.sampleRate), nd = nb.getChannelData(0);
+    let b0=0,b1=0,b2=0;
+    for(let i=0;i<nl;i++){
+      const w = Math.random()*2-1;
+      b0=.99765*b0+w*.0990460; b1=.96300*b1+w*.2965164; b2=.57000*b2+w*1.0526913;
+      nd[i] = (b0+b1+b2+w*.1848)*.16;
+    }
+    this.n.pink = nb;
+
+    /* 1 — barna zaj: integrált fehér zaj, mély lowpasszal */
+    const bl = ac.sampleRate*5, bb = ac.createBuffer(1, bl, ac.sampleRate), bd = bb.getChannelData(0);
+    let last = 0;
+    for(let i=0;i<bl;i++){ const w = Math.random()*2-1; last = (last + .02*w)/1.02; bd[i] = last*3.2; }
+    const bg = mk('brown');
+    const bsrc = ac.createBufferSource(); bsrc.buffer = bb; bsrc.loop = true;
+    const blp = ac.createBiquadFilter(); blp.type='lowpass'; blp.frequency.value=520; blp.Q.value=.7;
+    bsrc.connect(blp); blp.connect(bg); bsrc.start();
+
+    /* 2 — eső: rózsaszín zaj sávszűrőn, fölötte ritka cseppek */
+    const rg = mk('rain');
+    const rsrc = ac.createBufferSource(); rsrc.buffer = nb; rsrc.loop = true; rsrc.playbackRate.value = 1.35;
+    const rbp = ac.createBiquadFilter(); rbp.type='bandpass'; rbp.frequency.value=2100; rbp.Q.value=.55;
+    rsrc.connect(rbp); rbp.connect(rg); rg.connect(revG); rsrc.start();
+
+    /* 3 — mély zúgás: elhangolt alacsony oszcillátorok lassan söpört lowpasszal */
+    const dg = mk('drone');
+    const dlp = ac.createBiquadFilter(); dlp.type='lowpass'; dlp.frequency.value=300; dlp.Q.value=.7;
+    [55, 82.5, 110, 164.8].forEach((f,i)=>{
+      const o = ac.createOscillator(); o.type = i>1 ? 'sine' : 'triangle';
+      o.frequency.value = f; o.detune.value = (i-1.5)*7;
+      const og = ac.createGain(); og.gain.value = [.5,.32,.2,.09][i];
+      o.connect(og); og.connect(dlp); o.start();
+    });
+    const dlfo = ac.createOscillator(), dlg = ac.createGain();
+    dlfo.frequency.value = .045; dlg.gain.value = 110;
+    dlfo.connect(dlg); dlg.connect(dlp.frequency); dlfo.start();
+    dlp.connect(dg); dg.connect(revG);
+
+    /* 4 — hullámok: sávszűrt zaj, lassan dagadó-apadó burkolóval.
+       A burkoló a rétegerősítés ELŐTT ül, így a csúszka tőle függetlenül szabályoz. */
+    const wg = mk('waves');
+    const wsrc = ac.createBufferSource(); wsrc.buffer = nb; wsrc.loop = true; wsrc.playbackRate.value = .8;
+    const wbp = ac.createBiquadFilter(); wbp.type='bandpass'; wbp.frequency.value=520; wbp.Q.value=.8;
+    const swell = ac.createGain(); swell.gain.value = 0;
+    wsrc.connect(wbp); wbp.connect(swell); swell.connect(wg); wg.connect(revG); wsrc.start();
+    /* szabadonfutó dagály: LFO + alapszint a burkoló paraméterére (összeadódnak) */
+    const wlfo = ac.createOscillator(), wlg = ac.createGain(), wbase = ac.createConstantSource();
+    wlfo.frequency.value = .1; wlg.gain.value = .3; wbase.offset.value = .45;
+    wlfo.connect(wlg); wlg.connect(swell.gain); wbase.connect(swell.gain);
+    wlfo.start(); wbase.start();
+    this.n.swell = swell; this.n.wlg = wlg; this.n.wbase = wbase;
+
+    this.ready = true;
+    this.swellFree(!(this.follow && breathRunning));
+    return true;
+  },
+
+  /* csúszkák → erősítések, kattanásmentesen */
+  applyVols(){
+    if(!this.ac) return;
+    const t = this.ac.currentTime;
+    this.master.gain.setTargetAtTime(this.on ? (this.vols.master/100)*.9 : 0, t, .4);
+    for(const k in this.g)
+      this.g[k].gain.setTargetAtTime((this.vols[k]/100)*this.scale[k], t, .4);
+  },
+
+  /* A hullámok burkolója kétféleképp mozoghat: szabadonfutó lassú dagályként,
+     vagy a 4-7-8 légzés fázisait követve. A légzés csak akkor veszi át, ha
+     a gyakorlat tényleg fut — különben a réteg némán állna. */
+  swellFree(free){
+    if(!this.ready) return;
+    const t = this.ac.currentTime, p = this.n.swell.gain;
+    this.n.wlg.gain.setTargetAtTime(free ? .32 : 0, t, .3);
+    this.n.wbase.offset.setTargetAtTime(free ? .5 : 0, t, .3);
+    p.cancelScheduledValues(t);
+    p.setValueAtTime(p.value, t);
+    p.setTargetAtTime(free ? 0 : .25, t, .3);
+  },
+  setFollow(v){ this.follow = v; this.swellFree(!(v && breathRunning)); },
+  breathActive(active){ this.swellFree(!(this.follow && active)); },
+  /* a légzésgyakorlat fázisai: 0 = be (4 mp), 1 = tartás (7 mp), 2 = ki (8 mp) */
+  breath(phase, secs){
+    if(!this.on || !this.follow || !this.ready) return;
+    const p = this.n.swell.gain, t = this.ac.currentTime;
+    p.cancelScheduledValues(t);
+    p.setValueAtTime(p.value, t);
+    if(phase===0)      p.linearRampToValueAtTime(.8, t+secs);
+    else if(phase===2) p.linearRampToValueAtTime(.05, t+secs);
+  },
+
+  toggle(v){
+    const want = v===undefined ? !this.on : v;
+    if(want && !this.init()){ this.paint(false); return; }
+    this.on = want;
+    if(this.on && this.ac.state==='suspended') this.ac.resume();
+    this.applyVols();
+    this.armTimer();
+    this.drops();
+    this.paint(true);
+    this.save();
+  },
+
+  /* eső-cseppek: rövid, szűrt zajlökések, csak amíg szól és van esőhangerő */
+  drops(){
+    clearTimeout(this.dropId); this.dropId = null;
+    if(!this.on || !this.ready || this.vols.rain<=0) return;
+    const ac = this.ac, t0 = ac.currentTime;
+    const src = ac.createBufferSource(); src.buffer = this.n.pink;
+    src.playbackRate.value = 2.4 + Math.random()*1.4;
+    src.loop = true;
+    const bp = ac.createBiquadFilter(); bp.type='bandpass';
+    bp.frequency.value = 1800 + Math.random()*2600; bp.Q.value = 7;
+    const g = ac.createGain();
+    const amp = (this.vols.rain/100) * .05 * (.4 + Math.random()*.6);
+    g.gain.setValueAtTime(0, t0);
+    g.gain.linearRampToValueAtTime(amp, t0+.012);
+    g.gain.exponentialRampToValueAtTime(.0001, t0+.22);
+    src.connect(bp); bp.connect(g); g.connect(this.g.rain); g.connect(this.revG);
+    src.start(t0); src.stop(t0+.3);
+    this.dropId = setTimeout(()=>this.drops(), 90 + Math.random()*260);
+  },
+
+  /* elalvás-időzítő: a végén ~30 mp alatt lecseng, majd elnémul */
+  armTimer(){
+    clearTimeout(this.timerId); this.timerId = null;
+    if(!this.on || !this.timerMin) return;
+    this.timerId = setTimeout(()=>{
+      if(!this.on) return;
+      this.master.gain.setTargetAtTime(0, this.ac.currentTime, 10);
+      setTimeout(()=>this.toggle(false), 32000);
+    }, this.timerMin*60000);
+  },
+
+  paint(ok){
+    const pressed = String(this.on);
+    const b1 = $('#sndBtn'), b2 = $('#sndToggle'), body = $('#sndBody');
+    if(b1) b1.setAttribute('aria-pressed', pressed);
+    if(b2){ b2.setAttribute('aria-pressed', pressed); b2.textContent = tr(this.on ? 'audio.on' : 'audio.off'); }
+    if(body) body.classList.toggle('on', this.on);
+    if(ok===false && b2) b2.textContent = tr('audio.unsupported');
+  },
+
+  save(){
+    try{ localStorage.setItem('sleep-audio', JSON.stringify(
+      {vols:this.vols, follow:this.follow, timerMin:this.timerMin})); }catch(e){}
+  },
+  load(){
+    try{
+      const d = JSON.parse(localStorage.getItem('sleep-audio')||'null');
+      if(!d) return;
+      if(d.vols) for(const k in this.vols) if(typeof d.vols[k]==='number') this.vols[k]=d.vols[k];
+      if(typeof d.follow==='boolean') this.follow = d.follow;
+      if(typeof d.timerMin==='number') this.timerMin = d.timerMin;
+    }catch(e){}
+  }
+};
+
+/* ---------- a hangpanel bekötése ---------- */
+AUDIO.load();
+const TIMER_OPTS = [0, 15, 30, 60];
+function buildSndTimer(){
+  const box = $('#sndTimer'); if(!box) return;
+  box.innerHTML = '';
+  TIMER_OPTS.forEach(m=>{
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = m ? fill(tr('audio.timerMin'),{n:m}) : tr('audio.timerOff');
+    b.setAttribute('aria-pressed', String(m===AUDIO.timerMin));
+    b.addEventListener('click', ()=>{
+      AUDIO.timerMin = m; AUDIO.armTimer(); AUDIO.save(); buildSndTimer();
+    });
+    box.appendChild(b);
+  });
+}
+const VOL_IDS = {volMaster:'master', volBrown:'brown', volRain:'rain', volDrone:'drone', volWaves:'waves'};
+function paintVols(){
+  for(const [id,key] of Object.entries(VOL_IDS)){
+    const sl = $('#'+id); if(!sl) continue;
+    sl.value = AUDIO.vols[key];
+    const out = $('#v'+id.slice(3));
+    if(out) out.textContent = AUDIO.vols[key]+'%';
+  }
+  const f = $('#sndFollow'); if(f) f.checked = AUDIO.follow;
+}
+for(const [id,key] of Object.entries(VOL_IDS)){
+  const sl = $('#'+id);
+  if(sl) sl.addEventListener('input', e=>{
+    AUDIO.vols[key] = +e.target.value;
+    const out = $('#v'+id.slice(3)); if(out) out.textContent = e.target.value+'%';
+    AUDIO.applyVols();
+    if(key==='rain') AUDIO.drops();
+    AUDIO.save();
+  });
+}
+$('#sndFollow') && $('#sndFollow').addEventListener('change', e=>{ AUDIO.setFollow(e.target.checked); AUDIO.save(); });
+$('#sndBtn') && $('#sndBtn').addEventListener('click', ()=>AUDIO.toggle());
+$('#sndToggle') && $('#sndToggle').addEventListener('click', ()=>AUDIO.toggle());
+paintVols();
 
 /* ========================= MENÜ ========================= */
 const BRANCH_COLOR = {ciklus:'--n2', ritmus:'--sky', tisztitas:'--vein', miert:'--rem',
@@ -1769,16 +2081,20 @@ function bTick(){
     $('#bCircle').style.transition = `transform ${p.s}s ${bIdx===1?'linear':'cubic-bezier(.4,0,.4,1)'}`;
     $('#bCircle').style.transform = `scale(${p.scale})`;
     $('#bPhase').textContent = txt.label;
+    AUDIO.breath(bIdx, p.s);
   }
   $('#bHint').textContent = `${bLeft} ${tr('ui.secShort')} · ${tr('ui.breathRound')} ${bRound}`;
 }
 $('#bStart').addEventListener('click', ()=>{
   if(bTimer) return;
-  bIdx=2; bLeft=1; bRound=0; bTick();
+  bIdx=2; bLeft=1; bRound=0;
+  breathRunning = true; AUDIO.breathActive(true);
+  bTick();
   bTimer = setInterval(bTick,1000);
 });
 $('#bStop').addEventListener('click', ()=>{
   clearInterval(bTimer); bTimer=null;
+  breathRunning = false; AUDIO.breathActive(false);
   $('#bCircle').style.transition='transform .8s ease';
   $('#bCircle').style.transform='scale(.55)';
   $('#bPhase').textContent = tr('ui.breathDone');
@@ -2092,6 +2408,8 @@ function applyLang(){
   segbar('#scanSeg', SCAN().length); setScan(scanTotal);
   paintCirc();
   updScrollHints();
+  buildSndTimer(); paintVols(); AUDIO.paint();
+  $('#sndEv').innerHTML = evDots(1);
 }
 setNav(!isNarrow());
 applyLang();
