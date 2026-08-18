@@ -473,4 +473,17 @@ srcInfo:{
   supp24:{q:'Übersichtsarbeit zu Heilpflanzen und Nahrungsergänzungsmitteln für den Schlaf.',
            r:'Die meisten unterstützenden Daten gibt es für Melatonin, Baldrian und Hopfen. Die meisten Studien sind klein, die Evidenz ist begrenzt.'}
 }
+,
+
+audio:{
+  title:'Hintergrundklang',
+  sub:'Vier Schichten, alle live erzeugt — keine Audiodateien. Misch dir, was dir guttut.',
+  on:'Ton: an', off:'Ton: aus',
+  toggleAria:'Hintergrundklang ein- und ausschalten',
+  unsupported:'Von deinem Browser nicht unterstützt',
+  master:'Gesamtlautstärke', brown:'Braunes Rauschen', rain:'Regen', drone:'Tiefes Brummen', waves:'Wellen',
+  timer:'Einschlaf-Timer', timerAria:'Einschlaf-Timer', timerOff:'aus', timerMin:'{n} Min',
+  follow:'Wellen folgen der Atmung',
+  note:'Ein gleichmäßiger Hintergrundklang kann plötzliche Geräusche überdecken, und manchen hilft er beim Einschlafen. Die Evidenz ist begrenzt, und er ersetzt weder die feste Aufstehzeit noch das Morgenlicht. Wenn er dich stört, schalte ihn aus — es gibt keinen Klang, der allen guttut.'
+}
 };

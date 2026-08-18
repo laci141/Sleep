@@ -473,4 +473,17 @@ srcInfo:{
   supp24:{q:'Sinteză despre plantele medicinale și suplimentele alimentare folosite pentru somn.',
            r:'Cele mai multe date de sprijin există pentru melatonină, valeriană și hamei. Majoritatea studiilor sunt mici, iar dovezile sunt limitate.'}
 }
+,
+
+audio:{
+  title:'Sunet de fundal',
+  sub:'Patru straturi, toate generate live — fără fișiere audio. Combină-le cum îți place.',
+  on:'Sunet: pornit', off:'Sunet: oprit',
+  toggleAria:'Pornește și oprește sunetul de fundal',
+  unsupported:'Nu este acceptat de browserul tău',
+  master:'Volum principal', brown:'Zgomot maro', rain:'Ploaie', drone:'Zumzet grav', waves:'Valuri',
+  timer:'Cronometru de adormire', timerAria:'Cronometru de adormire', timerOff:'oprit', timerMin:'{n} minute',
+  follow:'Valurile urmează respirația',
+  note:'Un sunet de fundal constant poate acoperi zgomotele bruște, iar unora le ajută la adormire. Dovezile sunt limitate și nu înlocuiesc ora fixă de trezire și lumina de dimineață. Dacă te deranjează, oprește-l — nu există un sunet potrivit pentru toată lumea.'
+}
 };

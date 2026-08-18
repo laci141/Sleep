@@ -473,4 +473,17 @@ srcInfo:{
   supp24:{q:'Áttekintés az alvásra használt gyógynövényekről és étrend-kiegészítőkről.',
            r:'A legtöbb támogató adat a melatonin, a valeriána és a komló mellett van. A vizsgálatok többsége kicsi, a bizonyíték korlátozott.'}
 }
+,
+
+audio:{
+  title:'Háttérhang',
+  sub:'Négy réteg, mind élőben generálva — nincs hangfájl. Keverd ki magadnak azt, ami neked jó.',
+  on:'Hang: be', off:'Hang: ki',
+  toggleAria:'Háttérhang be- és kikapcsolása',
+  unsupported:'A böngésződ nem támogatja',
+  master:'Fő hangerő', brown:'Barna zaj', rain:'Eső', drone:'Mély zúgás', waves:'Hullámok',
+  timer:'Elalvás-időzítő', timerAria:'Elalvás-időzítő', timerOff:'ki', timerMin:'{n} perc',
+  follow:'A hullámok kövessék a légzést',
+  note:'A folyamatos háttérhang elfedheti a hirtelen zajokat, és egyeseknek segít elaludni. A bizonyíték korlátozott, és nem helyettesíti a fix ébredést és a reggeli fényt. Ha zavar, kapcsold ki — nincs olyan hang, ami mindenkinek jó.'
+}
 };
