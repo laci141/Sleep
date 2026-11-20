@@ -1870,10 +1870,30 @@ function drawBrain(dt){
   };
   const BOOST = BSC < .78;   /* phones: bigger labels, stacked in the free space above/below the scene */
   const fsN = bf(11.5), fsL = bf(11.5);
-  ctx.fillStyle = rgba(CL,.9); ctx.font=bfont(11.5); ctx.textAlign='left';
-  textIn(tr('brain.node'), LNODE.x-56, LNODE.y+34);
-  ctx.fillStyle='rgba(148,163,196,.7)'; ctx.font=bfont(10.5);
-  textIn(tr('brain.nodeSub'), LNODE.x-56, LNODE.y+34+(BOOST ? fsN*1.4 : 14));
+  ctx.textAlign='left';
+  if(BOOST){
+    ctx.fillStyle = rgba(CL,.9); ctx.font=bfont(11.5);
+    textIn(tr('brain.node'), LNODE.x-56, LNODE.y+34);
+    ctx.fillStyle='rgba(148,163,196,.7)'; ctx.font=bfont(10.5);
+    textIn(tr('brain.nodeSub'), LNODE.x-56, LNODE.y+34+fsN*1.4);
+  } else {
+    /* desktop/tablet: no room below the node (VH), so wrap both labels into the free column right of it */
+    const nx0 = Math.round(LNODE.x+LNODE.rx*1.1+14), nMaxW = VW-6-nx0, nLh = bf(10.5)*1.15;
+    const wrapTo = (txt,font)=>{
+      ctx.font = font; const out=[]; let cur='';
+      txt.split(' ').forEach(wd=>{
+        const t = cur ? cur+' '+wd : wd;
+        if(cur && ctx.measureText(t).width>nMaxW){ out.push(cur); cur=wd; } else cur=t;
+      });
+      if(cur) out.push(cur); return out;
+    };
+    const nA = wrapTo(tr('brain.node'), bfont(11.5)), nB = wrapTo(tr('brain.nodeSub'), bfont(10.5));
+    let ny = VH-4-(nA.length+nB.length-1)*nLh;   /* bottom-anchored: last baseline stays inside VH */
+    ctx.fillStyle = rgba(CL,.9); ctx.font=bfont(11.5);
+    nA.forEach(l=>{ ctx.fillText(l, nx0, ny); ny+=nLh; });
+    ctx.fillStyle='rgba(148,163,196,.7)'; ctx.font=bfont(10.5);
+    nB.forEach(l=>{ ctx.fillText(l, nx0, ny); ny+=nLh; });
+  }
   ctx.fillStyle = rgba(CL,.75); ctx.font=bfont(10.5);
   textIn(tr('brain.vessel'), lx0+12, ly0-6);
 
