@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0f1e">
 <title>Alvás 2026</title>
 <script src="lang/hu.js"></script>
 <script src="lang/en.js"></script>
@@ -57,6 +58,7 @@ a{color:var(--mint)} strong{color:#fff; font-weight:600} em{color:#dbe3f3}
   padding:9px clamp(12px,2.4vw,20px);
   background:rgba(10,15,30,.74); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line)}
+@media (max-width:600px){.topbar{backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px)}}
 .iconbtn{display:inline-flex; align-items:center; gap:9px; cursor:pointer; flex:0 0 auto;
   font-family:'Inter',sans-serif; font-size:14px; font-weight:500; color:#d3dcef;
   background:rgba(255,255,255,.06); border:1px solid var(--line); border-radius:11px;
@@ -66,9 +68,11 @@ a{color:var(--mint)} strong{color:#fff; font-weight:600} em{color:#dbe3f3}
 .iconbtn .bars{transition:.2s}
 body.nav-open .iconbtn{background:rgba(143,227,200,.18); border-color:rgba(143,227,200,.45); color:#fff}
 .topbrand{display:flex; flex-direction:column; min-width:0; margin-right:auto}
+/* desktop + open side panel: the panel already shows the brand; keep the space so the right side stays aligned */
+@media (min-width:981px){body.nav-open .topbrand{visibility:hidden}}
 .topbrand .mark{font-family:'Fraunces',serif; font-size:16.5px; font-weight:700; line-height:1.2;
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-.topbrand .sub{font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.13em;
+.topbrand .sub{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.13em;
   text-transform:uppercase; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .langsel{display:flex; gap:3px; flex:0 0 auto; background:rgba(255,255,255,.05);
   border:1px solid var(--line); border-radius:11px; padding:3px}
@@ -84,7 +88,7 @@ body.nav-open .iconbtn{background:rgba(143,227,200,.18); border-color:rgba(143,2
 body.nav-closed .shell{grid-template-columns:minmax(0,1fr)}
 body.nav-closed .side{display:none}
 .brand .mark{font-family:'Fraunces',serif; font-size:20px; font-weight:700; display:block; line-height:1.25}
-.brand .sub{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+.brand .sub{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
 .sidenav{display:flex; flex-direction:column; gap:3px; margin-top:18px}
 .sidenav button{display:flex; align-items:center; gap:11px; width:100%; text-align:left; cursor:pointer;
   font-family:'Inter',sans-serif; font-size:14.5px; font-weight:500; color:#c1cce6;
@@ -112,6 +116,10 @@ body.nav-closed .side{display:none}
   body.nav-open .backdrop{opacity:1; pointer-events:auto}
   .topbrand .sub{display:none}
 }
+@media (max-width:480px){
+  .topbrand .mark{font-size:14px; white-space:normal; display:-webkit-box;
+    -webkit-box-orient:vertical; -webkit-line-clamp:2; line-clamp:2}
+}
 @media (max-width:400px){
   .iconbtn span{display:none}
   .iconbtn{padding:9px 11px}
@@ -123,6 +131,7 @@ body.nav-closed .side{display:none}
 .stack{display:flex; flex-direction:column; gap:18px}
 .grid2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
 @media (max-width:900px){.grid2{grid-template-columns:1fr}}
+@media (min-width:901px){#stageCards > :last-child:nth-child(odd){grid-column:1/-1}}
 
 #mapSvg{width:100%; height:auto; display:block}
 .mapwrap{display:none} .mapwrap.on{display:block}
@@ -192,7 +201,7 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 .card{background:rgba(255,255,255,.045); border:1px solid var(--line); border-radius:16px;
   padding:18px 18px 16px; border-top:3px solid var(--c)}
 .card h3{color:var(--c)} .card p{font-size:14.5px; color:#c3cee6; margin:0}
-.tag{display:inline-block; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+.tag{display:inline-block; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em;
   text-transform:uppercase; color:var(--c); background:rgba(255,255,255,.06); border:1px solid var(--line);
   border-radius:999px; padding:3px 9px; margin-bottom:10px}
 .tips{list-style:none; padding:0; margin:0}
@@ -201,7 +210,7 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 .tips .num{font-family:'JetBrains Mono',monospace; font-size:15px; font-weight:700; color:var(--c); padding-top:3px}
 .tips h4{font-family:'Fraunces',serif; font-size:18px; font-weight:600; margin:0 0 8px; color:#fff}
 .tips .blk{display:grid; grid-template-columns:80px 1fr; gap:12px; margin-bottom:8px; align-items:start}
-.tips .lbl{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+.tips .lbl{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
   color:var(--c); border:1px solid var(--line); border-radius:6px; padding:3px 0; text-align:center;
   background:rgba(255,255,255,.04); margin-top:3px}
 .tips .txt{font-size:14.8px; color:#c3cee6; line-height:1.6}
@@ -220,7 +229,7 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 @media (max-width:640px){.circgrid{grid-template-columns:1fr}}
 .circval{background:rgba(255,255,255,.05); border:1px solid var(--line); border-left:3px solid var(--c);
   border-radius:12px; padding:11px 14px}
-.circval .k{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted)}
+.circval .k{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted)}
 .circval .v{font-family:'JetBrains Mono',monospace; font-size:23px; font-weight:700; color:var(--c); line-height:1.25}
 .circnote{margin-top:14px; background:rgba(159,208,245,.07); border-left:3px solid var(--sky);
   border-radius:0 12px 12px 0; padding:13px 16px; font-size:14.8px; color:#d5deef; min-height:76px}
@@ -229,7 +238,7 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 
 /* ---------- Bizonyítékszint: négy szint, saját színnel ---------- */
 .ev{display:inline-flex; align-items:center; gap:6px; margin-left:9px; padding:2px 10px;
-  font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+  font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.09em; text-transform:uppercase;
   white-space:nowrap; vertical-align:2px; border-radius:999px; line-height:1.7;
   color:var(--evink); background:var(--evbg); border:1px solid var(--evline)}
 .ev::before{content:''; width:8px; height:8px; border-radius:50%; background:var(--evink); flex:none}
@@ -250,7 +259,7 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 /* ---------- Bizonyítékszint jelmagyarázat ---------- */
 .evlegend{--c:var(--mint); display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center;
   margin:0 0 16px; padding-bottom:13px; border-bottom:1px solid rgba(255,255,255,.08)}
-.evlegend .k{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em;
+.evlegend .k{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em;
   text-transform:uppercase; color:var(--muted)}
 .evlegend .ev{margin-left:0}
 
@@ -311,14 +320,14 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 .sndbody.on{display:block}
 .sndgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:11px 22px}
 .sndrow{display:grid; grid-template-columns:1fr auto; gap:3px 10px; align-items:center}
-.sndrow label{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+.sndrow label{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em;
   text-transform:uppercase; color:var(--muted)}
 .sndrow .v{font-family:'JetBrains Mono',monospace; font-size:12px; color:#c6d0e8; text-align:right; min-width:42px}
 .sndrow input[type=range]{grid-column:1/-1; width:100%}
 .sndrow.master label{color:var(--mint)}
 .sndfoot{display:flex; align-items:center; gap:10px 18px; flex-wrap:wrap; margin-top:16px;
   padding-top:14px; border-top:1px solid rgba(255,255,255,.08)}
-.sndfoot .lab{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+.sndfoot .lab{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em;
   text-transform:uppercase; color:var(--muted)}
 .sndchips{display:flex; gap:6px; flex-wrap:wrap}
 .sndchips button{cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#c6d0e8;
@@ -351,10 +360,10 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 .src li:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0}
 .src .st{display:block; font-size:15px; color:#e7ecf7; font-weight:500; line-height:1.7; margin-bottom:6px}
 .src .meta{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:8px}
-.src .chip{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+.src .chip{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
   color:#c6d0e8; background:rgba(255,255,255,.06); border:1px solid var(--line); border-radius:999px; padding:3px 9px}
 .src .row{display:grid; grid-template-columns:78px 1fr; gap:11px; margin-bottom:5px; align-items:start}
-.src .rk{font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.12em; text-transform:uppercase;
+.src .rk{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase;
   color:var(--muted); margin-top:3px}
 .src .rv{font-size:13.8px; color:#c3cee6; line-height:1.55}
 .src a{color:var(--sky); text-decoration:none; border-bottom:1px solid rgba(159,208,245,.35)}
@@ -364,7 +373,7 @@ input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; 
 /* ---------- Mobil: jelzés, hogy a széles diagram oldalra húzható ---------- */
 .scrollhint{display:none; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.09em;
   color:var(--muted); text-align:center; margin:3px 0 9px; user-select:none}
-footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
+footer.foot{margin-top:26px; padding-bottom:24px; text-align:center; font-size:12.5px; color:#8a97b5;
   font-family:'JetBrains Mono',monospace; letter-spacing:.2em}
 
 /* ---------- MOBIL: a széles diagramok görgethetők, hogy a feliratok olvashatók maradjanak ---------- */
@@ -376,7 +385,7 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   .scrollx::-webkit-scrollbar{height:5px}
   .scrollx::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18); border-radius:4px}
   .scrollhint.on{display:block}
-  .eegwrap{min-height:190px}
+  .scrollx > .eegwrap{min-width:800px}
   .canvaswrap{aspect-ratio:600/470; min-height:330px}
   .ctlbar{gap:8px}
   .ctl{padding:10px 16px; font-size:14.5px}
@@ -393,6 +402,7 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
   body{font-size:15.4px}
   .glass-panel{padding:16px 13px}
   .scrollx > svg{min-width:600px}
+  .canvaswrap{min-height:420px}
 }
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.001s !important; transition-duration:.001s !important}
@@ -461,7 +471,7 @@ footer.foot{margin-top:26px; text-align:center; font-size:12.5px; color:#6c7a99;
           <span class="ev ev-0" data-i18n="ui.modelBadge">Szemléltető modell</span>
           <span class="mb-t" data-i18n="ui.cycEegSim">A hullámforma programozott szimuláció, nem valódi személy EEG-felvétele. Az alakja a szakaszokra jellemző frekvenciákat követi, oktatási céllal.</span>
         </div>
-        <div class="eegwrap"><canvas id="eegCanvas"></canvas></div>
+        <div class="scrollx"><div class="eegwrap"><canvas id="eegCanvas"></canvas></div></div>
         <div class="eeghead">
           <span class="band" id="eegBand">Béta</span>
           <span class="hz" id="eegHz">13–30 Hz · éber, gyors, kis amplitúdó</span>
@@ -1065,6 +1075,7 @@ function go(id){
   window.scrollTo({top:0, behavior: REDUCED ? 'auto':'smooth'});
   if(id==='tisztitas') startBrain(); else stopBrain();
   if(id==='ciklus') startEeg(); else stopEeg();
+  if(id==='map') layoutMap();
   /* a rejtett nézetekben a szélesség 0, ezért váltás után újra kell mérni */
   updScrollHints();
 }
@@ -1154,7 +1165,7 @@ function drawMapCards(){
   });
 }
 function layoutMap(){
-  const wide = window.innerWidth >= 780;
+  const wide = $('#view-map .glass-panel').clientWidth >= 820;   /* real box width (820: measured 8.1px subtitles at 738); 0 while the view is hidden */
   $('#mapWide').classList.toggle('on', wide);
   $('#mapNarrow').classList.toggle('on', !wide);
 }
@@ -1379,7 +1390,7 @@ function drawEeg(){
   ectx.beginPath(); ectx.moveTo(PX0+10,mid); ectx.lineTo(PX0+10,mid-half*.5); ectx.stroke();
   ectx.beginPath(); ectx.moveTo(PX0+6,mid); ectx.lineTo(PX0+14,mid); ectx.stroke();
   ectx.beginPath(); ectx.moveTo(PX0+6,mid-half*.5); ectx.lineTo(PX0+14,mid-half*.5); ectx.stroke();
-  ectx.fillStyle=col; ectx.font='10px JetBrains Mono, monospace'; ectx.fillText('50', PX0+18, mid-half*.25);
+  ectx.fillStyle=col; ectx.font='11px JetBrains Mono, monospace'; ectx.fillText('50', PX0+18, mid-half*.25);
   ectx.strokeStyle='rgba(255,255,255,.16)'; ectx.lineWidth=1;
   ectx.beginPath(); ectx.moveTo(PX0,PY1+12); ectx.lineTo(PX1,PY1+12); ectx.stroke();
   ectx.font='11px JetBrains Mono, monospace'; ectx.textAlign='center';
@@ -1663,7 +1674,12 @@ function fitCanvas(){
   cvs.width = Math.max(1,r.width*dpr); cvs.height = Math.max(1,r.height*dpr);
   const sc = Math.min(r.width/VW, r.height/VH);
   ctx.setTransform(dpr*sc,0,0,dpr*sc, dpr*(r.width-VW*sc)/2, dpr*(r.height-VH*sc)/2);
+  /* labels: effective size >= 9px; spare letterbox space above/below the scene is used for text */
+  BSC = sc; BTOP = -(r.height-VH*sc)/2/sc; BBOT = VH-BTOP;
 }
+let BSC = 1, BTOP = 0, BBOT = VH;
+const bf = px => Math.max(px, 9/BSC);
+const bfont = px => bf(px)+'px JetBrains Mono, monospace';
 function drawTree(tree,col,scale,pulseW){
   ctx.lineCap='round'; ctx.lineJoin='round';
   ctx.strokeStyle = col;
@@ -1852,29 +1868,36 @@ function drawBrain(dt){
     const w = ctx.measureText(txt).width;
     ctx.fillText(txt, Math.max(6, Math.min(x, VW-6-w)), y);
   };
-  ctx.fillStyle = rgba(CL,.9); ctx.font='11.5px JetBrains Mono, monospace'; ctx.textAlign='left';
+  const BOOST = BSC < .78;   /* phones: bigger labels, stacked in the free space above/below the scene */
+  const fsN = bf(11.5), fsL = bf(11.5);
+  ctx.fillStyle = rgba(CL,.9); ctx.font=bfont(11.5); ctx.textAlign='left';
   textIn(tr('brain.node'), LNODE.x-56, LNODE.y+34);
-  ctx.fillStyle='rgba(148,163,196,.7)'; ctx.font='10.5px JetBrains Mono, monospace';
-  textIn(tr('brain.nodeSub'), LNODE.x-56, LNODE.y+48);
-  ctx.fillStyle = rgba(CL,.75); ctx.font='10.5px JetBrains Mono, monospace';
+  ctx.fillStyle='rgba(148,163,196,.7)'; ctx.font=bfont(10.5);
+  textIn(tr('brain.nodeSub'), LNODE.x-56, LNODE.y+34+(BOOST ? fsN*1.4 : 14));
+  ctx.fillStyle = rgba(CL,.75); ctx.font=bfont(10.5);
   textIn(tr('brain.vessel'), lx0+12, ly0-6);
 
   /* pulzusjelző */
-  const bx=24, by=VH-30, bw=160;
-  ctx.fillStyle='rgba(148,163,196,.8)'; ctx.font='10.5px JetBrains Mono, monospace'; ctx.textAlign='left';
+  const fsH = bf(10);
+  const hintY = BOOST ? BBOT-8 : VH-30+23;
+  const bx=24, by = BOOST ? hintY-fsH-12 : VH-30, bw=160;
+  ctx.fillStyle='rgba(148,163,196,.8)'; ctx.font=bfont(10.5); ctx.textAlign='left';
   ctx.fillText(asleep?tr('brain.pumpOn'):tr('brain.pumpOff'), bx, by-8);
   ctx.fillStyle='rgba(255,255,255,.08)'; ctx.fillRect(bx,by,bw,8);
   ctx.fillStyle = asleep ? `rgba(200,250,230,${.5+.5*pulseAmp})` : 'rgba(176,160,240,.35)';
   ctx.fillRect(bx,by,bw*pulseAmp,8);
-  ctx.fillStyle='rgba(148,163,196,.6)'; ctx.font='10px JetBrains Mono, monospace';
-  ctx.fillText(asleep?tr('brain.pumpHintOn'):tr('brain.pumpHintOff'), bx, by+23);
+  ctx.fillStyle='rgba(148,163,196,.6)'; ctx.font=bfont(10);
+  ctx.fillText(asleep?tr('brain.pumpHintOn'):tr('brain.pumpHintOff'), bx, hintY);
 
-  ctx.textAlign='right'; ctx.fillStyle='rgba(148,163,196,.75)'; ctx.font='12px JetBrains Mono, monospace';
-  ctx.fillText(asleep?tr('brain.stateAsleep'):tr('brain.stateAwake'), VW-14, 24);
-  ctx.textAlign='left'; ctx.font='11.5px JetBrains Mono, monospace';
-  ctx.fillStyle = rgba(CA,.95); ctx.fillText(tr('brain.legIn'), 22, 26);
-  ctx.fillStyle = rgba(CV,.95); ctx.fillText(tr('brain.legOut'), 22, 44);
-  ctx.fillStyle = rgba(CW,1);   ctx.fillText(tr('brain.legWaste'), 22, 62);
+  const stateTxt = asleep?tr('brain.stateAsleep'):tr('brain.stateAwake');
+  const ly = BOOST ? BTOP+6+fsL : 26, lstep = BOOST ? fsL*1.55 : 18;
+  ctx.fillStyle='rgba(148,163,196,.75)'; ctx.font=bfont(12);
+  if(BOOST){ ctx.textAlign='left'; ctx.fillText(stateTxt, 22, ly+3*lstep); }
+  else { ctx.textAlign='right'; ctx.fillText(stateTxt, VW-14, 24); }
+  ctx.textAlign='left'; ctx.font=bfont(11.5);
+  ctx.fillStyle = rgba(CA,.95); ctx.fillText(tr('brain.legIn'), 22, ly);
+  ctx.fillStyle = rgba(CV,.95); ctx.fillText(tr('brain.legOut'), 22, ly+lstep);
+  ctx.fillStyle = rgba(CW,1);   ctx.fillText(tr('brain.legWaste'), 22, ly+2*lstep);
 }
 let brainLast = 0;
 function brainFrame(ts){
